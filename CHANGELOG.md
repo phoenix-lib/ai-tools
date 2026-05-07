@@ -13,12 +13,23 @@ major plan execution, and workflow gate change.
 - Planned an `ai-workspace-kit` gate review hook for release/maintenance once
   that upstream capability exists. Until then, gate relevance/conflict review is
   manual and routed through cross-repo requests or decisions.
+- Added AI Tools Self-Use Gate guidance: validated AI Tools capabilities should
+  be considered while developing this repository, but their output remains
+  evidence rather than an automatic decision.
+- Added New Tool Intake and Placement Gate guidance: every new tool idea must be
+  classified by owner, destination, maturity, activation stage, outputs, and
+  non-goals before implementation.
+- Added Git Baseline Gate guidance: old untracked seed/project files must be
+  separated from active work before git cleanliness is used as evidence.
 
 ### Planning
 
 - Inserted Phase 03: Cross-Repo Capability Request Gate.
 - Moved Contract Drift Auditor MVP from Phase 03 to Phase 04.
 - Moved Integration and Release Hardening from Phase 04 to Phase 05.
+- Added `RENDER-01` to Phase 04 for a shared packet renderer so JSON,
+  Markdown, recommended actions, evidence, and CLI status come from one packet
+  model.
 
 ### Cross-Repo Requests
 

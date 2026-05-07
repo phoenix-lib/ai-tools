@@ -65,7 +65,7 @@ Plans:
 ### Phase 3: Cross-Repo Capability Request Gate
 **Goal**: Create the structured protocol for AI Tools and `ai-workspace-kit` to request missing capabilities without mixing ownership or automatically creating work.
 **Depends on**: Phase 2
-**Requirements**: XREPO-01, XREPO-02, XREPO-03, XREPO-04, XREPO-05, XREPO-06, XREPO-07, XREPO-08, GATE-01, GATE-02
+**Requirements**: XREPO-01, XREPO-02, XREPO-03, XREPO-04, XREPO-05, XREPO-06, XREPO-07, XREPO-08, GATE-01, GATE-02, GATE-04, GATE-05, GATE-06
 **UI hint**: no
 **Success Criteria** (what must be TRUE):
   1. `.planning/cross-repo/` contains `inbox/`, `outbox/`, `decisions/`, and `templates/` structure.
@@ -74,30 +74,32 @@ Plans:
   4. Outgoing Need Gate and Incoming Review Gate are mapped to the relevant GSD stages and explicitly do not auto-run tools, create phases, copy planning state, or add repo dependencies.
   5. Example requests exist in both directions: `ai-workspace-kit` asks AI Tools for a read-only contract drift auditor, and AI Tools asks `ai-workspace-kit` for a stable review packet schema and evidence refs contract.
   6. The project changelog gate is documented, and the upstream freshness gate reads upstream changelog/release notes first when present and changed.
-  7. Tests or docs validation prove required templates/docs exist and contain required fields where the project test harness supports it.
+  7. AI Tools Self-Use Gate, New Tool Intake and Placement Gate, and Git Baseline Gate are documented with trigger stages, evidence rules, skip behavior, and no-automatic-decision boundaries.
+  8. Tests or docs validation prove required templates/docs exist and contain required fields where the project test harness supports it.
 **Plans**: 3 plans
 
 Plans:
 - [ ] 03-01: Create cross-repo request directories, request template, and decision template.
-- [ ] 03-02: Write the capability request playbook with ownership boundaries, changelog discipline, upstream changelog pre-read, and GSD gate mapping.
+- [ ] 03-02: Write the capability request playbook with ownership boundaries, changelog discipline, upstream changelog pre-read, self-use, new-tool intake, git baseline, and GSD gate mapping.
 - [ ] 03-03: Add bidirectional example requests and docs validation for required fields.
 
 ### Phase 4: Contract Drift Auditor MVP
 **Goal**: Ship a read-only CLI that detects AI contract drift and emits the shared review packet.
 **Depends on**: Phase 3
-**Requirements**: DRIFT-01, DRIFT-02, DRIFT-03, DRIFT-04, DRIFT-05, DRIFT-06, DRIFT-07, TEST-04
+**Requirements**: RENDER-01, DRIFT-01, DRIFT-02, DRIFT-03, DRIFT-04, DRIFT-05, DRIFT-06, DRIFT-07, TEST-04
 **UI hint**: no
 **Success Criteria** (what must be TRUE):
   1. User can run `contract-drift-auditor --project <path> --out <dir>` without mutating the target project.
   2. Auditor detects missing referenced files, missing commands, absent-tool permissions, invalid/missing skills, stale source layers, and profile fact drift.
   3. Auditor emits `REVIEW-SUMMARY.json`, `FINDINGS.md`, `EVIDENCE.json`, and `RECOMMENDED-ACTIONS.md`.
   4. Each finding cites evidence and unknown facts are marked explicitly.
+  5. Shared packet renderer generates JSON, Markdown, and CLI status from one packet model.
 **Plans**: 3 plans
 
 Plans:
 - [ ] 04-01: Implement CLI shell and contract/source discovery.
 - [ ] 04-02: Implement drift checks for files, commands, permissions, skills, source layers, and profile facts.
-- [ ] 04-03: Render packet artifacts and add auditor fixture tests.
+- [ ] 04-03: Render packet artifacts through the shared packet renderer and add auditor fixture tests.
 
 ### Phase 5: Integration and Release Hardening
 **Goal**: Prepare the first useful release and keep integration optional.
@@ -126,6 +128,7 @@ Plans:
 | RPS-04 | Phase 1 |
 | RPS-05 | Phase 1 |
 | RPS-06 | Phase 1 |
+| RENDER-01 | Phase 4 |
 | SAFE-01 | Phase 2 |
 | SAFE-02 | Phase 2 |
 | SAFE-03 | Phase 2 |
@@ -143,6 +146,9 @@ Plans:
 | GATE-01 | Phase 3 |
 | GATE-02 | Phase 3 |
 | GATE-03 | Phase 5 |
+| GATE-04 | Phase 3 |
+| GATE-05 | Phase 3 |
+| GATE-06 | Phase 3 |
 | DRIFT-01 | Phase 4 |
 | DRIFT-02 | Phase 4 |
 | DRIFT-03 | Phase 4 |
@@ -162,7 +168,7 @@ Plans:
 | DOC-03 | Phase 5 |
 | DOC-04 | Phase 5 |
 
-**Coverage:** 41/41 v1 requirements mapped.
+**Coverage:** 45/45 v1 requirements mapped.
 
 ## Progress
 

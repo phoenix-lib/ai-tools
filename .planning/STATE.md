@@ -84,6 +84,11 @@ Decisions are logged in PROJECT.md Key Decisions table.
   checkout currently has no changelog, so commit log/diff remains the fallback.
 - Plan future `ai-workspace-kit` gate-review integration at release/maintenance
   boundaries without pretending the command exists today.
+- Add self-use and new-tool intake gates so validated AI Tools capabilities are
+  applied to this repository at the right stages and new tool ideas are routed
+  before implementation.
+- Add a shared packet renderer in Phase 04 so packet-producing tools render
+  machine and human outputs from one packet model.
 
 ### Roadmap Evolution
 
@@ -93,12 +98,18 @@ Decisions are logged in PROJECT.md Key Decisions table.
 - Added changelog gate requirements to Phase 03.
 - Added future ai-workspace-kit gate-review hook to Phase 05.
 - Phase 02 completed with 3/3 plans, 40 passing tests, and verification report.
+- Phase 03 now also covers AI Tools Self-Use Gate, New Tool Intake and
+  Placement Gate, and Git Baseline Gate documentation.
+- Phase 04 now includes shared packet renderer work before broad tool expansion.
 
 ### Pending Todos
 
 - Accept gate linter request - capture the incoming `ai-workspace-kit` request
   as the first Phase 03 cross-repo inbox/decision candidate once
   `.planning/cross-repo/` exists.
+- Resolve git baseline - decide whether to stage the untracked root guide,
+  root README, and seed README folders as a separate baseline commit before
+  using git cleanliness as evidence in self-audits or release readiness.
 
 ### Blockers/Concerns
 

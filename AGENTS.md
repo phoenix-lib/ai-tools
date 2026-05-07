@@ -31,7 +31,9 @@ before the shared review packet standard and first external auditor exist.
 
 ## Current Facts
 
-- Current state is mostly planning/product seed documentation.
+- Current state includes review packet schemas/examples, shared safety helpers,
+  target fixtures, and automated tests. Product seed folders still document
+  later tools.
 - Root `package.json` exists with `npm test` backed by `node --test`; no build
   command is defined yet.
 - The current recommended implementation order is review packet standard,
@@ -53,6 +55,13 @@ before the shared review packet standard and first external auditor exist.
 - Treat incoming cross-repo capability requests as decision points. They do not
   automatically create phases, run tools, add dependencies, or copy planning
   state across repositories.
+- Run the AI Tools Self-Use Gate when planning, executing, verifying, or
+  releasing this repository after a relevant AI Tools capability has been
+  implemented and validated.
+- Run the New Tool Intake and Placement Gate whenever a new tool idea, upstream
+  request, seed, or user request appears.
+- Before relying on `git status` as evidence, separate baseline seed files from
+  active work through the Git Baseline Gate.
 - After every completed GSD phase, executed major plan, or workflow gate change,
   update `CHANGELOG.md` with what changed, validation performed, and any
   `ai-workspace-kit` upstream impact.
@@ -145,6 +154,97 @@ gate change before the final commit or final response for that work.
 4. Do not include secrets, raw environment values, or broad file dumps.
 5. Keep the changelog human-readable; detailed evidence belongs in phase
    summaries, review packets, or research files.
+
+## Git Baseline Gate
+
+Run this gate before using repository cleanliness as evidence in planning,
+verification, review packets, release readiness, or self-audits.
+
+1. Check `git status --short` and identify untracked seed/project files versus
+   active implementation changes.
+2. If untracked files are intended baseline project content, ask for an explicit
+   baseline decision before staging them. Do not silently mix broad baseline
+   staging with feature or gate work.
+3. If untracked files are not intended project content, route them to
+   `.gitignore`, cleanup, or a documented deferred decision.
+4. Record unresolved baseline noise in `.planning/STATE.md` so later agents do
+   not misread old untracked files as current work.
+5. When a baseline commit is approved, keep it separate from feature commits and
+   do not include generated review output or secrets.
+
+## AI Tools Self-Use Gate
+
+AI Tools should use its own validated tools while developing AI Tools, but only
+as read-only evidence. Tool output does not replace assistant judgment, phase
+verification, or user decisions.
+
+Run this gate at phase planning, after major gate/contract changes, during
+phase verification, and before release readiness:
+
+1. List relevant AI Tools capabilities from `ROADMAP.md`, `REQUIREMENTS.md`,
+   `CHANGELOG.md`, and tool manifests once they exist.
+2. Classify each capability maturity:
+   - **seed**: idea only; do not run.
+   - **planned**: phase or plan exists; do not run as evidence.
+   - **experimental**: may be run manually, but cannot block by itself.
+   - **validated**: may be used as supporting evidence for matching work.
+   - **self-use required**: must run at its documented stage, or the skip reason
+     must be recorded.
+3. Run only validated tools whose scope matches the current work. Use explicit
+   `--project <repo>` and `--out <dir>` arguments, keep outputs outside the
+   audited target unless a tool explicitly supports a safe ignored review
+   location, and never mutate the target project.
+4. Record command, output location, summary status, important findings, and any
+   skip reason in the active phase artifact or verification report.
+5. Treat findings as evidence. The assistant still decides whether a gate is
+   relevant, stale, duplicated, or boundary-breaking.
+
+Initial applicability matrix:
+
+| Tool capability | Use stage for this repo | Status |
+|-----------------|-------------------------|--------|
+| `contract-drift-auditor` | Before phase planning after contract/source-layer changes, during release readiness | Planned Phase 04 |
+| shared packet renderer | All packet-producing tools and self-audit reports | Planned Phase 04 |
+| mechanical gate linter | After workflow gate changes and release/maintenance boundaries | v2 candidate, evidence only |
+| test quality auditor | After non-trivial test-suite changes | v2 candidate |
+| runtime capability inspector | Before documenting commands, permissions, or tool availability | v2 candidate |
+| phase forensics tool | After failed or disputed phase execution | v2 candidate |
+| project context ledger | Milestone context refresh or large onboarding handoff | v2 candidate |
+| UI regression screenshot comparator | UI changes only | v2+ candidate |
+
+## New Tool Intake and Placement Gate
+
+Run this gate whenever a new AI Tools capability is proposed, discovered in an
+upstream request, added as a seed, or requested by the user.
+
+1. Run the ai-workspace-kit Tandem Boundary Gate first.
+2. Classify ownership:
+   - AI Tools owns external read-only auditors, shared review packet mechanics,
+     deterministic evidence collectors, safety helpers, renderers, validators,
+     fixtures, and optional packet consumers.
+   - `ai-workspace-kit` owns adoption/bootstrap contracts, adapter guidance,
+     generated project-local guidance, adoption review semantics, and
+     permission policy.
+   - Shared boundary work belongs in cross-repo requests or compatibility docs,
+     not hidden dependencies.
+3. Assign the destination before implementation:
+   - `standards/` for shared schemas, packet contracts, and compatibility
+     semantics.
+   - `shared/` for reusable safety, rendering, normalization, or evidence
+     mechanics used by multiple tools.
+   - `tools/<tool-name>/` for an implemented external auditor or validator.
+   - top-level seed README or backlog for an idea that is not ready for v1.
+   - `.planning/cross-repo/outbox/` for kit-owned capabilities AI Tools needs.
+   - `.planning/cross-repo/inbox/` plus a decision artifact for incoming
+     requests from `ai-workspace-kit`.
+4. Define the use gate before coding: when the tool should run, what inputs it
+   reads, where outputs go, what artifact proves it ran, and what it must never
+   decide automatically.
+5. Require read-only default behavior, explicit `--project` and `--out` for
+   report-generating CLIs, review packet output compatibility, fixture tests,
+   secret-safety tests, and changelog impact notes.
+6. Do not implement the tool until ownership, destination, maturity, activation
+   stage, outputs, and non-goals are explicit.
 
 ## Future ai-workspace-kit Gate Review Hook
 

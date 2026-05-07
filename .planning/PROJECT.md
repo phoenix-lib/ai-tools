@@ -51,6 +51,13 @@ guidance auditable without mutating target projects.
 - [ ] Plan a future `ai-workspace-kit` gate-review hook for release and
   maintenance boundaries, with manual fallback until the upstream capability
   exists.
+- [ ] Decide and commit or explicitly defer the current untracked seed baseline
+  before using git cleanliness as evidence in self-audits or release readiness.
+- [ ] Build a shared packet renderer so summary, findings, recommended actions,
+  Markdown projections, and CLI status are rendered from one packet model.
+- [ ] Document AI Tools self-use gates and new-tool intake/placement gates so
+  validated tools are used at the right project stages without automatic
+  decisions or dependency creep.
 
 ### Out of Scope
 
@@ -141,6 +148,16 @@ to inspect it.
   use the future `ai-workspace-kit` gate-review capability once available to
   find conflicting, stale, or irrelevant gates. Until then, review manually and
   route gaps through cross-repo requests or decisions.
+- **Git baseline gate**: Before relying on `git status` as evidence, distinguish
+  old untracked seed/project files from active work. A broad baseline commit
+  needs explicit approval and must stay separate from feature commits.
+- **Self-use gate**: Once an AI Tools capability is implemented and validated,
+  check whether it applies to this repository's planning, execution,
+  verification, or release stage. Run applicable tools as read-only evidence or
+  record why they are skipped.
+- **New tool intake gate**: Every new tool idea must be classified by owner,
+  destination, maturity, activation stage, outputs, and non-goals before
+  implementation starts.
 - **Windows compatibility**: Clean clone tests must pass on Windows, including
   line-ending behavior.
 
@@ -160,6 +177,9 @@ to inspect it.
 | Plan ai-workspace-kit gate review as a future hook | The upstream command does not exist yet, so AI Tools should reserve the review stage without pretending it is currently runnable. | Planned for Phase 05 |
 | Treat future mechanical gate-linter output as evidence only | Gate relevance and boundary decisions remain assistant-owned semantic review; tools can surface evidence but not decide adoption. | Deferred v2 candidate |
 | Validate shared safety harness before auditor work | The first heavy auditor should consume already-tested read-only, secret-safe, deterministic primitives instead of inventing safety behavior locally. | Validated in Phase 02 |
+| Add shared packet renderer before broad tool expansion | Schemas alone are not enough; packet-producing tools need one renderer so JSON, Markdown, and CLI status cannot drift. | Planned for Phase 04 |
+| Treat self-use tools as evidence, not authority | AI Tools should audit itself with validated tools, but the assistant keeps responsibility for scope, relevance, and boundary decisions. | Planned for Phase 03 |
+| Classify new tools before implementation | New tool ideas should go to `standards/`, `shared/`, `tools/<tool-name>/`, seed/backlog, or cross-repo requests based on ownership and maturity. | Planned for Phase 03 |
 
 ## Evolution
 
@@ -179,4 +199,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state.
 
 ---
-*Last updated: 2026-05-07 after validating Phase 02 shared safety harness*
+*Last updated: 2026-05-07 after adding self-use and tool-intake gates*
