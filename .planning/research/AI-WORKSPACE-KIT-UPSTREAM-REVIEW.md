@@ -1,9 +1,9 @@
 # ai-workspace-kit Upstream Review
 
 **Last checked:** 2026-05-07
-**Local before update:** `3e489b1a99c58443e593a1e2f6234ed5d0dc173d`
-**Remote HEAD checked:** `578d0f8e453ba65e667872ac0b529dcb7bbc405f`
-**Local after update:** `578d0f8e453ba65e667872ac0b529dcb7bbc405f`
+**Local before latest update:** `578d0f8e453ba65e667872ac0b529dcb7bbc405f`
+**Remote HEAD checked:** `48ec037d058747151c320ced9c0ee1e1d247d4b1`
+**Local after latest update:** `48ec037d058747151c320ced9c0ee1e1d247d4b1`
 **Result:** Local `.external/ai-workspace-kit` fast-forwarded to upstream HEAD.
 
 ## Gate
@@ -18,7 +18,59 @@ Before every phase planning step:
 This review is design input for AI Tools. It must not copy upstream `.planning`
 state or turn `ai-workspace-kit` into a runtime dependency.
 
-## Current Upstream Change Summary
+## Latest Upstream Change Summary
+
+Commits reviewed from `578d0f8` to `48ec037`:
+
+- `48ec037 docs: require self-improving project operating skill`
+- `8ea42da docs(gsd): plan skill synthesis and ai-tools freshness gates`
+- `97e9acd feat(phase-10): add laravel framework evidence adapter`
+- `21492b7 docs: schedule consumer review interoperability phase`
+- `2a80913 docs: add ai-tools non-duplication gate`
+- `5cf40bd docs(10): plan framework evidence adapters`
+- `79dc3fc test: normalize source layer assertions`
+- `5a9a103 docs: clarify ai-tools boundary`
+- `7623173 docs(10): refresh framework adapter context`
+
+Major changed areas:
+
+- `scripts/lib/frameworks.js` and `scripts/lib/frameworks/laravel.js` added a
+  reusable framework evidence adapter boundary for Laravel/PHP.
+- `TOOLING-PLAYBOOK.md` now includes an explicit external-tool
+  non-duplication gate and a framework evidence adapters row.
+- `ADAPTER-GENERATION.md` clarifies that framework adapters may inspect local
+  path/metadata evidence, but must not run framework commands or implement
+  external `ai-tools` capabilities such as drift audits or runtime probes.
+- Laravel fixtures include `.env` and `.env.example`, reinforcing path-only
+  runtime env handling and shallow structure-only example env treatment.
+- Upstream docs now require a self-improving project operating skill for
+  mature projects. This is relevant to future skill packaging, not Phase 2
+  shared helper implementation.
+
+New usable ideas for AI Tools:
+
+- Keep adapter/plugin boundaries generic enough that future domain evidence
+  adapters can sit on top of the file walker without bypassing safety policy.
+- Treat `.env.example` structure-only reading as a future explicit policy;
+  Phase 2 should keep default `.env*` classification path-only as already
+  decided.
+- Ensure generated review packet marker detection includes both AI Tools packet
+  names and ai-workspace-kit adoption packet names.
+- Non-duplication is now enforced in both directions: AI Tools must not rebuild
+  adoption review, and ai-workspace-kit must not hide external auditors inside
+  the kit.
+
+Latest phase-planning impact:
+
+- **Phase 2:** Keep the shared harness generic and framework-agnostic, but make
+  helper APIs usable by future framework evidence adapters. Do not implement
+  Laravel/PHP detection in Phase 2.
+- **Phase 3:** Contract drift can later consume framework/source-layer evidence,
+  but should remain a separate read-only auditor.
+- **Future skill work:** The self-improving project operating skill idea should
+  be captured later when packaging this project's workflow into durable skills.
+
+## Prior Upstream Change Summary
 
 Commits reviewed from `3e489b1` to `578d0f8`:
 
