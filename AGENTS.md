@@ -1,0 +1,156 @@
+# AGENTS.md
+
+## Generated Source
+
+Created from the `phoenix-lib/ai-workspace-kit` contract model and adapted for
+this repository. Review this file at phase boundaries and when project facts
+change. Stricter local rules may be added, but the safety floor must not be
+weakened.
+
+## Source Layers
+
+- Core reference: `.external/ai-workspace-kit/CORE-CONTRACT.md`
+- Bootstrap reference: `.external/ai-workspace-kit/AI-BOOTSTRAP.md`
+- Adapter reference: `.external/ai-workspace-kit/ADAPTER-GENERATION.md`
+- Project guide: `AI-AGENT-IMPLEMENTATION-GUIDE.md`
+- Project overview: `README.md`
+- Product seeds: each top-level tool folder's `README.md`
+
+## Project Contract
+
+Project: `ai-tools`
+
+Purpose: build a small ecosystem of read-only AI development auditors that
+produce evidence-backed review packets for assistants, humans, CI jobs, and GSD
+workflows without becoming mandatory dependencies of target projects.
+
+Keep this repository focused on standards, schemas, fixtures, deterministic
+parsers, and read-only auditors. Do not expand it into many disconnected tools
+before the shared review packet standard and first external auditor exist.
+
+## Current Facts
+
+- Current state is mostly planning/product seed documentation.
+- There is no root `package.json` and no verified project test/build command
+  yet.
+- The current recommended implementation order is review packet standard,
+  internal ai-workspace-kit gates, then `contract-drift-auditor`.
+- `.external/ai-workspace-kit` is a local reference checkout only. Do not treat
+  it as target project evidence unless the task explicitly asks to inspect it.
+- This directory is now a git repository initialized during GSD project setup.
+
+## Workflow
+
+- Read `AI-AGENT-IMPLEMENTATION-GUIDE.md` before making architectural changes.
+- Read the relevant seed `README.md` files before implementing a tool.
+- Prefer one small green read-only tool over broad README expansion.
+- Keep shared contracts in `standards/` and reusable mechanics in `shared/`.
+  Tool-specific checks belong under `tools/<tool-name>/` once implementation
+  begins.
+- Use schemas, fixtures, deterministic output, and tests before adding complex
+  heuristics.
+- Do not copy `.planning` state or assumptions from any external project into
+  this repository.
+
+## ai-workspace-kit Workflow Rules
+
+Use `.external/ai-workspace-kit` as the workflow reference for assistant
+contracts, not as a product dependency.
+
+- Keep the layer boundary clear: core policy and shared standards are separate
+  from tool-specific mechanics and adapter-specific behavior.
+- Before adopting or changing assistant contracts, inspect existing local
+  guidance and propose merges. Do not blindly replace project-specific rules.
+- Generated or derived contracts are review material first. They need explicit
+  review before they become project-local guidance.
+- Prefer an adoption-review shape for any contract-producing command:
+  `--review`, explicit `--project`, explicit `--out`, and no writes to the
+  target project.
+- `--out` must be outside the audited target project for target-project audits.
+  If a tool audits this repository itself, write review artifacts to a separate
+  review directory and ignore generated review packets on later scans.
+- Use adapter/tool selection explicitly. If only Codex output is requested,
+  do not generate Claude files or tell the user to inspect Claude-only files.
+- Treat `ADOPTION-REVIEW.md`-style files as packet overview, `CONFLICTS.md` as
+  decision routing, file/hash reviews as merge evidence, and JSON manifests as
+  the machine source of truth.
+- Render all human-readable reports, machine summaries, and CLI status from one
+  shared summary object so counts and status cannot diverge.
+- Keep project-local contracts living. At phase boundaries and whenever facts
+  change, review stack facts, commands, risks, permissions, optional tools,
+  source layers, and skills for drift.
+- During GSD discuss/context gathering, ask each phase whether the user wants
+  manual questions or trusted self-questioning. Do not persist that answer as a
+  global preference.
+
+## Implementation Start Rule
+
+For the first real code phase, start with `standards/review-packet/` and only
+the minimum shared helpers needed by the first read-only auditor:
+
+1. JSON schemas for review summary, finding, evidence ref, recommended action,
+   and tool manifest.
+2. Canonical JSON writer with recursively sorted keys and trailing newline.
+3. File walker with the default ignore policy.
+4. Secret policy that supports path-only evidence.
+5. Fixture harness proving deterministic output and target non-mutation.
+
+Do not implement `project-context-ledger`, `phase-forensics-tool`, UI visual
+comparison, or integration harness code until the common review packet schema
+and `contract-drift-auditor` MVP exist.
+
+## Safety
+
+- Preserve user changes. Do not revert, overwrite, or discard unrelated files
+  without explicit instruction.
+- Never read or expose secret contents unless the user requests that exact file
+  or value and the access is necessary.
+- Treat `.env`, `.env.*`, key, token, credential, and secret files as path-only
+  evidence by default.
+- Ask before writes outside the workspace, commits, package installs, remote git
+  operations, network actions with external effects, long-lived services, or
+  destructive operations.
+- MVP tools must be review-only and must not mutate target projects.
+
+## Permission Defaults
+
+| Category | Default | Examples |
+|----------|---------|----------|
+| Read-only inspection | allow | read files, `rg`, `git status`, `git diff`, `git log` |
+| Workspace edits | ask | create/edit files, formatters that rewrite files |
+| Git history and remotes | ask | commit, push, pull, fetch, remote operations |
+| Package changes | ask | install, update, add, remove, dependency downloads |
+| Documentation lookup | allow | official docs/reference lookup without project mutation |
+| Secrets | deny | `.env`, keys, tokens, credentials unless exact access is requested |
+| Destructive operations | deny | recursive delete, forced overwrite, broad cleanup, force push, elevation |
+
+Do not grant permissions for absent package managers or tools. Command
+discovery is evidence that a command exists; it is not permission approval.
+
+## Review Packet Standards
+
+- JSON artifacts are for agents and CI; Markdown artifacts are for humans.
+- Render CLI, Markdown, and JSON status from one shared summary object.
+- Findings must cite evidence refs.
+- Unknowns must be marked `unknown`, `stale`, `TODO`, or `unresolved`; do not
+  invent project facts.
+- Use canonical JSON with recursively sorted keys and trailing newline.
+- Include tool version, schema version, policy hashes, target facts, generated
+  files, requested outputs, and run timestamp in packet metadata when available.
+- `--out <dir>` is required for report-generating CLIs, and output paths inside
+  the target project must be rejected for target-project audits.
+- Review packets must clearly separate blockers, required decisions, rejected
+  assumptions, stricter local rules to preserve, and safe-to-merge findings.
+- Command discovery must record command, source file, package root when
+  applicable, and verification status. It must not grant permission by itself.
+
+## Verification Checklist
+
+- Source layers are current.
+- Commands are verified from project files before being documented.
+- Review-only commands do not mutate target projects.
+- Secret-like contents do not appear in outputs.
+- Tree-hash or equivalent fixture checks prove non-mutation.
+- CLI status, Markdown status, JSON summary status, and counts match.
+- Adapter/tool selection is respected; unrequested outputs and next steps are
+  not generated.

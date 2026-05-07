@@ -1,0 +1,7 @@
+.external/
+*.log
+tmp/
+.tmp/
+*-review/
+*-review-*/
+ai-tools-review-*/

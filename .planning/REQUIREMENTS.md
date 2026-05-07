@@ -78,42 +78,42 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| RPS-01 | TBD | Pending |
-| RPS-02 | TBD | Pending |
-| RPS-03 | TBD | Pending |
-| RPS-04 | TBD | Pending |
-| RPS-05 | TBD | Pending |
-| RPS-06 | TBD | Pending |
-| SAFE-01 | TBD | Pending |
-| SAFE-02 | TBD | Pending |
-| SAFE-03 | TBD | Pending |
-| SAFE-04 | TBD | Pending |
-| SAFE-05 | TBD | Pending |
-| SAFE-06 | TBD | Pending |
-| DRIFT-01 | TBD | Pending |
-| DRIFT-02 | TBD | Pending |
-| DRIFT-03 | TBD | Pending |
-| DRIFT-04 | TBD | Pending |
-| DRIFT-05 | TBD | Pending |
-| DRIFT-06 | TBD | Pending |
-| DRIFT-07 | TBD | Pending |
-| TEST-01 | TBD | Pending |
-| TEST-02 | TBD | Pending |
-| TEST-03 | TBD | Pending |
-| TEST-04 | TBD | Pending |
-| TEST-05 | TBD | Pending |
-| TEST-06 | TBD | Pending |
-| TEST-07 | TBD | Pending |
-| DOC-01 | TBD | Pending |
-| DOC-02 | TBD | Pending |
-| DOC-03 | TBD | Pending |
-| DOC-04 | TBD | Pending |
+| RPS-01 | Phase 1 | Pending |
+| RPS-02 | Phase 1 | Pending |
+| RPS-03 | Phase 1 | Pending |
+| RPS-04 | Phase 1 | Pending |
+| RPS-05 | Phase 1 | Pending |
+| RPS-06 | Phase 1 | Pending |
+| SAFE-01 | Phase 2 | Pending |
+| SAFE-02 | Phase 2 | Pending |
+| SAFE-03 | Phase 2 | Pending |
+| SAFE-04 | Phase 1 | Pending |
+| SAFE-05 | Phase 2 | Pending |
+| SAFE-06 | Phase 1 | Pending |
+| DRIFT-01 | Phase 3 | Pending |
+| DRIFT-02 | Phase 3 | Pending |
+| DRIFT-03 | Phase 3 | Pending |
+| DRIFT-04 | Phase 3 | Pending |
+| DRIFT-05 | Phase 3 | Pending |
+| DRIFT-06 | Phase 3 | Pending |
+| DRIFT-07 | Phase 3 | Pending |
+| TEST-01 | Phase 1 | Pending |
+| TEST-02 | Phase 2 | Pending |
+| TEST-03 | Phase 2 | Pending |
+| TEST-04 | Phase 3 | Pending |
+| TEST-05 | Phase 1 | Pending |
+| TEST-06 | Phase 1 | Pending |
+| TEST-07 | Phase 2 | Pending |
+| DOC-01 | Phase 4 | Pending |
+| DOC-02 | Phase 4 | Pending |
+| DOC-03 | Phase 4 | Pending |
+| DOC-04 | Phase 4 | Pending |
 
 **Coverage:**
 - v1 requirements: 30 total
-- Mapped to phases: 0
-- Unmapped: 30
+- Mapped to phases: 30
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-05-07*
-*Last updated: 2026-05-07 after initial definition*
+*Last updated: 2026-05-07 after roadmap creation*
