@@ -4,6 +4,11 @@ const os = require("node:os");
 const path = require("node:path");
 const test = require("node:test");
 const { assertSafeOutputDir, isInsideOrEqual, realOrResolved } = require("../../shared/path-guard");
+const {
+  createTempOutputDir,
+  fixtureInputDir,
+  removeTempOutputDir
+} = require("./fixture-helpers");
 
 function withTempDir(fn) {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), "ai-tools-path-guard-"));
@@ -57,3 +62,18 @@ test("assertSafeOutputDir allows sibling output paths", () => withTempDir((dir) 
 
   assert.doesNotThrow(() => assertSafeOutputDir(target, siblingOutput));
 }));
+
+test("assertSafeOutputDir rejects fixture-local outputs before creation", () => {
+  const input = fixtureInputDir("clean-project");
+  const childOutput = path.join(input, "review-output");
+  const externalOutput = createTempOutputDir("clean-project");
+
+  try {
+    assert.throws(() => assertSafeOutputDir(input, input), /outside the target project/);
+    assert.throws(() => assertSafeOutputDir(input, childOutput), /outside the target project/);
+    assert.equal(fs.existsSync(childOutput), false);
+    assert.doesNotThrow(() => assertSafeOutputDir(input, externalOutput));
+  } finally {
+    removeTempOutputDir(externalOutput);
+  }
+});

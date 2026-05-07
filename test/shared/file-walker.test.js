@@ -4,6 +4,7 @@ const os = require("node:os");
 const path = require("node:path");
 const test = require("node:test");
 const { walkProjectFiles } = require("../../shared/file-walker");
+const { fixtureInputDir } = require("./fixture-helpers");
 
 function withTempDir(fn) {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), "ai-tools-file-walker-"));
@@ -56,6 +57,12 @@ test("walkProjectFiles ignores generated packet marker directories", () => withT
 
   assert.deepEqual(walkProjectFiles(dir), ["src/index.js"]);
 }));
+
+test("walkProjectFiles ignores generated packet dirs inside target fixtures", () => {
+  assert.deepEqual(walkProjectFiles(fixtureInputDir("generated-packet-inside-target")), [
+    "README.md"
+  ]);
+});
 
 test("walkProjectFiles ignores nested ai-workspace-kit checkouts", () => withTempDir((dir) => {
   writeFile(dir, "src/index.js");
