@@ -58,7 +58,11 @@ function addFinding(result, finding, evidenceRefs, action) {
 }
 
 function sourceDocuments(discovery) {
-  return [...(discovery.contractFiles ?? []), ...(discovery.planningFiles ?? [])]
+  return [
+    ...(discovery.contractFiles ?? []),
+    ...(discovery.planningFiles ?? []),
+    ...(discovery.skillFiles ?? [])
+  ]
     .filter((document) => document.content !== null);
 }
 

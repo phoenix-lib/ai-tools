@@ -4,6 +4,7 @@ const { normalizeEvidencePath } = require("../../shared/secret-policy");
 const FILE_EXT_RE = /\.(md|markdown|json|js|cjs|mjs|ts|tsx|yml|yaml|toml|txt|lock|key|pem|sh|cmd)$/i;
 const COMMAND_RE = /\b(npm\s+(?:test|run\s+[a-z0-9:._-]+))\b/gi;
 const BACKTICK_RE = /`([^`]+)`/g;
+const PATH_TOKEN_RE = /(?:^|\s)([A-Za-z0-9._/-]+\.(?:md|markdown|json|js|cjs|mjs|ts|tsx|yml|yaml|toml|txt|lock|key|pem|sh|cmd))(?:\s|$|[),.;:])/gi;
 
 function stripPunctuation(value) {
   return value.replace(/[),.;:]+$/g, "");
@@ -65,6 +66,11 @@ function extractMarkdownReferences(document) {
     const afterColon = line.match(/:\s*([^`]+)$/);
     if (afterColon) {
       candidates.push(afterColon[1].trim());
+    }
+
+    let pathTokenMatch;
+    while ((pathTokenMatch = PATH_TOKEN_RE.exec(line)) !== null) {
+      candidates.push(pathTokenMatch[1]);
     }
 
     for (const candidate of candidates) {

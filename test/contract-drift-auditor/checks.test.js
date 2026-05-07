@@ -60,6 +60,17 @@ test("missing skill references produce skill drift finding", () => {
   });
 });
 
+test("project skill references are checked for missing local files", () => {
+  withTempProject({
+    "AGENTS.md": "# Fixture\n\n## Source Layers\n\n- Local skill: .codex/skills/operator/SKILL.md\n",
+    ".codex/skills/operator/SKILL.md": "# Operator\n\nUse docs/MISSING.md before running maintenance.\n",
+    "package.json": "{\"scripts\":{\"test\":\"node --test\"}}\n"
+  }, (projectDir) => {
+    const findings = runChecks(discoverProject(projectDir)).findings;
+    assert.ok(findings.some((finding) => finding.id === "drift.file.missing" && /docs\/MISSING\.md/.test(finding.summary)));
+  });
+});
+
 test("absent tool references are evidence-backed findings, not permission decisions", () => {
   withTempProject({
     "AGENTS.md": "# Fixture\n\n## Workflow\n\n- Use `pnpm test` before release.\n",
