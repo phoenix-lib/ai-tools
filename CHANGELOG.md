@@ -5,6 +5,38 @@ major plan execution, and workflow gate change.
 
 ## Unreleased
 
+### Phase 03: Cross-Repo Capability Request Gate
+
+- Changed cross-repo protocol artifacts: added `.planning/cross-repo/` with
+  inbox, outbox, decisions, templates, request examples, a real incoming
+  request, and a mixed decision artifact.
+- Changed gates: added `.planning/gates/registry.json` as the machine-readable
+  gate source for discuss mode, upstream freshness, cross-repo incoming/outgoing
+  review, changelog, self-use, new-tool intake, git baseline, and future
+  gate-review hook.
+- Changed templates: added capability request and decision templates with
+  required fields, boundary classifications, decision statuses, non-goals, and
+  review/expiry sections.
+- Changed review packet/interoperability semantics: documented that
+  `ai-workspace-kit` can request AI Tools external auditors through inbox
+  requests, and AI Tools can request stable review packet/evidence-ref
+  compatibility through outbox requests.
+- Compatibility impact for `ai-workspace-kit`: requests are evidence and
+  decision inputs only. They do not install, run, or depend on AI Tools
+  automatically, and they do not copy `.planning` state between repositories.
+- Breaking changes: none for runtime behavior; future GSD artifacts now need
+  observable `Gate Resolution` sections when registered gates apply.
+- Migration notes: future agents should read `CHANGELOG.md` first, then
+  `.planning/gates/registry.json` and
+  `.planning/cross-repo/CROSS-REPO-CAPABILITY-REQUESTS.md` before changing
+  gates or cross-repo protocol behavior.
+- Validation: `npm.cmd test -- test/planning/cross-repo-protocol.test.js` and
+  `npm.cmd test` passed after Phase 03 docs validation was added.
+- Upstream impact: Phase 03 planning checked `ai-workspace-kit` at commit
+  `48ec037d058747151c320ced9c0ee1e1d247d4b1`; no upstream changelog or release
+  notes artifact existed at that commit, so commit/diff review remains the
+  fallback.
+
 ### Workflow Gates
 
 - Added a planned changelog gate: after each major task or phase, update this
