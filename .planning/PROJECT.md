@@ -39,6 +39,9 @@ guidance auditable without mutating target projects.
 - [ ] Enforce the ai-workspace-kit tandem boundary gate so AI Tools does not
   duplicate adoption/bootstrap, adapter generation, or generated-contract
   review capabilities already owned by `ai-workspace-kit`.
+- [ ] Run an ai-workspace-kit upstream freshness gate before each phase planning
+  step so planning uses the latest reachable upstream commit and records
+  reusable changes.
 
 ### Out of Scope
 
@@ -107,6 +110,10 @@ to inspect it.
   capability is owned by AI Tools, owned by `ai-workspace-kit`, or shared
   boundary work. Do not mask duplicate `ai-workspace-kit` behavior as a new AI
   Tools review utility.
+- **Upstream freshness gate**: Before phase planning, compare the local
+  `.external/ai-workspace-kit` commit with GitHub `HEAD`, fast-forward the
+  checkout when it changed, review the upstream diff, and record project impacts
+  before writing or updating a phase plan.
 - **Windows compatibility**: Clean clone tests must pass on Windows, including
   line-ending behavior.
 
@@ -120,6 +127,7 @@ to inspect it.
 | Use `ai-workspace-kit` workflow principles but keep it optional | The workflow is useful, but target projects should not inherit dependencies or assumptions. | Pending |
 | Treat generated packets as review material, not installation material | This preserves user control and avoids accidental target-project mutation. | Pending |
 | Enforce the ai-workspace-kit tandem boundary gate | AI Tools should complement `ai-workspace-kit`, not duplicate adoption/bootstrap or adapter-generation behavior under new tool names. | Active |
+| Enforce the ai-workspace-kit upstream freshness gate | `ai-workspace-kit` is a living upstream reference; phase plans should reflect current contracts, schemas, and workflow lessons. | Active |
 
 ## Evolution
 
@@ -139,4 +147,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state.
 
 ---
-*Last updated: 2026-05-07 after adding ai-workspace-kit tandem boundary gate*
+*Last updated: 2026-05-07 after adding ai-workspace-kit upstream freshness gate*

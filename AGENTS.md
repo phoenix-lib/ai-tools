@@ -45,6 +45,9 @@ before the shared review packet standard and first external auditor exist.
 - Read the relevant seed `README.md` files before implementing a tool.
 - Run the ai-workspace-kit tandem boundary gate before proposing, planning, or
   implementing a new tool or review workflow.
+- Before every GSD phase planning step, run the ai-workspace-kit upstream
+  freshness gate. Planning must use the latest reachable
+  `phoenix-lib/ai-workspace-kit` reference, not a stale local checkout.
 - Prefer one small green read-only tool over broad README expansion.
 - Keep shared contracts in `standards/` and reusable mechanics in `shared/`.
   Tool-specific checks belong under `tools/<tool-name>/` once implementation
@@ -84,6 +87,38 @@ contracts, not as a product dependency.
 - During GSD discuss/context gathering, ask each phase whether the user wants
   manual questions or trusted self-questioning. Do not persist that answer as a
   global preference.
+
+## ai-workspace-kit Upstream Freshness Gate
+
+Run this gate before every `$gsd-plan-phase`, before major replanning, and
+whenever a phase depends on `ai-workspace-kit` behavior. The purpose is to keep
+this project aligned with the living upstream kit and to harvest useful new
+principles without copying its product responsibilities.
+
+1. Read the current local commit:
+   `git -C .external/ai-workspace-kit rev-parse HEAD`.
+2. Check the latest reachable upstream commit:
+   `git ls-remote https://github.com/phoenix-lib/ai-workspace-kit.git HEAD`.
+3. If the commits differ, ensure the local checkout is clean, then update it
+   with `git -C .external/ai-workspace-kit pull --ff-only`. If the checkout is
+   missing, clone it into `.external/ai-workspace-kit`.
+4. Review what changed before planning:
+   - `git -C .external/ai-workspace-kit log --oneline <old>..<new>`
+   - `git -C .external/ai-workspace-kit diff --name-only <old>..<new>`
+   - Changed source layers such as `CORE-CONTRACT.md`,
+     `AI-BOOTSTRAP.md`, `ADAPTER-GENERATION.md`, `TOOLING-PLAYBOOK.md`,
+     schemas, adapter templates, and `scripts/lib/*`.
+5. Update `.planning/research/AI-WORKSPACE-KIT-UPSTREAM-REVIEW.md` with the
+   checked commits, changed areas, usable ideas, boundaries to preserve, and
+   any phase-planning impact.
+6. Carry relevant findings into the active phase `CONTEXT.md`, `RESEARCH.md`,
+   or `PLAN.md` so downstream agents see the current upstream state.
+
+Do not copy `.external/ai-workspace-kit/.planning` state into this project.
+Treat upstream changes as evidence and design input, not as automatic authority
+over AI Tools scope. If network access is unavailable, record the upstream
+commit as `unknown`, note the risk in the phase plan, and avoid decisions that
+depend on newly changed kit behavior until the gate can run.
 
 ## ai-workspace-kit Tandem Boundary Gate
 

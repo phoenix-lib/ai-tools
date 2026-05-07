@@ -33,6 +33,7 @@ Cycles run:
 - Ignore policy and file walker: 5
 - Fixture harness and mutation proof: 5
 - Shared module layout and API surface: 4
+- Upstream freshness impact: 4
 
 ## Implementation Decisions
 
@@ -156,6 +157,23 @@ Cycles run:
 - **D-37:** Tests should live under `test/shared/` and should directly exercise
   the helper APIs before any auditor exists.
 
+### Upstream Freshness Impact
+
+- **D-38:** Before planning Phase 2, run the ai-workspace-kit upstream
+  freshness gate: compare local `.external/ai-workspace-kit` with GitHub HEAD,
+  fast-forward if changed, and review the upstream diff before writing plans.
+- **D-39:** The latest reviewed upstream update for this context is
+  `3e489b1a99c58443e593a1e2f6234ed5d0dc173d` to
+  `578d0f8e453ba65e667872ac0b529dcb7bbc405f`.
+- **D-40:** Phase 2 should reuse the updated upstream lessons around compact
+  `REVIEW-SUMMARY.json`, single-source review summaries, optional tooling
+  governance, stricter generated-contract policy, and adapter-aware review
+  packets only as compatible design input. Do not implement ai-workspace-kit
+  adoption review behavior here.
+- **D-41:** Future phase plans must record the upstream commit checked and any
+  reusable changes in
+  `.planning/research/AI-WORKSPACE-KIT-UPSTREAM-REVIEW.md`.
+
 ### the agent's Discretion
 
 The planner may choose exact helper function names, fixture scenario names, max
@@ -182,6 +200,8 @@ imports. Keep the behavioral decisions above intact and avoid adding
   rules, and ai-workspace-kit tandem boundary gate.
 - `AI-AGENT-IMPLEMENTATION-GUIDE.md` - Main implementation guide and product
   standards.
+- `.planning/research/AI-WORKSPACE-KIT-UPSTREAM-REVIEW.md` - Latest recorded
+  review of upstream `ai-workspace-kit` changes and phase-planning impacts.
 
 ### Phase 1 Outputs
 
@@ -213,6 +233,10 @@ imports. Keep the behavioral decisions above intact and avoid adding
   `isSecretLike` path classifier and path-only evidence concept.
 - `.external/ai-workspace-kit/test/adopt.test.js` - Reference tree-hash
   mutation proof and secret sentinel leakage tests.
+- `.external/ai-workspace-kit/TOOLING-PLAYBOOK.md` - Updated optional-tool
+  governance and GSD stage mapping.
+- `.external/ai-workspace-kit/schemas/review-summary.schema.json` - Updated
+  compact review gate schema to compare with AI Tools packet contracts.
 
 </canonical_refs>
 
