@@ -1,5 +1,60 @@
 # ai-workspace-kit Upstream Review
 
+## Phase 4 Planning Freshness Check
+
+**Checked:** 2026-05-07 during `$gsd-plan-phase 4`
+**Local before update:** `48ec037d058747151c320ced9c0ee1e1d247d4b1`
+**Remote HEAD:** `2079ab9626e9f9ed256512091f9c5ea473582885`
+**Local after update:** `2079ab9626e9f9ed256512091f9c5ea473582885`
+**Checkout status before update:** clean
+**Result:** local `.external/ai-workspace-kit` fast-forwarded to upstream HEAD.
+
+Upstream now provides `CHANGELOG.md`, so the freshness gate read it before
+reviewing changed contracts directly. The changelog records Phase 11 interop
+guidance, Phase 12 skill synthesis/maintenance guidance, and Phase 13 gate
+enforcement contracts.
+
+Relevant changed areas reviewed for Phase 4:
+
+- `CHANGELOG.md` - changed contracts, gates, schemas, compatibility impact, and
+  explicit statement that changelog is planning evidence, not automatic
+  approval.
+- `AI-TOOLS-INTEROP.md` - compatible AI Tools packet artifacts, status mapping,
+  evidence-ref semantics, secret path-only rules, and recommended-action
+  boundaries.
+- `EXTERNAL-DEV-TOOLS.md` - optional external tool matrix. It names
+  `contract-drift-auditor` for discuss/plan/maintenance and keeps it
+  review-only with no automatic contract rewrite.
+- `TOOLING-PLAYBOOK.md` - external tool non-duplication gate and tool matrix.
+  It explicitly keeps drift auditing external to `ai-workspace-kit`.
+- `CROSS-REPO-CAPABILITY-REQUESTS.md` - protocol version, canonical IDs,
+  `Thread ID`, repo-qualified counterpart paths, registry mapping, and
+  incoming/outgoing gates.
+- `AI-CONTRACT-REVIEW.md` - review packet consumption order and mature-project
+  rule to preserve stricter local contracts before copying generated guidance.
+- `schemas/gate-registry.schema.json` and `templates/GATE-RESOLUTION.md` -
+  upstream gate registry/gate-resolution contract. AI Tools keeps its
+  snake_case registry with explicit mapping instead of claiming direct schema
+  equality.
+
+Phase 4 planning impact:
+
+- `contract-drift-auditor` remains clearly AI Tools-owned external auditor
+  scope. `ai-workspace-kit` may recommend it or consume compatible packets, but
+  must not run it automatically or hide it inside adoption/bootstrap.
+- Phase 4 packet renderer should align with `AI-TOOLS-INTEROP.md`:
+  `REVIEW-SUMMARY.json`, `EVIDENCE.json`, `FINDINGS.md`, and
+  `RECOMMENDED-ACTIONS.md` generated from one packet model.
+- `low` severity is valid in AI Tools schemas; kit consumers may map it to
+  `info`. Do not remove `low` from AI Tools.
+- Evidence refs must stay relative, normalized, and secret-like paths must
+  remain path-only without content reads, copied values, or content hashes.
+- Plan artifacts should continue recording `Gate Resolution`, but completed
+  pre-registry artifacts are legacy evidence and are not rewritten solely to
+  satisfy new upstream gate fields.
+- Future mechanical gate-linter and cross-repo validator remain deferred
+  AI Tools capabilities; they are not Phase 4 scope.
+
 **Last checked:** 2026-05-07
 **Local before latest update:** `578d0f8e453ba65e667872ac0b529dcb7bbc405f`
 **Remote HEAD checked:** `48ec037d058747151c320ced9c0ee1e1d247d4b1`
