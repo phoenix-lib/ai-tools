@@ -1,5 +1,4 @@
 const crypto = require("node:crypto");
-const fs = require("node:fs");
 const path = require("node:path");
 const { assertSafeOutputDir } = require("../../shared/path-guard");
 const {
@@ -7,19 +6,28 @@ const {
   deriveCounts,
   writePacketArtifacts
 } = require("../../shared/review-packet-renderer");
+const {
+  CONTRACT_DRIFT_AUDITOR_TOOL_NAME,
+  POLICY_HASH_SOURCES,
+  REVIEW_PACKET_SCHEMA_VERSION,
+  loadPackageVersion
+} = require("../../shared/tool-metadata");
 const { discoverProject } = require("./discovery");
 const { runChecks } = require("./checks");
 
 function sha256File(filePath) {
+  const fs = require("node:fs");
   return crypto.createHash("sha256").update(fs.readFileSync(filePath)).digest("hex");
 }
 
-function packageVersion() {
-  try {
-    return JSON.parse(fs.readFileSync(path.join(__dirname, "../../package.json"), "utf8")).version ?? "0.0.0";
-  } catch {
-    return "0.0.0";
+function createPolicyHashes(rootDir) {
+  const hashes = {};
+
+  for (const [policyName, relativePath] of Object.entries(POLICY_HASH_SOURCES)) {
+    hashes[policyName] = sha256File(path.join(rootDir, relativePath));
   }
+
+  return hashes;
 }
 
 function packetStatus(findings, blockers) {
@@ -39,17 +47,15 @@ function packetStatus(findings, blockers) {
 }
 
 function createToolManifest({ projectDir, argv, timestamp }) {
+  const rootDir = path.join(__dirname, "../..");
+
   return {
     generated_files: REQUIRED_ARTIFACTS.map((artifact) => ({ path: artifact })),
     input: {
       args: argv ?? [],
       target_path: projectDir
     },
-    policy_hashes: {
-      ignore_policy: sha256File(path.join(__dirname, "../../shared/ignore-policy.js")),
-      path_guard: sha256File(path.join(__dirname, "../../shared/path-guard.js")),
-      secret_policy: sha256File(path.join(__dirname, "../../shared/secret-policy.js"))
-    },
+    policy_hashes: createPolicyHashes(rootDir),
     read_write_behavior: "review_output_only",
     requested_outputs: REQUIRED_ARTIFACTS,
     run_timestamp: timestamp,
@@ -59,14 +65,14 @@ function createToolManifest({ projectDir, argv, timestamp }) {
       target_mutation: "none"
     },
     schema_versions: {
-      review_packet: "review-packet/v1"
+      review_packet: REVIEW_PACKET_SCHEMA_VERSION
     },
     source_commit: null,
     target_project: {
       path: projectDir
     },
-    tool_name: "contract-drift-auditor",
-    tool_version: packageVersion()
+    tool_name: CONTRACT_DRIFT_AUDITOR_TOOL_NAME,
+    tool_version: loadPackageVersion(rootDir)
   };
 }
 
@@ -90,7 +96,7 @@ async function runAudit(options) {
     recommended_actions_file: "RECOMMENDED-ACTIONS.md",
     rejected_assumptions: checkResult.rejected_assumptions,
     required_decisions: checkResult.required_decisions,
-    schema_version: "review-packet/v1",
+    schema_version: REVIEW_PACKET_SCHEMA_VERSION,
     status: packetStatus(checkResult.findings, checkResult.blockers),
     target_project: {
       path: projectDir

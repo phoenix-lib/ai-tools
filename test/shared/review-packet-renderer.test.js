@@ -6,6 +6,7 @@ const {
   renderPacketArtifacts,
   renderReviewSummaryJson
 } = require("../../shared/review-packet-renderer");
+const { REQUIRED_PACKET_ARTIFACTS, REVIEW_PACKET_SCHEMA_VERSION } = require("../../shared/tool-metadata");
 
 function minimalSummary() {
   return {
@@ -54,7 +55,7 @@ function minimalSummary() {
     recommended_actions_file: "RECOMMENDED-ACTIONS.md",
     rejected_assumptions: [],
     required_decisions: [],
-    schema_version: "review-packet/v1",
+    schema_version: REVIEW_PACKET_SCHEMA_VERSION,
     status: "human_review_required",
     target_project: {
       path: "fixture"
@@ -72,7 +73,7 @@ function minimalSummary() {
         target_mutation: "none"
       },
       schema_versions: {
-        review_packet: "review-packet/v1"
+        review_packet: REVIEW_PACKET_SCHEMA_VERSION
       },
       tool_name: "contract-drift-auditor",
       tool_version: "0.1.0"
@@ -95,6 +96,7 @@ test("renders all required artifacts from one model", () => {
   });
 
   assert.deepEqual(Object.keys(artifacts).sort(), [...REQUIRED_ARTIFACTS].sort());
+  assert.deepEqual(REQUIRED_ARTIFACTS, REQUIRED_PACKET_ARTIFACTS);
   assert.match(artifacts["FINDINGS.md"], /Total findings: 1/);
   assert.match(artifacts["RECOMMENDED-ACTIONS.md"], /Required decisions: 0/);
 });

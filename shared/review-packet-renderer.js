@@ -1,13 +1,9 @@
 const fs = require("node:fs");
 const path = require("node:path");
 const { canonicalJson, sortValue } = require("./canonical-json");
+const { REQUIRED_PACKET_ARTIFACTS } = require("./tool-metadata");
 
-const REQUIRED_ARTIFACTS = [
-  "REVIEW-SUMMARY.json",
-  "EVIDENCE.json",
-  "FINDINGS.md",
-  "RECOMMENDED-ACTIONS.md"
-];
+const REQUIRED_ARTIFACTS = REQUIRED_PACKET_ARTIFACTS;
 
 const EMPTY_SEVERITY_COUNTS = {
   critical: 0,

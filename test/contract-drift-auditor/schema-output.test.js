@@ -6,6 +6,12 @@ const Ajv2020 = require("ajv/dist/2020");
 const addFormats = require("ajv-formats");
 const { runAudit } = require("../../tools/contract-drift-auditor");
 const {
+  CONTRACT_DRIFT_AUDITOR_TOOL_NAME,
+  REQUIRED_PACKET_ARTIFACTS,
+  REVIEW_PACKET_SCHEMA_VERSION,
+  loadPackageVersion
+} = require("../../shared/tool-metadata");
+const {
   createTempOutputDir,
   fixtureInputDir,
   removeTempOutputDir
@@ -64,6 +70,12 @@ test("generated auditor packet validates against review packet schemas", async (
 
   try {
     assert.equal(validateSummary(packet.summary), true, ajv.errorsText(validateSummary.errors));
+    assert.equal(packet.summary.schema_version, REVIEW_PACKET_SCHEMA_VERSION);
+    assert.deepEqual(packet.summary.generated_artifacts, REQUIRED_PACKET_ARTIFACTS);
+    assert.equal(packet.summary.tool.tool_name, CONTRACT_DRIFT_AUDITOR_TOOL_NAME);
+    assert.equal(packet.summary.tool.tool_version, loadPackageVersion(process.cwd()));
+    assert.equal(packet.summary.tool.schema_versions.review_packet, REVIEW_PACKET_SCHEMA_VERSION);
+    assert.deepEqual(packet.summary.tool.requested_outputs, REQUIRED_PACKET_ARTIFACTS);
 
     for (const evidenceRef of packet.evidence) {
       assert.equal(validateEvidence(evidenceRef), true, ajv.errorsText(validateEvidence.errors));

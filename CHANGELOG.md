@@ -5,6 +5,32 @@ major plan execution, and workflow gate change.
 
 ## Unreleased
 
+### Phase 06-02: Tool Metadata Source
+
+- Changed shared metadata: added `shared/tool-metadata.js` as the code-owned
+  source for `review-packet/v1`, required packet artifact names,
+  `contract-drift-auditor` tool name, policy hash source paths, and package
+  version lookup from `package.json`.
+- Changed packet generation internals: `shared/review-packet-renderer.js` and
+  `tools/contract-drift-auditor/index.js` now consume shared metadata constants
+  instead of repeating schema version, artifact names, tool name, or package
+  version lookup locally.
+- Packet semantics unchanged: required artifacts remain `REVIEW-SUMMARY.json`,
+  `EVIDENCE.json`, `FINDINGS.md`, and `RECOMMENDED-ACTIONS.md`; schema version
+  remains `review-packet/v1`.
+- Validation: `npm.cmd test -- test/shared/tool-metadata.test.js`,
+  `npm.cmd test -- test/shared/review-packet-renderer.test.js`,
+  `npm.cmd test -- test/contract-drift-auditor/schema-output.test.js`, and
+  `npm.cmd test` are the required checks for this plan.
+- Compatibility impact for `ai-workspace-kit`: downstream packet readers should
+  see no schema or artifact-name change. This is a source-of-truth cleanup only
+  and does not add runtime dependency, automatic tool execution, or kit-owned
+  behavior.
+- Breaking changes: none.
+- Migration notes: future packet examples and tools should import shared
+  metadata constants instead of duplicating packet artifact names or schema
+  versions.
+
 ### Phase 06-01: Release Docs Closeout
 
 - Changed documentation only: updated `tools/contract-drift-auditor/README.md`
