@@ -1,0 +1,12 @@
+[
+  {
+    "confidence": "verified",
+    "evidence_type": "contract_file",
+    "id": "ev.agents-command",
+    "line": 1,
+    "path": "AGENTS.md",
+    "path_only": false,
+    "reason": "Example evidence for a documented assistant command that requires human review.",
+    "sha256": "fd78476cf339384b600f177392a87981014b10a87390e95db73ddfe850e8fda1"
+  }
+]

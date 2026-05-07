@@ -5,6 +5,39 @@ major plan execution, and workflow gate change.
 
 ## Unreleased
 
+### Phase 06-03: Release Packet Fixtures
+
+- Changed tool examples: added release-facing `contract-drift-auditor` packet
+  fixtures under `tools/contract-drift-auditor/examples/` for `pass`,
+  `human_review_required`, and `blocked` outcomes.
+- Changed safety evidence: the `blocked-safety` fixture is explicitly a
+  synthetic packet-shape example. Real target-local output paths are rejected
+  before packet artifacts are written.
+- Changed validation: added `test/contract-drift-auditor/release-examples.test.js`
+  for schema-valid examples, required artifact coverage, normalized evidence
+  paths, and Markdown status/count consistency. Added an integration regression
+  proving unsafe target-local output writes no packet files.
+- Changed release docs: `tools/contract-drift-auditor/README.md` and
+  `docs/RELEASE-READINESS.md` now point to the three example folders and
+  preserve portable self-audit guidance with caller-provided external `--out`.
+- Self-use result: final Phase 6 self-audit wrote output outside the repository
+  at `C:\Users\suppo\.codex\memories\ai-tools-self-audit-phase06`; packet
+  status was `human_review_required` with 55 low findings, 0 blockers, 0
+  critical/high/medium findings, and 0 required decisions.
+- Validation: `npm.cmd test -- test/contract-drift-auditor/release-examples.test.js`
+  passed 4/4, `npm.cmd test -- test/contract-drift-auditor/integration.test.js`
+  passed 5/5, `npm.cmd test -- test/planning/release-docs.test.js` passed 4/4,
+  and `npm.cmd test` passed 99/99.
+- Compatibility impact for `ai-workspace-kit`: downstream readers now have
+  concrete packet examples for all release-relevant statuses. No schema change,
+  runtime dependency, automatic tool execution, kit-owned adoption/bootstrap
+  behavior, or hidden cross-repo integration was added.
+- Breaking changes: none.
+- Migration notes: downstream validators should treat
+  `REVIEW-SUMMARY.json` as the machine source of truth and treat the blocked
+  fixture as a synthetic shape example, not proof that unsafe output writes are
+  allowed.
+
 ### Phase 06-02: Tool Metadata Source
 
 - Changed shared metadata: added `shared/tool-metadata.js` as the code-owned

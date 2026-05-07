@@ -24,20 +24,25 @@ gate-linter automation, auto-fix mode, or additional seed tools.
 - [x] One working external auditor exists: `contract-drift-auditor`.
 - [x] Auditor emits `REVIEW-SUMMARY.json`, `EVIDENCE.json`, `FINDINGS.md`, and
   `RECOMMENDED-ACTIONS.md`.
+- [x] Auditor release packet examples cover `pass`, `human_review_required`, and
+  `blocked` outcomes.
 - [x] Deterministic tests validate packet rendering and schema output.
 - [x] Secret-like evidence is path-only by default.
 - [x] Auditor output is isolated outside the audited target project.
 - [x] Target fixture non-mutation is tested.
 - [x] Release self-audit evidence is recorded.
 - [x] Manual gate review evidence is recorded.
-- [x] `CHANGELOG.md` records Phase 05 release hardening validation and upstream
-  `ai-workspace-kit` impact.
+- [x] `CHANGELOG.md` records Phase 05 and Phase 06 release validation and
+  upstream `ai-workspace-kit` impact.
 
 ## Required Artifacts
 
 - `README.md`
 - `tools/contract-drift-auditor/README.md`
 - `standards/review-packet/README.md`
+- `tools/contract-drift-auditor/examples/pass/`
+- `tools/contract-drift-auditor/examples/human-review/`
+- `tools/contract-drift-auditor/examples/blocked-safety/`
 - `docs/RELEASE-READINESS.md`
 - `test/planning/release-docs.test.js`
 - `CHANGELOG.md`
@@ -51,6 +56,17 @@ Already verified in Phase 4:
 - target files are not mutated;
 - generated packet directories inside targets are ignored;
 - secret sentinel values from secret-like files do not appear in output.
+
+Phase 6 adds release packet fixtures:
+
+- `tools/contract-drift-auditor/examples/pass/`: no findings, status `pass`.
+- `tools/contract-drift-auditor/examples/human-review/`: one human-review
+  finding, status `human_review_required`.
+- `tools/contract-drift-auditor/examples/blocked-safety/`: synthetic blocked packet-shape
+  example for unsafe output semantics.
+
+The blocked-safety fixture is intentionally synthetic. A real unsafe output path
+inside the audited target is rejected before packet artifacts are written.
 
 Plan `05-02` refreshed release evidence with:
 
@@ -82,6 +98,13 @@ Validation results recorded on 2026-05-07:
 - `npm.cmd test -- test/contract-drift-auditor/integration.test.js`: 4/4 pass.
 - `npm.cmd test -- test/planning/release-docs.test.js`: 3/3 pass.
 - `npm.cmd test`: 89/89 pass.
+
+Final Phase 6 validation results recorded on 2026-05-07:
+
+- `npm.cmd test -- test/contract-drift-auditor/release-examples.test.js`: 4/4 pass.
+- `npm.cmd test -- test/contract-drift-auditor/integration.test.js`: 5/5 pass.
+- `npm.cmd test -- test/planning/release-docs.test.js`: 4/4 pass.
+- `npm.cmd test`: 99/99 pass.
 
 ## Docs Evidence
 
@@ -146,6 +169,19 @@ Release readiness evidence:
   example, or shorthand references in current contract/planning docs. They do
   not block the first release because packet generation, schema validation,
   secret handling, output isolation, and non-mutation checks all passed.
+
+Final Phase 6 evidence:
+
+- Reusable command: `node tools/contract-drift-auditor/cli.js --project . --out <external-dir>`
+- Final Phase 6 command: `node tools/contract-drift-auditor/cli.js --project . --out C:\Users\suppo\.codex\memories\ai-tools-self-audit-phase06`
+- Final Phase 6 output path: `C:\Users\suppo\.codex\memories\ai-tools-self-audit-phase06`
+- Packet status: `human_review_required`
+- Finding count: 55 total, all `low`; 0 blockers, 0 critical, 0 high,
+  0 medium, 0 required decisions.
+- Interpretation: remaining findings are human-review caveats in current
+  contract/planning documentation. They do not block the first release because
+  release packet examples, schema validation, secret handling, output
+  isolation, non-mutation checks, and final full tests passed.
 
 ## Deferred V2 Work
 

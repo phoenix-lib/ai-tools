@@ -1,0 +1,115 @@
+{
+  "blockers": [],
+  "counts": {
+    "blockers": 0,
+    "findings_by_severity": {
+      "critical": 0,
+      "high": 0,
+      "info": 0,
+      "low": 0,
+      "medium": 1
+    },
+    "preserved_stricter_local_rules": 0,
+    "rejected_assumptions": 0,
+    "required_decisions": 0,
+    "total_findings": 1
+  },
+  "evidence_file": "EVIDENCE.json",
+  "findings": [
+    {
+      "confidence": "verified",
+      "evidence_refs": [
+        "ev.agents-command"
+      ],
+      "id": "drift.command.missing",
+      "recommended_action_refs": [
+        "act.review-command"
+      ],
+      "severity": "medium",
+      "source_check_id": "contract-drift-auditor.commands",
+      "status_contribution": "human_review_required",
+      "summary": "Example packet shape for a documented command that the auditor cannot confirm from package scripts.",
+      "title": "Documented command needs review"
+    }
+  ],
+  "generated_artifacts": [
+    "REVIEW-SUMMARY.json",
+    "EVIDENCE.json",
+    "FINDINGS.md",
+    "RECOMMENDED-ACTIONS.md"
+  ],
+  "preserved_stricter_local_rules": [],
+  "recommended_actions": [
+    {
+      "finding_refs": [
+        "drift.command.missing"
+      ],
+      "human_review_required": true,
+      "id": "act.review-command",
+      "rationale": "The auditor reports evidence only; a maintainer decides whether to add the script, update guidance, or accept the caveat.",
+      "suggested_file": "AGENTS.md",
+      "summary": "Review the documented command against current package scripts.",
+      "target_owner": "project maintainer"
+    }
+  ],
+  "recommended_actions_file": "RECOMMENDED-ACTIONS.md",
+  "rejected_assumptions": [],
+  "required_decisions": [],
+  "schema_version": "review-packet/v1",
+  "status": "human_review_required",
+  "target_project": {
+    "path": "examples/human-review-target"
+  },
+  "tool": {
+    "generated_files": [
+      {
+        "path": "REVIEW-SUMMARY.json"
+      },
+      {
+        "path": "EVIDENCE.json"
+      },
+      {
+        "path": "FINDINGS.md"
+      },
+      {
+        "path": "RECOMMENDED-ACTIONS.md"
+      }
+    ],
+    "input": {
+      "args": [
+        "--project",
+        "examples/human-review-target",
+        "--out",
+        "packet"
+      ],
+      "target_path": "examples/human-review-target"
+    },
+    "policy_hashes": {
+      "ignore_policy": "d64285cfba46d17a10daef631b5161cfedbe9999934213f48cf18f018ef8e6cb",
+      "path_guard": "05352fd7d8e71419b9f13c736cdf1357d54ceddb763a334dcd47f0ec9ea52887",
+      "secret_policy": "6012d6089159bf588d05e67cb6af5b3fc7ddc9f32eb61bc45f3bbfbb71c0a97f"
+    },
+    "read_write_behavior": "review_output_only",
+    "requested_outputs": [
+      "REVIEW-SUMMARY.json",
+      "EVIDENCE.json",
+      "FINDINGS.md",
+      "RECOMMENDED-ACTIONS.md"
+    ],
+    "run_timestamp": "2026-05-07T00:00:00.000Z",
+    "safety_profile": {
+      "review_only": true,
+      "secret_policy": "path-only-secret-evidence",
+      "target_mutation": "none"
+    },
+    "schema_versions": {
+      "review_packet": "review-packet/v1"
+    },
+    "source_commit": null,
+    "target_project": {
+      "path": "examples/human-review-target"
+    },
+    "tool_name": "contract-drift-auditor",
+    "tool_version": "0.1.0"
+  }
+}

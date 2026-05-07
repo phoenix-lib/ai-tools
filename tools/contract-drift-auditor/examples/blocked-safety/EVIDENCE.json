@@ -1,0 +1,12 @@
+[
+  {
+    "confidence": "verified",
+    "evidence_type": "safety_policy",
+    "id": "ev.path-guard",
+    "line": 30,
+    "path": "shared/path-guard.js",
+    "path_only": false,
+    "reason": "Path guard rejects output directories inside the audited target project.",
+    "sha256": "05352fd7d8e71419b9f13c736cdf1357d54ceddb763a334dcd47f0ec9ea52887"
+  }
+]

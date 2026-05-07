@@ -1,0 +1,121 @@
+{
+  "blockers": [
+    {
+      "id": "blocker.unsafe-output",
+      "reason": "Synthetic packet-shape example: a real target-local output path is rejected before packet artifacts are written.",
+      "source": "path-guard"
+    }
+  ],
+  "counts": {
+    "blockers": 1,
+    "findings_by_severity": {
+      "critical": 0,
+      "high": 1,
+      "info": 0,
+      "low": 0,
+      "medium": 0
+    },
+    "preserved_stricter_local_rules": 0,
+    "rejected_assumptions": 0,
+    "required_decisions": 0,
+    "total_findings": 1
+  },
+  "evidence_file": "EVIDENCE.json",
+  "findings": [
+    {
+      "confidence": "verified",
+      "evidence_refs": [
+        "ev.path-guard"
+      ],
+      "id": "safety.output.target_local",
+      "recommended_action_refs": [
+        "act.use-external-out"
+      ],
+      "severity": "high",
+      "source_check_id": "path-guard.output-isolation",
+      "status_contribution": "blocked",
+      "summary": "Example packet shape for an unsafe target-local output request. Real runs reject this path before writing packet files.",
+      "title": "Unsafe output path is blocked"
+    }
+  ],
+  "generated_artifacts": [
+    "REVIEW-SUMMARY.json",
+    "EVIDENCE.json",
+    "FINDINGS.md",
+    "RECOMMENDED-ACTIONS.md"
+  ],
+  "preserved_stricter_local_rules": [],
+  "recommended_actions": [
+    {
+      "finding_refs": [
+        "safety.output.target_local"
+      ],
+      "human_review_required": true,
+      "id": "act.use-external-out",
+      "rationale": "Review output must remain outside the audited target so generated evidence cannot pollute the project being audited.",
+      "suggested_command": "node tools/contract-drift-auditor/cli.js --project <path> --out <external-dir>",
+      "summary": "Choose an output directory outside the audited target project.",
+      "target_owner": "tool caller"
+    }
+  ],
+  "recommended_actions_file": "RECOMMENDED-ACTIONS.md",
+  "rejected_assumptions": [],
+  "required_decisions": [],
+  "schema_version": "review-packet/v1",
+  "status": "blocked",
+  "target_project": {
+    "path": "examples/unsafe-target"
+  },
+  "tool": {
+    "generated_files": [
+      {
+        "path": "REVIEW-SUMMARY.json"
+      },
+      {
+        "path": "EVIDENCE.json"
+      },
+      {
+        "path": "FINDINGS.md"
+      },
+      {
+        "path": "RECOMMENDED-ACTIONS.md"
+      }
+    ],
+    "input": {
+      "args": [
+        "--project",
+        "examples/unsafe-target",
+        "--out",
+        "examples/unsafe-target/packet"
+      ],
+      "target_path": "examples/unsafe-target"
+    },
+    "policy_hashes": {
+      "ignore_policy": "d64285cfba46d17a10daef631b5161cfedbe9999934213f48cf18f018ef8e6cb",
+      "path_guard": "05352fd7d8e71419b9f13c736cdf1357d54ceddb763a334dcd47f0ec9ea52887",
+      "secret_policy": "6012d6089159bf588d05e67cb6af5b3fc7ddc9f32eb61bc45f3bbfbb71c0a97f"
+    },
+    "read_write_behavior": "review_output_only",
+    "requested_outputs": [
+      "REVIEW-SUMMARY.json",
+      "EVIDENCE.json",
+      "FINDINGS.md",
+      "RECOMMENDED-ACTIONS.md"
+    ],
+    "run_timestamp": "2026-05-07T00:00:00.000Z",
+    "safety_profile": {
+      "review_only": true,
+      "secret_policy": "path-only-secret-evidence",
+      "target_mutation": "none"
+    },
+    "schema_versions": {
+      "review_packet": "review-packet/v1"
+    },
+    "source_commit": null,
+    "target_project": {
+      "path": "examples/unsafe-target"
+    },
+    "tool_name": "contract-drift-auditor",
+    "tool_version": "0.1.0"
+  }
+}

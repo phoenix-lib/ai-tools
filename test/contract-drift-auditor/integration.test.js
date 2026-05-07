@@ -4,6 +4,7 @@ const os = require("node:os");
 const path = require("node:path");
 const test = require("node:test");
 const { runAudit } = require("../../tools/contract-drift-auditor");
+const { REQUIRED_ARTIFACTS } = require("../../shared/review-packet-renderer");
 const { treeHash } = require("../../shared/tree-hash");
 const {
   createTempOutputDir,
@@ -107,6 +108,30 @@ test("auditor does not report historical planning references as current drift", 
     assert.equal(treeHash(input), before);
   } finally {
     removeTempOutputDir(outDir);
+    fs.rmSync(input, { recursive: true, force: true });
+  }
+});
+
+test("auditor rejects target-local output before writing packet artifacts", async () => {
+  const input = fs.mkdtempSync(path.join(os.tmpdir(), "ai-tools-unsafe-output-input-"));
+  const outDir = path.join(input, "packet");
+
+  try {
+    writeFile(input, "AGENTS.md", "# Contract\n");
+    writeFile(input, "package.json", "{\"scripts\":{\"test\":\"node --test\"}}\n");
+
+    const before = treeHash(input);
+
+    await assert.rejects(
+      () => runAudit({ projectDir: input, outDir, clock: fixedClock }),
+      /output directory must be outside the target project/
+    );
+
+    for (const artifact of REQUIRED_ARTIFACTS) {
+      assert.equal(fs.existsSync(path.join(outDir, artifact)), false, `${artifact} must not be written`);
+    }
+    assert.equal(treeHash(input), before);
+  } finally {
     fs.rmSync(input, { recursive: true, force: true });
   }
 });

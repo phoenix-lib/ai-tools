@@ -99,6 +99,21 @@ Unknown and stale facts are first-class data. Recommended actions are guidance
 only; they are not patches, permission grants, or automatic apply instructions.
 In short, recommended actions are guidance only.
 
+## Release Examples
+
+Release-facing packet examples live under `tools/contract-drift-auditor/examples/`:
+
+- `pass/`: no findings, packet status `pass`;
+- `human-review/`: one realistic review finding, packet status
+  `human_review_required`;
+- `blocked-safety/`: synthetic packet-shape example for an unsafe target-local
+  output request, packet status `blocked`.
+
+Each example contains all four packet artifacts and is rendered from the shared
+packet model. The blocked-safety example is synthetic because a real unsafe
+output path is rejected before packet files are written. Use it to understand
+blocked packet semantics, not as evidence that target-local output is allowed.
+
 ## Current Checks
 
 - Missing source-layer or local file references.
