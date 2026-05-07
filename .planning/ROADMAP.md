@@ -19,7 +19,7 @@ proven by `contract-drift-auditor`.
 - [x] **Phase 2: Shared Safety Harness** - Build deterministic read-only inspection primitives and fixture proof. Completed 2026-05-07.
 - [x] **Phase 3: Cross-Repo Capability Request Gate** - Define structured capability requests and decisions between AI Tools and `ai-workspace-kit`. Completed 2026-05-07.
 - [x] **Phase 4: Contract Drift Auditor MVP** - Ship the first external auditor using the shared packet standard. Completed 2026-05-07.
-- [ ] **Phase 5: Integration and Release Hardening** - Align docs, optional ai-workspace-kit integration, and first-release readiness.
+- [x] **Phase 5: Integration and Release Hardening** - Align docs, optional ai-workspace-kit integration, and first-release readiness. (completed 2026-05-07)
 
 ## Phase Details
 
@@ -120,7 +120,7 @@ Plans:
 - [x] 05-01: Write usage, safety, integration, and first-release documentation.
 
 **Wave 2** *(blocked on Wave 1 completion)*
-- [ ] 05-02: Run release readiness review, future ai-workspace-kit gate review if available, document deferred tool criteria, and preserve `XREPO-VALIDATOR-01` as a v2 prerequisite for automatic cross-repo validation.
+- [x] 05-02: Run release readiness review, future ai-workspace-kit gate review if available, document deferred tool criteria, and preserve `XREPO-VALIDATOR-01` as a v2 prerequisite for automatic cross-repo validation.
 
 ## Requirement Coverage
 
@@ -184,4 +184,4 @@ Plans:
 | 2. Shared Safety Harness | 3/3 | Complete | 2026-05-07 |
 | 3. Cross-Repo Capability Request Gate | 3/3 | Complete | 2026-05-07 |
 | 4. Contract Drift Auditor MVP | 3/3 | Complete | 2026-05-07 |
-| 5. Integration and Release Hardening | 1/2 | In Progress|  |
+| 5. Integration and Release Hardening | 2/2 | Complete   | 2026-05-07 |

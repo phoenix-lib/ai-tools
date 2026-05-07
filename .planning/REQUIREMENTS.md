@@ -42,7 +42,7 @@
 
 - [x] **GATE-01**: `CHANGELOG.md` is updated after each completed phase, executed major plan, or workflow gate change with date, phase/plan, changed scope, validation, and upstream impact.
 - [x] **GATE-02**: The ai-workspace-kit upstream freshness gate reads an upstream changelog or release notes first when that artifact exists and changed, and records the absence of such a changelog when it does not exist.
-- [ ] **GATE-03**: Release or maintenance gate review uses the future `ai-workspace-kit` gate-review capability when available, with manual review plus cross-repo request/decision fallback when it is not available.
+- [x] **GATE-03**: Release or maintenance gate review uses the future `ai-workspace-kit` gate-review capability when available, with manual review plus cross-repo request/decision fallback when it is not available.
 - [x] **GATE-04**: AI Tools Self-Use Gate documents when validated AI Tools capabilities must be considered while developing AI Tools itself, how to run them read-only, and how to record skip reasons.
 - [x] **GATE-05**: New Tool Intake and Placement Gate classifies every new tool idea by owner, destination, maturity, activation stage, outputs, and non-goals before implementation.
 - [x] **GATE-06**: Git Baseline Gate separates baseline seed/project files from active work before git cleanliness is used as planning, verification, review packet, or release evidence.
@@ -127,7 +127,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | XREPO-08 | Phase 3 | Complete |
 | GATE-01 | Phase 3 | Complete |
 | GATE-02 | Phase 3 | Complete |
-| GATE-03 | Phase 5 | Pending |
+| GATE-03 | Phase 5 | Complete |
 | GATE-04 | Phase 3 | Complete |
 | GATE-05 | Phase 3 | Complete |
 | GATE-06 | Phase 3 | Complete |
