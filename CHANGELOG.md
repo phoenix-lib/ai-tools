@@ -20,6 +20,15 @@ major plan execution, and workflow gate change.
 - Moved Contract Drift Auditor MVP from Phase 03 to Phase 04.
 - Moved Integration and Release Hardening from Phase 04 to Phase 05.
 
+### Cross-Repo Requests
+
+- Captured an incoming `ai-workspace-kit` request for changelog gate
+  compatibility, assistant-owned gate review, and future evidence-only
+  mechanical gate-linter support. The structured `.planning/cross-repo/`
+  protocol is not implemented yet, so the request is preserved as a pending
+  Phase 03 todo. Mechanical gate-linter is recorded as a v2 candidate, not a
+  v1 implementation dependency.
+
 ## 2026-05-07
 
 ### Phase 01: Review Packet Standard

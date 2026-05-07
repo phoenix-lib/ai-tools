@@ -77,6 +77,7 @@
 - **SKILL-01**: User can lint project skills for trigger quality, referenced files, tool assumptions, and contract conflicts.
 - **TESTQA-01**: User can audit tests for shallow assertions, over-mocking, missing error paths, and missing domain behavior proof.
 - **UIREG-01**: User can compare UI screenshots with layout and interaction checks.
+- **GATELINT-01**: User can run an evidence-only mechanical gate linter that reports missing required gate blocks, duplicate gate IDs, stale file paths, missing source layers, missing changelog entries, conflicting required or forbidden wording, unresolved references, and gates without observable artifact output.
 
 ## Out of Scope
 
@@ -144,4 +145,4 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 ---
 *Requirements defined: 2026-05-07*
-*Last updated: 2026-05-07 after adding changelog and gate-review governance*
+*Last updated: 2026-05-07 after capturing incoming gate-linter request*

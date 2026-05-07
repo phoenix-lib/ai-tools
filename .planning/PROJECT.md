@@ -93,6 +93,7 @@ Important seed areas:
 - `tool-usage-registry`
 - `ui-regression-screenshot-comparator`
 - `local-integration-harness`
+- future `gate-linter` seed from the `ai-workspace-kit` cross-repo request
 
 The project guide is `AI-AGENT-IMPLEMENTATION-GUIDE.md`. It is the main source
 for implementation order and standards. The local `AGENTS.md` adapts
@@ -156,6 +157,7 @@ to inspect it.
 | Insert Cross-Repo Capability Request Gate before the first heavy auditor | The two repos need a structured request/decision protocol before external tool work starts consuming or influencing upstream contracts. | Planned for Phase 03 |
 | Maintain a project changelog after major work | Future agents need a compact history before reading deeper planning artifacts. | Active |
 | Plan ai-workspace-kit gate review as a future hook | The upstream command does not exist yet, so AI Tools should reserve the review stage without pretending it is currently runnable. | Planned for Phase 05 |
+| Treat future mechanical gate-linter output as evidence only | Gate relevance and boundary decisions remain assistant-owned semantic review; tools can surface evidence but not decide adoption. | Deferred v2 candidate |
 
 ## Evolution
 

@@ -3,9 +3,9 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Changelog and gate-review governance added; Phase 02 ready to execute
-last_updated: "2026-05-07T14:26:18.638Z"
-last_activity: 2026-05-07 -- Added changelog gate and future ai-workspace-kit gate-review hook
+stopped_at: Incoming gate-linter request captured; Phase 02 ready to execute
+last_updated: "2026-05-07T14:32:06.732Z"
+last_activity: 2026-05-07 -- Captured incoming ai-workspace-kit gate-linter request
 progress:
   total_phases: 5
   completed_phases: 1
@@ -28,7 +28,7 @@ See: .planning/PROJECT.md (updated 2026-05-07)
 Phase: 2
 Plan: 0/3 executed
 Status: Ready to execute
-Last activity: 2026-05-07 -- Added changelog gate and future ai-workspace-kit gate-review hook
+Last activity: 2026-05-07 -- Captured incoming ai-workspace-kit gate-linter request
 
 Progress: [#####-----] 50%
 
@@ -85,7 +85,9 @@ Decisions are logged in PROJECT.md Key Decisions table.
 
 ### Pending Todos
 
-None yet.
+- Accept gate linter request - capture the incoming `ai-workspace-kit` request
+  as the first Phase 03 cross-repo inbox/decision candidate once
+  `.planning/cross-repo/` exists.
 
 ### Blockers/Concerns
 
@@ -101,6 +103,7 @@ None yet.
 | Tooling | Phase forensics tool | v2 candidate | Initialization |
 | Tooling | Config matrix validator | v2 candidate | Initialization |
 | Tooling | UI and integration tools | v2+ candidate | Initialization |
+| Tooling | Mechanical gate linter | v2 candidate | 2026-05-07 cross-repo request |
 
 ## Session Continuity
 
