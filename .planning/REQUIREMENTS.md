@@ -54,7 +54,7 @@
 
 - [x] **TEST-01**: Tests prove generated review output is deterministic.
 - [x] **TEST-02**: Tests prove target project fixtures are not mutated by review-only commands.
-- [ ] **TEST-03**: Tests prove secret sentinel strings from secret-like files never appear in output.
+- [x] **TEST-03**: Tests prove secret sentinel strings from secret-like files never appear in output.
 - [ ] **TEST-04**: Tests prove stale source-layer and missing command drift are detected.
 - [x] **TEST-05**: Tests prove review summary counts match findings across JSON, Markdown, and CLI output.
 - [x] **TEST-06**: Tests prove generated packet JSON validates against schemas.
@@ -128,7 +128,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | DRIFT-07 | Phase 4 | Pending |
 | TEST-01 | Phase 1 | Complete |
 | TEST-02 | Phase 2 | Complete |
-| TEST-03 | Phase 2 | Pending |
+| TEST-03 | Phase 2 | Complete |
 | TEST-04 | Phase 4 | Pending |
 | TEST-05 | Phase 1 | Complete |
 | TEST-06 | Phase 1 | Complete |
