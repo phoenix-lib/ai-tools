@@ -5,6 +5,24 @@ major plan execution, and workflow gate change.
 
 ## Unreleased
 
+### Local ai-workspace-kit Review
+
+- Reviewed sibling local checkout `C:\projects\ai-workspace-kit` at
+  `bfeb670`, which is 28 commits ahead of the embedded `.external` reference
+  and remote HEAD previously used by the freshness gate.
+- Added `.planning/research/AI-WORKSPACE-KIT-LOCAL-REVIEW.md` with useful
+  ideas for AI Tools: machine-readable contract index, centralized protocol
+  versions, Documentation Impact Gate, forward-only gate registry validation,
+  normalized Gate Resolution template, optional-tool evidence boundaries, and
+  skill synthesis governance.
+- Recommendation: keep Phase 7 as cross-repo compatibility checker, then
+  promote `GATELINT-01` as user-facing `gates-scan`, then add tool registry
+  plus AI Tools contract index/protocol versions before broad skill/tool
+  expansion.
+- Compatibility impact for `ai-workspace-kit`: this is planning evidence only.
+  No runtime dependency, automatic tool execution, copied `.planning` state, or
+  duplicated adoption/bootstrap behavior is added.
+
 ### Phase Verification and Gates Scan Review
 
 - Added `.planning/verification/PHASE-VERIFY-AUDIT.md` confirming every
