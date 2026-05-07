@@ -3,7 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "type": "commonjs",
+  "bin": {
+    "contract-drift-auditor": "tools/contract-drift-auditor/cli.js"
+  },
   "scripts": {
+    "contract-drift-auditor": "node tools/contract-drift-auditor/cli.js",
     "test": "node --test"
   },
   "devDependencies": {
