@@ -2,11 +2,19 @@
   "gates": [
     {
       "automation_boundary": "Ask per phase; if interactive question tools are unavailable, present plain-text choices and stop for user input unless an explicit safe auto/default flag applies.",
-      "description": "Selects Manual Questions or Trusted Self-Questioning before discuss/context gathering writes canonical artifacts.",
+      "blocks_before": [
+        "gray-area analysis",
+        "user questions",
+        "checkpoint writes",
+        "*-CONTEXT.md",
+        "*-DISCUSSION-LOG.md"
+      ],
+      "description": "Selects Manual Questions or Trusted Self-Questioning before any discuss-stage analysis, questions, checkpoints, or canonical artifact writes. workflow.discuss_mode is routing only, not approval evidence.",
       "id": "discuss-mode",
       "name": "Discuss Mode Gate",
       "observable_outputs": [
         "Gate Resolution entry naming selected mode, approval source, and evidence",
+        "Gate Resolution entry naming cycle limits or skip reason",
         "CONTEXT.md discuss mode or gate resolution block"
       ],
       "required_artifacts": [
@@ -16,8 +24,10 @@
       "required_fields": [
         "mode",
         "selected_by",
+        "approval_source",
         "evidence",
-        "skip_reason_when_not_applicable"
+        "cycle_limits_or_skip_reason",
+        "workflow_discuss_mode_is_routing_only"
       ],
       "skip_allowed": false,
       "skip_reason_required": true,

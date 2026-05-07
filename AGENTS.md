@@ -54,6 +54,17 @@ before the shared review packet standard and first external auditor exist.
   workflow gates after Phase 03. Major GSD artifacts must include a
   `Gate Resolution` section when a registered gate applies, or an explicit
   reason when it does not apply.
+- Before any `$gsd-discuss-phase` gray-area analysis, user questions,
+  checkpoint writes, `*-CONTEXT.md`, or `*-DISCUSSION-LOG.md` writes, read
+  `.planning/gates/registry.json` and resolve gate id `discuss-mode`.
+  `workflow.discuss_mode` is routing only; it is not evidence of user approval
+  for Manual Questions or Trusted Self-Questioning.
+- If `discuss-mode` applies, ask the user to choose Manual Questions or
+  Trusted Self-Questioning. If interactive question tooling is unavailable,
+  present a plain-text numbered list and stop for user input. Do not write
+  phase discussion artifacts until the user answers.
+- Record the selected mode, selected_by, approval source, evidence, and
+  self-questioning cycle limits or skip reason in the `Gate Resolution`.
 - Use `.planning/cross-repo/CROSS-REPO-CAPABILITY-REQUESTS.md` as the playbook
   for AI Tools and `ai-workspace-kit` capability requests. The protocol
   structure is `.planning/cross-repo/inbox/`, `outbox/`, `decisions/`, and
@@ -115,8 +126,9 @@ contracts, not as a product dependency.
   change, review stack facts, commands, risks, permissions, optional tools,
   source layers, and skills for drift.
 - During GSD discuss/context gathering, ask each phase whether the user wants
-  manual questions or trusted self-questioning. Do not persist that answer as a
-  global preference.
+  manual questions or trusted self-questioning by resolving the local
+  `discuss-mode` gate before any discussion output is produced. Do not persist
+  that answer as a global preference.
 
 ## ai-workspace-kit Upstream Freshness Gate
 

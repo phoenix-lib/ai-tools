@@ -5,6 +5,18 @@ major plan execution, and workflow gate change.
 
 ## Unreleased
 
+### Workflow Gate Enforcement
+
+- Fixed the Discuss Mode Gate contract so `$gsd-discuss-phase` must resolve
+  `discuss-mode` before gray-area analysis, user questions, checkpoints,
+  `*-CONTEXT.md`, or `*-DISCUSSION-LOG.md` writes.
+- Clarified that `workflow.discuss_mode` is routing only and is not evidence of
+  user approval for Manual Questions or Trusted Self-Questioning.
+- Validation: added regression coverage for `AGENTS.md`,
+  `.planning/gates/registry.json`, and existing discuss context artifacts.
+- Phase 4 impact: no Phase 4 discussion artifacts existed before this fix, so
+  no stale artifact migration was required.
+
 ### Cross-Repo Interop Compatibility
 
 - Planned `XREPO-VALIDATOR-01` as a deferred v2 read-only cross-repo
