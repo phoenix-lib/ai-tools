@@ -65,7 +65,7 @@ Plans:
 ### Phase 3: Cross-Repo Capability Request Gate
 **Goal**: Create the structured protocol for AI Tools and `ai-workspace-kit` to request missing capabilities without mixing ownership or automatically creating work.
 **Depends on**: Phase 2
-**Requirements**: XREPO-01, XREPO-02, XREPO-03, XREPO-04, XREPO-05, XREPO-06, XREPO-07, XREPO-08
+**Requirements**: XREPO-01, XREPO-02, XREPO-03, XREPO-04, XREPO-05, XREPO-06, XREPO-07, XREPO-08, GATE-01, GATE-02
 **UI hint**: no
 **Success Criteria** (what must be TRUE):
   1. `.planning/cross-repo/` contains `inbox/`, `outbox/`, `decisions/`, and `templates/` structure.
@@ -73,12 +73,13 @@ Plans:
   3. A playbook documents why the gate exists, when to create or reject requests, how to prevent endless task exchange, and which repository owns which responsibilities.
   4. Outgoing Need Gate and Incoming Review Gate are mapped to the relevant GSD stages and explicitly do not auto-run tools, create phases, copy planning state, or add repo dependencies.
   5. Example requests exist in both directions: `ai-workspace-kit` asks AI Tools for a read-only contract drift auditor, and AI Tools asks `ai-workspace-kit` for a stable review packet schema and evidence refs contract.
-  6. Tests or docs validation prove required templates/docs exist and contain required fields where the project test harness supports it.
+  6. The project changelog gate is documented, and the upstream freshness gate reads upstream changelog/release notes first when present and changed.
+  7. Tests or docs validation prove required templates/docs exist and contain required fields where the project test harness supports it.
 **Plans**: 3 plans
 
 Plans:
 - [ ] 03-01: Create cross-repo request directories, request template, and decision template.
-- [ ] 03-02: Write the capability request playbook with ownership boundaries and GSD gate mapping.
+- [ ] 03-02: Write the capability request playbook with ownership boundaries, changelog discipline, upstream changelog pre-read, and GSD gate mapping.
 - [ ] 03-03: Add bidirectional example requests and docs validation for required fields.
 
 ### Phase 4: Contract Drift Auditor MVP
@@ -101,18 +102,19 @@ Plans:
 ### Phase 5: Integration and Release Hardening
 **Goal**: Prepare the first useful release and keep integration optional.
 **Depends on**: Phase 4
-**Requirements**: DOC-01, DOC-02, DOC-03, DOC-04
+**Requirements**: DOC-01, DOC-02, DOC-03, DOC-04, GATE-03
 **UI hint**: no
 **Success Criteria** (what must be TRUE):
   1. Documentation explains when to use the auditor, when not to use it, and what safety guarantees it provides.
   2. Documentation states `ai-workspace-kit` remains the adoption/bootstrap contract tool and external tools are optional.
   3. First release definition of done is checkable against schemas, one working auditor, deterministic tests, and secret safety.
   4. Later tool selection is deferred with clear criteria based on repeated real demand.
+  5. Release readiness includes a planned `ai-workspace-kit` gate review hook for conflicting, stale, or irrelevant gates, with manual fallback until the upstream capability exists.
 **Plans**: 2 plans
 
 Plans:
 - [ ] 05-01: Write usage, safety, integration, and first-release documentation.
-- [ ] 05-02: Run release readiness review and document deferred tool criteria.
+- [ ] 05-02: Run release readiness review, future ai-workspace-kit gate review if available, and document deferred tool criteria.
 
 ## Requirement Coverage
 
@@ -138,6 +140,9 @@ Plans:
 | XREPO-06 | Phase 3 |
 | XREPO-07 | Phase 3 |
 | XREPO-08 | Phase 3 |
+| GATE-01 | Phase 3 |
+| GATE-02 | Phase 3 |
+| GATE-03 | Phase 5 |
 | DRIFT-01 | Phase 4 |
 | DRIFT-02 | Phase 4 |
 | DRIFT-03 | Phase 4 |
@@ -157,7 +162,7 @@ Plans:
 | DOC-03 | Phase 5 |
 | DOC-04 | Phase 5 |
 
-**Coverage:** 38/38 v1 requirements mapped.
+**Coverage:** 41/41 v1 requirements mapped.
 
 ## Progress
 

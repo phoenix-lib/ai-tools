@@ -93,7 +93,8 @@ canonical JSON helper, fixtures, and mutation/secret/determinism tests.
 **Rationale:** The two repositories need an explicit request and decision
 protocol before heavy auditor work starts influencing upstream contracts.
 **Delivers:** Cross-repo inbox/outbox/decision structure, request and decision
-templates, gate playbook, bidirectional examples, and docs validation.
+templates, gate playbook, changelog discipline, upstream changelog pre-read,
+bidirectional examples, and docs validation.
 **Avoids:** Duplicated ownership, automatic phase creation from incoming
 requests, and dependency coupling between repositories.
 
@@ -110,7 +111,8 @@ permissions, skills, source layers, and project facts.
 **Rationale:** The first release should document how AI Tools complements
 `ai-workspace-kit` without becoming a mandatory dependency.
 **Delivers:** Usage, safety, optional integration guidance, release readiness
-review, and criteria for deferring later tools.
+review, future ai-workspace-kit gate-review hook, and criteria for deferring
+later tools.
 **Avoids:** Integration drift, unclear release gates, and premature tool
 expansion.
 
@@ -139,6 +141,9 @@ or skill linter based on usage evidence.
   authoring.
 - The cross-repo request gate is now Phase 3; `contract-drift-auditor` moved to
   Phase 4 and release/integration hardening moved to Phase 5.
+- The future ai-workspace-kit gate-review command does not exist in the local
+  checkout yet. Phase 5 should reserve the review stage and use manual review
+  plus cross-repo request/decision fallback until upstream ships it.
 
 ## Sources
 

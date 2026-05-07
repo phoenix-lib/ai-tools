@@ -67,8 +67,16 @@ Latest phase-planning impact:
   Laravel/PHP detection in Phase 2.
 - **Phase 3:** Add a cross-repo capability request gate so upstream requests and
   AI Tools requests become structured decisions before heavy auditor work starts.
+- **Phase 3:** Document local `CHANGELOG.md` updates after major work and make
+  the upstream freshness gate read upstream changelog/release notes first once
+  `ai-workspace-kit` provides them. At commit `48ec037`, no upstream changelog
+  file exists, so commit log and diff review remain the fallback.
 - **Phase 4:** Contract drift can later consume framework/source-layer evidence,
   but should remain a separate read-only auditor.
+- **Phase 5:** Reserve a release/maintenance gate-review step for a future
+  `ai-workspace-kit` capability that detects conflicting, stale, or irrelevant
+  gates. Until upstream exposes that command, keep the review manual and route
+  gaps through cross-repo requests or decisions.
 - **Future skill work:** The self-improving project operating skill idea should
   be captured later when packaging this project's workflow into durable skills.
 
@@ -137,9 +145,13 @@ Major changed areas:
   JSON, tree hash, and fixtures.
 - **Phase 3:** Capture the cross-repo request protocol and keep incoming
   requests as decision points, not automatic phases.
+- **Phase 3:** Include changelog discipline and upstream changelog pre-read in
+  the cross-repo capability request playbook.
 - **Phase 4:** When building `contract-drift-auditor`, consider emitting a
   compact `REVIEW-SUMMARY.json` projection that is easy for `ai-workspace-kit`,
   GSD, and other assistants to consume.
 - **Phase 5:** Use `TOOLING-PLAYBOOK.md` as a source for optional integration
   documentation and for explaining when AI Tools complements
   `ai-workspace-kit`.
+- **Phase 5:** Plan a future ai-workspace-kit gate-review hook, but do not mark
+  it as currently runnable until upstream ships the capability.

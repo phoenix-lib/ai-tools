@@ -45,6 +45,11 @@ guidance auditable without mutating target projects.
 - [ ] Define a cross-repo capability request protocol so AI Tools and
   `ai-workspace-kit` can ask for missing capabilities through explicit requests
   and decisions without automatically creating phases or mixing ownership.
+- [ ] Maintain `CHANGELOG.md` after every completed phase, executed major plan,
+  or workflow gate change.
+- [ ] Plan a future `ai-workspace-kit` gate-review hook for release and
+  maintenance boundaries, with manual fallback until the upstream capability
+  exists.
 
 ### Out of Scope
 
@@ -123,6 +128,17 @@ to inspect it.
   `ai-workspace-kit`, create an outbox request instead of implementing it here.
   Incoming requests from `ai-workspace-kit` create decision points, not automatic
   phases, tool runs, dependencies, or copied planning state.
+- **Project changelog gate**: After every completed phase, executed major plan,
+  or workflow gate change, update `CHANGELOG.md` with changed scope,
+  validation, and upstream impact.
+- **Upstream changelog pre-read**: When the ai-workspace-kit freshness gate
+  detects upstream changes, read upstream changelog/release notes first if that
+  artifact exists and changed. If it does not exist yet, record the absence and
+  use commit log plus diff review.
+- **Future gate review hook**: At release hardening and maintenance boundaries,
+  use the future `ai-workspace-kit` gate-review capability once available to
+  find conflicting, stale, or irrelevant gates. Until then, review manually and
+  route gaps through cross-repo requests or decisions.
 - **Windows compatibility**: Clean clone tests must pass on Windows, including
   line-ending behavior.
 
@@ -138,6 +154,8 @@ to inspect it.
 | Enforce the ai-workspace-kit tandem boundary gate | AI Tools should complement `ai-workspace-kit`, not duplicate adoption/bootstrap or adapter-generation behavior under new tool names. | Active |
 | Enforce the ai-workspace-kit upstream freshness gate | `ai-workspace-kit` is a living upstream reference; phase plans should reflect current contracts, schemas, and workflow lessons. | Active |
 | Insert Cross-Repo Capability Request Gate before the first heavy auditor | The two repos need a structured request/decision protocol before external tool work starts consuming or influencing upstream contracts. | Planned for Phase 03 |
+| Maintain a project changelog after major work | Future agents need a compact history before reading deeper planning artifacts. | Active |
+| Plan ai-workspace-kit gate review as a future hook | The upstream command does not exist yet, so AI Tools should reserve the review stage without pretending it is currently runnable. | Planned for Phase 05 |
 
 ## Evolution
 
@@ -157,4 +175,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state.
 
 ---
-*Last updated: 2026-05-07 after inserting Cross-Repo Capability Request Gate*
+*Last updated: 2026-05-07 after adding changelog and gate-review governance*

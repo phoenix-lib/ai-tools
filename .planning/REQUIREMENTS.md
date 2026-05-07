@@ -34,6 +34,12 @@
 - [ ] **XREPO-07**: Incoming Review Gate is documented for discuss, maintenance, and phase-boundary stages so incoming requests create decision points, not automatic phases or automatic tool runs.
 - [ ] **XREPO-08**: Example requests and docs validation prove the protocol covers both directions without repo dependency, copied `.planning` state, automatic integration, or duplicated ownership.
 
+### Workflow Governance
+
+- [ ] **GATE-01**: `CHANGELOG.md` is updated after each completed phase, executed major plan, or workflow gate change with date, phase/plan, changed scope, validation, and upstream impact.
+- [ ] **GATE-02**: The ai-workspace-kit upstream freshness gate reads an upstream changelog or release notes first when that artifact exists and changed, and records the absence of such a changelog when it does not exist.
+- [ ] **GATE-03**: Release or maintenance gate review uses the future `ai-workspace-kit` gate-review capability when available, with manual review plus cross-repo request/decision fallback when it is not available.
+
 ### Contract Drift Auditor
 
 - [ ] **DRIFT-01**: A user can run `contract-drift-auditor` in read-only mode with explicit `--project` and `--out` arguments.
@@ -109,6 +115,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 | XREPO-06 | Phase 3 | Pending |
 | XREPO-07 | Phase 3 | Pending |
 | XREPO-08 | Phase 3 | Pending |
+| GATE-01 | Phase 3 | Pending |
+| GATE-02 | Phase 3 | Pending |
+| GATE-03 | Phase 5 | Pending |
 | DRIFT-01 | Phase 4 | Pending |
 | DRIFT-02 | Phase 4 | Pending |
 | DRIFT-03 | Phase 4 | Pending |
@@ -129,10 +138,10 @@ Which phases cover which requirements. Updated during roadmap creation.
 | DOC-04 | Phase 5 | Pending |
 
 **Coverage:**
-- v1 requirements: 38 total
-- Mapped to phases: 38
+- v1 requirements: 41 total
+- Mapped to phases: 41
 - Unmapped: 0
 
 ---
 *Requirements defined: 2026-05-07*
-*Last updated: 2026-05-07 after inserting Cross-Repo Capability Request Gate*
+*Last updated: 2026-05-07 after adding changelog and gate-review governance*

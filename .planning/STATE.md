@@ -3,9 +3,9 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Phase 03 inserted; Phase 02 ready to execute
-last_updated: "2026-05-07T14:15:47.571Z"
-last_activity: 2026-05-07 -- Inserted Phase 03 Cross-Repo Capability Request Gate
+stopped_at: Changelog and gate-review governance added; Phase 02 ready to execute
+last_updated: "2026-05-07T14:26:18.638Z"
+last_activity: 2026-05-07 -- Added changelog gate and future ai-workspace-kit gate-review hook
 progress:
   total_phases: 5
   completed_phases: 1
@@ -28,7 +28,7 @@ See: .planning/PROJECT.md (updated 2026-05-07)
 Phase: 2
 Plan: 0/3 executed
 Status: Ready to execute
-Last activity: 2026-05-07 -- Inserted Phase 03 Cross-Repo Capability Request Gate
+Last activity: 2026-05-07 -- Added changelog gate and future ai-workspace-kit gate-review hook
 
 Progress: [#####-----] 50%
 
@@ -67,12 +67,21 @@ Decisions are logged in PROJECT.md Key Decisions table.
 - Insert Phase 03 Cross-Repo Capability Request Gate before
   `contract-drift-auditor` so cross-repo requests become explicit decision
   points instead of automatic work or duplicated responsibilities.
+- Maintain `CHANGELOG.md` after completed phases, executed major plans, and
+  workflow gate changes.
+- Read upstream `ai-workspace-kit` changelog or release notes first when the
+  freshness gate detects a changed upstream changelog. The local upstream
+  checkout currently has no changelog, so commit log/diff remains the fallback.
+- Plan future `ai-workspace-kit` gate-review integration at release/maintenance
+  boundaries without pretending the command exists today.
 
 ### Roadmap Evolution
 
 - Phase 03 inserted: Cross-Repo Capability Request Gate.
 - Former Phase 03 Contract Drift Auditor MVP moved to Phase 04.
 - Former Phase 04 Integration and Release Hardening moved to Phase 05.
+- Added changelog gate requirements to Phase 03.
+- Added future ai-workspace-kit gate-review hook to Phase 05.
 
 ### Pending Todos
 

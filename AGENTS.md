@@ -13,6 +13,7 @@ weakened.
 - Bootstrap reference: `.external/ai-workspace-kit/AI-BOOTSTRAP.md`
 - Adapter reference: `.external/ai-workspace-kit/ADAPTER-GENERATION.md`
 - Project guide: `AI-AGENT-IMPLEMENTATION-GUIDE.md`
+- Project changelog: `CHANGELOG.md`
 - Project overview: `README.md`
 - Product seeds: each top-level tool folder's `README.md`
 
@@ -31,8 +32,8 @@ before the shared review packet standard and first external auditor exist.
 ## Current Facts
 
 - Current state is mostly planning/product seed documentation.
-- There is no root `package.json` and no verified project test/build command
-  yet.
+- Root `package.json` exists with `npm test` backed by `node --test`; no build
+  command is defined yet.
 - The current recommended implementation order is review packet standard,
   shared safety harness, cross-repo capability request gate, then
   `contract-drift-auditor`.
@@ -52,6 +53,9 @@ before the shared review packet standard and first external auditor exist.
 - Treat incoming cross-repo capability requests as decision points. They do not
   automatically create phases, run tools, add dependencies, or copy planning
   state across repositories.
+- After every completed GSD phase, executed major plan, or workflow gate change,
+  update `CHANGELOG.md` with what changed, validation performed, and any
+  `ai-workspace-kit` upstream impact.
 - Prefer one small green read-only tool over broad README expansion.
 - Keep shared contracts in `standards/` and reusable mechanics in `shared/`.
   Tool-specific checks belong under `tools/<tool-name>/` once implementation
@@ -106,15 +110,18 @@ principles without copying its product responsibilities.
 3. If the commits differ, ensure the local checkout is clean, then update it
    with `git -C .external/ai-workspace-kit pull --ff-only`. If the checkout is
    missing, clone it into `.external/ai-workspace-kit`.
-4. Review what changed before planning:
+4. Review what changed before planning. If upstream provides `CHANGELOG.md`,
+   `CHANGES.md`, release notes, or an equivalent change log and that file
+   changed, read it first. If no upstream changelog exists, record that and use
+   commit log plus changed files:
    - `git -C .external/ai-workspace-kit log --oneline <old>..<new>`
    - `git -C .external/ai-workspace-kit diff --name-only <old>..<new>`
    - Changed source layers such as `CORE-CONTRACT.md`,
      `AI-BOOTSTRAP.md`, `ADAPTER-GENERATION.md`, `TOOLING-PLAYBOOK.md`,
      schemas, adapter templates, and `scripts/lib/*`.
 5. Update `.planning/research/AI-WORKSPACE-KIT-UPSTREAM-REVIEW.md` with the
-   checked commits, changed areas, usable ideas, boundaries to preserve, and
-   any phase-planning impact.
+   checked commits, upstream changelog status, changed areas, usable ideas,
+   boundaries to preserve, and any phase-planning impact.
 6. Carry relevant findings into the active phase `CONTEXT.md`, `RESEARCH.md`,
    or `PLAN.md` so downstream agents see the current upstream state.
 
@@ -123,6 +130,35 @@ Treat upstream changes as evidence and design input, not as automatic authority
 over AI Tools scope. If network access is unavailable, record the upstream
 commit as `unknown`, note the risk in the phase plan, and avoid decisions that
 depend on newly changed kit behavior until the gate can run.
+
+## Project Changelog Gate
+
+Run this gate after every completed GSD phase, executed major plan, and workflow
+gate change before the final commit or final response for that work.
+
+1. Update `CHANGELOG.md`.
+2. Include date, phase or plan ID, changed behavior or planning scope, important
+   files or artifacts, validation run, and any `ai-workspace-kit` upstream
+   commit/changelog impact.
+3. If the work is documentation-only, say so explicitly instead of implying
+   runtime behavior changed.
+4. Do not include secrets, raw environment values, or broad file dumps.
+5. Keep the changelog human-readable; detailed evidence belongs in phase
+   summaries, review packets, or research files.
+
+## Future ai-workspace-kit Gate Review Hook
+
+At release hardening and later maintenance boundaries, use the future
+`ai-workspace-kit` gate-review capability when it exists to review this
+repository's assistant contracts, workflow gates, and cross-repo boundaries for
+conflicting, stale, or irrelevant guidance.
+
+Until that upstream capability exists, do a manual gate review and route gaps
+through `.planning/cross-repo/` requests or decisions once Phase 03 creates that
+protocol. Do not block unrelated implementation solely because the upstream
+gate-review command is not available yet, and do not create phases
+automatically from its findings. Any review packet output must be written
+outside the target project.
 
 ## ai-workspace-kit Tandem Boundary Gate
 
