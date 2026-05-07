@@ -38,7 +38,7 @@ Plans:
 - [x] 01-01: Define review packet schemas and status/severity/confidence taxonomy.
 
 **Wave 2** *(blocked on Wave 1 completion)*
-- [ ] 01-02: Define evidence refs, recommended actions, and tool manifest metadata.
+- [x] 01-02: Define evidence refs, recommended actions, and tool manifest metadata.
 
 **Wave 3** *(blocked on Wave 2 completion)*
 - [ ] 01-03: Add canonical JSON guidance, examples, and schema validation tests.
