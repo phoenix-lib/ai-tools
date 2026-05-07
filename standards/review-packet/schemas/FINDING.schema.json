@@ -1,0 +1,79 @@
+{
+  "$id": "https://ai-tools.local/schemas/review-packet/FINDING.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "One auditor finding. Status contribution is a packet-status signal; severity is finding impact.",
+  "properties": {
+    "confidence": {
+      "enum": [
+        "verified",
+        "inferred",
+        "unknown",
+        "stale"
+      ]
+    },
+    "evidence_refs": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 0,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "id": {
+      "minLength": 1,
+      "pattern": "^[a-z0-9][a-z0-9._-]*$",
+      "type": "string"
+    },
+    "recommended_action_refs": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 0,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "severity": {
+      "enum": [
+        "critical",
+        "high",
+        "medium",
+        "low",
+        "info"
+      ]
+    },
+    "source_check_id": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "status_contribution": {
+      "enum": [
+        "pass",
+        "info",
+        "human_review_required",
+        "blocked"
+      ]
+    },
+    "summary": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "title": {
+      "minLength": 1,
+      "type": "string"
+    }
+  },
+  "required": [
+    "id",
+    "severity",
+    "title",
+    "summary",
+    "confidence",
+    "status_contribution",
+    "source_check_id",
+    "evidence_refs",
+    "recommended_action_refs"
+  ],
+  "title": "Review Packet Finding",
+  "type": "object"
+}

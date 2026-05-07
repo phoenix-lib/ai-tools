@@ -1,0 +1,198 @@
+{
+  "$id": "https://ai-tools.local/schemas/review-packet/REVIEW-SUMMARY.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "blockers": {
+      "items": {
+        "$ref": "#/$defs/decisionItem"
+      },
+      "type": "array"
+    },
+    "counts": {
+      "additionalProperties": false,
+      "properties": {
+        "blockers": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "findings_by_severity": {
+          "additionalProperties": false,
+          "properties": {
+            "critical": {
+              "minimum": 0,
+              "type": "integer"
+            },
+            "high": {
+              "minimum": 0,
+              "type": "integer"
+            },
+            "info": {
+              "minimum": 0,
+              "type": "integer"
+            },
+            "low": {
+              "minimum": 0,
+              "type": "integer"
+            },
+            "medium": {
+              "minimum": 0,
+              "type": "integer"
+            }
+          },
+          "required": [
+            "critical",
+            "high",
+            "medium",
+            "low",
+            "info"
+          ],
+          "type": "object"
+        },
+        "preserved_stricter_local_rules": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "rejected_assumptions": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "required_decisions": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "total_findings": {
+          "minimum": 0,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "total_findings",
+        "findings_by_severity",
+        "blockers",
+        "required_decisions",
+        "rejected_assumptions",
+        "preserved_stricter_local_rules"
+      ],
+      "type": "object"
+    },
+    "evidence_file": {
+      "const": "EVIDENCE.json"
+    },
+    "findings": {
+      "items": {
+        "$ref": "FINDING.schema.json"
+      },
+      "type": "array"
+    },
+    "generated_artifacts": {
+      "items": {
+        "enum": [
+          "REVIEW-SUMMARY.json",
+          "EVIDENCE.json",
+          "FINDINGS.md",
+          "RECOMMENDED-ACTIONS.md"
+        ]
+      },
+      "minItems": 4,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "preserved_stricter_local_rules": {
+      "items": {
+        "$ref": "#/$defs/decisionItem"
+      },
+      "type": "array"
+    },
+    "recommended_actions_file": {
+      "const": "RECOMMENDED-ACTIONS.md"
+    },
+    "rejected_assumptions": {
+      "items": {
+        "$ref": "#/$defs/decisionItem"
+      },
+      "type": "array"
+    },
+    "required_decisions": {
+      "items": {
+        "$ref": "#/$defs/decisionItem"
+      },
+      "type": "array"
+    },
+    "schema_version": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "pass",
+        "info",
+        "human_review_required",
+        "blocked"
+      ]
+    },
+    "target_project": {
+      "additionalProperties": false,
+      "properties": {
+        "display_name": {
+          "type": "string"
+        },
+        "path": {
+          "description": "Target path may be recorded as metadata, but evidence paths remain normalized relative paths.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "type": "object"
+    },
+    "tool": {
+      "additionalProperties": true,
+      "description": "Refined by TOOL-MANIFEST.schema.json in the complete schema set.",
+      "type": "object"
+    }
+  },
+  "required": [
+    "schema_version",
+    "status",
+    "counts",
+    "tool",
+    "target_project",
+    "generated_artifacts",
+    "findings",
+    "evidence_file",
+    "recommended_actions_file",
+    "blockers",
+    "required_decisions",
+    "rejected_assumptions",
+    "preserved_stricter_local_rules"
+  ],
+  "$defs": {
+    "decisionItem": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "reason": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "source": {
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "source",
+        "reason"
+      ],
+      "type": "object"
+    }
+  },
+  "title": "Review Packet Summary",
+  "type": "object"
+}
