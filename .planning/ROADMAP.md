@@ -41,7 +41,7 @@ Plans:
 - [x] 01-02: Define evidence refs, recommended actions, and tool manifest metadata.
 
 **Wave 3** *(blocked on Wave 2 completion)*
-- [ ] 01-03: Add canonical JSON guidance, examples, and schema validation tests.
+- [x] 01-03: Add canonical JSON guidance, examples, and schema validation tests.
 
 ### Phase 2: Shared Safety Harness
 **Goal**: Build the shared read-only inspection and fixture safety foundation.
