@@ -43,6 +43,8 @@ before the shared review packet standard and first external auditor exist.
 
 - Read `AI-AGENT-IMPLEMENTATION-GUIDE.md` before making architectural changes.
 - Read the relevant seed `README.md` files before implementing a tool.
+- Run the ai-workspace-kit tandem boundary gate before proposing, planning, or
+  implementing a new tool or review workflow.
 - Prefer one small green read-only tool over broad README expansion.
 - Keep shared contracts in `standards/` and reusable mechanics in `shared/`.
   Tool-specific checks belong under `tools/<tool-name>/` once implementation
@@ -82,6 +84,45 @@ contracts, not as a product dependency.
 - During GSD discuss/context gathering, ask each phase whether the user wants
   manual questions or trusted self-questioning. Do not persist that answer as a
   global preference.
+
+## ai-workspace-kit Tandem Boundary Gate
+
+AI Tools and `ai-workspace-kit` work in tandem. Do not duplicate
+`ai-workspace-kit` capabilities under a different tool name or a generic
+"review" label. Before proposing, planning, or implementing any AI Tools
+capability:
+
+1. Inspect the relevant `ai-workspace-kit` source layer or docs in
+   `.external/ai-workspace-kit`.
+2. Classify the capability as one of:
+   - **AI Tools owns**: external read-only auditors, shared review packet
+     schemas, evidence refs, safety harnesses, fixtures, deterministic checks,
+     and packet consumers.
+   - **ai-workspace-kit owns**: project adoption/bootstrap, assistant contract
+     generation, adapter-specific contract files, generated local guidance,
+     adoption review packets, merge/conflict routing for generated contracts,
+     adapter next steps, and project-local contract maintenance.
+   - **Shared boundary**: packet compatibility, optional integration docs,
+     schema-compatible summaries, and evidence that lets the two systems
+     interoperate without either becoming a required dependency of the other.
+3. If `ai-workspace-kit` already owns the capability, do not rebuild it here.
+   Instead, document the boundary, add compatibility checks, consume or emit the
+   shared review packet, or propose an upstream `ai-workspace-kit` change.
+4. Infrastructure needed for AI Tools to operate is allowed, but it must remain
+   clearly in service of external auditors and shared packet validation rather
+   than becoming a parallel adoption/bootstrap system.
+
+Examples:
+
+- Do not build a second adapter generator, adoption installer, generated
+  `AGENTS.md`/`CLAUDE.md` workflow, or adoption-review merge router in this
+  repository.
+- Do build schema validation, canonical JSON helpers, path-only evidence,
+  mutation-proof fixtures, and external auditors such as
+  `contract-drift-auditor`.
+- If a proposed tool sounds like "review generated assistant contracts", first
+  check whether `ai-workspace-kit` already performs that review. If yes, keep
+  AI Tools focused on packet compatibility or external drift evidence.
 
 ## Implementation Start Rule
 

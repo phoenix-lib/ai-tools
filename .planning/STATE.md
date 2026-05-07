@@ -61,6 +61,9 @@ Decisions are logged in PROJECT.md Key Decisions table.
 - Build one external auditor before expanding the ecosystem.
 - Keep `ai-workspace-kit` integration optional and packet-based.
 - Phase 01 validated the shared review packet standard, canonical JSON guidance, examples, and schema validation tests.
+- Enforce the ai-workspace-kit tandem boundary gate: do not duplicate
+  adoption/bootstrap, adapter generation, or generated-contract review behavior
+  that `ai-workspace-kit` already owns.
 
 ### Pending Todos
 

@@ -36,6 +36,9 @@ guidance auditable without mutating target projects.
   no secret leakage, consistent status/counts across artifacts, and schema-valid
   review packets.
 - [ ] Keep `ai-workspace-kit` integration optional and review-packet based.
+- [ ] Enforce the ai-workspace-kit tandem boundary gate so AI Tools does not
+  duplicate adoption/bootstrap, adapter generation, or generated-contract
+  review capabilities already owned by `ai-workspace-kit`.
 
 ### Out of Scope
 
@@ -49,6 +52,10 @@ guidance auditable without mutating target projects.
   evidence unless the user requests exact access.
 - Making external tools mandatory dependencies of `ai-workspace-kit` or target
   products - integration stays optional.
+- Rebuilding `ai-workspace-kit` adoption/bootstrap behavior inside AI Tools -
+  the two projects work in tandem, so duplicated adapter generation,
+  generated-contract review routing, or project-local contract installation
+  belongs upstream or as compatibility integration, not as a parallel tool.
 - Starting with AI-generated prose reports only - the first implementation work
   must be schemas, fixtures, parsers, and deterministic reports.
 
@@ -96,6 +103,10 @@ to inspect it.
   trailing newlines; tests should prove deterministic reports.
 - **Optional integration**: `ai-workspace-kit` remains the adoption/bootstrap
   contract tool; external auditors are optional helpers.
+- **Tandem boundary gate**: Before planning a new tool, classify whether the
+  capability is owned by AI Tools, owned by `ai-workspace-kit`, or shared
+  boundary work. Do not mask duplicate `ai-workspace-kit` behavior as a new AI
+  Tools review utility.
 - **Windows compatibility**: Clean clone tests must pass on Windows, including
   line-ending behavior.
 
@@ -108,6 +119,7 @@ to inspect it.
 | Keep existing seed folders as product notes initially | Moving everything before code exists adds churn without proving architecture. | Pending |
 | Use `ai-workspace-kit` workflow principles but keep it optional | The workflow is useful, but target projects should not inherit dependencies or assumptions. | Pending |
 | Treat generated packets as review material, not installation material | This preserves user control and avoids accidental target-project mutation. | Pending |
+| Enforce the ai-workspace-kit tandem boundary gate | AI Tools should complement `ai-workspace-kit`, not duplicate adoption/bootstrap or adapter-generation behavior under new tool names. | Active |
 
 ## Evolution
 
@@ -127,4 +139,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state.
 
 ---
-*Last updated: 2026-05-07 after Phase 01 completion*
+*Last updated: 2026-05-07 after adding ai-workspace-kit tandem boundary gate*
