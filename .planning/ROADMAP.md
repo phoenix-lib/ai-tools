@@ -59,7 +59,7 @@ Plans:
 
 Plans:
 - [x] 02-01: Implement output path guard, ignore policy, file walker, and secret policy.
-- [ ] 02-02: Build reusable fixtures and tree-hash mutation checks.
+- [x] 02-02: Build reusable fixtures and tree-hash mutation checks.
 - [ ] 02-03: Add deterministic safety tests for output isolation, secret handling, and ignored generated packets.
 
 ### Phase 3: Cross-Repo Capability Request Gate

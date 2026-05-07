@@ -20,7 +20,7 @@
 - [x] **SAFE-02**: A shared secret policy classifies `.env`, `.env.*`, key, token, credential, and secret-like files as path-only evidence by default.
 - [x] **SAFE-03**: A shared ignore policy excludes `.git`, dependency folders, build outputs, coverage, temporary directories, generated review packets, nested checkouts, and fixture expected/output trees unless explicitly targeted.
 - [x] **SAFE-04**: A canonical JSON writer emits recursively sorted object keys and a trailing newline.
-- [ ] **SAFE-05**: A fixture harness can hash target project trees before and after tool runs to prove non-mutation.
+- [x] **SAFE-05**: A fixture harness can hash target project trees before and after tool runs to prove non-mutation.
 - [x] **SAFE-06**: Shared summary rendering keeps CLI status, Markdown status, JSON status, and finding/blocker counts consistent.
 
 ### Cross-Repo Capability Requests
@@ -53,12 +53,12 @@
 ### Test Coverage
 
 - [x] **TEST-01**: Tests prove generated review output is deterministic.
-- [ ] **TEST-02**: Tests prove target project fixtures are not mutated by review-only commands.
+- [x] **TEST-02**: Tests prove target project fixtures are not mutated by review-only commands.
 - [ ] **TEST-03**: Tests prove secret sentinel strings from secret-like files never appear in output.
 - [ ] **TEST-04**: Tests prove stale source-layer and missing command drift are detected.
 - [x] **TEST-05**: Tests prove review summary counts match findings across JSON, Markdown, and CLI output.
 - [x] **TEST-06**: Tests prove generated packet JSON validates against schemas.
-- [ ] **TEST-07**: Tests cover clean project, mature project, stale source layer, missing command, secret-like files, mixed package managers, and generated packet inside target tree.
+- [x] **TEST-07**: Tests cover clean project, mature project, stale source layer, missing command, secret-like files, mixed package managers, and generated packet inside target tree.
 
 ### Integration and Documentation
 
@@ -106,7 +106,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | SAFE-02 | Phase 2 | Complete |
 | SAFE-03 | Phase 2 | Complete |
 | SAFE-04 | Phase 1 | Complete |
-| SAFE-05 | Phase 2 | Pending |
+| SAFE-05 | Phase 2 | Complete |
 | SAFE-06 | Phase 1 | Complete |
 | XREPO-01 | Phase 3 | Pending |
 | XREPO-02 | Phase 3 | Pending |
@@ -127,12 +127,12 @@ Which phases cover which requirements. Updated during roadmap creation.
 | DRIFT-06 | Phase 4 | Pending |
 | DRIFT-07 | Phase 4 | Pending |
 | TEST-01 | Phase 1 | Complete |
-| TEST-02 | Phase 2 | Pending |
+| TEST-02 | Phase 2 | Complete |
 | TEST-03 | Phase 2 | Pending |
 | TEST-04 | Phase 4 | Pending |
 | TEST-05 | Phase 1 | Complete |
 | TEST-06 | Phase 1 | Complete |
-| TEST-07 | Phase 2 | Pending |
+| TEST-07 | Phase 2 | Complete |
 | DOC-01 | Phase 5 | Pending |
 | DOC-02 | Phase 5 | Pending |
 | DOC-03 | Phase 5 | Pending |
