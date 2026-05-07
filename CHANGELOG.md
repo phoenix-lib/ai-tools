@@ -5,6 +5,27 @@ major plan execution, and workflow gate change.
 
 ## Unreleased
 
+### Phase 05: Integration and Release Hardening
+
+- Changed documentation: added the root `README.md` release entrypoint,
+  expanded `tools/contract-drift-auditor/README.md`, and added
+  `docs/RELEASE-READINESS.md` as the first-release definition of done.
+- Changed compatibility guidance: documentation now states that
+  `ai-workspace-kit` remains the adoption/bootstrap contract tool and may
+  consume AI Tools packets only as optional external evidence.
+- Changed docs validation: added `test/planning/release-docs.test.js` to check
+  required use/non-use guidance, safety guarantees, packet artifacts,
+  `ai-workspace-kit` boundary language, and deferred v2 validator/linter scope.
+- Validation: documentation-only plan; focused docs validation should run with
+  `npm.cmd test -- test/planning/release-docs.test.js` and full validation with
+  `npm.cmd test`.
+- Upstream impact: Phase 05 planning checked `ai-workspace-kit` local and
+  remote HEAD at `2079ab9`; no update was required before release docs work.
+- Breaking changes: none; this entry adds documentation and validation only.
+- Migration notes: downstream consumers should read the changelog first, then
+  `README.md` and `docs/RELEASE-READINESS.md` before relying on changed AI Tools
+  release guidance.
+
 ### Phase 04: Contract Drift Auditor MVP
 
 - Changed tool capabilities: added a runnable review-only
