@@ -19,7 +19,7 @@
             "type": "string"
           },
           {
-            "$ref": "EVIDENCE-REF.schema.json"
+            "$ref": "https://ai-tools.local/schemas/review-packet/EVIDENCE-REF.schema.json"
           }
         ]
       },
@@ -39,7 +39,7 @@
             "type": "string"
           },
           {
-            "$ref": "RECOMMENDED-ACTION.schema.json"
+            "$ref": "https://ai-tools.local/schemas/review-packet/RECOMMENDED-ACTION.schema.json"
           }
         ]
       },

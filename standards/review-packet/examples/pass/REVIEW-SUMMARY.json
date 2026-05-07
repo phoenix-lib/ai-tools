@@ -1,0 +1,88 @@
+{
+  "blockers": [],
+  "counts": {
+    "blockers": 0,
+    "findings_by_severity": {
+      "critical": 0,
+      "high": 0,
+      "info": 0,
+      "low": 0,
+      "medium": 0
+    },
+    "preserved_stricter_local_rules": 0,
+    "rejected_assumptions": 0,
+    "required_decisions": 0,
+    "total_findings": 0
+  },
+  "evidence_file": "EVIDENCE.json",
+  "findings": [],
+  "generated_artifacts": [
+    "REVIEW-SUMMARY.json",
+    "EVIDENCE.json",
+    "FINDINGS.md",
+    "RECOMMENDED-ACTIONS.md"
+  ],
+  "preserved_stricter_local_rules": [],
+  "recommended_actions": [],
+  "recommended_actions_file": "RECOMMENDED-ACTIONS.md",
+  "rejected_assumptions": [],
+  "required_decisions": [],
+  "schema_version": "review-packet/v1",
+  "status": "pass",
+  "target_project": {
+    "display_name": "clean-example",
+    "path": "examples/clean-project"
+  },
+  "tool": {
+    "generated_files": [
+      {
+        "path": "REVIEW-SUMMARY.json",
+        "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      {
+        "path": "EVIDENCE.json",
+        "sha256": "1111111111111111111111111111111111111111111111111111111111111111"
+      },
+      {
+        "path": "FINDINGS.md",
+        "sha256": "2222222222222222222222222222222222222222222222222222222222222222"
+      },
+      {
+        "path": "RECOMMENDED-ACTIONS.md",
+        "sha256": "3333333333333333333333333333333333333333333333333333333333333333"
+      }
+    ],
+    "input": {
+      "args": [
+        "--project",
+        "examples/clean-project",
+        "--out",
+        "review-packet"
+      ],
+      "target_path": "examples/clean-project"
+    },
+    "policy_hashes": {
+      "evidence_policy": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "read_write_behavior": "review_output_only",
+    "requested_outputs": [
+      "review-packet"
+    ],
+    "run_timestamp": "2026-05-07T00:00:00Z",
+    "safety_profile": {
+      "review_only": true,
+      "secret_policy": "path-only-secret-evidence",
+      "target_mutation": "none"
+    },
+    "schema_versions": {
+      "review_packet": "review-packet/v1"
+    },
+    "source_commit": null,
+    "target_project": {
+      "display_name": "clean-example",
+      "path": "examples/clean-project"
+    },
+    "tool_name": "example-reviewer",
+    "tool_version": "0.1.0"
+  }
+}

@@ -91,10 +91,8 @@
         ]
       },
       "then": {
-        "not": {
-          "required": [
-            "sha256"
-          ]
+        "properties": {
+          "sha256": false
         }
       }
     },
@@ -110,6 +108,12 @@
         ]
       },
       "then": {
+        "properties": {
+          "sha256": {
+            "pattern": "^[a-f0-9]{64}$",
+            "type": "string"
+          }
+        },
         "required": [
           "sha256"
         ]

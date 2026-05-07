@@ -3,3 +3,4 @@
 tmp/
 .tmp/
 ai-tools-review-*/
+node_modules/

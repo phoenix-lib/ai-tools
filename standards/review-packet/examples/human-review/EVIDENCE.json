@@ -1,0 +1,20 @@
+[
+  {
+    "confidence": "verified",
+    "evidence_type": "contract_file",
+    "id": "ev.agents",
+    "line": 1,
+    "path": "AGENTS.md",
+    "path_only": false,
+    "reason": "Project-local assistant contract requires human review for stricter local rules.",
+    "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+  },
+  {
+    "confidence": "verified",
+    "evidence_type": "secret_path",
+    "id": "ev.env.path",
+    "path": ".env",
+    "path_only": true,
+    "reason": "Secret-like file is present and may be cited only by path."
+  }
+]

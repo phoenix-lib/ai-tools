@@ -81,7 +81,7 @@
     },
     "findings": {
       "items": {
-        "$ref": "FINDING.schema.json"
+        "$ref": "https://ai-tools.local/schemas/review-packet/FINDING.schema.json"
       },
       "type": "array"
     },
@@ -109,7 +109,7 @@
     },
     "recommended_actions": {
       "items": {
-        "$ref": "RECOMMENDED-ACTION.schema.json"
+        "$ref": "https://ai-tools.local/schemas/review-packet/RECOMMENDED-ACTION.schema.json"
       },
       "type": "array"
     },
@@ -154,7 +154,7 @@
       "type": "object"
     },
     "tool": {
-      "$ref": "TOOL-MANIFEST.schema.json"
+      "$ref": "https://ai-tools.local/schemas/review-packet/TOOL-MANIFEST.schema.json"
     }
   },
   "required": [

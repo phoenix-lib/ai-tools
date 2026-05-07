@@ -1,0 +1,129 @@
+{
+  "blockers": [],
+  "counts": {
+    "blockers": 0,
+    "findings_by_severity": {
+      "critical": 0,
+      "high": 0,
+      "info": 0,
+      "low": 0,
+      "medium": 1
+    },
+    "preserved_stricter_local_rules": 1,
+    "rejected_assumptions": 0,
+    "required_decisions": 1,
+    "total_findings": 1
+  },
+  "evidence_file": "EVIDENCE.json",
+  "findings": [
+    {
+      "confidence": "verified",
+      "evidence_refs": [
+        "ev.agents",
+        "ev.env.path"
+      ],
+      "id": "contract.local_rules.review_required",
+      "recommended_action_refs": [
+        "act.review.local_rules"
+      ],
+      "severity": "medium",
+      "source_check_id": "contract.local_rules",
+      "status_contribution": "human_review_required",
+      "summary": "The target project contains stricter local assistant rules that must be preserved before generated guidance is adopted.",
+      "title": "Existing local guidance needs human review"
+    }
+  ],
+  "generated_artifacts": [
+    "REVIEW-SUMMARY.json",
+    "EVIDENCE.json",
+    "FINDINGS.md",
+    "RECOMMENDED-ACTIONS.md"
+  ],
+  "preserved_stricter_local_rules": [
+    {
+      "id": "preserve.local.rules",
+      "reason": "Existing assistant guidance may be stricter than generated guidance.",
+      "source": "AGENTS.md"
+    }
+  ],
+  "recommended_actions": [
+    {
+      "finding_refs": [
+        "contract.local_rules.review_required"
+      ],
+      "human_review_required": true,
+      "id": "act.review.local_rules",
+      "rationale": "Generated or external guidance must not weaken project-local rules.",
+      "suggested_file": "AGENTS.md",
+      "summary": "Review generated guidance against existing local assistant rules and preserve the stricter rule when conflicts exist.",
+      "target_owner": "project maintainer"
+    }
+  ],
+  "recommended_actions_file": "RECOMMENDED-ACTIONS.md",
+  "rejected_assumptions": [],
+  "required_decisions": [
+    {
+      "id": "decision.local.rules",
+      "reason": "A maintainer must decide how to merge generated guidance with stricter local rules.",
+      "source": "AGENTS.md"
+    }
+  ],
+  "schema_version": "review-packet/v1",
+  "status": "human_review_required",
+  "target_project": {
+    "display_name": "mature-example",
+    "path": "examples/mature-project"
+  },
+  "tool": {
+    "generated_files": [
+      {
+        "path": "REVIEW-SUMMARY.json",
+        "sha256": "4444444444444444444444444444444444444444444444444444444444444444"
+      },
+      {
+        "path": "EVIDENCE.json",
+        "sha256": "5555555555555555555555555555555555555555555555555555555555555555"
+      },
+      {
+        "path": "FINDINGS.md",
+        "sha256": "6666666666666666666666666666666666666666666666666666666666666666"
+      },
+      {
+        "path": "RECOMMENDED-ACTIONS.md",
+        "sha256": "7777777777777777777777777777777777777777777777777777777777777777"
+      }
+    ],
+    "input": {
+      "args": [
+        "--project",
+        "examples/mature-project",
+        "--out",
+        "review-packet"
+      ],
+      "target_path": "examples/mature-project"
+    },
+    "policy_hashes": {
+      "evidence_policy": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+    },
+    "read_write_behavior": "review_output_only",
+    "requested_outputs": [
+      "review-packet"
+    ],
+    "run_timestamp": "2026-05-07T00:00:00Z",
+    "safety_profile": {
+      "review_only": true,
+      "secret_policy": "path-only-secret-evidence",
+      "target_mutation": "none"
+    },
+    "schema_versions": {
+      "review_packet": "review-packet/v1"
+    },
+    "source_commit": "3e489b1a99c58443e593a1e2f6234ed5d0dc173d",
+    "target_project": {
+      "display_name": "mature-example",
+      "path": "examples/mature-project"
+    },
+    "tool_name": "example-reviewer",
+    "tool_version": "0.1.0"
+  }
+}
