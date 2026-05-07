@@ -50,6 +50,14 @@ before the shared review packet standard and first external auditor exist.
   changes.
 - Read the relevant `tools/<tool-name>/SEED-IDEAS.md` file before implementing
   a tool.
+- Use `.planning/gates/registry.json` as the machine-readable source for local
+  workflow gates after Phase 03. Major GSD artifacts must include a
+  `Gate Resolution` section when a registered gate applies, or an explicit
+  reason when it does not apply.
+- Use `.planning/cross-repo/CROSS-REPO-CAPABILITY-REQUESTS.md` as the playbook
+  for AI Tools and `ai-workspace-kit` capability requests. The protocol
+  structure is `.planning/cross-repo/inbox/`, `outbox/`, `decisions/`, and
+  `templates/`.
 - Run the ai-workspace-kit tandem boundary gate before proposing, planning, or
   implementing a new tool or review workflow.
 - Before every GSD phase planning step, run the ai-workspace-kit upstream
@@ -57,7 +65,9 @@ before the shared review packet standard and first external auditor exist.
   `phoenix-lib/ai-workspace-kit` reference, not a stale local checkout.
 - Treat incoming cross-repo capability requests as decision points. They do not
   automatically create phases, run tools, add dependencies, or copy planning
-  state across repositories.
+  state across repositories. Record the decision in
+  `.planning/cross-repo/decisions/` when the request affects roadmap, gates,
+  contracts, schemas, or compatibility.
 - Run the AI Tools Self-Use Gate when planning, executing, verifying, or
   releasing this repository after a relevant AI Tools capability has been
   implemented and validated.
