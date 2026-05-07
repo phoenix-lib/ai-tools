@@ -20,12 +20,12 @@ guidance auditable without mutating target projects.
 
 ### Validated
 
-(None yet - ship to validate)
+- [x] Define a portable AI review packet standard with schemas for summaries,
+  findings, evidence references, recommended actions, and tool metadata.
+  Validated in Phase 01: Review Packet Standard.
 
 ### Active
 
-- [ ] Define a portable AI review packet standard with schemas for summaries,
-  findings, evidence references, recommended actions, and tool metadata.
 - [ ] Implement shared safety primitives for read-only inspection, output path
   isolation, secret-like path-only evidence, deterministic JSON, and ignored
   generated artifacts.
@@ -103,7 +103,7 @@ to inspect it.
 
 | Decision | Rationale | Outcome |
 |----------|-----------|---------|
-| Start with the review packet standard | Every later tool depends on a stable output contract. | Pending |
+| Start with the review packet standard | Every later tool depends on a stable output contract. | Validated in Phase 01 |
 | Build one external auditor before expanding the ecosystem | A small green `contract-drift-auditor` proves the standards under real use. | Pending |
 | Keep existing seed folders as product notes initially | Moving everything before code exists adds churn without proving architecture. | Pending |
 | Use `ai-workspace-kit` workflow principles but keep it optional | The workflow is useful, but target projects should not inherit dependencies or assumptions. | Pending |
@@ -127,4 +127,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state.
 
 ---
-*Last updated: 2026-05-07 after initialization*
+*Last updated: 2026-05-07 after Phase 01 completion*
