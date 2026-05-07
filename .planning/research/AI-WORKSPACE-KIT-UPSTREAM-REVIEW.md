@@ -1,5 +1,36 @@
 # ai-workspace-kit Upstream Review
 
+## Phase 5 Planning Freshness Check
+
+**Checked:** 2026-05-07 during `$gsd-plan-phase 5`
+**Local commit:** `2079ab9626e9f9ed256512091f9c5ea473582885`
+**Remote HEAD:** `2079ab9626e9f9ed256512091f9c5ea473582885`
+**Branch:** `master`
+**Checkout status:** clean
+**Result:** no upstream update required before Phase 5 planning.
+
+Upstream `CHANGELOG.md` exists and remains current at the checked commit. The
+Phase 5 planning-relevant entries are still:
+
+- Phase 11 cross-repo request, AI Tools interoperability, changelog-first
+  freshness, and assistant-led gate-review guidance.
+- Phase 12 skill synthesis and generated-contract skill gate guidance.
+- Phase 13 gate enforcement contracts, with mechanical gate-linter execution
+  explicitly remaining an external AI Tools capability.
+
+Phase 5 planning impact:
+
+- Use `.external/ai-workspace-kit/TOOLING-PLAYBOOK.md` and
+  `.external/ai-workspace-kit/templates/GATE-REGISTRY.json` as current
+  semantic input for manual gate review.
+- Do not assume a runnable upstream gate-review command exists. The local kit
+  checkout provides gate-review guidance and registry structure, not an AI
+  Tools dependency or automatic runner.
+- Keep release docs explicit that `ai-workspace-kit` may consume AI Tools
+  packets as optional evidence while retaining adoption/bootstrap ownership.
+- Keep `XREPO-VALIDATOR-01` and mechanical `GATELINT-01` deferred until a
+  deliberate v2 phase promotes them.
+
 ## Phase 4 Planning Freshness Check
 
 **Checked:** 2026-05-07 during `$gsd-plan-phase 4`

@@ -116,7 +116,10 @@ Plans:
 **Plans**: 2 plans
 
 Plans:
+**Wave 1**
 - [ ] 05-01: Write usage, safety, integration, and first-release documentation.
+
+**Wave 2** *(blocked on Wave 1 completion)*
 - [ ] 05-02: Run release readiness review, future ai-workspace-kit gate review if available, document deferred tool criteria, and preserve `XREPO-VALIDATOR-01` as a v2 prerequisite for automatic cross-repo validation.
 
 ## Requirement Coverage

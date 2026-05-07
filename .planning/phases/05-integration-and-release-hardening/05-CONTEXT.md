@@ -40,7 +40,7 @@ assistant can use without reading the whole planning history.
   - `AGENTS.md` states `$gsd-discuss-phase` must resolve Manual Questions vs
     Trusted Self-Questioning before writing discuss artifacts.
   - `workflow.discuss_mode=discuss` is routing only and is not approval evidence.
-- Cycle limit: five focused self-questioning passes.
+- Cycle limits: five focused self-questioning passes.
 - Passes performed:
   - release documentation surface;
   - optional `ai-workspace-kit` integration boundary;
