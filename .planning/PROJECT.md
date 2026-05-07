@@ -33,6 +33,12 @@ guidance auditable without mutating target projects.
 - [x] Consolidate initial seed ideas into `tools/*/SEED-IDEAS.md`,
   `standards/review-packet/SEED-IDEAS.md`, and `docs/` so root-level seed
   folders are no longer baseline noise.
+- [x] Define a cross-repo capability request protocol with inbox/outbox,
+  decisions, templates, playbook, gate registry, bidirectional examples, and
+  docs validation. Validated in Phase 03: Cross-Repo Capability Request Gate.
+- [x] Document AI Tools self-use, new-tool intake, git baseline, changelog,
+  upstream freshness, and cross-repo incoming/outgoing gates with observable
+  evidence and skip behavior. Validated in Phase 03.
 
 ### Active
 
@@ -46,9 +52,6 @@ guidance auditable without mutating target projects.
 - [ ] Run an ai-workspace-kit upstream freshness gate before each phase planning
   step so planning uses the latest reachable upstream commit and records
   reusable changes.
-- [ ] Define a cross-repo capability request protocol so AI Tools and
-  `ai-workspace-kit` can ask for missing capabilities through explicit requests
-  and decisions without automatically creating phases or mixing ownership.
 - [ ] Maintain `CHANGELOG.md` after every completed phase, executed major plan,
   or workflow gate change.
 - [ ] Plan a future `ai-workspace-kit` gate-review hook for release and
@@ -56,10 +59,6 @@ guidance auditable without mutating target projects.
   exists.
 - [ ] Build a shared packet renderer so summary, findings, recommended actions,
   Markdown projections, and CLI status are rendered from one packet model.
-- [ ] Document AI Tools self-use gates and new-tool intake/placement gates so
-  validated tools are used at the right project stages without automatic
-  decisions or dependency creep.
-
 ### Out of Scope
 
 - Building all seed tools at once - this would create many disconnected partial
@@ -173,14 +172,14 @@ to inspect it.
 | Treat generated packets as review material, not installation material | This preserves user control and avoids accidental target-project mutation. | Pending |
 | Enforce the ai-workspace-kit tandem boundary gate | AI Tools should complement `ai-workspace-kit`, not duplicate adoption/bootstrap or adapter-generation behavior under new tool names. | Active |
 | Enforce the ai-workspace-kit upstream freshness gate | `ai-workspace-kit` is a living upstream reference; phase plans should reflect current contracts, schemas, and workflow lessons. | Active |
-| Insert Cross-Repo Capability Request Gate before the first heavy auditor | The two repos need a structured request/decision protocol before external tool work starts consuming or influencing upstream contracts. | Planned for Phase 03 |
+| Insert Cross-Repo Capability Request Gate before the first heavy auditor | The two repos need a structured request/decision protocol before external tool work starts consuming or influencing upstream contracts. | Validated in Phase 03 |
 | Maintain a project changelog after major work | Future agents need a compact history before reading deeper planning artifacts. | Active |
 | Plan ai-workspace-kit gate review as a future hook | The upstream command does not exist yet, so AI Tools should reserve the review stage without pretending it is currently runnable. | Planned for Phase 05 |
 | Treat future mechanical gate-linter output as evidence only | Gate relevance and boundary decisions remain assistant-owned semantic review; tools can surface evidence but not decide adoption. | Deferred v2 candidate |
 | Validate shared safety harness before auditor work | The first heavy auditor should consume already-tested read-only, secret-safe, deterministic primitives instead of inventing safety behavior locally. | Validated in Phase 02 |
 | Add shared packet renderer before broad tool expansion | Schemas alone are not enough; packet-producing tools need one renderer so JSON, Markdown, and CLI status cannot drift. | Planned for Phase 04 |
-| Treat self-use tools as evidence, not authority | AI Tools should audit itself with validated tools, but the assistant keeps responsibility for scope, relevance, and boundary decisions. | Planned for Phase 03 |
-| Classify new tools before implementation | New tool ideas should go to `standards/`, `shared/`, `tools/<tool-name>/`, seed/backlog, or cross-repo requests based on ownership and maturity. | Planned for Phase 03 |
+| Treat self-use tools as evidence, not authority | AI Tools should audit itself with validated tools, but the assistant keeps responsibility for scope, relevance, and boundary decisions. | Validated in Phase 03 |
+| Classify new tools before implementation | New tool ideas should go to `standards/`, `shared/`, `tools/<tool-name>/`, seed/backlog, or cross-repo requests based on ownership and maturity. | Validated in Phase 03 |
 
 ## Evolution
 
@@ -200,4 +199,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state.
 
 ---
-*Last updated: 2026-05-07 after consolidating seed ideas under `tools/`*
+*Last updated: 2026-05-07 after completing Phase 03 cross-repo request gate*
