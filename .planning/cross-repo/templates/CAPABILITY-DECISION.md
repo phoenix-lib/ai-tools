@@ -1,6 +1,11 @@
 # Capability Decision
 
+Protocol version: 1.0
 Request ID:
+Canonical ID:
+Counterpart ID:
+Counterpart path:
+Legacy ID:
 Decision:
 Decided by:
 Date:

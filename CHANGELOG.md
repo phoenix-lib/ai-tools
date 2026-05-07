@@ -5,6 +5,27 @@ major plan execution, and workflow gate change.
 
 ## Unreleased
 
+### Cross-Repo Interop Compatibility
+
+- Changed cross-repo protocol fields: capability request and decision templates
+  now require `Protocol version: 1.0`, canonical IDs, counterpart IDs,
+  counterpart paths, and legacy IDs.
+- Changed compatibility semantics: mirrored legacy files from
+  `ai-workspace-kit` are explicit counterparts, not separate requests.
+- Changed gate registry compatibility: `.planning/gates/registry.json` remains
+  AI Tools-specific snake_case and now declares a kit interop mapping for field
+  names and stage aliases.
+- Validation: added protocol tests for canonical request IDs, mirrored
+  counterpart metadata, and registry interop metadata.
+- Compatibility impact for `ai-workspace-kit`: consumers can correlate current
+  canonical AI Tools requests with kit legacy filenames without automatic
+  dependency, install, or tool execution.
+- Breaking changes: none for runtime behavior. Validators that read cross-repo
+  markdown should expect the new protocol/counterpart fields.
+- Migration notes: old mirrored artifacts should be linked through
+  `Counterpart ID`, `Counterpart path`, and `Legacy ID` instead of being copied
+  or renamed across repositories.
+
 ### Phase 03: Cross-Repo Capability Request Gate
 
 - Changed cross-repo protocol artifacts: added `.planning/cross-repo/` with

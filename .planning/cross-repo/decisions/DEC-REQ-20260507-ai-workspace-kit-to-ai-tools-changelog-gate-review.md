@@ -1,6 +1,11 @@
 # Capability Decision
 
+Protocol version: 1.0
 Request ID: REQ-20260507-ai-workspace-kit-to-ai-tools-changelog-gate-review
+Canonical ID: REQ-20260507-ai-workspace-kit-to-ai-tools-changelog-gate-review
+Counterpart ID: none
+Counterpart path: none
+Legacy ID: none
 Decision: planned
 Decided by: AI Tools assistant
 Date: 2026-05-07

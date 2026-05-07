@@ -1,5 +1,10 @@
 # Capability Request
 
+Protocol version: 1.0
+Canonical ID: REQ-20260507-ai-workspace-kit-to-ai-tools-changelog-gate-review
+Counterpart ID: none
+Counterpart path: none
+Legacy ID: none
 ID: REQ-20260507-ai-workspace-kit-to-ai-tools-changelog-gate-review
 From: ai-workspace-kit
 To: ai-tools

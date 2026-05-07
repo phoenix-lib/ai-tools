@@ -1,5 +1,10 @@
 # Capability Request
 
+Protocol version: 1.0
+Canonical ID: REQ-YYYYMMDD-<from>-to-<to>-<slug>
+Counterpart ID:
+Counterpart path:
+Legacy ID:
 ID:
 From:
 To:

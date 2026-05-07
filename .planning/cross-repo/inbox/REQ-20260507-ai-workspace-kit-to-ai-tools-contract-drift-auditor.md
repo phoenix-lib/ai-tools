@@ -1,5 +1,10 @@
 # Capability Request
 
+Protocol version: 1.0
+Canonical ID: REQ-20260507-ai-workspace-kit-to-ai-tools-contract-drift-auditor
+Counterpart ID: REQ-20260507-ai-workspace-kit-to-ai-tools-contract-drift-auditor
+Counterpart path: C:/projects/ai-workspace-kit/.planning/cross-repo/outbox/2026-05-07-ai-tools-contract-drift-auditor.md
+Legacy ID: 2026-05-07-ai-tools-contract-drift-auditor
 ID: REQ-20260507-ai-workspace-kit-to-ai-tools-contract-drift-auditor
 From: ai-workspace-kit
 To: ai-tools
@@ -23,6 +28,9 @@ permission drift, and profile fact drift belong in AI Tools.
 
 ## Evidence
 
+- Mirrors `ai-workspace-kit` legacy request
+  `2026-05-07-ai-tools-contract-drift-auditor`; do not count the legacy file
+  and this canonical inbox artifact as separate requests.
 - `tools/contract-drift-auditor/SEED-IDEAS.md`
 - `.external/ai-workspace-kit/TOOLING-PLAYBOOK.md`
 - `AGENTS.md` AI Tools Self-Use Gate and Tandem Boundary Gate

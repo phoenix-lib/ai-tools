@@ -20,6 +20,11 @@ function assertIncludesAll(content, values, label) {
 }
 
 const requiredRequestFields = [
+  "Protocol version:",
+  "Canonical ID:",
+  "Counterpart ID:",
+  "Counterpart path:",
+  "Legacy ID:",
   "ID:",
   "From:",
   "To:",
@@ -43,7 +48,12 @@ const requiredRequestHeadings = [
 ];
 
 const requiredDecisionFields = [
+  "Protocol version:",
   "Request ID:",
+  "Canonical ID:",
+  "Counterpart ID:",
+  "Counterpart path:",
+  "Legacy ID:",
   "Decision:",
   "Decided by:",
   "Date:",
@@ -90,6 +100,17 @@ const requiredGateIds = [
   "git-baseline",
   "future-gate-review"
 ];
+
+const requestPaths = [
+  ".planning/cross-repo/inbox/REQ-20260507-ai-workspace-kit-to-ai-tools-contract-drift-auditor.md",
+  ".planning/cross-repo/inbox/REQ-20260507-ai-workspace-kit-to-ai-tools-changelog-gate-review.md",
+  ".planning/cross-repo/outbox/REQ-20260507-ai-tools-to-ai-workspace-kit-review-packet-contract.md"
+];
+
+function fieldValue(content, field) {
+  const match = content.match(new RegExp(`^${field}:\\s*(.+)$`, "m"));
+  return match ? match[1].trim() : "";
+}
 
 test("cross-repo protocol directories exist", () => {
   for (const relativePath of [
@@ -171,20 +192,60 @@ test("gate registry contains required gate IDs and fields", () => {
   }
 });
 
+test("gate registry declares kit compatibility mapping", () => {
+  const registry = JSON.parse(read(".planning/gates/registry.json"));
+
+  assert.equal(registry.interop.compatibility, "ai-tools-specific");
+  assert.equal(registry.interop.kit_schema_direct_compatibility, false);
+  assert.equal(registry.interop.field_name_mapping.schema_version, "schemaVersion");
+  assert.equal(registry.interop.field_name_mapping.required_artifacts, "requiredArtifacts");
+  assert.equal(registry.interop.field_name_mapping.skip_allowed, "skipAllowed");
+  assert.equal(registry.interop.stage_aliases.verification, "verify");
+  assert.equal(registry.interop.stage_aliases.release, "phase-boundary");
+  assert.equal(registry.interop.stage_aliases.replan, "plan");
+});
+
 test("example and real capability requests are complete", () => {
-  for (const relativePath of [
-    ".planning/cross-repo/inbox/REQ-20260507-ai-workspace-kit-to-ai-tools-contract-drift-auditor.md",
-    ".planning/cross-repo/inbox/REQ-20260507-ai-workspace-kit-to-ai-tools-changelog-gate-review.md",
-    ".planning/cross-repo/outbox/REQ-20260507-ai-tools-to-ai-workspace-kit-review-packet-contract.md"
-  ]) {
+  for (const relativePath of requestPaths) {
     const content = read(relativePath);
 
     assertIncludesAll(content, requiredRequestFields, `${relativePath} fields`);
     assertIncludesAll(content, requiredRequestHeadings, `${relativePath} headings`);
+    assert.equal(fieldValue(content, "Protocol version"), "1.0");
+    assert.match(
+      fieldValue(content, "ID"),
+      /^REQ-\d{8}-[a-z0-9-]+-to-[a-z0-9-]+-[a-z0-9-]+$/,
+      `${relativePath} must use canonical REQ ID`
+    );
     assert.match(content, /Status: proposed/);
     assert.match(content, /Boundary classification: (external ai-tools capability|interop contract)/);
     assert.match(content, /REVIEW-SUMMARY\.json/);
     assert.match(content, /## Non-Goals[\s\S]+Do not/);
+  }
+});
+
+test("mirrored capability requests have counterpart metadata", () => {
+  for (const relativePath of [
+    ".planning/cross-repo/inbox/REQ-20260507-ai-workspace-kit-to-ai-tools-contract-drift-auditor.md",
+    ".planning/cross-repo/outbox/REQ-20260507-ai-tools-to-ai-workspace-kit-review-packet-contract.md"
+  ]) {
+    const content = read(relativePath);
+    const id = fieldValue(content, "ID");
+    const counterpartId = fieldValue(content, "Counterpart ID");
+    const counterpartPath = fieldValue(content, "Counterpart path");
+    const legacyId = fieldValue(content, "Legacy ID");
+
+    assert.notEqual(counterpartId, "", `${relativePath} needs counterpart ID`);
+    assert.notEqual(counterpartPath, "", `${relativePath} needs counterpart path`);
+    assert.notEqual(legacyId, "", `${relativePath} needs legacy ID`);
+    assert.notEqual(counterpartId, "none", `${relativePath} mirrors a real counterpart`);
+    assert.notEqual(counterpartPath, "none", `${relativePath} mirrors a real counterpart path`);
+    assert.notEqual(legacyId, "none", `${relativePath} mirrors a real legacy ID`);
+    assert.match(counterpartId, /^REQ-\d{8}-[a-z0-9-]+-to-[a-z0-9-]+-[a-z0-9-]+$/);
+    assert.ok(
+      id === counterpartId || legacyId.startsWith("2026-"),
+      `${relativePath} must use matching canonical IDs or explicit legacy pairing`
+    );
   }
 });
 

@@ -264,6 +264,32 @@
       ]
     }
   ],
+  "interop": {
+    "compatibility": "ai-tools-specific",
+    "kit_schema_direct_compatibility": false,
+    "field_name_mapping": {
+      "automation_boundary": "automationBoundary",
+      "observable_outputs": "observableOutputs",
+      "required_artifacts": "requiredArtifacts",
+      "required_fields": "requiredFields",
+      "schema_version": "schemaVersion",
+      "skip_allowed": "skipAllowed",
+      "skip_reason_required": "skipReasonRequired"
+    },
+    "stage_aliases": {
+      "adoption-review": "adoption-review",
+      "discuss": "discuss",
+      "execute": "execute",
+      "maintenance": "maintenance",
+      "phase-boundary": "phase-boundary",
+      "plan": "plan",
+      "release": "phase-boundary",
+      "replan": "plan",
+      "research": "research",
+      "verification": "verify",
+      "verify": "verify"
+    }
+  },
   "schema_version": "1.0",
   "updated": "2026-05-07"
 }

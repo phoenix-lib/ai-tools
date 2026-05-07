@@ -52,6 +52,12 @@ Requests:
 REQ-YYYYMMDD-<from>-to-<to>-<slug>.md
 ```
 
+Every request must include `Protocol version: 1.0`, `Canonical ID`,
+`Counterpart ID`, `Counterpart path`, and `Legacy ID`. Use `none` only when a
+mirrored artifact does not exist. If a neighboring repository still has a
+legacy filename or ID, record it in `Legacy ID` and record the path in
+`Counterpart path` so validators do not count the same request twice.
+
 Decisions:
 
 ```text
@@ -60,6 +66,27 @@ DEC-<request-id>.md
 
 Use stable slugs. Do not rename requests after other artifacts reference their
 IDs unless the decision explicitly supersedes the old request.
+
+## Machine Compatibility
+
+AI Tools keeps `.planning/gates/registry.json` in an AI Tools-local snake_case
+format. It is not directly valid against the current `ai-workspace-kit`
+`gate-registry.schema.json` camelCase contract.
+
+Cross-repo consumers must treat the registry as an AI Tools-specific source and
+use the registry `interop` mapping when comparing it to kit contracts:
+
+- `schema_version` maps to `schemaVersion`;
+- `required_artifacts` maps to `requiredArtifacts`;
+- `required_fields` maps to `requiredFields`;
+- `observable_outputs` maps to `observableOutputs`;
+- `skip_allowed` maps to `skipAllowed`;
+- `skip_reason_required` maps to `skipReasonRequired`;
+- `automation_boundary` maps to `automationBoundary`.
+
+Stage names are also mapped, not assumed identical. AI Tools `verification`
+maps to kit `verify`; AI Tools `release` maps to kit `phase-boundary`; AI Tools
+`replan` maps to kit `plan`. `adoption-review` remains kit-owned.
 
 ## Ownership Boundaries
 
