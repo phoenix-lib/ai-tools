@@ -47,6 +47,15 @@ guidance auditable without mutating target projects.
   Validated in Phase 04.
 - [x] Ensure first auditor findings cite narrow evidence and mark unknown facts
   explicitly. Validated in Phase 04.
+- [x] Document the first release surface, including root usage entrypoint,
+  auditor use/non-use guidance, optional `ai-workspace-kit` integration, and
+  release readiness checklist. Validated in Phase 05.
+- [x] Harden full-repo self-audit source filtering so historical phase
+  artifacts and nested fixture contracts do not dominate release evidence.
+  Validated in Phase 05.
+- [x] Run release gate review manually using current `ai-workspace-kit`
+  guidance while no runnable upstream gate-review command exists. Validated in
+  Phase 05.
 
 ### Active
 
@@ -59,14 +68,9 @@ guidance auditable without mutating target projects.
   reusable changes.
 - [ ] Maintain `CHANGELOG.md` after every completed phase, executed major plan,
   or workflow gate change.
-- [ ] Plan a future `ai-workspace-kit` gate-review hook for release and
-  maintenance boundaries, with manual fallback until the upstream capability
-  exists.
 - [ ] Keep `XREPO-VALIDATOR-01` as a deferred v2 prerequisite before automatic
   cross-repo indexer or gate-linter automation.
-- [ ] Harden full-repo self-audit source filtering so historical `.planning`,
-  fixture, placeholder, and optional `.external` references do not dominate
-  release evidence.
+
 ### Out of Scope
 
 - Building all seed tools at once - this would create many disconnected partial
@@ -184,7 +188,7 @@ to inspect it.
 | Enforce the ai-workspace-kit upstream freshness gate | `ai-workspace-kit` is a living upstream reference; phase plans should reflect current contracts, schemas, and workflow lessons. | Active |
 | Insert Cross-Repo Capability Request Gate before the first heavy auditor | The two repos need a structured request/decision protocol before external tool work starts consuming or influencing upstream contracts. | Validated in Phase 03 |
 | Maintain a project changelog after major work | Future agents need a compact history before reading deeper planning artifacts. | Active |
-| Plan ai-workspace-kit gate review as a future hook | The upstream command does not exist yet, so AI Tools should reserve the review stage without pretending it is currently runnable. | Planned for Phase 05 |
+| Plan ai-workspace-kit gate review as a future hook | The upstream command does not exist yet, so AI Tools should reserve the review stage without pretending it is currently runnable. | Validated in Phase 05 |
 | Treat future mechanical gate-linter output as evidence only | Gate relevance and boundary decisions remain assistant-owned semantic review; tools can surface evidence but not decide adoption. | Deferred v2 candidate |
 | Validate shared safety harness before auditor work | The first heavy auditor should consume already-tested read-only, secret-safe, deterministic primitives instead of inventing safety behavior locally. | Validated in Phase 02 |
 | Add shared packet renderer before broad tool expansion | Schemas alone are not enough; packet-producing tools need one renderer so JSON, Markdown, and CLI status cannot drift. | Validated in Phase 04 |
@@ -210,4 +214,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state.
 
 ---
-*Last updated: 2026-05-07 after completing Phase 04 Contract Drift Auditor MVP*
+*Last updated: 2026-05-07 after completing Phase 05 Integration and Release Hardening*
