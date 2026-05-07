@@ -3,7 +3,7 @@
 Protocol version: 1.0
 Canonical ID: REQ-20260507-ai-workspace-kit-to-ai-tools-contract-drift-auditor
 Counterpart ID: REQ-20260507-ai-workspace-kit-to-ai-tools-contract-drift-auditor
-Counterpart path: C:/projects/ai-workspace-kit/.planning/cross-repo/outbox/2026-05-07-ai-tools-contract-drift-auditor.md
+Counterpart path: ai-workspace-kit/.planning/cross-repo/outbox/2026-05-07-ai-tools-contract-drift-auditor.md
 Legacy ID: 2026-05-07-ai-tools-contract-drift-auditor
 ID: REQ-20260507-ai-workspace-kit-to-ai-tools-contract-drift-auditor
 From: ai-workspace-kit

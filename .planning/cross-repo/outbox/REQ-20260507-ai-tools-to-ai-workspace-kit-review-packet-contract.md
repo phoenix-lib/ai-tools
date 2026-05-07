@@ -3,7 +3,7 @@
 Protocol version: 1.0
 Canonical ID: REQ-20260507-ai-tools-to-ai-workspace-kit-review-packet-contract
 Counterpart ID: REQ-20260507-ai-tools-to-ai-workspace-kit-review-packet-standard
-Counterpart path: C:/projects/ai-workspace-kit/.planning/cross-repo/inbox/2026-05-07-ai-tools-review-packet-standard.md
+Counterpart path: ai-workspace-kit/.planning/cross-repo/inbox/2026-05-07-ai-tools-review-packet-standard.md
 Legacy ID: 2026-05-07-ai-tools-review-packet-standard
 ID: REQ-20260507-ai-tools-to-ai-workspace-kit-review-packet-contract
 From: ai-tools

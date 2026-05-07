@@ -7,6 +7,10 @@ major plan execution, and workflow gate change.
 
 ### Cross-Repo Interop Compatibility
 
+- Changed counterpart paths: cross-repo protocol files now use repo-qualified
+  relative paths instead of machine-local absolute paths.
+- Validation: protocol tests now reject Windows absolute paths inside
+  `.planning/cross-repo/` markdown files.
 - Changed cross-repo protocol fields: capability request and decision templates
   now require `Protocol version: 1.0`, canonical IDs, counterpart IDs,
   counterpart paths, and legacy IDs.

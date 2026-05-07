@@ -13,6 +13,18 @@ function exists(relativePath) {
   return fs.existsSync(path.join(root, relativePath));
 }
 
+function listMarkdownFiles(relativeDir) {
+  const dir = path.join(root, relativeDir);
+  const entries = fs.readdirSync(dir, { withFileTypes: true });
+  return entries.flatMap((entry) => {
+    const relativePath = path.join(relativeDir, entry.name);
+    if (entry.isDirectory()) {
+      return listMarkdownFiles(relativePath);
+    }
+    return entry.isFile() && entry.name.endsWith(".md") ? [relativePath] : [];
+  });
+}
+
 function assertIncludesAll(content, values, label) {
   for (const value of values) {
     assert.ok(content.includes(value), `${label} missing ${value}`);
@@ -245,6 +257,18 @@ test("mirrored capability requests have counterpart metadata", () => {
     assert.ok(
       id === counterpartId || legacyId.startsWith("2026-"),
       `${relativePath} must use matching canonical IDs or explicit legacy pairing`
+    );
+  }
+});
+
+test("cross-repo protocol files use portable paths", () => {
+  for (const relativePath of listMarkdownFiles(".planning/cross-repo")) {
+    const content = read(relativePath);
+
+    assert.doesNotMatch(
+      content,
+      /(?:[A-Za-z]:[\\/]|[A-Za-z]:\/)/,
+      `${relativePath} must not contain machine-local absolute paths`
     );
   }
 });
