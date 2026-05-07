@@ -29,23 +29,23 @@
 
 ### Cross-Repo Capability Requests
 
-- [ ] **XREPO-01**: The project defines `.planning/cross-repo/inbox/`, `.planning/cross-repo/outbox/`, `.planning/cross-repo/decisions/`, and `.planning/cross-repo/templates/` for explicit cross-repo capability coordination.
-- [ ] **XREPO-02**: A capability request template captures ID, sender, recipient, status, severity, requested phase/gate, boundary classification, need, evidence, boundary, expected output, compatibility impact, acceptance criteria, non-goals, decision needed, and review/expiry.
-- [ ] **XREPO-03**: Boundary classification supports `kit-owned infrastructure`, `interop contract`, `recommendation guidance`, `external ai-tools capability`, and `unclear boundary`.
-- [ ] **XREPO-04**: A capability decision template captures request ID, decision, decider, date, target phase, reason, outcome, accepted scope, rejected scope, follow-up, and compatibility notes.
-- [ ] **XREPO-05**: Decision statuses include `proposed`, `needs-clarification`, `accepted`, `planned`, `implemented`, `deferred`, `rejected`, `superseded`, and `stale`.
-- [ ] **XREPO-06**: Outgoing Need Gate is documented for research/plan stages so AI Tools creates an outbox request instead of implementing a capability owned by `ai-workspace-kit`.
-- [ ] **XREPO-07**: Incoming Review Gate is documented for discuss, maintenance, and phase-boundary stages so incoming requests create decision points, not automatic phases or automatic tool runs.
-- [ ] **XREPO-08**: Example requests and docs validation prove the protocol covers both directions without repo dependency, copied `.planning` state, automatic integration, or duplicated ownership.
+- [x] **XREPO-01**: The project defines `.planning/cross-repo/inbox/`, `.planning/cross-repo/outbox/`, `.planning/cross-repo/decisions/`, and `.planning/cross-repo/templates/` for explicit cross-repo capability coordination.
+- [x] **XREPO-02**: A capability request template captures ID, sender, recipient, status, severity, requested phase/gate, boundary classification, need, evidence, boundary, expected output, compatibility impact, acceptance criteria, non-goals, decision needed, and review/expiry.
+- [x] **XREPO-03**: Boundary classification supports `kit-owned infrastructure`, `interop contract`, `recommendation guidance`, `external ai-tools capability`, and `unclear boundary`.
+- [x] **XREPO-04**: A capability decision template captures request ID, decision, decider, date, target phase, reason, outcome, accepted scope, rejected scope, follow-up, and compatibility notes.
+- [x] **XREPO-05**: Decision statuses include `proposed`, `needs-clarification`, `accepted`, `planned`, `implemented`, `deferred`, `rejected`, `superseded`, and `stale`.
+- [x] **XREPO-06**: Outgoing Need Gate is documented for research/plan stages so AI Tools creates an outbox request instead of implementing a capability owned by `ai-workspace-kit`.
+- [x] **XREPO-07**: Incoming Review Gate is documented for discuss, maintenance, and phase-boundary stages so incoming requests create decision points, not automatic phases or automatic tool runs.
+- [x] **XREPO-08**: Example requests and docs validation prove the protocol covers both directions without repo dependency, copied `.planning` state, automatic integration, or duplicated ownership.
 
 ### Workflow Governance
 
-- [ ] **GATE-01**: `CHANGELOG.md` is updated after each completed phase, executed major plan, or workflow gate change with date, phase/plan, changed scope, validation, and upstream impact.
-- [ ] **GATE-02**: The ai-workspace-kit upstream freshness gate reads an upstream changelog or release notes first when that artifact exists and changed, and records the absence of such a changelog when it does not exist.
+- [x] **GATE-01**: `CHANGELOG.md` is updated after each completed phase, executed major plan, or workflow gate change with date, phase/plan, changed scope, validation, and upstream impact.
+- [x] **GATE-02**: The ai-workspace-kit upstream freshness gate reads an upstream changelog or release notes first when that artifact exists and changed, and records the absence of such a changelog when it does not exist.
 - [ ] **GATE-03**: Release or maintenance gate review uses the future `ai-workspace-kit` gate-review capability when available, with manual review plus cross-repo request/decision fallback when it is not available.
-- [ ] **GATE-04**: AI Tools Self-Use Gate documents when validated AI Tools capabilities must be considered while developing AI Tools itself, how to run them read-only, and how to record skip reasons.
-- [ ] **GATE-05**: New Tool Intake and Placement Gate classifies every new tool idea by owner, destination, maturity, activation stage, outputs, and non-goals before implementation.
-- [ ] **GATE-06**: Git Baseline Gate separates baseline seed/project files from active work before git cleanliness is used as planning, verification, review packet, or release evidence.
+- [x] **GATE-04**: AI Tools Self-Use Gate documents when validated AI Tools capabilities must be considered while developing AI Tools itself, how to run them read-only, and how to record skip reasons.
+- [x] **GATE-05**: New Tool Intake and Placement Gate classifies every new tool idea by owner, destination, maturity, activation stage, outputs, and non-goals before implementation.
+- [x] **GATE-06**: Git Baseline Gate separates baseline seed/project files from active work before git cleanliness is used as planning, verification, review packet, or release evidence.
 
 ### Contract Drift Auditor
 
@@ -116,20 +116,20 @@ Which phases cover which requirements. Updated during roadmap creation.
 | SAFE-04 | Phase 1 | Complete |
 | SAFE-05 | Phase 2 | Complete |
 | SAFE-06 | Phase 1 | Complete |
-| XREPO-01 | Phase 3 | Pending |
-| XREPO-02 | Phase 3 | Pending |
-| XREPO-03 | Phase 3 | Pending |
-| XREPO-04 | Phase 3 | Pending |
-| XREPO-05 | Phase 3 | Pending |
-| XREPO-06 | Phase 3 | Pending |
-| XREPO-07 | Phase 3 | Pending |
-| XREPO-08 | Phase 3 | Pending |
-| GATE-01 | Phase 3 | Pending |
-| GATE-02 | Phase 3 | Pending |
+| XREPO-01 | Phase 3 | Complete |
+| XREPO-02 | Phase 3 | Complete |
+| XREPO-03 | Phase 3 | Complete |
+| XREPO-04 | Phase 3 | Complete |
+| XREPO-05 | Phase 3 | Complete |
+| XREPO-06 | Phase 3 | Complete |
+| XREPO-07 | Phase 3 | Complete |
+| XREPO-08 | Phase 3 | Complete |
+| GATE-01 | Phase 3 | Complete |
+| GATE-02 | Phase 3 | Complete |
 | GATE-03 | Phase 5 | Pending |
-| GATE-04 | Phase 3 | Pending |
-| GATE-05 | Phase 3 | Pending |
-| GATE-06 | Phase 3 | Pending |
+| GATE-04 | Phase 3 | Complete |
+| GATE-05 | Phase 3 | Complete |
+| GATE-06 | Phase 3 | Complete |
 | DRIFT-01 | Phase 4 | Pending |
 | DRIFT-02 | Phase 4 | Pending |
 | DRIFT-03 | Phase 4 | Pending |
