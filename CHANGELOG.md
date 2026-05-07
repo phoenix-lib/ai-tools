@@ -5,6 +5,31 @@ major plan execution, and workflow gate change.
 
 ## Unreleased
 
+### Phase 04: Contract Drift Auditor MVP
+
+- Changed tool capabilities: added a runnable review-only
+  `contract-drift-auditor --project <path> --out <dir>` MVP that emits
+  `REVIEW-SUMMARY.json`, `EVIDENCE.json`, `FINDINGS.md`, and
+  `RECOMMENDED-ACTIONS.md`.
+- Changed shared review packet mechanics: added
+  `shared/review-packet-renderer.js` so JSON and Markdown packet artifacts
+  render from one summary/evidence/action model with canonical JSON.
+- Changed drift checks: the auditor now detects missing source-layer/local file
+  references, missing `npm test` or `npm run <script>` package scripts, missing
+  or invalid local skills, absent-tool references, and unknown contract facts.
+- Changed safety behavior: auditor output is rejected inside the audited target
+  project, target commands are never executed, target files are not mutated, and
+  generated packet directories inside targets are ignored as stale evidence.
+- Validation: added renderer, CLI, discovery, checks, integration, and schema
+  output tests. Full validation passed with `npm.cmd test`.
+- Compatibility impact for `ai-workspace-kit`: the auditor produces compatible
+  review packet artifacts that kit may consume as optional evidence. No runtime
+  dependency, automatic execution, adapter/bootstrap duplication, or target
+  project dependency was added.
+- Breaking changes: none for existing APIs; the new CLI is additive.
+- Migration notes: future packet-producing tools should use the shared renderer
+  and keep CLI output, Markdown, and JSON status derived from one model.
+
 ### Workflow Gate Enforcement
 
 - Fixed the Discuss Mode Gate contract so `$gsd-discuss-phase` must resolve
