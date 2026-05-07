@@ -1,0 +1,7 @@
+{
+  "name": "mature-ai-project-api",
+  "private": true,
+  "scripts": {
+    "test": "node --test"
+  }
+}

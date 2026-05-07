@@ -1,0 +1,8 @@
+{
+  "name": "mature-ai-project",
+  "private": true,
+  "scripts": {
+    "test": "node --test",
+    "typecheck": "tsc --noEmit"
+  }
+}

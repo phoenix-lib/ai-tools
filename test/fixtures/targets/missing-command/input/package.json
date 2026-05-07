@@ -1,0 +1,7 @@
+{
+  "name": "missing-command",
+  "private": true,
+  "scripts": {
+    "test": "node --test"
+  }
+}

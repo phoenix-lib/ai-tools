@@ -1,0 +1,7 @@
+{
+  "name": "clean-project",
+  "private": true,
+  "scripts": {
+    "test": "node --test"
+  }
+}

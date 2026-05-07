@@ -1,0 +1,7 @@
+{
+  "name": "mixed-package-managers",
+  "private": true,
+  "scripts": {
+    "test": "node --test"
+  }
+}
