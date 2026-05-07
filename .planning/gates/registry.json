@@ -1,0 +1,269 @@
+{
+  "gates": [
+    {
+      "automation_boundary": "Ask per phase; if interactive question tools are unavailable, present plain-text choices and stop for user input unless an explicit safe auto/default flag applies.",
+      "description": "Selects Manual Questions or Trusted Self-Questioning before discuss/context gathering writes canonical artifacts.",
+      "id": "discuss-mode",
+      "name": "Discuss Mode Gate",
+      "observable_outputs": [
+        "Gate Resolution entry naming selected mode, approval source, and evidence",
+        "CONTEXT.md discuss mode or gate resolution block"
+      ],
+      "required_artifacts": [
+        "*-CONTEXT.md",
+        "*-DISCUSSION-LOG.md"
+      ],
+      "required_fields": [
+        "mode",
+        "selected_by",
+        "evidence",
+        "skip_reason_when_not_applicable"
+      ],
+      "skip_allowed": false,
+      "skip_reason_required": true,
+      "stages": [
+        "discuss"
+      ]
+    },
+    {
+      "automation_boundary": "Fetch or pull only with explicit permission when network or remote mutation policy requires it; use upstream as design input, not as automatic authority.",
+      "description": "Checks the local ai-workspace-kit reference against reachable upstream before planning or major replanning.",
+      "id": "upstream-freshness",
+      "name": "ai-workspace-kit Upstream Freshness Gate",
+      "observable_outputs": [
+        "local commit",
+        "remote HEAD or unknown",
+        "checkout dirty status",
+        "changelog or release-note status",
+        "phase planning impact"
+      ],
+      "required_artifacts": [
+        ".planning/research/AI-WORKSPACE-KIT-UPSTREAM-REVIEW.md",
+        "active phase RESEARCH.md or PLAN.md Gate Resolution"
+      ],
+      "required_fields": [
+        "local_commit",
+        "remote_head",
+        "dirty_status",
+        "changelog_status",
+        "planning_impact"
+      ],
+      "skip_allowed": false,
+      "skip_reason_required": true,
+      "stages": [
+        "research",
+        "plan",
+        "replan"
+      ]
+    },
+    {
+      "automation_boundary": "If the need is kit-owned, create an outbox request instead of implementing it in AI Tools.",
+      "description": "Prevents AI Tools from implementing functionality owned by ai-workspace-kit.",
+      "id": "cross-repo-outgoing",
+      "name": "Cross-Repo Outgoing Need Gate",
+      "observable_outputs": [
+        "Gate Resolution entry",
+        "outbox capability request when boundary belongs to ai-workspace-kit",
+        "explicit skip reason when no outgoing need exists"
+      ],
+      "required_artifacts": [
+        ".planning/cross-repo/outbox/*.md",
+        "active RESEARCH.md or PLAN.md Gate Resolution"
+      ],
+      "required_fields": [
+        "ownership_classification",
+        "decision",
+        "artifact_or_skip_reason"
+      ],
+      "skip_allowed": true,
+      "skip_reason_required": true,
+      "stages": [
+        "research",
+        "plan"
+      ]
+    },
+    {
+      "automation_boundary": "Incoming requests create decision points only; they do not automatically create phases, run tools, add dependencies, or copy planning state.",
+      "description": "Reviews incoming cross-repo capability requests for roadmap impact and boundary decisions.",
+      "id": "cross-repo-incoming",
+      "name": "Cross-Repo Incoming Review Gate",
+      "observable_outputs": [
+        "Gate Resolution entry",
+        "inbox request review",
+        "decision artifact or explicit no-incoming-request note"
+      ],
+      "required_artifacts": [
+        ".planning/cross-repo/inbox/*.md",
+        ".planning/cross-repo/decisions/*.md",
+        "active phase Gate Resolution"
+      ],
+      "required_fields": [
+        "request_id",
+        "decision_status",
+        "target_phase_or_deferred",
+        "compatibility_notes"
+      ],
+      "skip_allowed": true,
+      "skip_reason_required": true,
+      "stages": [
+        "discuss",
+        "research",
+        "plan",
+        "maintenance",
+        "phase-boundary"
+      ]
+    },
+    {
+      "automation_boundary": "Changelog entries are planning evidence, not approval to consume changed capabilities automatically.",
+      "description": "Requires concise changelog entries after completed phases, major tasks, or workflow gate changes.",
+      "id": "changelog",
+      "name": "Project Changelog Gate",
+      "observable_outputs": [
+        "CHANGELOG.md entry with changed scope, validation, upstream impact, compatibility, breaking changes, and migration notes"
+      ],
+      "required_artifacts": [
+        "CHANGELOG.md",
+        "SUMMARY.md or VERIFICATION.md Gate Resolution when relevant"
+      ],
+      "required_fields": [
+        "date",
+        "phase_or_plan",
+        "changed_scope",
+        "validation",
+        "upstream_impact",
+        "compatibility_impact"
+      ],
+      "skip_allowed": false,
+      "skip_reason_required": true,
+      "stages": [
+        "execute",
+        "verify",
+        "phase-boundary",
+        "release"
+      ]
+    },
+    {
+      "automation_boundary": "Run validated matching AI Tools as read-only evidence; tool output never replaces assistant judgment.",
+      "description": "Checks whether AI Tools should use its own validated capabilities while developing this repository.",
+      "id": "self-use",
+      "name": "AI Tools Self-Use Gate",
+      "observable_outputs": [
+        "tool maturity classification",
+        "command and output location when run",
+        "skip reason when no validated matching tool exists"
+      ],
+      "required_artifacts": [
+        "active phase Gate Resolution",
+        "review packet output when a validated self-use tool runs"
+      ],
+      "required_fields": [
+        "capability",
+        "maturity",
+        "run_or_skip_reason",
+        "evidence_summary"
+      ],
+      "skip_allowed": true,
+      "skip_reason_required": true,
+      "stages": [
+        "discuss",
+        "research",
+        "plan",
+        "execute",
+        "verify",
+        "phase-boundary",
+        "release"
+      ]
+    },
+    {
+      "automation_boundary": "Do not implement a new tool until owner, destination, maturity, activation stage, outputs, and non-goals are explicit.",
+      "description": "Routes new AI Tools capability ideas to the right owner and destination before implementation.",
+      "id": "new-tool-intake",
+      "name": "New Tool Intake and Placement Gate",
+      "observable_outputs": [
+        "ownership classification",
+        "destination decision",
+        "use gate definition",
+        "seed/backlog/request artifact when not implemented"
+      ],
+      "required_artifacts": [
+        "tools/<tool-name>/SEED-IDEAS.md",
+        ".planning/cross-repo/outbox/*.md",
+        ".planning/cross-repo/inbox/*.md",
+        "active phase Gate Resolution"
+      ],
+      "required_fields": [
+        "owner",
+        "destination",
+        "maturity",
+        "activation_stage",
+        "outputs",
+        "non_goals"
+      ],
+      "skip_allowed": true,
+      "skip_reason_required": true,
+      "stages": [
+        "research",
+        "plan"
+      ]
+    },
+    {
+      "automation_boundary": "Do not silently mix baseline files with active work; broad baseline staging needs explicit approval.",
+      "description": "Separates existing baseline/project files from active changes before using git cleanliness as evidence.",
+      "id": "git-baseline",
+      "name": "Git Baseline Gate",
+      "observable_outputs": [
+        "git status summary",
+        "baseline versus active-work classification",
+        "unresolved baseline noise in STATE.md when present"
+      ],
+      "required_artifacts": [
+        "active phase Gate Resolution",
+        ".planning/STATE.md when unresolved baseline noise exists"
+      ],
+      "required_fields": [
+        "status_short",
+        "classification",
+        "decision_or_skip_reason"
+      ],
+      "skip_allowed": true,
+      "skip_reason_required": true,
+      "stages": [
+        "discuss",
+        "phase-boundary",
+        "verification",
+        "release"
+      ]
+    },
+    {
+      "automation_boundary": "Use future ai-workspace-kit gate review only when it exists; until then, review manually and route findings through requests or decisions.",
+      "description": "Reviews gates for conflicts, staleness, duplication, relevance, and dependency creep at maintenance boundaries.",
+      "id": "future-gate-review",
+      "name": "Future ai-workspace-kit Gate Review Hook",
+      "observable_outputs": [
+        "manual gate review notes or future review packet",
+        "decision or request artifacts for required changes",
+        "explicit skip reason when upstream capability is unavailable"
+      ],
+      "required_artifacts": [
+        ".planning/cross-repo/decisions/*.md",
+        ".planning/cross-repo/outbox/*.md",
+        "VERIFICATION.md or release readiness report"
+      ],
+      "required_fields": [
+        "review_method",
+        "findings",
+        "assistant_decision",
+        "follow_up"
+      ],
+      "skip_allowed": true,
+      "skip_reason_required": true,
+      "stages": [
+        "maintenance",
+        "phase-boundary",
+        "release"
+      ]
+    }
+  ],
+  "schema_version": "1.0",
+  "updated": "2026-05-07"
+}
