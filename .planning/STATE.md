@@ -3,11 +3,11 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Phase 02 planned
-last_updated: "2026-05-07T14:02:26.253Z"
-last_activity: 2026-05-07 -- Phase 02 planning complete
+stopped_at: Phase 03 inserted; Phase 02 ready to execute
+last_updated: "2026-05-07T14:15:47.571Z"
+last_activity: 2026-05-07 -- Inserted Phase 03 Cross-Repo Capability Request Gate
 progress:
-  total_phases: 4
+  total_phases: 5
   completed_phases: 1
   total_plans: 6
   completed_plans: 3
@@ -28,7 +28,7 @@ See: .planning/PROJECT.md (updated 2026-05-07)
 Phase: 2
 Plan: 0/3 executed
 Status: Ready to execute
-Last activity: 2026-05-07 -- Phase 02 planning complete
+Last activity: 2026-05-07 -- Inserted Phase 03 Cross-Repo Capability Request Gate
 
 Progress: [#####-----] 50%
 
@@ -64,6 +64,15 @@ Decisions are logged in PROJECT.md Key Decisions table.
 - Enforce the ai-workspace-kit tandem boundary gate: do not duplicate
   adoption/bootstrap, adapter generation, or generated-contract review behavior
   that `ai-workspace-kit` already owns.
+- Insert Phase 03 Cross-Repo Capability Request Gate before
+  `contract-drift-auditor` so cross-repo requests become explicit decision
+  points instead of automatic work or duplicated responsibilities.
+
+### Roadmap Evolution
+
+- Phase 03 inserted: Cross-Repo Capability Request Gate.
+- Former Phase 03 Contract Drift Auditor MVP moved to Phase 04.
+- Former Phase 04 Integration and Release Hardening moved to Phase 05.
 
 ### Pending Todos
 

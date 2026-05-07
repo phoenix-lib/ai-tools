@@ -65,7 +65,9 @@ Latest phase-planning impact:
 - **Phase 2:** Keep the shared harness generic and framework-agnostic, but make
   helper APIs usable by future framework evidence adapters. Do not implement
   Laravel/PHP detection in Phase 2.
-- **Phase 3:** Contract drift can later consume framework/source-layer evidence,
+- **Phase 3:** Add a cross-repo capability request gate so upstream requests and
+  AI Tools requests become structured decisions before heavy auditor work starts.
+- **Phase 4:** Contract drift can later consume framework/source-layer evidence,
   but should remain a separate read-only auditor.
 - **Future skill work:** The self-improving project operating skill idea should
   be captured later when packaging this project's workflow into durable skills.
@@ -133,9 +135,11 @@ Major changed areas:
   shared helper design, but keep implementation focused on generic safety
   primitives: path guard, ignore policy, file walker, secret policy, canonical
   JSON, tree hash, and fixtures.
-- **Phase 3:** When building `contract-drift-auditor`, consider emitting a
+- **Phase 3:** Capture the cross-repo request protocol and keep incoming
+  requests as decision points, not automatic phases.
+- **Phase 4:** When building `contract-drift-auditor`, consider emitting a
   compact `REVIEW-SUMMARY.json` projection that is easy for `ai-workspace-kit`,
   GSD, and other assistants to consume.
-- **Phase 4:** Use `TOOLING-PLAYBOOK.md` as a source for optional integration
+- **Phase 5:** Use `TOOLING-PLAYBOOK.md` as a source for optional integration
   documentation and for explaining when AI Tools complements
   `ai-workspace-kit`.

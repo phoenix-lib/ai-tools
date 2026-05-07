@@ -12,7 +12,7 @@ evidence references, recommended actions, tool metadata, canonical JSON
 guidance, example packets, and schema validation tests.
 
 This phase does not implement the shared file walker, secret policy, fixture
-harness, or `contract-drift-auditor` behavior. Those are Phase 2 and Phase 3.
+harness, or `contract-drift-auditor` behavior. Those are Phase 2 and Phase 4.
 
 </domain>
 
@@ -192,7 +192,7 @@ the decisions above remain true.
 
 ### Integration Points
 
-- Phase 1 output feeds Phase 2 safety helpers and Phase 3
+- Phase 1 output feeds Phase 2 safety helpers and Phase 4
   `contract-drift-auditor`.
 - GSD integration should consume JSON packet summaries rather than parse
   Markdown prose.

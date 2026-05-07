@@ -88,7 +88,16 @@ target projects.
 canonical JSON helper, fixtures, and mutation/secret/determinism tests.
 **Avoids:** Hidden mutation and secret leakage.
 
-### Phase 3: Contract Drift Auditor MVP
+### Phase 3: Cross-Repo Capability Request Gate
+
+**Rationale:** The two repositories need an explicit request and decision
+protocol before heavy auditor work starts influencing upstream contracts.
+**Delivers:** Cross-repo inbox/outbox/decision structure, request and decision
+templates, gate playbook, bidirectional examples, and docs validation.
+**Avoids:** Duplicated ownership, automatic phase creation from incoming
+requests, and dependency coupling between repositories.
+
+### Phase 4: Contract Drift Auditor MVP
 
 **Rationale:** The first auditor proves the packet standard against real
 contract drift.
@@ -96,15 +105,16 @@ contract drift.
 permissions, skills, source layers, and project facts.
 **Avoids:** Standards that are not grounded in a working tool.
 
-### Phase 4: ai-workspace-kit Internal Gate Alignment
+### Phase 5: Integration and Release Hardening
 
-**Rationale:** The bootstrap tool should consume or emit compatible packets
-without making external tools mandatory.
-**Delivers:** Adapter-aware review output, severity model, patch-oriented
-generated-contract review, and strict permission defaults.
-**Avoids:** Integration drift between `ai-workspace-kit` and external auditors.
+**Rationale:** The first release should document how AI Tools complements
+`ai-workspace-kit` without becoming a mandatory dependency.
+**Delivers:** Usage, safety, optional integration guidance, release readiness
+review, and criteria for deferring later tools.
+**Avoids:** Integration drift, unclear release gates, and premature tool
+expansion.
 
-### Phase 5: Later Tool Selection
+### Future: Later Tool Selection
 
 **Rationale:** Build only the next tool justified by real repeated demand.
 **Delivers:** Decision between context ledger, phase forensics, config matrix,
@@ -127,8 +137,8 @@ or skill linter based on usage evidence.
 - Exact Node module format and package structure should be decided in Phase 1.
 - JSON Schema validation dependency should be decided after initial schema
   authoring.
-- Whether Phase 4 should come before Phase 3 depends on whether
-  `ai-workspace-kit` must be changed in this repo or upstream.
+- The cross-repo request gate is now Phase 3; `contract-drift-auditor` moved to
+  Phase 4 and release/integration hardening moved to Phase 5.
 
 ## Sources
 

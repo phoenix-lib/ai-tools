@@ -40,7 +40,7 @@ inspection ignores noise, mutation proof sees everything.
 
 ## Integration Notes
 
-- Phase 3 can import `shared/*` helpers for `contract-drift-auditor`.
+- Phase 4 can import `shared/*` helpers for `contract-drift-auditor`.
 - Future framework evidence adapters can use `file-walker` and `secret-policy`
   without bypassing output isolation or path-only evidence rules.
 - No Phase 2 file should import from `.external/ai-workspace-kit`.

@@ -51,7 +51,7 @@
 | Ignore policy | `shared/ignore-policy.js` | `test/shared/file-walker.test.js` | Prevents generated/noisy evidence pollution. |
 | File walker | `shared/file-walker.js` | `test/shared/file-walker.test.js` | Gives auditors deterministic target evidence paths. |
 | Tree hash | `shared/tree-hash.js` | `test/shared/tree-hash.test.js` | Proves read-only commands do not mutate targets. |
-| Fixtures | `test/fixtures/targets/` | `test/shared/safety-harness.test.js` | Covers Phase 2 safety and future Phase 3 drift scenarios. |
+| Fixtures | `test/fixtures/targets/` | `test/shared/safety-harness.test.js` | Covers Phase 2 safety and future Phase 4 drift scenarios. |
 </architectural_responsibility_map>
 
 <research_summary>

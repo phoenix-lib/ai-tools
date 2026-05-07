@@ -42,6 +42,9 @@ guidance auditable without mutating target projects.
 - [ ] Run an ai-workspace-kit upstream freshness gate before each phase planning
   step so planning uses the latest reachable upstream commit and records
   reusable changes.
+- [ ] Define a cross-repo capability request protocol so AI Tools and
+  `ai-workspace-kit` can ask for missing capabilities through explicit requests
+  and decisions without automatically creating phases or mixing ownership.
 
 ### Out of Scope
 
@@ -59,6 +62,8 @@ guidance auditable without mutating target projects.
   the two projects work in tandem, so duplicated adapter generation,
   generated-contract review routing, or project-local contract installation
   belongs upstream or as compatibility integration, not as a parallel tool.
+- Auto-creating AI Tools phases from incoming cross-repo requests - requests are
+  decision points first, not automatic commitments.
 - Starting with AI-generated prose reports only - the first implementation work
   must be schemas, fixtures, parsers, and deterministic reports.
 
@@ -114,6 +119,10 @@ to inspect it.
   `.external/ai-workspace-kit` commit with GitHub `HEAD`, fast-forward the
   checkout when it changed, review the upstream diff, and record project impacts
   before writing or updating a phase plan.
+- **Cross-repo request gate**: When AI Tools needs a capability owned by
+  `ai-workspace-kit`, create an outbox request instead of implementing it here.
+  Incoming requests from `ai-workspace-kit` create decision points, not automatic
+  phases, tool runs, dependencies, or copied planning state.
 - **Windows compatibility**: Clean clone tests must pass on Windows, including
   line-ending behavior.
 
@@ -128,6 +137,7 @@ to inspect it.
 | Treat generated packets as review material, not installation material | This preserves user control and avoids accidental target-project mutation. | Pending |
 | Enforce the ai-workspace-kit tandem boundary gate | AI Tools should complement `ai-workspace-kit`, not duplicate adoption/bootstrap or adapter-generation behavior under new tool names. | Active |
 | Enforce the ai-workspace-kit upstream freshness gate | `ai-workspace-kit` is a living upstream reference; phase plans should reflect current contracts, schemas, and workflow lessons. | Active |
+| Insert Cross-Repo Capability Request Gate before the first heavy auditor | The two repos need a structured request/decision protocol before external tool work starts consuming or influencing upstream contracts. | Planned for Phase 03 |
 
 ## Evolution
 
@@ -147,4 +157,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state.
 
 ---
-*Last updated: 2026-05-07 after adding ai-workspace-kit upstream freshness gate*
+*Last updated: 2026-05-07 after inserting Cross-Repo Capability Request Gate*

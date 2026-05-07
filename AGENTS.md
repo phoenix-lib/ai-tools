@@ -34,7 +34,8 @@ before the shared review packet standard and first external auditor exist.
 - There is no root `package.json` and no verified project test/build command
   yet.
 - The current recommended implementation order is review packet standard,
-  internal ai-workspace-kit gates, then `contract-drift-auditor`.
+  shared safety harness, cross-repo capability request gate, then
+  `contract-drift-auditor`.
 - `.external/ai-workspace-kit` is a local reference checkout only. Do not treat
   it as target project evidence unless the task explicitly asks to inspect it.
 - This directory is now a git repository initialized during GSD project setup.
@@ -48,6 +49,9 @@ before the shared review packet standard and first external auditor exist.
 - Before every GSD phase planning step, run the ai-workspace-kit upstream
   freshness gate. Planning must use the latest reachable
   `phoenix-lib/ai-workspace-kit` reference, not a stale local checkout.
+- Treat incoming cross-repo capability requests as decision points. They do not
+  automatically create phases, run tools, add dependencies, or copy planning
+  state across repositories.
 - Prefer one small green read-only tool over broad README expansion.
 - Keep shared contracts in `standards/` and reusable mechanics in `shared/`.
   Tool-specific checks belong under `tools/<tool-name>/` once implementation
@@ -158,6 +162,9 @@ Examples:
 - If a proposed tool sounds like "review generated assistant contracts", first
   check whether `ai-workspace-kit` already performs that review. If yes, keep
   AI Tools focused on packet compatibility or external drift evidence.
+- If AI Tools needs `ai-workspace-kit` to provide or stabilize a contract, use
+  the planned cross-repo capability request protocol instead of implementing the
+  kit-owned capability locally.
 
 ## Implementation Start Rule
 

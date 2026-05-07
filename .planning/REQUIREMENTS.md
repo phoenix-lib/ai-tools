@@ -23,6 +23,17 @@
 - [ ] **SAFE-05**: A fixture harness can hash target project trees before and after tool runs to prove non-mutation.
 - [x] **SAFE-06**: Shared summary rendering keeps CLI status, Markdown status, JSON status, and finding/blocker counts consistent.
 
+### Cross-Repo Capability Requests
+
+- [ ] **XREPO-01**: The project defines `.planning/cross-repo/inbox/`, `.planning/cross-repo/outbox/`, `.planning/cross-repo/decisions/`, and `.planning/cross-repo/templates/` for explicit cross-repo capability coordination.
+- [ ] **XREPO-02**: A capability request template captures ID, sender, recipient, status, severity, requested phase/gate, boundary classification, need, evidence, boundary, expected output, compatibility impact, acceptance criteria, non-goals, decision needed, and review/expiry.
+- [ ] **XREPO-03**: Boundary classification supports `kit-owned infrastructure`, `interop contract`, `recommendation guidance`, `external ai-tools capability`, and `unclear boundary`.
+- [ ] **XREPO-04**: A capability decision template captures request ID, decision, decider, date, target phase, reason, outcome, accepted scope, rejected scope, follow-up, and compatibility notes.
+- [ ] **XREPO-05**: Decision statuses include `proposed`, `needs-clarification`, `accepted`, `planned`, `implemented`, `deferred`, `rejected`, `superseded`, and `stale`.
+- [ ] **XREPO-06**: Outgoing Need Gate is documented for research/plan stages so AI Tools creates an outbox request instead of implementing a capability owned by `ai-workspace-kit`.
+- [ ] **XREPO-07**: Incoming Review Gate is documented for discuss, maintenance, and phase-boundary stages so incoming requests create decision points, not automatic phases or automatic tool runs.
+- [ ] **XREPO-08**: Example requests and docs validation prove the protocol covers both directions without repo dependency, copied `.planning` state, automatic integration, or duplicated ownership.
+
 ### Contract Drift Auditor
 
 - [ ] **DRIFT-01**: A user can run `contract-drift-auditor` in read-only mode with explicit `--project` and `--out` arguments.
@@ -90,30 +101,38 @@ Which phases cover which requirements. Updated during roadmap creation.
 | SAFE-04 | Phase 1 | Complete |
 | SAFE-05 | Phase 2 | Pending |
 | SAFE-06 | Phase 1 | Complete |
-| DRIFT-01 | Phase 3 | Pending |
-| DRIFT-02 | Phase 3 | Pending |
-| DRIFT-03 | Phase 3 | Pending |
-| DRIFT-04 | Phase 3 | Pending |
-| DRIFT-05 | Phase 3 | Pending |
-| DRIFT-06 | Phase 3 | Pending |
-| DRIFT-07 | Phase 3 | Pending |
+| XREPO-01 | Phase 3 | Pending |
+| XREPO-02 | Phase 3 | Pending |
+| XREPO-03 | Phase 3 | Pending |
+| XREPO-04 | Phase 3 | Pending |
+| XREPO-05 | Phase 3 | Pending |
+| XREPO-06 | Phase 3 | Pending |
+| XREPO-07 | Phase 3 | Pending |
+| XREPO-08 | Phase 3 | Pending |
+| DRIFT-01 | Phase 4 | Pending |
+| DRIFT-02 | Phase 4 | Pending |
+| DRIFT-03 | Phase 4 | Pending |
+| DRIFT-04 | Phase 4 | Pending |
+| DRIFT-05 | Phase 4 | Pending |
+| DRIFT-06 | Phase 4 | Pending |
+| DRIFT-07 | Phase 4 | Pending |
 | TEST-01 | Phase 1 | Complete |
 | TEST-02 | Phase 2 | Pending |
 | TEST-03 | Phase 2 | Pending |
-| TEST-04 | Phase 3 | Pending |
+| TEST-04 | Phase 4 | Pending |
 | TEST-05 | Phase 1 | Complete |
 | TEST-06 | Phase 1 | Complete |
 | TEST-07 | Phase 2 | Pending |
-| DOC-01 | Phase 4 | Pending |
-| DOC-02 | Phase 4 | Pending |
-| DOC-03 | Phase 4 | Pending |
-| DOC-04 | Phase 4 | Pending |
+| DOC-01 | Phase 5 | Pending |
+| DOC-02 | Phase 5 | Pending |
+| DOC-03 | Phase 5 | Pending |
+| DOC-04 | Phase 5 | Pending |
 
 **Coverage:**
-- v1 requirements: 30 total
-- Mapped to phases: 30
+- v1 requirements: 38 total
+- Mapped to phases: 38
 - Unmapped: 0
 
 ---
 *Requirements defined: 2026-05-07*
-*Last updated: 2026-05-07 after roadmap creation*
+*Last updated: 2026-05-07 after inserting Cross-Repo Capability Request Gate*

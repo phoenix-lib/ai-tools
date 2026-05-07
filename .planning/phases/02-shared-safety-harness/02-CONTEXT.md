@@ -143,7 +143,7 @@ Cycles run:
 
 - **D-32:** Reusable mechanics belong in `shared/`, matching the local
   `AGENTS.md` rule. Tool-specific checks should wait for
-  `tools/contract-drift-auditor/` in Phase 3.
+  `tools/contract-drift-auditor/` in Phase 4.
 - **D-33:** Use CommonJS modules and `node:test`, matching the current
   `package.json` and Phase 1 tests.
 - **D-34:** Promote canonical JSON from documented/tested guidance into a shared
@@ -153,7 +153,7 @@ Cycles run:
   `ignore-policy`, `file-walker`, `tree-hash`, and `canonical-json`. Exact file
   names can vary if the planner keeps the boundaries clear.
 - **D-36:** Shared helpers should expose small deterministic functions rather
-  than CLI behavior. CLI shell work belongs to Phase 3.
+  than CLI behavior. CLI shell work belongs to Phase 4.
 - **D-37:** Tests should live under `test/shared/` and should directly exercise
   the helper APIs before any auditor exists.
 
@@ -273,7 +273,7 @@ imports. Keep the behavioral decisions above intact and avoid adding
 
 ### Integration Points
 
-- Phase 2 helpers feed Phase 3 `contract-drift-auditor`.
+- Phase 2 helpers feed Phase 4 `contract-drift-auditor`.
 - Output path guard will back future `--project <path> --out <dir>` CLIs.
 - File walker and ignore policy will define the target evidence set used by
   future drift checks.
@@ -300,14 +300,14 @@ imports. Keep the behavioral decisions above intact and avoid adding
 <deferred>
 ## Deferred Ideas
 
-- `contract-drift-auditor` CLI shell and drift checks are deferred to Phase 3.
+- `contract-drift-auditor` CLI shell and drift checks are deferred to Phase 4.
 - Adoption/bootstrap review packets, adapter generation, generated contract
   merge routing, and project-local contract maintenance remain in
   `ai-workspace-kit`.
 - Structure-only reading for `.env.example` or sample env files is deferred
   until there is an explicit safe-read policy.
 - Integration documentation explaining when to use AI Tools versus
-  `ai-workspace-kit` is deferred to Phase 4.
+  `ai-workspace-kit` is deferred to Phase 5.
 
 </deferred>
 

@@ -101,7 +101,7 @@ schema/determinism verification.
 ## Residual Risk
 
 - The schemas are validated against example packets, not against a real auditor
-  output yet. Phase 3 will prove the packet contract through
+  output yet. Phase 4 will prove the packet contract through
   `contract-drift-auditor`.
 - Canonical JSON is currently documented and tested locally; Phase 2 should
   promote it into a shared helper.

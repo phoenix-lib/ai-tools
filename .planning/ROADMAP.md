@@ -4,7 +4,8 @@
 
 The v1 roadmap builds one reliable read-only audit pipeline from the inside out:
 first the shared review packet contract, then shared safety and deterministic
-inspection helpers, then the first external auditor, then integration and
+inspection helpers, then an explicit cross-repo request gate for coordinating
+with `ai-workspace-kit`, then the first external auditor, then integration and
 documentation hardening. Later tools stay deferred until the packet standard is
 proven by `contract-drift-auditor`.
 
@@ -16,8 +17,9 @@ proven by `contract-drift-auditor`.
 
 - [x] **Phase 1: Review Packet Standard** - Define the machine and human output contract every tool will use. Completed 2026-05-07.
 - [ ] **Phase 2: Shared Safety Harness** - Build deterministic read-only inspection primitives and fixture proof.
-- [ ] **Phase 3: Contract Drift Auditor MVP** - Ship the first external auditor using the shared packet standard.
-- [ ] **Phase 4: Integration and Release Hardening** - Align docs, optional ai-workspace-kit integration, and first-release readiness.
+- [ ] **Phase 3: Cross-Repo Capability Request Gate** - Define structured capability requests and decisions between AI Tools and `ai-workspace-kit`.
+- [ ] **Phase 4: Contract Drift Auditor MVP** - Ship the first external auditor using the shared packet standard.
+- [ ] **Phase 5: Integration and Release Hardening** - Align docs, optional ai-workspace-kit integration, and first-release readiness.
 
 ## Phase Details
 
@@ -60,9 +62,28 @@ Plans:
 - [ ] 02-02: Build reusable fixtures and tree-hash mutation checks.
 - [ ] 02-03: Add deterministic safety tests for output isolation, secret handling, and ignored generated packets.
 
-### Phase 3: Contract Drift Auditor MVP
-**Goal**: Ship a read-only CLI that detects AI contract drift and emits the shared review packet.
+### Phase 3: Cross-Repo Capability Request Gate
+**Goal**: Create the structured protocol for AI Tools and `ai-workspace-kit` to request missing capabilities without mixing ownership or automatically creating work.
 **Depends on**: Phase 2
+**Requirements**: XREPO-01, XREPO-02, XREPO-03, XREPO-04, XREPO-05, XREPO-06, XREPO-07, XREPO-08
+**UI hint**: no
+**Success Criteria** (what must be TRUE):
+  1. `.planning/cross-repo/` contains `inbox/`, `outbox/`, `decisions/`, and `templates/` structure.
+  2. Capability request and decision templates exist with required fields, boundary classifications, and decision statuses.
+  3. A playbook documents why the gate exists, when to create or reject requests, how to prevent endless task exchange, and which repository owns which responsibilities.
+  4. Outgoing Need Gate and Incoming Review Gate are mapped to the relevant GSD stages and explicitly do not auto-run tools, create phases, copy planning state, or add repo dependencies.
+  5. Example requests exist in both directions: `ai-workspace-kit` asks AI Tools for a read-only contract drift auditor, and AI Tools asks `ai-workspace-kit` for a stable review packet schema and evidence refs contract.
+  6. Tests or docs validation prove required templates/docs exist and contain required fields where the project test harness supports it.
+**Plans**: 3 plans
+
+Plans:
+- [ ] 03-01: Create cross-repo request directories, request template, and decision template.
+- [ ] 03-02: Write the capability request playbook with ownership boundaries and GSD gate mapping.
+- [ ] 03-03: Add bidirectional example requests and docs validation for required fields.
+
+### Phase 4: Contract Drift Auditor MVP
+**Goal**: Ship a read-only CLI that detects AI contract drift and emits the shared review packet.
+**Depends on**: Phase 3
 **Requirements**: DRIFT-01, DRIFT-02, DRIFT-03, DRIFT-04, DRIFT-05, DRIFT-06, DRIFT-07, TEST-04
 **UI hint**: no
 **Success Criteria** (what must be TRUE):
@@ -73,13 +94,13 @@ Plans:
 **Plans**: 3 plans
 
 Plans:
-- [ ] 03-01: Implement CLI shell and contract/source discovery.
-- [ ] 03-02: Implement drift checks for files, commands, permissions, skills, source layers, and profile facts.
-- [ ] 03-03: Render packet artifacts and add auditor fixture tests.
+- [ ] 04-01: Implement CLI shell and contract/source discovery.
+- [ ] 04-02: Implement drift checks for files, commands, permissions, skills, source layers, and profile facts.
+- [ ] 04-03: Render packet artifacts and add auditor fixture tests.
 
-### Phase 4: Integration and Release Hardening
+### Phase 5: Integration and Release Hardening
 **Goal**: Prepare the first useful release and keep integration optional.
-**Depends on**: Phase 3
+**Depends on**: Phase 4
 **Requirements**: DOC-01, DOC-02, DOC-03, DOC-04
 **UI hint**: no
 **Success Criteria** (what must be TRUE):
@@ -90,8 +111,8 @@ Plans:
 **Plans**: 2 plans
 
 Plans:
-- [ ] 04-01: Write usage, safety, integration, and first-release documentation.
-- [ ] 04-02: Run release readiness review and document deferred tool criteria.
+- [ ] 05-01: Write usage, safety, integration, and first-release documentation.
+- [ ] 05-02: Run release readiness review and document deferred tool criteria.
 
 ## Requirement Coverage
 
@@ -109,34 +130,43 @@ Plans:
 | SAFE-04 | Phase 1 |
 | SAFE-05 | Phase 2 |
 | SAFE-06 | Phase 1 |
-| DRIFT-01 | Phase 3 |
-| DRIFT-02 | Phase 3 |
-| DRIFT-03 | Phase 3 |
-| DRIFT-04 | Phase 3 |
-| DRIFT-05 | Phase 3 |
-| DRIFT-06 | Phase 3 |
-| DRIFT-07 | Phase 3 |
+| XREPO-01 | Phase 3 |
+| XREPO-02 | Phase 3 |
+| XREPO-03 | Phase 3 |
+| XREPO-04 | Phase 3 |
+| XREPO-05 | Phase 3 |
+| XREPO-06 | Phase 3 |
+| XREPO-07 | Phase 3 |
+| XREPO-08 | Phase 3 |
+| DRIFT-01 | Phase 4 |
+| DRIFT-02 | Phase 4 |
+| DRIFT-03 | Phase 4 |
+| DRIFT-04 | Phase 4 |
+| DRIFT-05 | Phase 4 |
+| DRIFT-06 | Phase 4 |
+| DRIFT-07 | Phase 4 |
 | TEST-01 | Phase 1 |
 | TEST-02 | Phase 2 |
 | TEST-03 | Phase 2 |
-| TEST-04 | Phase 3 |
+| TEST-04 | Phase 4 |
 | TEST-05 | Phase 1 |
 | TEST-06 | Phase 1 |
 | TEST-07 | Phase 2 |
-| DOC-01 | Phase 4 |
-| DOC-02 | Phase 4 |
-| DOC-03 | Phase 4 |
-| DOC-04 | Phase 4 |
+| DOC-01 | Phase 5 |
+| DOC-02 | Phase 5 |
+| DOC-03 | Phase 5 |
+| DOC-04 | Phase 5 |
 
-**Coverage:** 30/30 v1 requirements mapped.
+**Coverage:** 38/38 v1 requirements mapped.
 
 ## Progress
 
-**Execution Order:** 1 -> 2 -> 3 -> 4
+**Execution Order:** 1 -> 2 -> 3 -> 4 -> 5
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Review Packet Standard | 3/3 | Complete | 2026-05-07 |
 | 2. Shared Safety Harness | 0/3 | Not started | - |
-| 3. Contract Drift Auditor MVP | 0/3 | Not started | - |
-| 4. Integration and Release Hardening | 0/2 | Not started | - |
+| 3. Cross-Repo Capability Request Gate | 0/3 | Not started | - |
+| 4. Contract Drift Auditor MVP | 0/3 | Not started | - |
+| 5. Integration and Release Hardening | 0/2 | Not started | - |

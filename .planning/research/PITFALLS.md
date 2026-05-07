@@ -42,7 +42,7 @@ keep MVP tools review-only.
 Tests do not hash target fixtures before and after a run.
 
 **Phase to address:**
-Phase 2 and Phase 3.
+Phase 2 and Phase 4.
 
 ---
 
@@ -81,7 +81,7 @@ Separate command existence, package-manager evidence, and permission conclusions
 Prose mentions of Yarn, pnpm, curl, or wget generate permissions.
 
 **Phase to address:**
-Phase 3.
+Phase 4.
 
 ---
 
@@ -128,7 +128,7 @@ Phase 1.
 | Tool silos | Phase 1 | Shared schemas and renderer exist before auditor MVP. |
 | Hidden mutation | Phase 2 | Fixture tree hashes match before and after runs. |
 | Secret leakage | Phase 2 | Secret sentinel strings never appear in outputs. |
-| Weak permission evidence | Phase 3 | Mixed manager/prose mention fixtures reject broad permissions. |
+| Weak permission evidence | Phase 4 | Mixed manager/prose mention fixtures reject broad permissions. |
 | Markdown source of truth | Phase 1 | CLI, Markdown, and JSON statuses match from shared summary. |
 
 ## Sources

@@ -74,7 +74,7 @@ handling is deferred until a future explicit safe-read policy exists.
 | Tool-specific ignore rules only | Let each future auditor define its own ignore behavior. | |
 
 **User's choice:** Trusted self-questioning delegated this decision to the agent.
-**Notes:** Selected shared marker-based policy so Phase 3 has deterministic
+**Notes:** Selected shared marker-based policy so Phase 4 has deterministic
 evidence collection and generated review packets do not pollute later scans.
 
 ---
@@ -98,11 +98,11 @@ inside ignored directories.
 | Option | Description | Selected |
 |--------|-------------|----------|
 | Small CommonJS helpers in `shared/` | Implement deterministic helper modules and direct `node:test` coverage before any CLI. | yes |
-| Start Phase 3 CLI immediately | Build `contract-drift-auditor` shell and extract helpers later. | |
+| Start Phase 4 CLI immediately | Build `contract-drift-auditor` shell and extract helpers later. | |
 | Keep helpers embedded in tests | Use test-only helper code until a real auditor needs it. | |
 
 **User's choice:** Trusted self-questioning delegated this decision to the agent.
-**Notes:** Selected `shared/` helpers to match `AGENTS.md` and reduce Phase 3
+**Notes:** Selected `shared/` helpers to match `AGENTS.md` and reduce Phase 4
 risk.
 
 ---
@@ -119,5 +119,5 @@ risk.
 - Structure-only `.env.example` or sample env handling.
 - `contract-drift-auditor` CLI shell and drift checks.
 - ai-workspace-kit adoption/bootstrap packet generation or merge routing.
-- Phase 4 integration documentation explaining how AI Tools and ai-workspace-kit
+- Phase 5 integration documentation explaining how AI Tools and ai-workspace-kit
   work together.
