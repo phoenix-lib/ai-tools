@@ -30,6 +30,9 @@ guidance auditable without mutating target projects.
 - [x] Add deterministic fixtures and tests proving no target-project mutation,
   no secret leakage, consistent status/counts across artifacts, and
   schema-valid review packets. Validated across Phase 01 and Phase 02.
+- [x] Consolidate initial seed ideas into `tools/*/SEED-IDEAS.md`,
+  `standards/review-packet/SEED-IDEAS.md`, and `docs/` so root-level seed
+  folders are no longer baseline noise.
 
 ### Active
 
@@ -51,8 +54,6 @@ guidance auditable without mutating target projects.
 - [ ] Plan a future `ai-workspace-kit` gate-review hook for release and
   maintenance boundaries, with manual fallback until the upstream capability
   exists.
-- [ ] Decide and commit or explicitly defer the current untracked seed baseline
-  before using git cleanliness as evidence in self-audits or release readiness.
 - [ ] Build a shared packet renderer so summary, findings, recommended actions,
   Markdown projections, and CLI status are rendered from one packet model.
 - [ ] Document AI Tools self-use gates and new-tool intake/placement gates so
@@ -82,29 +83,29 @@ guidance auditable without mutating target projects.
 
 ## Context
 
-The repository currently contains product seed folders. Each seed folder has a
-`README.md` describing purpose, inputs, outputs, MVP, risks, and integration
-ideas. These are planning seeds, not final architecture.
+The repository keeps product seed ideas in `tools/*/SEED-IDEAS.md`. Each seed
+file describes purpose, inputs, outputs, MVP, risks, and integration ideas.
+These are planning seeds, not final architecture.
 
 Important seed areas:
 
-- `ai-review-packet-standard`
-- `ai-workspace-kit-internal-gates`
-- `contract-drift-auditor`
-- `project-context-ledger`
-- `phase-forensics-tool`
-- `config-matrix-validator`
-- `domain-contract-test-generator`
-- `runtime-capability-inspector`
-- `skill-linter`
-- `test-quality-auditor`
-- `tool-usage-registry`
-- `ui-regression-screenshot-comparator`
-- `local-integration-harness`
+- `standards/review-packet/SEED-IDEAS.md`
+- `tools/ai-workspace-kit-internal-gates/SEED-IDEAS.md`
+- `tools/contract-drift-auditor/SEED-IDEAS.md`
+- `tools/project-context-ledger/SEED-IDEAS.md`
+- `tools/phase-forensics-tool/SEED-IDEAS.md`
+- `tools/config-matrix-validator/SEED-IDEAS.md`
+- `tools/domain-contract-test-generator/SEED-IDEAS.md`
+- `tools/runtime-capability-inspector/SEED-IDEAS.md`
+- `tools/skill-linter/SEED-IDEAS.md`
+- `tools/test-quality-auditor/SEED-IDEAS.md`
+- `tools/tool-usage-registry/SEED-IDEAS.md`
+- `tools/ui-regression-screenshot-comparator/SEED-IDEAS.md`
+- `tools/local-integration-harness/SEED-IDEAS.md`
 - future `gate-linter` seed from the `ai-workspace-kit` cross-repo request
 
-The project guide is `AI-AGENT-IMPLEMENTATION-GUIDE.md`. It is the main source
-for implementation order and standards. The local `AGENTS.md` adapts
+The project guide is `docs/AI-AGENT-IMPLEMENTATION-GUIDE.md`. It is the main
+source for implementation order and standards. The local `AGENTS.md` adapts
 `phoenix-lib/ai-workspace-kit` workflow principles for this repository.
 
 The local `.external/ai-workspace-kit` checkout is a reference source only. It
@@ -167,7 +168,7 @@ to inspect it.
 |----------|-----------|---------|
 | Start with the review packet standard | Every later tool depends on a stable output contract. | Validated in Phase 01 |
 | Build one external auditor before expanding the ecosystem | A small green `contract-drift-auditor` proves the standards under real use. | Pending |
-| Keep existing seed folders as product notes initially | Moving everything before code exists adds churn without proving architecture. | Pending |
+| Consolidate seed ideas under their future homes | Tool ideas should live beside the future tool namespace, while shared packet ideas stay under `standards/`. | Validated 2026-05-07 |
 | Use `ai-workspace-kit` workflow principles but keep it optional | The workflow is useful, but target projects should not inherit dependencies or assumptions. | Pending |
 | Treat generated packets as review material, not installation material | This preserves user control and avoids accidental target-project mutation. | Pending |
 | Enforce the ai-workspace-kit tandem boundary gate | AI Tools should complement `ai-workspace-kit`, not duplicate adoption/bootstrap or adapter-generation behavior under new tool names. | Active |
@@ -199,4 +200,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state.
 
 ---
-*Last updated: 2026-05-07 after adding self-use and tool-intake gates*
+*Last updated: 2026-05-07 after consolidating seed ideas under `tools/`*

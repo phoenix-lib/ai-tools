@@ -133,7 +133,7 @@ Phase 1.
 
 ## Sources
 
-- `AI-AGENT-IMPLEMENTATION-GUIDE.md`
+- `docs/AI-AGENT-IMPLEMENTATION-GUIDE.md`
 - `.external/ai-workspace-kit/README.md`
 - `.external/ai-workspace-kit/ADAPTER-GENERATION.md`
 - `.external/ai-workspace-kit/test/*.js`

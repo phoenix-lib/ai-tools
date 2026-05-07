@@ -282,9 +282,9 @@ const status = blockers.length
 ### Primary (HIGH confidence)
 
 - `.planning/phases/01-review-packet-standard/01-CONTEXT.md` - locked decisions.
-- `AI-AGENT-IMPLEMENTATION-GUIDE.md` - build order and packet requirements.
+- `docs/AI-AGENT-IMPLEMENTATION-GUIDE.md` - build order and packet requirements.
 - `AGENTS.md` - local workflow, safety, and review packet rules.
-- `ai-review-packet-standard/README.md` - seed product scope.
+- `standards/review-packet/SEED-IDEAS.md` - seed product scope.
 - `.external/ai-workspace-kit/ADAPTER-GENERATION.md` - compatible manifest and review packet concepts.
 - `.external/ai-workspace-kit/schemas/ai-workspace.manifest.schema.json` - strict schema precedent.
 - `.external/ai-workspace-kit/scripts/lib/canonical-json.js` - canonical JSON reference.

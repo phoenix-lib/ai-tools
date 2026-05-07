@@ -198,7 +198,7 @@ imports. Keep the behavioral decisions above intact and avoid adding
 - `.planning/STATE.md` - Current project state and residual Phase 1 notes.
 - `AGENTS.md` - Local assistant contract, implementation start rule, safety
   rules, and ai-workspace-kit tandem boundary gate.
-- `AI-AGENT-IMPLEMENTATION-GUIDE.md` - Main implementation guide and product
+- `docs/AI-AGENT-IMPLEMENTATION-GUIDE.md` - Main implementation guide and product
   standards.
 - `.planning/research/AI-WORKSPACE-KIT-UPSTREAM-REVIEW.md` - Latest recorded
   review of upstream `ai-workspace-kit` changes and phase-planning impacts.

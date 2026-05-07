@@ -59,7 +59,7 @@
 
 ## Sources
 
-- `AI-AGENT-IMPLEMENTATION-GUIDE.md` - implementation order and safety rules.
+- `docs/AI-AGENT-IMPLEMENTATION-GUIDE.md` - implementation order and safety rules.
 - `.external/ai-workspace-kit` - Node CLI, schemas, canonical JSON, review-only workflow.
 - Seed README files - target tool domains.
 

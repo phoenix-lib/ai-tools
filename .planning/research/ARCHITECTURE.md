@@ -143,7 +143,7 @@ Target project path
 
 ## Sources
 
-- `AI-AGENT-IMPLEMENTATION-GUIDE.md`
+- `docs/AI-AGENT-IMPLEMENTATION-GUIDE.md`
 - `.external/ai-workspace-kit/ADAPTER-GENERATION.md`
 - `.external/ai-workspace-kit/scripts/lib/*`
 

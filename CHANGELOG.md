@@ -30,6 +30,9 @@ major plan execution, and workflow gate change.
 - Added `RENDER-01` to Phase 04 for a shared packet renderer so JSON,
   Markdown, recommended actions, evidence, and CLI status come from one packet
   model.
+- Consolidated untracked seed ideas into `tools/*/SEED-IDEAS.md`,
+  `standards/review-packet/SEED-IDEAS.md`, and `docs/`, removing obsolete
+  root-level seed folders.
 
 ### Cross-Repo Requests
 

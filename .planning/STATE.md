@@ -101,21 +101,22 @@ Decisions are logged in PROJECT.md Key Decisions table.
 - Phase 03 now also covers AI Tools Self-Use Gate, New Tool Intake and
   Placement Gate, and Git Baseline Gate documentation.
 - Phase 04 now includes shared packet renderer work before broad tool expansion.
+- Baseline seed ideas were consolidated into `tools/*/SEED-IDEAS.md`,
+  `standards/review-packet/SEED-IDEAS.md`, and `docs/`; obsolete root seed
+  folders were removed.
 
 ### Pending Todos
 
 - Accept gate linter request - capture the incoming `ai-workspace-kit` request
   as the first Phase 03 cross-repo inbox/decision candidate once
   `.planning/cross-repo/` exists.
-- Resolve git baseline - decide whether to stage the untracked root guide,
-  root README, and seed README folders as a separate baseline commit before
-  using git cleanliness as evidence in self-audits or release readiness.
+- Re-run `git status --short` after the seed consolidation commit and use the
+  Git Baseline Gate if any new untracked baseline files appear.
 
 ### Blockers/Concerns
 
-- The existing root seed folders are not yet committed except for planning docs.
-- `AI-AGENT-IMPLEMENTATION-GUIDE.md`, root `README.md`, and seed README folders
-  are currently untracked baseline project files.
+- The old root seed folders were consolidated into `tools/*/SEED-IDEAS.md`,
+  `standards/review-packet/SEED-IDEAS.md`, and `docs/`.
 - `phase.complete` warned that v2 candidate IDs are present in REQUIREMENTS.md
   body but not in the Traceability table; this is non-blocking for v1 Phase 02
   closure.

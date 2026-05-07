@@ -149,10 +149,10 @@ the decisions above remain true.
 
 ### Local Standards
 
-- `AI-AGENT-IMPLEMENTATION-GUIDE.md` - Main implementation guide and adopted
+- `docs/AI-AGENT-IMPLEMENTATION-GUIDE.md` - Main implementation guide and adopted
   principles from `ai-workspace-kit`.
 - `AGENTS.md` - Local assistant contract and workflow rules.
-- `ai-review-packet-standard/README.md` - Product seed for this phase.
+- `standards/review-packet/SEED-IDEAS.md` - Product seed for this phase.
 
 ### ai-workspace-kit Reference
 
@@ -204,7 +204,7 @@ the decisions above remain true.
 <specifics>
 ## Specific Ideas
 
-- Use the four required artifact names from `AI-AGENT-IMPLEMENTATION-GUIDE.md`
+- Use the four required artifact names from `docs/AI-AGENT-IMPLEMENTATION-GUIDE.md`
   as the V1 base.
 - Keep `RISK-MATRIX.md` and patch-oriented outputs deferred until real demand or
   fix-mode design.

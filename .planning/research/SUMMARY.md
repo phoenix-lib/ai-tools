@@ -150,7 +150,7 @@ or skill linter based on usage evidence.
 ### Primary
 
 - `.planning/PROJECT.md`
-- `AI-AGENT-IMPLEMENTATION-GUIDE.md`
+- `docs/AI-AGENT-IMPLEMENTATION-GUIDE.md`
 - `.external/ai-workspace-kit/README.md`
 - `.external/ai-workspace-kit/ADAPTER-GENERATION.md`
 

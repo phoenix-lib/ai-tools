@@ -160,7 +160,7 @@ for focused tests and under 30 seconds for the full suite.
 - `.planning/REQUIREMENTS.md`
 - `.planning/ROADMAP.md`
 - `AGENTS.md`
-- `AI-AGENT-IMPLEMENTATION-GUIDE.md`
+- `docs/AI-AGENT-IMPLEMENTATION-GUIDE.md`
 - `standards/review-packet/CANONICAL-JSON.md`
 - `standards/review-packet/schemas/EVIDENCE-REF.schema.json`
 - `.planning/research/AI-WORKSPACE-KIT-UPSTREAM-REVIEW.md`

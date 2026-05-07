@@ -89,7 +89,7 @@ contract-drift-auditor packets
 
 ## Sources
 
-- `AI-AGENT-IMPLEMENTATION-GUIDE.md`
+- `docs/AI-AGENT-IMPLEMENTATION-GUIDE.md`
 - `README.md`
 - Seed tool READMEs
 - `.external/ai-workspace-kit/README.md`

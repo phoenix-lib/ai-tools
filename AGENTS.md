@@ -12,10 +12,11 @@ weakened.
 - Core reference: `.external/ai-workspace-kit/CORE-CONTRACT.md`
 - Bootstrap reference: `.external/ai-workspace-kit/AI-BOOTSTRAP.md`
 - Adapter reference: `.external/ai-workspace-kit/ADAPTER-GENERATION.md`
-- Project guide: `AI-AGENT-IMPLEMENTATION-GUIDE.md`
+- Project guide: `docs/AI-AGENT-IMPLEMENTATION-GUIDE.md`
 - Project changelog: `CHANGELOG.md`
-- Project overview: `README.md`
-- Product seeds: each top-level tool folder's `README.md`
+- Initial seed overview: `docs/INITIAL-SEED-OVERVIEW.md`
+- Product seeds: `tools/*/SEED-IDEAS.md` and
+  `standards/review-packet/SEED-IDEAS.md`
 
 ## Project Contract
 
@@ -32,8 +33,8 @@ before the shared review packet standard and first external auditor exist.
 ## Current Facts
 
 - Current state includes review packet schemas/examples, shared safety helpers,
-  target fixtures, and automated tests. Product seed folders still document
-  later tools.
+  target fixtures, automated tests, and consolidated tool seed ideas under
+  `tools/*/SEED-IDEAS.md`.
 - Root `package.json` exists with `npm test` backed by `node --test`; no build
   command is defined yet.
 - The current recommended implementation order is review packet standard,
@@ -45,8 +46,10 @@ before the shared review packet standard and first external auditor exist.
 
 ## Workflow
 
-- Read `AI-AGENT-IMPLEMENTATION-GUIDE.md` before making architectural changes.
-- Read the relevant seed `README.md` files before implementing a tool.
+- Read `docs/AI-AGENT-IMPLEMENTATION-GUIDE.md` before making architectural
+  changes.
+- Read the relevant `tools/<tool-name>/SEED-IDEAS.md` file before implementing
+  a tool.
 - Run the ai-workspace-kit tandem boundary gate before proposing, planning, or
   implementing a new tool or review workflow.
 - Before every GSD phase planning step, run the ai-workspace-kit upstream
@@ -233,7 +236,8 @@ upstream request, added as a seed, or requested by the user.
    - `shared/` for reusable safety, rendering, normalization, or evidence
      mechanics used by multiple tools.
    - `tools/<tool-name>/` for an implemented external auditor or validator.
-   - top-level seed README or backlog for an idea that is not ready for v1.
+   - `tools/<tool-name>/SEED-IDEAS.md` or backlog for an idea that is not ready
+     for v1.
    - `.planning/cross-repo/outbox/` for kit-owned capabilities AI Tools needs.
    - `.planning/cross-repo/inbox/` plus a decision artifact for incoming
      requests from `ai-workspace-kit`.
