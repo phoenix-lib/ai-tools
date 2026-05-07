@@ -39,7 +39,23 @@ major plan execution, and workflow gate change.
 
 ### Phase 02: Shared Safety Harness
 
-- Planned shared read-only safety helpers, fixture harnesses, mutation proof,
-  and integrated safety tests.
-- Reviewed `ai-workspace-kit` upstream changes through commit `48ec037` before
-  writing Phase 02 plans.
+- Changed scope: completed shared read-only safety helpers for canonical JSON,
+  output path isolation, secret-like path-only evidence, default ignored target
+  walks, and raw fixture tree hashing.
+- Validation: added focused helper tests plus integrated fixture tests proving
+  output isolation, generated packet exclusion, secret sentinel non-leakage, and
+  no target fixture mutation. `npm.cmd test` passed with 40 tests.
+- Changed tool capabilities: future auditors can reuse deterministic safety
+  primitives and the seven target fixtures before `contract-drift-auditor`
+  exists.
+- Changed contracts, gates, schemas, and review packet semantics: no changes to
+  the Phase 01 review packet schema contract or cross-repo gates.
+- Compatibility impact for `ai-workspace-kit`: no dependency or runtime
+  integration added. The generated packet ignore policy recognizes stale
+  ai-workspace-kit adoption packet markers inside target fixtures as ignored
+  generated review material.
+- Breaking changes: none.
+- Migration notes: none.
+- Upstream impact: reviewed `ai-workspace-kit` upstream changes through commit
+  `48ec037` before writing Phase 02 plans; no upstream changelog artifact was
+  available to pre-read.

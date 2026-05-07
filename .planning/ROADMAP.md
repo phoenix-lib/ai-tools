@@ -16,7 +16,7 @@ proven by `contract-drift-auditor`.
 - Decimal phases (2.1, 2.2): Urgent insertions if needed.
 
 - [x] **Phase 1: Review Packet Standard** - Define the machine and human output contract every tool will use. Completed 2026-05-07.
-- [ ] **Phase 2: Shared Safety Harness** - Build deterministic read-only inspection primitives and fixture proof.
+- [x] **Phase 2: Shared Safety Harness** - Build deterministic read-only inspection primitives and fixture proof. Completed 2026-05-07.
 - [ ] **Phase 3: Cross-Repo Capability Request Gate** - Define structured capability requests and decisions between AI Tools and `ai-workspace-kit`.
 - [ ] **Phase 4: Contract Drift Auditor MVP** - Ship the first external auditor using the shared packet standard.
 - [ ] **Phase 5: Integration and Release Hardening** - Align docs, optional ai-workspace-kit integration, and first-release readiness.
@@ -171,7 +171,7 @@ Plans:
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Review Packet Standard | 3/3 | Complete | 2026-05-07 |
-| 2. Shared Safety Harness | 0/3 | Not started | - |
+| 2. Shared Safety Harness | 3/3 | Complete | 2026-05-07 |
 | 3. Cross-Repo Capability Request Gate | 0/3 | Not started | - |
 | 4. Contract Drift Auditor MVP | 0/3 | Not started | - |
 | 5. Integration and Release Hardening | 0/2 | Not started | - |

@@ -23,18 +23,19 @@ guidance auditable without mutating target projects.
 - [x] Define a portable AI review packet standard with schemas for summaries,
   findings, evidence references, recommended actions, and tool metadata.
   Validated in Phase 01: Review Packet Standard.
+- [x] Implement shared safety primitives for read-only inspection, output path
+  isolation, secret-like path-only evidence, deterministic JSON, ignored
+  generated artifacts, fixture hashing, and no-mutation proof. Validated in
+  Phase 02: Shared Safety Harness.
+- [x] Add deterministic fixtures and tests proving no target-project mutation,
+  no secret leakage, consistent status/counts across artifacts, and
+  schema-valid review packets. Validated across Phase 01 and Phase 02.
 
 ### Active
 
-- [ ] Implement shared safety primitives for read-only inspection, output path
-  isolation, secret-like path-only evidence, deterministic JSON, and ignored
-  generated artifacts.
 - [ ] Build `contract-drift-auditor` as the first external read-only tool.
 - [ ] Ensure every finding cites narrow evidence and marks unknown or stale facts
   explicitly.
-- [ ] Add deterministic fixtures and tests proving no target-project mutation,
-  no secret leakage, consistent status/counts across artifacts, and schema-valid
-  review packets.
 - [ ] Keep `ai-workspace-kit` integration optional and review-packet based.
 - [ ] Enforce the ai-workspace-kit tandem boundary gate so AI Tools does not
   duplicate adoption/bootstrap, adapter generation, or generated-contract
@@ -158,6 +159,7 @@ to inspect it.
 | Maintain a project changelog after major work | Future agents need a compact history before reading deeper planning artifacts. | Active |
 | Plan ai-workspace-kit gate review as a future hook | The upstream command does not exist yet, so AI Tools should reserve the review stage without pretending it is currently runnable. | Planned for Phase 05 |
 | Treat future mechanical gate-linter output as evidence only | Gate relevance and boundary decisions remain assistant-owned semantic review; tools can surface evidence but not decide adoption. | Deferred v2 candidate |
+| Validate shared safety harness before auditor work | The first heavy auditor should consume already-tested read-only, secret-safe, deterministic primitives instead of inventing safety behavior locally. | Validated in Phase 02 |
 
 ## Evolution
 
@@ -177,4 +179,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state.
 
 ---
-*Last updated: 2026-05-07 after adding changelog and gate-review governance*
+*Last updated: 2026-05-07 after validating Phase 02 shared safety harness*
