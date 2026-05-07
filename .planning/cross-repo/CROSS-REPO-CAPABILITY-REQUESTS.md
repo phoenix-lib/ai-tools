@@ -53,12 +53,14 @@ REQ-YYYYMMDD-<from>-to-<to>-<slug>.md
 ```
 
 Every request must include `Protocol version: 1.0`, `Canonical ID`,
-`Counterpart ID`, `Counterpart path`, and `Legacy ID`. Use `none` only when a
-mirrored artifact does not exist. If a neighboring repository still has a
-legacy filename or ID, record it in `Legacy ID` and record a repo-qualified
-relative path such as `ai-workspace-kit/.planning/cross-repo/...` in
-`Counterpart path` so validators do not count the same request twice. Do not
-use machine-local absolute paths.
+`Thread ID`, `Counterpart ID`, `Counterpart path`, and `Legacy ID`. `Thread ID`
+is the cross-repository semantic request identifier; mirrored records for the
+same need must share it even when `Canonical ID` or filenames differ. Use
+`none` only when a mirrored artifact does not exist. If a neighboring
+repository still has a legacy filename or ID, record it in `Legacy ID` and
+record a repo-qualified relative path such as
+`ai-workspace-kit/.planning/cross-repo/...` in `Counterpart path` so validators
+do not count the same request twice. Do not use machine-local absolute paths.
 
 Decisions:
 

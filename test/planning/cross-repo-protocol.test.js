@@ -34,6 +34,7 @@ function assertIncludesAll(content, values, label) {
 const requiredRequestFields = [
   "Protocol version:",
   "Canonical ID:",
+  "Thread ID:",
   "Counterpart ID:",
   "Counterpart path:",
   "Legacy ID:",
@@ -63,6 +64,7 @@ const requiredDecisionFields = [
   "Protocol version:",
   "Request ID:",
   "Canonical ID:",
+  "Thread ID:",
   "Counterpart ID:",
   "Counterpart path:",
   "Legacy ID:",
@@ -118,6 +120,17 @@ const requestPaths = [
   ".planning/cross-repo/inbox/REQ-20260507-ai-workspace-kit-to-ai-tools-changelog-gate-review.md",
   ".planning/cross-repo/outbox/REQ-20260507-ai-tools-to-ai-workspace-kit-review-packet-contract.md"
 ];
+
+const mirroredRequestThreads = new Map([
+  [
+    ".planning/cross-repo/inbox/REQ-20260507-ai-workspace-kit-to-ai-tools-contract-drift-auditor.md",
+    "THREAD-20260507-contract-drift-auditor"
+  ],
+  [
+    ".planning/cross-repo/outbox/REQ-20260507-ai-tools-to-ai-workspace-kit-review-packet-contract.md",
+    "THREAD-20260507-review-packet-semantics"
+  ]
+]);
 
 function fieldValue(content, field) {
   const match = content.match(new RegExp(`^${field}:\\s*(.+)$`, "m"));
@@ -225,6 +238,11 @@ test("example and real capability requests are complete", () => {
     assertIncludesAll(content, requiredRequestHeadings, `${relativePath} headings`);
     assert.equal(fieldValue(content, "Protocol version"), "1.0");
     assert.match(
+      fieldValue(content, "Thread ID"),
+      /^THREAD-\d{8}-[a-z0-9-]+$/,
+      `${relativePath} must use canonical thread ID`
+    );
+    assert.match(
       fieldValue(content, "ID"),
       /^REQ-\d{8}-[a-z0-9-]+-to-[a-z0-9-]+-[a-z0-9-]+$/,
       `${relativePath} must use canonical REQ ID`
@@ -237,16 +255,15 @@ test("example and real capability requests are complete", () => {
 });
 
 test("mirrored capability requests have counterpart metadata", () => {
-  for (const relativePath of [
-    ".planning/cross-repo/inbox/REQ-20260507-ai-workspace-kit-to-ai-tools-contract-drift-auditor.md",
-    ".planning/cross-repo/outbox/REQ-20260507-ai-tools-to-ai-workspace-kit-review-packet-contract.md"
-  ]) {
+  for (const [relativePath, expectedThreadId] of mirroredRequestThreads) {
     const content = read(relativePath);
     const id = fieldValue(content, "ID");
+    const threadId = fieldValue(content, "Thread ID");
     const counterpartId = fieldValue(content, "Counterpart ID");
     const counterpartPath = fieldValue(content, "Counterpart path");
     const legacyId = fieldValue(content, "Legacy ID");
 
+    assert.equal(threadId, expectedThreadId, `${relativePath} must share kit Thread ID`);
     assert.notEqual(counterpartId, "", `${relativePath} needs counterpart ID`);
     assert.notEqual(counterpartPath, "", `${relativePath} needs counterpart path`);
     assert.notEqual(legacyId, "", `${relativePath} needs legacy ID`);
@@ -280,6 +297,7 @@ test("real incoming request has a planned mixed decision", () => {
 
   assertIncludesAll(content, requiredDecisionFields, "real decision fields");
   assertIncludesAll(content, requiredDecisionHeadings, "real decision headings");
+  assert.match(fieldValue(content, "Thread ID"), /^THREAD-\d{8}-[a-z0-9-]+$/);
   assert.match(content, /Request ID: REQ-20260507-ai-workspace-kit-to-ai-tools-changelog-gate-review/);
   assert.match(content, /Decision: planned/);
   assert.match(content, /Scope Accepted/);

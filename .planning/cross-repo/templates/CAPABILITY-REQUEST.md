@@ -2,6 +2,7 @@
 
 Protocol version: 1.0
 Canonical ID: REQ-YYYYMMDD-<from>-to-<to>-<slug>
+Thread ID: THREAD-YYYYMMDD-<semantic-slug>
 Counterpart ID:
 Counterpart path:
 Legacy ID:

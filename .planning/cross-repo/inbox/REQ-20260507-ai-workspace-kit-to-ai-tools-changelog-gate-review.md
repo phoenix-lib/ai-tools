@@ -2,6 +2,7 @@
 
 Protocol version: 1.0
 Canonical ID: REQ-20260507-ai-workspace-kit-to-ai-tools-changelog-gate-review
+Thread ID: THREAD-20260507-changelog-gate-review
 Counterpart ID: none
 Counterpart path: none
 Legacy ID: none

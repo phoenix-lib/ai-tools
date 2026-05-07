@@ -7,6 +7,12 @@ major plan execution, and workflow gate change.
 
 ### Cross-Repo Interop Compatibility
 
+- Changed semantic grouping: request and decision artifacts now require
+  `Thread ID` so mirrored requests can be grouped even when canonical IDs or
+  filenames differ.
+- Validation: protocol tests now require `THREAD-YYYYMMDD-...` identifiers and
+  verify the mirrored kit thread IDs for contract drift and review packet
+  semantics.
 - Changed counterpart paths: cross-repo protocol files now use repo-qualified
   relative paths instead of machine-local absolute paths.
 - Validation: protocol tests now reject Windows absolute paths inside

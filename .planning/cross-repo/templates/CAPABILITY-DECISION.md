@@ -3,6 +3,7 @@
 Protocol version: 1.0
 Request ID:
 Canonical ID:
+Thread ID:
 Counterpart ID:
 Counterpart path:
 Legacy ID:
