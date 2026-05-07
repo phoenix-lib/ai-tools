@@ -18,7 +18,7 @@ proven by `contract-drift-auditor`.
 - [x] **Phase 1: Review Packet Standard** - Define the machine and human output contract every tool will use. Completed 2026-05-07.
 - [x] **Phase 2: Shared Safety Harness** - Build deterministic read-only inspection primitives and fixture proof. Completed 2026-05-07.
 - [x] **Phase 3: Cross-Repo Capability Request Gate** - Define structured capability requests and decisions between AI Tools and `ai-workspace-kit`. Completed 2026-05-07.
-- [ ] **Phase 4: Contract Drift Auditor MVP** - Ship the first external auditor using the shared packet standard.
+- [x] **Phase 4: Contract Drift Auditor MVP** - Ship the first external auditor using the shared packet standard. Completed 2026-05-07.
 - [ ] **Phase 5: Integration and Release Hardening** - Align docs, optional ai-workspace-kit integration, and first-release readiness.
 
 ## Phase Details
@@ -97,9 +97,9 @@ Plans:
 **Plans**: 3 plans
 
 Plans:
-- [ ] 04-01: Implement CLI shell and contract/source discovery.
-- [ ] 04-02: Implement drift checks for files, commands, permissions, skills, source layers, and profile facts.
-- [ ] 04-03: Render packet artifacts through the shared packet renderer and add auditor fixture tests.
+- [x] 04-01: Implement CLI shell and contract/source discovery.
+- [x] 04-02: Implement drift checks for files, commands, permissions, skills, source layers, and profile facts.
+- [x] 04-03: Render packet artifacts through the shared packet renderer and add auditor fixture tests.
 
 ### Phase 5: Integration and Release Hardening
 **Goal**: Prepare the first useful release and keep integration optional.
@@ -180,5 +180,5 @@ Plans:
 | 1. Review Packet Standard | 3/3 | Complete | 2026-05-07 |
 | 2. Shared Safety Harness | 3/3 | Complete | 2026-05-07 |
 | 3. Cross-Repo Capability Request Gate | 3/3 | Complete | 2026-05-07 |
-| 4. Contract Drift Auditor MVP | 0/3 | Not started | - |
+| 4. Contract Drift Auditor MVP | 3/3 | Complete | 2026-05-07 |
 | 5. Integration and Release Hardening | 0/2 | Not started | - |

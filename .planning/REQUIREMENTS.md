@@ -16,7 +16,7 @@
 
 ### Packet Rendering
 
-- [ ] **RENDER-01**: A shared packet renderer emits `REVIEW-SUMMARY.json`, `FINDINGS.md`, `EVIDENCE.json`, `RECOMMENDED-ACTIONS.md`, and CLI status from one packet model so status and counts cannot diverge.
+- [x] **RENDER-01**: A shared packet renderer emits `REVIEW-SUMMARY.json`, `FINDINGS.md`, `EVIDENCE.json`, `RECOMMENDED-ACTIONS.md`, and CLI status from one packet model so status and counts cannot diverge.
 
 ### Shared Safety and Determinism
 
@@ -49,20 +49,20 @@
 
 ### Contract Drift Auditor
 
-- [ ] **DRIFT-01**: A user can run `contract-drift-auditor` in read-only mode with explicit `--project` and `--out` arguments.
-- [ ] **DRIFT-02**: The auditor reports missing files referenced by `AGENTS.md`, `CLAUDE.md`, `.planning/*`, or project skills.
-- [ ] **DRIFT-03**: The auditor reports commands referenced by contracts when no matching package script or documented command source is found.
-- [ ] **DRIFT-04**: The auditor reports permissions that reference absent tools or package managers.
-- [ ] **DRIFT-05**: The auditor reports referenced skills that are missing or lack a valid `SKILL.md`.
-- [ ] **DRIFT-06**: The auditor reports stale or missing source-layer references and project profile facts that do not match local evidence.
-- [ ] **DRIFT-07**: The auditor emits `REVIEW-SUMMARY.json`, `FINDINGS.md`, `EVIDENCE.json`, and `RECOMMENDED-ACTIONS.md` using the shared packet standard.
+- [x] **DRIFT-01**: A user can run `contract-drift-auditor` in read-only mode with explicit `--project` and `--out` arguments.
+- [x] **DRIFT-02**: The auditor reports missing files referenced by `AGENTS.md`, `CLAUDE.md`, `.planning/*`, or project skills.
+- [x] **DRIFT-03**: The auditor reports commands referenced by contracts when no matching package script or documented command source is found.
+- [x] **DRIFT-04**: The auditor reports permissions that reference absent tools or package managers.
+- [x] **DRIFT-05**: The auditor reports referenced skills that are missing or lack a valid `SKILL.md`.
+- [x] **DRIFT-06**: The auditor reports stale or missing source-layer references and project profile facts that do not match local evidence.
+- [x] **DRIFT-07**: The auditor emits `REVIEW-SUMMARY.json`, `FINDINGS.md`, `EVIDENCE.json`, and `RECOMMENDED-ACTIONS.md` using the shared packet standard.
 
 ### Test Coverage
 
 - [x] **TEST-01**: Tests prove generated review output is deterministic.
 - [x] **TEST-02**: Tests prove target project fixtures are not mutated by review-only commands.
 - [x] **TEST-03**: Tests prove secret sentinel strings from secret-like files never appear in output.
-- [ ] **TEST-04**: Tests prove stale source-layer and missing command drift are detected.
+- [x] **TEST-04**: Tests prove stale source-layer and missing command drift are detected.
 - [x] **TEST-05**: Tests prove review summary counts match findings across JSON, Markdown, and CLI output.
 - [x] **TEST-06**: Tests prove generated packet JSON validates against schemas.
 - [x] **TEST-07**: Tests cover clean project, mature project, stale source layer, missing command, secret-like files, mixed package managers, and generated packet inside target tree.
@@ -110,7 +110,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | RPS-04 | Phase 1 | Complete |
 | RPS-05 | Phase 1 | Complete |
 | RPS-06 | Phase 1 | Complete |
-| RENDER-01 | Phase 4 | Pending |
+| RENDER-01 | Phase 4 | Complete |
 | SAFE-01 | Phase 2 | Complete |
 | SAFE-02 | Phase 2 | Complete |
 | SAFE-03 | Phase 2 | Complete |
@@ -131,17 +131,17 @@ Which phases cover which requirements. Updated during roadmap creation.
 | GATE-04 | Phase 3 | Complete |
 | GATE-05 | Phase 3 | Complete |
 | GATE-06 | Phase 3 | Complete |
-| DRIFT-01 | Phase 4 | Pending |
-| DRIFT-02 | Phase 4 | Pending |
-| DRIFT-03 | Phase 4 | Pending |
-| DRIFT-04 | Phase 4 | Pending |
-| DRIFT-05 | Phase 4 | Pending |
-| DRIFT-06 | Phase 4 | Pending |
-| DRIFT-07 | Phase 4 | Pending |
+| DRIFT-01 | Phase 4 | Complete |
+| DRIFT-02 | Phase 4 | Complete |
+| DRIFT-03 | Phase 4 | Complete |
+| DRIFT-04 | Phase 4 | Complete |
+| DRIFT-05 | Phase 4 | Complete |
+| DRIFT-06 | Phase 4 | Complete |
+| DRIFT-07 | Phase 4 | Complete |
 | TEST-01 | Phase 1 | Complete |
 | TEST-02 | Phase 2 | Complete |
 | TEST-03 | Phase 2 | Complete |
-| TEST-04 | Phase 4 | Pending |
+| TEST-04 | Phase 4 | Complete |
 | TEST-05 | Phase 1 | Complete |
 | TEST-06 | Phase 1 | Complete |
 | TEST-07 | Phase 2 | Complete |

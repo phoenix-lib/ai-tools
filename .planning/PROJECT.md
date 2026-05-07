@@ -39,12 +39,17 @@ guidance auditable without mutating target projects.
 - [x] Document AI Tools self-use, new-tool intake, git baseline, changelog,
   upstream freshness, and cross-repo incoming/outgoing gates with observable
   evidence and skip behavior. Validated in Phase 03.
+- [x] Build `contract-drift-auditor` as the first external read-only tool with
+  explicit `--project` and `--out`, output isolation, deterministic drift
+  checks, and shared review packet output. Validated in Phase 04.
+- [x] Build a shared packet renderer so summary, findings, recommended actions,
+  Markdown projections, and CLI status are rendered from one packet model.
+  Validated in Phase 04.
+- [x] Ensure first auditor findings cite narrow evidence and mark unknown facts
+  explicitly. Validated in Phase 04.
 
 ### Active
 
-- [ ] Build `contract-drift-auditor` as the first external read-only tool.
-- [ ] Ensure every finding cites narrow evidence and marks unknown or stale facts
-  explicitly.
 - [ ] Keep `ai-workspace-kit` integration optional and review-packet based.
 - [ ] Enforce the ai-workspace-kit tandem boundary gate so AI Tools does not
   duplicate adoption/bootstrap, adapter generation, or generated-contract
@@ -57,10 +62,11 @@ guidance auditable without mutating target projects.
 - [ ] Plan a future `ai-workspace-kit` gate-review hook for release and
   maintenance boundaries, with manual fallback until the upstream capability
   exists.
-- [ ] Build a shared packet renderer so summary, findings, recommended actions,
-  Markdown projections, and CLI status are rendered from one packet model.
 - [ ] Keep `XREPO-VALIDATOR-01` as a deferred v2 prerequisite before automatic
   cross-repo indexer or gate-linter automation.
+- [ ] Harden full-repo self-audit source filtering so historical `.planning`,
+  fixture, placeholder, and optional `.external` references do not dominate
+  release evidence.
 ### Out of Scope
 
 - Building all seed tools at once - this would create many disconnected partial
@@ -170,7 +176,7 @@ to inspect it.
 | Decision | Rationale | Outcome |
 |----------|-----------|---------|
 | Start with the review packet standard | Every later tool depends on a stable output contract. | Validated in Phase 01 |
-| Build one external auditor before expanding the ecosystem | A small green `contract-drift-auditor` proves the standards under real use. | Pending |
+| Build one external auditor before expanding the ecosystem | A small green `contract-drift-auditor` proves the standards under real use. | Validated in Phase 04 |
 | Consolidate seed ideas under their future homes | Tool ideas should live beside the future tool namespace, while shared packet ideas stay under `standards/`. | Validated 2026-05-07 |
 | Use `ai-workspace-kit` workflow principles but keep it optional | The workflow is useful, but target projects should not inherit dependencies or assumptions. | Pending |
 | Treat generated packets as review material, not installation material | This preserves user control and avoids accidental target-project mutation. | Pending |
@@ -181,7 +187,7 @@ to inspect it.
 | Plan ai-workspace-kit gate review as a future hook | The upstream command does not exist yet, so AI Tools should reserve the review stage without pretending it is currently runnable. | Planned for Phase 05 |
 | Treat future mechanical gate-linter output as evidence only | Gate relevance and boundary decisions remain assistant-owned semantic review; tools can surface evidence but not decide adoption. | Deferred v2 candidate |
 | Validate shared safety harness before auditor work | The first heavy auditor should consume already-tested read-only, secret-safe, deterministic primitives instead of inventing safety behavior locally. | Validated in Phase 02 |
-| Add shared packet renderer before broad tool expansion | Schemas alone are not enough; packet-producing tools need one renderer so JSON, Markdown, and CLI status cannot drift. | Planned for Phase 04 |
+| Add shared packet renderer before broad tool expansion | Schemas alone are not enough; packet-producing tools need one renderer so JSON, Markdown, and CLI status cannot drift. | Validated in Phase 04 |
 | Treat self-use tools as evidence, not authority | AI Tools should audit itself with validated tools, but the assistant keeps responsibility for scope, relevance, and boundary decisions. | Validated in Phase 03 |
 | Classify new tools before implementation | New tool ideas should go to `standards/`, `shared/`, `tools/<tool-name>/`, seed/backlog, or cross-repo requests based on ownership and maturity. | Validated in Phase 03 |
 | Defer cross-repo protocol automation until a validator exists | Human-reviewed protocol exchange is compatible now, but automatic indexers or gate linters need a read-only checker that validates both repositories together. | Deferred v2 candidate |
@@ -204,4 +210,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state.
 
 ---
-*Last updated: 2026-05-07 after adding the cross-repo compatibility checker v2 seed*
+*Last updated: 2026-05-07 after completing Phase 04 Contract Drift Auditor MVP*
