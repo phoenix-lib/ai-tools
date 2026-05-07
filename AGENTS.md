@@ -218,6 +218,7 @@ Initial applicability matrix:
 |-----------------|-------------------------|--------|
 | `contract-drift-auditor` | Before phase planning after contract/source-layer changes, during release readiness | Planned Phase 04 |
 | shared packet renderer | All packet-producing tools and self-audit reports | Planned Phase 04 |
+| cross-repo compatibility checker | Before automatic cross-repo indexer or gate-linter automation; release readiness after protocol changes | v2 candidate, read-only evidence |
 | mechanical gate linter | After workflow gate changes and release/maintenance boundaries | v2 candidate, evidence only |
 | test quality auditor | After non-trivial test-suite changes | v2 candidate |
 | runtime capability inspector | Before documenting commands, permissions, or tool availability | v2 candidate |

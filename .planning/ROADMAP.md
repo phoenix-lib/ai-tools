@@ -112,11 +112,12 @@ Plans:
   3. First release definition of done is checkable against schemas, one working auditor, deterministic tests, and secret safety.
   4. Later tool selection is deferred with clear criteria based on repeated real demand.
   5. Release readiness includes a planned `ai-workspace-kit` gate review hook for conflicting, stale, or irrelevant gates, with manual fallback until the upstream capability exists.
+  6. Release readiness records `XREPO-VALIDATOR-01` as the deferred read-only cross-repo compatibility checker to build before any automatic cross-repo indexer or gate-linter automation.
 **Plans**: 2 plans
 
 Plans:
 - [ ] 05-01: Write usage, safety, integration, and first-release documentation.
-- [ ] 05-02: Run release readiness review, future ai-workspace-kit gate review if available, and document deferred tool criteria.
+- [ ] 05-02: Run release readiness review, future ai-workspace-kit gate review if available, document deferred tool criteria, and preserve `XREPO-VALIDATOR-01` as a v2 prerequisite for automatic cross-repo validation.
 
 ## Requirement Coverage
 

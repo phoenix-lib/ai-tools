@@ -7,6 +7,12 @@ major plan execution, and workflow gate change.
 
 ### Cross-Repo Interop Compatibility
 
+- Planned `XREPO-VALIDATOR-01` as a deferred v2 read-only cross-repo
+  compatibility checker that validates both `ai-tools` and `ai-workspace-kit`
+  protocol artifacts before automatic indexer or gate-linter automation.
+- Added `tools/cross-repo-compatibility-checker/SEED-IDEAS.md` to preserve the
+  checker scope, non-goals, expected review packet outputs, and first fixture
+  shape without blocking Phase 4.
 - Changed mirror semantics: request and decision artifacts now include
   `Origin` and `Mirror required` so manual transfers can be explicit instead of
   looking like broken mirrored requests.

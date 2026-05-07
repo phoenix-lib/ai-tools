@@ -78,6 +78,7 @@
 
 ### Later Tools
 
+- **XREPO-VALIDATOR-01**: User can run a read-only cross-repo compatibility checker over sibling `ai-tools` and `ai-workspace-kit` checkouts that groups requests by `Thread ID`, validates reciprocal `Counterpart ID` and repo-qualified `Counterpart path`, enforces `Origin` / `Mirror required` rules, verifies decisions for manual-transfer requests, checks protocol version fields, and reports gate registry field/stage mapping drift without installing, running, or depending on the neighboring repository.
 - **LEDGER-01**: User can scan a project into a verified context ledger with FACTS, COMMANDS, CONTRACTS, SKILLS, DECISIONS, EVIDENCE, and CACHE-MANIFEST files.
 - **FORENSICS-01**: User can analyze a failed phase by correlating plans, diffs, commits, tests, review artifacts, and feedback.
 - **CONFIG-01**: User can validate config matrices across dev/stage/prod evidence.
@@ -156,4 +157,4 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 ---
 *Requirements defined: 2026-05-07*
-*Last updated: 2026-05-07 after adding self-use, tool-intake, baseline, and renderer requirements*
+*Last updated: 2026-05-07 after adding the cross-repo compatibility checker v2 requirement*

@@ -17,6 +17,7 @@ Current seeds:
 - `ai-workspace-kit-internal-gates`
 - `config-matrix-validator`
 - `contract-drift-auditor`
+- `cross-repo-compatibility-checker`
 - `domain-contract-test-generator`
 - `local-integration-harness`
 - `phase-forensics-tool`
