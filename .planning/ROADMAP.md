@@ -35,7 +35,7 @@ proven by `contract-drift-auditor`.
 
 Plans:
 **Wave 1**
-- [ ] 01-01: Define review packet schemas and status/severity/confidence taxonomy.
+- [x] 01-01: Define review packet schemas and status/severity/confidence taxonomy.
 
 **Wave 2** *(blocked on Wave 1 completion)*
 - [ ] 01-02: Define evidence refs, recommended actions, and tool manifest metadata.
