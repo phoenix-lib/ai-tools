@@ -22,6 +22,10 @@ major plan execution, and workflow gate change.
   generated packet directories inside targets are ignored as stale evidence.
 - Validation: added renderer, CLI, discovery, checks, integration, and schema
   output tests. Full validation passed with `npm.cmd test`.
+- Self-use impact: running the auditor against this repository produced a
+  `human_review_required` packet with noisy historical `.planning`, fixture, and
+  optional `.external` references; Phase 5 should harden self-audit source
+  filtering before treating full-repo output as release evidence.
 - Compatibility impact for `ai-workspace-kit`: the auditor produces compatible
   review packet artifacts that kit may consume as optional evidence. No runtime
   dependency, automatic execution, adapter/bootstrap duplication, or target
