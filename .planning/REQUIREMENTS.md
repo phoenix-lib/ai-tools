@@ -163,10 +163,10 @@ Which phases cover which requirements. Updated during roadmap creation.
 | DOC-02 | Phase 5 | Complete |
 | DOC-03 | Phase 5 | Complete |
 | DOC-04 | Phase 5 | Complete |
-| REL-05 | Phase 6 | Planned |
-| REL-06 | Phase 6 | Planned |
-| META-01 | Phase 6 | Planned |
-| SELF-01 | Phase 6 | Planned |
+| REL-05 | Phase 6 | Complete |
+| REL-06 | Phase 6 | Complete |
+| META-01 | Phase 6 | Complete |
+| SELF-01 | Phase 6 | Complete |
 | XREPO-VALIDATOR-01 | Phase 7 | Planned |
 | CLI-01 | Phase 8 | Planned |
 | CLI-02 | Phase 8 | Planned |
@@ -187,4 +187,4 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 ---
 *Requirements defined: 2026-05-07*
-*Last updated: 2026-05-07 after adding the cross-repo compatibility checker v2 requirement*
+*Last updated: 2026-05-07 after completing Phase 6 release closeout and tool metadata*

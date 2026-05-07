@@ -1,17 +1,17 @@
 ---
 gsd_state_version: 1.0
 milestone: v2.0
-milestone_name: milestone
-status: executing
-stopped_at: Phase 6 planned
-last_updated: "2026-05-07T18:44:00.770Z"
-last_activity: 2026-05-07 -- Phase 6 execution started
+milestone_name: Tooling Hardening
+status: planned
+stopped_at: Phase 6 completed
+last_updated: "2026-05-07T22:35:00+03:00"
+last_activity: "2026-05-07 -- Phase 6 completed with release fixtures, centralized metadata, final self-audit evidence, and 99/99 tests passing"
 progress:
   total_phases: 11
-  completed_phases: 5
-  total_plans: 17
-  completed_plans: 14
-  percent: 82
+  completed_phases: 6
+  total_plans: 27
+  completed_plans: 17
+  percent: 63
 ---
 
 # Project State
@@ -22,46 +22,36 @@ See: .planning/PROJECT.md (updated 2026-05-07)
 
 **Core value:** Produce deterministic, evidence-backed review packets that make
 AI project guidance auditable without mutating target projects.
-**Current focus:** Phase 6 — Release Closeout and Tool Metadata
+**Current focus:** Phase 7 - Cross-Repo Compatibility Checker MVP
 
 ## Current Position
 
-Phase: 6 (Release Closeout and Tool Metadata) — EXECUTING
-Plan: 1 of 3
-Status: Executing Phase 6
-Last activity: 2026-05-07 -- Phase 6 execution started
+Phase: 7 (Cross-Repo Compatibility Checker MVP) - READY FOR DISCUSSION
+Plan: 0 of 3
+Status: Phase 6 complete; next command is `$gsd-discuss-phase 7`.
+Last activity: 2026-05-07 -- Phase 6 completed and verified.
 
-Progress: [#####-----] 52% of mapped plans complete
+Progress: [######----] 63% of mapped plans complete
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 14
+- Total plans completed: 17
 - Average duration: n/a
-- Total execution time: 0.0 hours
+- Total execution time: n/a
 
 **By Phase:**
 
-| Phase | Plans | Total | Avg/Plan |
-|-------|-------|-------|----------|
-| 01 | 3 | - | - |
-| 02 | 3 | - | - |
-| 03 | 3 | - | - |
-| 04 | 3 | - | - |
-| 5 | 2 | - | - |
-
-**Recent Trend:**
-
-- Last 5 plans: 3 completed
-- Trend: n/a
-
-| Phase 02 P02-01 | 20 min | 4 tasks | 9 files |
-| Phase 02 P02-02 | 16 min | 3 tasks | 31 files |
-| Phase 02 P02-03 | 18 min | 5 tasks | 8 files |
-| Phase 03 P03-01 | 8 min | 4 tasks | 6 files |
-| Phase 03 P03-02 | 5 min | 3 tasks | 2 files |
-| Phase 03 P03-03 | 11 min | 5 tasks | 7 files |
+| Phase | Plans | Status |
+|-------|-------|--------|
+| 01 | 3/3 | Complete |
+| 02 | 3/3 | Complete |
+| 03 | 3/3 | Complete |
+| 04 | 3/3 | Complete |
+| 05 | 2/2 | Complete |
+| 06 | 3/3 | Complete |
+| 07 | 0/3 | Planned |
 
 ## Accumulated Context
 
@@ -72,73 +62,53 @@ Decisions are logged in PROJECT.md Key Decisions table.
 - Start with review packet schemas before external tools.
 - Build one external auditor before expanding the ecosystem.
 - Keep `ai-workspace-kit` integration optional and packet-based.
+- Enforce the tandem boundary gate: do not duplicate adoption/bootstrap,
+  adapter generation, or generated-contract review behavior owned by
+  `ai-workspace-kit`.
+- Maintain `CHANGELOG.md` after completed phases, executed major plans, and
+  workflow gate changes.
+- Treat AI Tools self-use output as evidence, not authority.
+- Start v2 with release closeout, centralized metadata, and cross-repo
+  validation before promoting broad seed tools.
+
+### Completed Work
+
 - Phase 01 validated the shared review packet standard, canonical JSON
   guidance, examples, and schema validation tests.
-
 - Phase 02 validated shared read-only safety helpers, target fixture hashing,
   no-mutation proof, secret non-leakage, generated packet exclusion, and
   reusable target fixtures.
-
 - Phase 03 validated the cross-repo capability request protocol, gate registry,
-  request/decision templates, bidirectional example requests, real incoming
-  request decision, changelog compatibility entry, and docs validation tests.
-
+  request/decision templates, bidirectional examples, real incoming request
+  decision, changelog compatibility entry, and docs validation tests.
 - Phase 04 validated the shared packet renderer and `contract-drift-auditor`
   MVP with read-only CLI behavior, drift checks, schema-valid packet emission,
   non-mutation proof, secret non-leakage, and self-use evidence.
-
-- Enforce the ai-workspace-kit tandem boundary gate: do not duplicate
-  adoption/bootstrap, adapter generation, or generated-contract review behavior
-  that `ai-workspace-kit` already owns.
-
-- Maintain `CHANGELOG.md` after completed phases, executed major plans, and
-  workflow gate changes.
-
-- Read upstream `ai-workspace-kit` changelog or release notes first when the
-  freshness gate detects a changed upstream changelog. The local upstream
-  checkout currently has no changelog, so commit log/diff remains the fallback.
-
-- Plan future `ai-workspace-kit` gate-review integration at release/maintenance
-  boundaries without pretending the command exists today.
-
-- Add a shared packet renderer in Phase 04 so packet-producing tools render
-  machine and human outputs from one packet model.
-
-- Start v2 with release closeout, centralized tool metadata, release packet
-  fixtures, and the cross-repo compatibility checker before promoting broad
-  seed tools.
+- Phase 05 validated the first release docs, release readiness checklist,
+  optional `ai-workspace-kit` integration boundary, manual gate review, and
+  hardened self-audit source filtering.
+- Phase 06 validated release closeout: corrected auditor limitations,
+  centralized tool metadata, release packet fixtures for `pass`,
+  `human_review_required`, and `blocked`, final external self-audit evidence,
+  and 99/99 tests passing.
 
 ### Roadmap Evolution
 
 - Phase 03 inserted: Cross-Repo Capability Request Gate.
 - Former Phase 03 Contract Drift Auditor MVP moved to Phase 04.
 - Former Phase 04 Integration and Release Hardening moved to Phase 05.
-- Added changelog gate requirements to Phase 03.
-- Added future ai-workspace-kit gate-review hook to Phase 05.
-- Phase 02 completed with 3/3 plans, 40 passing tests, and verification report.
-- Phase 03 completed with 3/3 plans, 48 passing tests, and verification report.
-- Phase 04 now includes shared packet renderer work before broad tool expansion.
-- Phase 04 completed with 3/3 plans, 80 passing tests, and verification report.
-- Baseline seed ideas were consolidated into `tools/*/SEED-IDEAS.md`,
-  `standards/review-packet/SEED-IDEAS.md`, and `docs/`; obsolete root seed
-  folders were removed.
-
 - Preliminary v2 phases 06-11 were added after Phase 5 to keep release
   discipline, interop validation, CLI ergonomics, tool registry, and future
   tool selection ordered by current risk.
 
 ### Pending Todos
 
-None.
+- Begin Phase 7 discussion for `XREPO-VALIDATOR-01`.
 
 ### Blockers/Concerns
 
-- The old root seed folders were consolidated into `tools/*/SEED-IDEAS.md`,
-  `standards/review-packet/SEED-IDEAS.md`, and `docs/`.
-
-- `phase.complete` warned that v2 candidate IDs are present in REQUIREMENTS.md
-  body but not in the Traceability table; this is non-blocking because those
-  IDs are explicitly v2 candidates.
+- Automatic cross-repo indexer or gate-linter automation should remain blocked
+  until Phase 7 ships a read-only compatibility checker.
 
 ## Deferred Items
 
@@ -153,6 +123,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-05-07T21:41:47+03:00
-Stopped at: Phase 6 planned
-Resume file: .planning/phases/06-release-closeout-and-tool-metadata/06-01-PLAN.md
+Last session: 2026-05-07T22:35:00+03:00
+Stopped at: Phase 6 completed
+Resume file: .planning/ROADMAP.md

@@ -27,7 +27,7 @@ validator can govern tool intake.
 - [x] **Phase 3: Cross-Repo Capability Request Gate** - Define structured capability requests and decisions between AI Tools and `ai-workspace-kit`. Completed 2026-05-07.
 - [x] **Phase 4: Contract Drift Auditor MVP** - Ship the first external auditor using the shared packet standard. Completed 2026-05-07.
 - [x] **Phase 5: Integration and Release Hardening** - Align docs, optional ai-workspace-kit integration, and first-release readiness. (completed 2026-05-07)
-- [ ] **Phase 6: Release Closeout and Tool Metadata** - Fix post-Phase-5 doc drift, add release packet fixtures, centralize tool metadata, and preserve safe self-audit invocation.
+- [x] **Phase 6: Release Closeout and Tool Metadata** - Fix post-Phase-5 doc drift, add release packet fixtures, centralize tool metadata, and preserve safe self-audit invocation. Completed 2026-05-07.
 - [ ] **Phase 7: Cross-Repo Compatibility Checker MVP** - Build the smallest read-only validator for AI Tools / `ai-workspace-kit` protocol compatibility before any automatic cross-repo automation.
 - [ ] **Phase 8: Contract Drift Auditor CLI Ergonomics** - Add machine stdout, quiet mode, fail-on policy, and documented exit codes without making findings automatic decisions.
 - [ ] **Phase 9: Tool Registry and Workflow Gate Slimming** - Create the machine-readable tool registry and move detailed gate policy out of root `AGENTS.md` into focused workflow docs.
@@ -150,11 +150,11 @@ Plans:
 
 Plans:
 **Wave 1**
-- [ ] 06-01: Clean release docs and auditor limitations after Phase 5 self-audit hardening.
+- [x] 06-01: Clean release docs and auditor limitations after Phase 5 self-audit hardening.
 
 **Wave 2** *(blocked on Wave 1 completion)*
-- [ ] 06-02: Add release packet fixtures and validation for representative auditor outcomes.
-- [ ] 06-03: Centralize tool metadata/version data and add safe self-audit command guidance.
+- [x] 06-02: Centralize tool metadata/version data and add safe self-audit command guidance.
+- [x] 06-03: Add release packet fixtures and validation for representative auditor outcomes.
 
 ### Phase 7: Cross-Repo Compatibility Checker MVP
 **Goal**: Ship the first v2 tool as a read-only compatibility validator for sibling `ai-tools` and `ai-workspace-kit` checkouts.
@@ -323,7 +323,7 @@ Plans:
 | 3. Cross-Repo Capability Request Gate | 3/3 | Complete | 2026-05-07 |
 | 4. Contract Drift Auditor MVP | 3/3 | Complete | 2026-05-07 |
 | 5. Integration and Release Hardening | 2/2 | Complete | 2026-05-07 |
-| 6. Release Closeout and Tool Metadata | 0/3 | Planned | - |
+| 6. Release Closeout and Tool Metadata | 3/3 | Complete | 2026-05-07 |
 | 7. Cross-Repo Compatibility Checker MVP | 0/3 | Planned | - |
 | 8. Contract Drift Auditor CLI Ergonomics | 0/2 | Planned | - |
 | 9. Tool Registry and Workflow Gate Slimming | 0/2 | Planned | - |
