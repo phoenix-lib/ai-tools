@@ -16,9 +16,9 @@
 
 ### Shared Safety and Determinism
 
-- [ ] **SAFE-01**: A shared output path guard rejects report output paths inside the audited target project for target-project audits.
-- [ ] **SAFE-02**: A shared secret policy classifies `.env`, `.env.*`, key, token, credential, and secret-like files as path-only evidence by default.
-- [ ] **SAFE-03**: A shared ignore policy excludes `.git`, dependency folders, build outputs, coverage, temporary directories, generated review packets, nested checkouts, and fixture expected/output trees unless explicitly targeted.
+- [x] **SAFE-01**: A shared output path guard rejects report output paths inside the audited target project for target-project audits.
+- [x] **SAFE-02**: A shared secret policy classifies `.env`, `.env.*`, key, token, credential, and secret-like files as path-only evidence by default.
+- [x] **SAFE-03**: A shared ignore policy excludes `.git`, dependency folders, build outputs, coverage, temporary directories, generated review packets, nested checkouts, and fixture expected/output trees unless explicitly targeted.
 - [x] **SAFE-04**: A canonical JSON writer emits recursively sorted object keys and a trailing newline.
 - [ ] **SAFE-05**: A fixture harness can hash target project trees before and after tool runs to prove non-mutation.
 - [x] **SAFE-06**: Shared summary rendering keeps CLI status, Markdown status, JSON status, and finding/blocker counts consistent.
@@ -102,9 +102,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 | RPS-04 | Phase 1 | Complete |
 | RPS-05 | Phase 1 | Complete |
 | RPS-06 | Phase 1 | Complete |
-| SAFE-01 | Phase 2 | Pending |
-| SAFE-02 | Phase 2 | Pending |
-| SAFE-03 | Phase 2 | Pending |
+| SAFE-01 | Phase 2 | Complete |
+| SAFE-02 | Phase 2 | Complete |
+| SAFE-03 | Phase 2 | Complete |
 | SAFE-04 | Phase 1 | Complete |
 | SAFE-05 | Phase 2 | Pending |
 | SAFE-06 | Phase 1 | Complete |
