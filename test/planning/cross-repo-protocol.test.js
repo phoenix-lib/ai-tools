@@ -17,7 +17,7 @@ function listMarkdownFiles(relativeDir) {
   const dir = path.join(root, relativeDir);
   const entries = fs.readdirSync(dir, { withFileTypes: true });
   return entries.flatMap((entry) => {
-    const relativePath = path.join(relativeDir, entry.name);
+    const relativePath = path.join(relativeDir, entry.name).replace(/\\/g, "/");
     if (entry.isDirectory()) {
       return listMarkdownFiles(relativePath);
     }
@@ -35,6 +35,8 @@ const requiredRequestFields = [
   "Protocol version:",
   "Canonical ID:",
   "Thread ID:",
+  "Origin:",
+  "Mirror required:",
   "Counterpart ID:",
   "Counterpart path:",
   "Legacy ID:",
@@ -65,6 +67,8 @@ const requiredDecisionFields = [
   "Request ID:",
   "Canonical ID:",
   "Thread ID:",
+  "Origin:",
+  "Mirror required:",
   "Counterpart ID:",
   "Counterpart path:",
   "Legacy ID:",
@@ -103,6 +107,8 @@ const decisionStatuses = [
   "stale"
 ];
 
+const allowedOrigins = ["mirrored", "manual-transfer", "local-created"];
+
 const requiredGateIds = [
   "discuss-mode",
   "upstream-freshness",
@@ -116,10 +122,9 @@ const requiredGateIds = [
 ];
 
 const requestPaths = [
-  ".planning/cross-repo/inbox/REQ-20260507-ai-workspace-kit-to-ai-tools-contract-drift-auditor.md",
-  ".planning/cross-repo/inbox/REQ-20260507-ai-workspace-kit-to-ai-tools-changelog-gate-review.md",
-  ".planning/cross-repo/outbox/REQ-20260507-ai-tools-to-ai-workspace-kit-review-packet-contract.md"
-];
+  ...listMarkdownFiles(".planning/cross-repo/inbox"),
+  ...listMarkdownFiles(".planning/cross-repo/outbox")
+].sort();
 
 const mirroredRequestThreads = new Map([
   [
@@ -129,6 +134,13 @@ const mirroredRequestThreads = new Map([
   [
     ".planning/cross-repo/outbox/REQ-20260507-ai-tools-to-ai-workspace-kit-review-packet-contract.md",
     "THREAD-20260507-review-packet-semantics"
+  ]
+]);
+
+const requestDecisions = new Map([
+  [
+    ".planning/cross-repo/inbox/REQ-20260507-ai-workspace-kit-to-ai-tools-changelog-gate-review.md",
+    ".planning/cross-repo/decisions/DEC-REQ-20260507-ai-workspace-kit-to-ai-tools-changelog-gate-review.md"
   ]
 ]);
 
@@ -242,6 +254,8 @@ test("example and real capability requests are complete", () => {
       /^THREAD-\d{8}-[a-z0-9-]+$/,
       `${relativePath} must use canonical thread ID`
     );
+    assert.ok(allowedOrigins.includes(fieldValue(content, "Origin")), `${relativePath} has invalid origin`);
+    assert.match(fieldValue(content, "Mirror required"), /^(true|false)$/);
     assert.match(
       fieldValue(content, "ID"),
       /^REQ-\d{8}-[a-z0-9-]+-to-[a-z0-9-]+-[a-z0-9-]+$/,
@@ -259,11 +273,15 @@ test("mirrored capability requests have counterpart metadata", () => {
     const content = read(relativePath);
     const id = fieldValue(content, "ID");
     const threadId = fieldValue(content, "Thread ID");
+    const origin = fieldValue(content, "Origin");
+    const mirrorRequired = fieldValue(content, "Mirror required");
     const counterpartId = fieldValue(content, "Counterpart ID");
     const counterpartPath = fieldValue(content, "Counterpart path");
     const legacyId = fieldValue(content, "Legacy ID");
 
     assert.equal(threadId, expectedThreadId, `${relativePath} must share kit Thread ID`);
+    assert.equal(origin, "mirrored", `${relativePath} must be marked mirrored`);
+    assert.equal(mirrorRequired, "true", `${relativePath} must require a mirror`);
     assert.notEqual(counterpartId, "", `${relativePath} needs counterpart ID`);
     assert.notEqual(counterpartPath, "", `${relativePath} needs counterpart path`);
     assert.notEqual(legacyId, "", `${relativePath} needs legacy ID`);
@@ -274,6 +292,32 @@ test("mirrored capability requests have counterpart metadata", () => {
     assert.ok(
       id === counterpartId || legacyId.startsWith("2026-"),
       `${relativePath} must use matching canonical IDs or explicit legacy pairing`
+    );
+  }
+});
+
+test("non-mirrored capability requests require a decision artifact", () => {
+  for (const relativePath of requestPaths) {
+    const content = read(relativePath);
+    const origin = fieldValue(content, "Origin");
+    const mirrorRequired = fieldValue(content, "Mirror required");
+    const counterpartId = fieldValue(content, "Counterpart ID");
+    const counterpartPath = fieldValue(content, "Counterpart path");
+
+    if (mirrorRequired === "true") {
+      assert.notEqual(counterpartId, "none", `${relativePath} requires counterpart ID`);
+      assert.notEqual(counterpartPath, "none", `${relativePath} requires counterpart path`);
+      continue;
+    }
+
+    assert.notEqual(origin, "mirrored", `${relativePath} cannot be mirrored without mirror requirement`);
+    assert.equal(counterpartId, "none", `${relativePath} without mirror should not fake counterpart ID`);
+    assert.equal(counterpartPath, "none", `${relativePath} without mirror should not fake counterpart path`);
+    assert.ok(requestDecisions.has(relativePath), `${relativePath} needs decision mapping`);
+    assert.equal(
+      exists(requestDecisions.get(relativePath)),
+      true,
+      `${relativePath} needs decision artifact when mirror is not required`
     );
   }
 });
@@ -298,6 +342,8 @@ test("real incoming request has a planned mixed decision", () => {
   assertIncludesAll(content, requiredDecisionFields, "real decision fields");
   assertIncludesAll(content, requiredDecisionHeadings, "real decision headings");
   assert.match(fieldValue(content, "Thread ID"), /^THREAD-\d{8}-[a-z0-9-]+$/);
+  assert.equal(fieldValue(content, "Origin"), "manual-transfer");
+  assert.equal(fieldValue(content, "Mirror required"), "false");
   assert.match(content, /Request ID: REQ-20260507-ai-workspace-kit-to-ai-tools-changelog-gate-review/);
   assert.match(content, /Decision: planned/);
   assert.match(content, /Scope Accepted/);

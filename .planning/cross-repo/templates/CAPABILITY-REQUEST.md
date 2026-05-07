@@ -3,6 +3,8 @@
 Protocol version: 1.0
 Canonical ID: REQ-YYYYMMDD-<from>-to-<to>-<slug>
 Thread ID: THREAD-YYYYMMDD-<semantic-slug>
+Origin:
+Mirror required:
 Counterpart ID:
 Counterpart path:
 Legacy ID:

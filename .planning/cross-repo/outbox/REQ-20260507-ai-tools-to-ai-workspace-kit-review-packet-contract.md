@@ -3,6 +3,8 @@
 Protocol version: 1.0
 Canonical ID: REQ-20260507-ai-tools-to-ai-workspace-kit-review-packet-contract
 Thread ID: THREAD-20260507-review-packet-semantics
+Origin: mirrored
+Mirror required: true
 Counterpart ID: REQ-20260507-ai-tools-to-ai-workspace-kit-review-packet-standard
 Counterpart path: ai-workspace-kit/.planning/cross-repo/inbox/2026-05-07-ai-tools-review-packet-standard.md
 Legacy ID: 2026-05-07-ai-tools-review-packet-standard

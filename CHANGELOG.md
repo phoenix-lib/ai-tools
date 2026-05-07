@@ -7,6 +7,11 @@ major plan execution, and workflow gate change.
 
 ### Cross-Repo Interop Compatibility
 
+- Changed mirror semantics: request and decision artifacts now include
+  `Origin` and `Mirror required` so manual transfers can be explicit instead of
+  looking like broken mirrored requests.
+- Validation: protocol tests now require mirrored requests to have counterpart
+  metadata, and require non-mirrored requests to have a decision artifact.
 - Changed semantic grouping: request and decision artifacts now require
   `Thread ID` so mirrored requests can be grouped even when canonical IDs or
   filenames differ.

@@ -4,6 +4,8 @@ Protocol version: 1.0
 Request ID:
 Canonical ID:
 Thread ID:
+Origin:
+Mirror required:
 Counterpart ID:
 Counterpart path:
 Legacy ID:
