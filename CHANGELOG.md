@@ -5,6 +5,22 @@ major plan execution, and workflow gate change.
 
 ## Unreleased
 
+### Phase Verification and Gates Scan Review
+
+- Added `.planning/verification/PHASE-VERIFY-AUDIT.md` confirming every
+  completed phase from 01 through 06 has a verification artifact with verdict,
+  requirement coverage, validation evidence, and residual risk notes.
+- Added `.planning/research/GATES-SCAN-ROADMAP-REVIEW.md` analyzing the
+  proposed `gates-scan` CLI while keeping requirement ID `GATELINT-01`.
+- Recommendation: keep Phase 7 as the cross-repo compatibility checker, then
+  promote a small read-only evidence-only `gates-scan` MVP immediately after
+  Phase 7, before broader tool registry or deferred seed work.
+- Compatibility impact for `ai-workspace-kit`: no kit dependency, automatic
+  tool execution, or semantic gate decision is added. `ai-workspace-kit` should
+  remain the source of gate policy; AI Tools may produce mechanical evidence.
+- Validation: planning-only audit/review. Full `npm.cmd test` should remain the
+  mechanical regression check after this documentation update.
+
 ### Phase 06-03: Release Packet Fixtures
 
 - Changed tool examples: added release-facing `contract-drift-auditor` packet
