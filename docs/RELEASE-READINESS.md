@@ -64,7 +64,14 @@ and:
 node tools/contract-drift-auditor/cli.js --project . --out C:\Users\suppo\.codex\memories\ai-tools-self-audit-phase05
 ```
 
-The self-audit output path is outside this repository. Findings are release
+That machine-local output path is historical evidence from the Phase 5 run, not
+the reusable command pattern. For future self-audits, use:
+
+```bash
+node tools/contract-drift-auditor/cli.js --project . --out <external-dir>
+```
+
+`<external-dir>` must be outside the audited repository. Findings are release
 evidence for human review; they are not automatic blockers unless a safety or
 schema issue makes the packet unusable.
 
@@ -129,8 +136,9 @@ current source documents by default.
 
 Release readiness evidence:
 
-- Command: `node tools/contract-drift-auditor/cli.js --project . --out C:\Users\suppo\.codex\memories\ai-tools-self-audit-phase05`
-- Output path: `C:\Users\suppo\.codex\memories\ai-tools-self-audit-phase05`
+- Reusable command: `node tools/contract-drift-auditor/cli.js --project . --out <external-dir>`
+- Historical Phase 5 command: `node tools/contract-drift-auditor/cli.js --project . --out C:\Users\suppo\.codex\memories\ai-tools-self-audit-phase05`
+- Historical Phase 5 output path: `C:\Users\suppo\.codex\memories\ai-tools-self-audit-phase05`
 - Packet status: `human_review_required`
 - Finding count: 57 total, all `low`; 0 blockers, 0 critical, 0 high,
   0 medium, 0 required decisions.

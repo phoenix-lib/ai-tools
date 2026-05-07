@@ -65,6 +65,9 @@ test("contract drift auditor docs explain usage, non-usage, safety, and packet s
       "path-only evidence",
       "recommended actions are guidance only",
       "Current Limitations",
+      "Historical `.planning/phases/**` artifacts",
+      "current contract/planning docs",
+      "conservative text parsing",
       "ai-workspace-kit Compatibility",
       "optional external evidence"
     ],
@@ -98,4 +101,25 @@ test("release readiness doc is checkable and preserves deferred boundaries", () 
     ],
     "release readiness"
   );
+});
+
+test("release readiness documents portable self-audit guidance", () => {
+  const docs = read("docs/RELEASE-READINESS.md");
+
+  assertIncludesAll(
+    docs,
+    [
+      "node tools/contract-drift-auditor/cli.js --project . --out <external-dir>",
+      "`<external-dir>` must be outside the audited repository",
+      "historical evidence",
+      "Historical Phase 5 command",
+      "Historical Phase 5 output path"
+    ],
+    "portable self-audit guidance"
+  );
+
+  const reusableCommandIndex = docs.indexOf("Reusable command:");
+  assert.notEqual(reusableCommandIndex, -1, "release readiness must label reusable command");
+  const reusableCommandLine = docs.slice(reusableCommandIndex, docs.indexOf("\n", reusableCommandIndex));
+  assert.equal(reusableCommandLine.includes("C:\\Users"), false, "reusable self-audit command must not be machine-local");
 });

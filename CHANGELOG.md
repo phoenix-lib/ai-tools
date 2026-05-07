@@ -5,6 +5,29 @@ major plan execution, and workflow gate change.
 
 ## Unreleased
 
+### Phase 06-01: Release Docs Closeout
+
+- Changed documentation only: updated `tools/contract-drift-auditor/README.md`
+  so current limitations reflect Phase 5 self-audit filtering. Historical
+  `.planning/phases/**` artifacts and nested fixture contracts are no longer
+  described as dominating current self-audit results by default.
+- Changed self-audit guidance: `docs/RELEASE-READINESS.md` now gives the
+  reusable command as
+  `node tools/contract-drift-auditor/cli.js --project . --out <external-dir>`,
+  with `<external-dir>` required to be outside the audited repository. The
+  Phase 5 `C:\Users\suppo\...` path remains historical evidence only.
+- Validation: `npm.cmd test -- test/planning/release-docs.test.js` and
+  `npm.cmd test` are the required checks for this plan.
+- Upstream impact: Phase 06 planning checked `ai-workspace-kit` local and
+  remote HEAD at `2079ab9`; no upstream update was required.
+- Compatibility impact for `ai-workspace-kit`: downstream freshness checks can
+  read this changelog first to see that Phase 06-01 changed docs and guidance
+  only. No runtime dependency, automatic tool execution, packet schema change,
+  or duplicated adoption/bootstrap behavior was added.
+- Breaking changes: none.
+- Migration notes: use caller-provided external output directories for future
+  self-audits instead of copying the historical Phase 5 machine-local path.
+
 ### Preliminary v2 Roadmap
 
 - Changed planning scope: added preliminary Phases 06-11 after the completed

@@ -113,8 +113,12 @@ permission decisions and they do not rewrite project contracts.
 
 ## Current Limitations
 
-- The MVP is deterministic and fixture-backed, but it uses conservative text
-  parsing and can report noisy references on large historical planning folders.
+- The MVP is deterministic and fixture-backed, but it uses conservative text parsing
+  and can still report low-severity caveats from optional, example, or shorthand
+  references in current contract/planning docs.
+- Historical `.planning/phases/**` artifacts and nested fixture contracts are
+  excluded from current self-audit source documents by default, so old phase
+  evidence should not dominate current self-audit results.
 - It does not execute target commands to prove runtime behavior.
 - It does not decide whether a local contract or filesystem reference is
   authoritative; it reports evidence for review.
