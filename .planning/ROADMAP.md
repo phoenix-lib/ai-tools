@@ -79,7 +79,7 @@ Plans:
 **Plans**: 3 plans
 
 Plans:
-- [ ] 03-01: Create cross-repo request directories, request template, and decision template.
+- [x] 03-01: Create cross-repo request directories, request template, and decision template.
 - [ ] 03-02: Write the capability request playbook with ownership boundaries, changelog discipline, upstream changelog pre-read, self-use, new-tool intake, git baseline, and GSD gate mapping.
 - [ ] 03-03: Add bidirectional example requests and docs validation for required fields.
 
