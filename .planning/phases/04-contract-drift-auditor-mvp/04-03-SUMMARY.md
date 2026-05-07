@@ -62,22 +62,23 @@ Files changed: 5
 | Commit | Description |
 |--------|-------------|
 | `ef91d9e` | Wired packet emission, added integration/schema tests, README, and changelog entry. |
+| `5767365` | Included project skill files in reference extraction and added regression coverage. |
 
 ## Verification
 
 - `npm.cmd test -- test/contract-drift-auditor/integration.test.js` passed.
 - `npm.cmd test -- test/contract-drift-auditor/schema-output.test.js` passed.
 - README/changelog `Select-String` check found CLI usage, review-only, `ai-workspace-kit`, and `REVIEW-SUMMARY.json`.
-- `npm.cmd test` passed with 79/79 tests.
+- `npm.cmd test` passed with 80/80 tests.
 - `node tools/contract-drift-auditor/cli.js --help` printed the expected usage.
 - Runtime search found no `.external/ai-workspace-kit` imports in shared or auditor runtime files.
 - `git status --short test/fixtures/targets` reported no fixture input changes.
 
 ## Deviations from Plan
 
-None - plan executed exactly as written.
+Fixed one requirement traceability gap during phase-level verification: `DRIFT-02` requires project skill files to participate in missing-file reference checks. Skill files are now included in source documents and covered by a regression test.
 
-**Total deviations:** 0 auto-fixed. **Impact:** no scope change.
+**Total deviations:** 1 auto-fixed. **Impact:** no scope change; requirement coverage improved.
 
 ## Self-Check: PASSED
 
