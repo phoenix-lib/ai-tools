@@ -69,10 +69,10 @@
 
 ### Integration and Documentation
 
-- [ ] **DOC-01**: Documentation explains when to use `contract-drift-auditor` and when not to use it.
-- [ ] **DOC-02**: Documentation explains that `ai-workspace-kit` remains the adoption/bootstrap contract tool and external auditors are optional.
-- [ ] **DOC-03**: Documentation explains secret handling, output isolation, evidence refs, severity, confidence, and unknown/stale facts.
-- [ ] **DOC-04**: The first release definition of done is documented and references the shared packet schema plus one working external auditor.
+- [x] **DOC-01**: Documentation explains when to use `contract-drift-auditor` and when not to use it.
+- [x] **DOC-02**: Documentation explains that `ai-workspace-kit` remains the adoption/bootstrap contract tool and external auditors are optional.
+- [x] **DOC-03**: Documentation explains secret handling, output isolation, evidence refs, severity, confidence, and unknown/stale facts.
+- [x] **DOC-04**: The first release definition of done is documented and references the shared packet schema plus one working external auditor.
 
 ## v2 Requirements
 
@@ -145,10 +145,10 @@ Which phases cover which requirements. Updated during roadmap creation.
 | TEST-05 | Phase 1 | Complete |
 | TEST-06 | Phase 1 | Complete |
 | TEST-07 | Phase 2 | Complete |
-| DOC-01 | Phase 5 | Pending |
-| DOC-02 | Phase 5 | Pending |
-| DOC-03 | Phase 5 | Pending |
-| DOC-04 | Phase 5 | Pending |
+| DOC-01 | Phase 5 | Complete |
+| DOC-02 | Phase 5 | Complete |
+| DOC-03 | Phase 5 | Complete |
+| DOC-04 | Phase 5 | Complete |
 
 **Coverage:**
 - v1 requirements: 45 total

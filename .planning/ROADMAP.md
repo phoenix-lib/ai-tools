@@ -117,7 +117,7 @@ Plans:
 
 Plans:
 **Wave 1**
-- [ ] 05-01: Write usage, safety, integration, and first-release documentation.
+- [x] 05-01: Write usage, safety, integration, and first-release documentation.
 
 **Wave 2** *(blocked on Wave 1 completion)*
 - [ ] 05-02: Run release readiness review, future ai-workspace-kit gate review if available, document deferred tool criteria, and preserve `XREPO-VALIDATOR-01` as a v2 prerequisite for automatic cross-repo validation.
@@ -184,4 +184,4 @@ Plans:
 | 2. Shared Safety Harness | 3/3 | Complete | 2026-05-07 |
 | 3. Cross-Repo Capability Request Gate | 3/3 | Complete | 2026-05-07 |
 | 4. Contract Drift Auditor MVP | 3/3 | Complete | 2026-05-07 |
-| 5. Integration and Release Hardening | 0/2 | Not started | - |
+| 5. Integration and Release Hardening | 1/2 | In Progress|  |
