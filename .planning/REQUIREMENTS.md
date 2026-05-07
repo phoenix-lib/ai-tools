@@ -76,6 +76,20 @@
 
 ## v2 Requirements
 
+### Release Discipline and Tool Metadata
+
+- **REL-05**: First-release docs are consistent after Phase 5 self-audit hardening, including updated `contract-drift-auditor` limitations that distinguish historical phase artifacts from remaining low-severity current-doc caveats.
+- **REL-06**: `contract-drift-auditor` has release packet fixtures that demonstrate `pass`, `human_review_required`, and safety-blocked output shapes using the shared review packet artifacts.
+- **META-01**: Tool metadata and protocol versions are centralized so package version, tool version, review packet schema version, artifact names, and policy identifiers do not silently drift between code, docs, examples, and tests.
+- **SELF-01**: Self-audit invocation is documented as a safe command pattern that requires an explicit external `--out` from the caller and does not hard-code a machine-local path.
+
+### CLI and Consumer Ergonomics
+
+- **CLI-01**: `contract-drift-auditor` supports stable machine stdout mode for CI or assistant consumers without replacing packet artifacts as the source of truth.
+- **CLI-02**: `contract-drift-auditor` supports quiet mode and documented `--fail-on blocked|human_review_required|never` behavior with stable exit codes while keeping default findings evidence-only.
+- **REG-01**: AI Tools has a machine-readable tool registry that records each capability's owner, destination, maturity, self-use stage, required outputs, activation gate, and non-goals before broad tool expansion.
+- **GOV-01**: The root `AGENTS.md` entrypoint is slimmed by moving detailed gate policy prose into dedicated workflow gate documentation while preserving hard rules and source-layer links.
+
 ### Later Tools
 
 - **XREPO-VALIDATOR-01**: User can run a read-only cross-repo compatibility checker over sibling `ai-tools` and `ai-workspace-kit` checkouts that groups requests by `Thread ID`, validates reciprocal `Counterpart ID` and repo-qualified `Counterpart path`, enforces `Origin` / `Mirror required` rules, verifies decisions for manual-transfer requests, checks protocol version fields, and reports gate registry field/stage mapping drift without installing, running, or depending on the neighboring repository.
@@ -149,6 +163,22 @@ Which phases cover which requirements. Updated during roadmap creation.
 | DOC-02 | Phase 5 | Complete |
 | DOC-03 | Phase 5 | Complete |
 | DOC-04 | Phase 5 | Complete |
+| REL-05 | Phase 6 | Planned |
+| REL-06 | Phase 6 | Planned |
+| META-01 | Phase 6 | Planned |
+| SELF-01 | Phase 6 | Planned |
+| XREPO-VALIDATOR-01 | Phase 7 | Planned |
+| CLI-01 | Phase 8 | Planned |
+| CLI-02 | Phase 8 | Planned |
+| REG-01 | Phase 9 | Planned |
+| GOV-01 | Phase 9 | Planned |
+| GATELINT-01 | Phase 10 | Planned |
+| LEDGER-01 | Phase 11 | Deferred |
+| FORENSICS-01 | Phase 11 | Deferred |
+| CONFIG-01 | Phase 11 | Deferred |
+| SKILL-01 | Phase 11 | Deferred |
+| TESTQA-01 | Phase 11 | Deferred |
+| UIREG-01 | Phase 11 | Deferred |
 
 **Coverage:**
 - v1 requirements: 45 total

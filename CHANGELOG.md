@@ -5,6 +5,31 @@ major plan execution, and workflow gate change.
 
 ## Unreleased
 
+### Preliminary v2 Roadmap
+
+- Changed planning scope: added preliminary Phases 06-11 after the completed
+  v1 release hardening phase.
+- Planned Phase 06 for release closeout, auditor limitation cleanup, release
+  packet fixtures, centralized tool metadata, and safe self-audit invocation.
+- Planned Phase 07 for `XREPO-VALIDATOR-01`, the read-only cross-repo
+  compatibility checker that must exist before automatic cross-repo indexer or
+  gate-linter automation.
+- Planned Phase 08 for `contract-drift-auditor` CLI ergonomics: machine stdout,
+  quiet mode, documented `--fail-on` behavior, and stable exit codes while
+  keeping findings evidence-only by default.
+- Planned Phase 09 for a machine-readable tool registry and root `AGENTS.md`
+  slimming by moving detailed gate policy into focused workflow docs.
+- Planned Phase 10 for evidence-only `GATELINT-01` promotion or explicit
+  re-deferral after validator and registry guardrails exist.
+- Planned Phase 11 as the evidence-backed review point for broad seed tools
+  such as ledger, forensics, config, skill, test quality, UI, and integration
+  candidates. At most one next tool should be promoted from that review.
+- Compatibility impact for `ai-workspace-kit`: no runtime dependency, tool
+  execution, automatic phase creation, or duplicated adoption/bootstrap behavior
+  is added. The next interop work remains read-only validation evidence.
+- Validation: planning-only change; `npm.cmd test` passed with 89/89 tests
+  after editing roadmap, requirements, state, and changelog.
+
 ### Phase 05: Integration and Release Hardening
 
 - Changed documentation: added the root `README.md` release entrypoint,

@@ -9,6 +9,13 @@ with `ai-workspace-kit`, then the first external auditor, then integration and
 documentation hardening. Later tools stay deferred until the packet standard is
 proven by `contract-drift-auditor`.
 
+The v2 preliminary roadmap keeps that discipline: first close release
+documentation and machine-readable metadata gaps, then build the smallest
+cross-repo validator that prevents known `ai-tools` / `ai-workspace-kit`
+protocol drift, then improve the first auditor's CLI ergonomics. Broad seed
+tools stay deferred until the existing packet standard, registry, gates, and
+validator can govern tool intake.
+
 ## Phases
 
 **Phase Numbering:**
@@ -20,6 +27,12 @@ proven by `contract-drift-auditor`.
 - [x] **Phase 3: Cross-Repo Capability Request Gate** - Define structured capability requests and decisions between AI Tools and `ai-workspace-kit`. Completed 2026-05-07.
 - [x] **Phase 4: Contract Drift Auditor MVP** - Ship the first external auditor using the shared packet standard. Completed 2026-05-07.
 - [x] **Phase 5: Integration and Release Hardening** - Align docs, optional ai-workspace-kit integration, and first-release readiness. (completed 2026-05-07)
+- [ ] **Phase 6: Release Closeout and Tool Metadata** - Fix post-Phase-5 doc drift, add release packet fixtures, centralize tool metadata, and preserve safe self-audit invocation.
+- [ ] **Phase 7: Cross-Repo Compatibility Checker MVP** - Build the smallest read-only validator for AI Tools / `ai-workspace-kit` protocol compatibility before any automatic cross-repo automation.
+- [ ] **Phase 8: Contract Drift Auditor CLI Ergonomics** - Add machine stdout, quiet mode, fail-on policy, and documented exit codes without making findings automatic decisions.
+- [ ] **Phase 9: Tool Registry and Workflow Gate Slimming** - Create the machine-readable tool registry and move detailed gate policy out of root `AGENTS.md` into focused workflow docs.
+- [ ] **Phase 10: Evidence-Only Gate Linter Seed MVP** - Build or formally re-defer the mechanical gate-linter only after the cross-repo validator and tool registry are in place.
+- [ ] **Phase 11: v2 Tool Selection Review** - Reassess deferred seed tools and choose the next single tool only from repeated evidence-backed demand.
 
 ## Phase Details
 
@@ -122,6 +135,113 @@ Plans:
 **Wave 2** *(blocked on Wave 1 completion)*
 - [x] 05-02: Run release readiness review, future ai-workspace-kit gate review if available, document deferred tool criteria, and preserve `XREPO-VALIDATOR-01` as a v2 prerequisite for automatic cross-repo validation.
 
+### Phase 6: Release Closeout and Tool Metadata
+**Goal**: Convert Phase 5 release evidence into a clean v1 release baseline.
+**Depends on**: Phase 5
+**Requirements**: REL-05, REL-06, META-01, SELF-01
+**UI hint**: no
+**Success Criteria** (what must be TRUE):
+  1. `contract-drift-auditor` docs no longer claim historical phase artifacts dominate self-audit after Phase 5 filtering; remaining limitations are accurately scoped.
+  2. Release packet fixtures exist for `pass`, `human_review_required`, and safety-blocked auditor outcomes.
+  3. Tool metadata and protocol versions have a single source used by code, docs, examples, or tests.
+  4. Self-audit is documented as a safe invocation that requires caller-provided external `--out` and does not encode a machine-local path.
+  5. Changelog captures compatibility impact for `ai-workspace-kit` and downstream freshness checks.
+**Plans**: 3 plans
+
+Plans:
+**Wave 1**
+- [ ] 06-01: Clean release docs and auditor limitations after Phase 5 self-audit hardening.
+
+**Wave 2** *(blocked on Wave 1 completion)*
+- [ ] 06-02: Add release packet fixtures and validation for representative auditor outcomes.
+- [ ] 06-03: Centralize tool metadata/version data and add safe self-audit command guidance.
+
+### Phase 7: Cross-Repo Compatibility Checker MVP
+**Goal**: Ship the first v2 tool as a read-only compatibility validator for sibling `ai-tools` and `ai-workspace-kit` checkouts.
+**Depends on**: Phase 6
+**Requirements**: XREPO-VALIDATOR-01
+**UI hint**: no
+**Success Criteria** (what must be TRUE):
+  1. User can run a checker with explicit paths to both repositories and explicit `--out`.
+  2. Checker validates `Protocol version`, canonical request IDs, `Thread ID`, `Origin`, `Mirror required`, counterpart IDs, and repo-qualified counterpart paths.
+  3. Checker requires decisions for `manual-transfer` requests with `Mirror required: false`.
+  4. Checker compares AI Tools snake_case gate registry metadata with kit camelCase expectations through documented interop mapping and stage aliases.
+  5. Output uses the shared review packet artifacts and never installs, runs, mutates, or depends on the neighboring repository.
+**Plans**: 3 plans
+
+Plans:
+**Wave 1**
+- [ ] 07-01: Define cross-repo checker fixtures, discovery, and protocol metadata parsing.
+
+**Wave 2** *(blocked on Wave 1 completion)*
+- [ ] 07-02: Implement thread/counterpart/origin/path validation checks.
+- [ ] 07-03: Add gate registry mapping checks, packet rendering, docs, and self-use validation.
+
+### Phase 8: Contract Drift Auditor CLI Ergonomics
+**Goal**: Make the first auditor easier to consume in CI and assistant workflows without changing evidence-only defaults.
+**Depends on**: Phase 6
+**Requirements**: CLI-01, CLI-02
+**UI hint**: no
+**Success Criteria** (what must be TRUE):
+  1. CLI can emit a compact machine stdout summary while packet files remain the source of truth.
+  2. CLI supports quiet mode that suppresses non-essential output.
+  3. CLI supports `--fail-on blocked|human_review_required|never` with documented stable exit codes.
+  4. Default behavior remains non-breaking: findings are evidence, not automatic shell failure.
+  5. Tests cover stdout modes and exit-code behavior on Windows.
+**Plans**: 2 plans
+
+Plans:
+- [ ] 08-01: Add CLI output modes and stable exit-code policy.
+- [ ] 08-02: Update docs, tests, and release examples for CI/assistant consumption.
+
+### Phase 9: Tool Registry and Workflow Gate Slimming
+**Goal**: Make tool intake and self-use machine-readable before adding more tools, while keeping root assistant guidance lightweight.
+**Depends on**: Phase 7
+**Requirements**: REG-01, GOV-01
+**UI hint**: no
+**Success Criteria** (what must be TRUE):
+  1. A machine-readable tool registry records implemented, validated, self-use-required, planned, seed-only, and deferred capabilities.
+  2. Registry entries include owner, destination, maturity, activation stage, expected outputs, non-goals, and use gate.
+  3. New Tool Intake and AI Tools Self-Use gates reference the registry as evidence.
+  4. Root `AGENTS.md` keeps hard rules and source layers, while detailed gate policy moves to focused workflow gate docs.
+  5. Tests validate registry shape and required gate documentation links.
+**Plans**: 2 plans
+
+Plans:
+- [ ] 09-01: Add tool registry schema/data and registry-backed docs validation.
+- [ ] 09-02: Slim `AGENTS.md` and move detailed gate policy into workflow gate documentation.
+
+### Phase 10: Evidence-Only Gate Linter Seed MVP
+**Goal**: Promote or explicitly re-defer `GATELINT-01` after the validator and tool registry can bound its scope.
+**Depends on**: Phase 9
+**Requirements**: GATELINT-01
+**UI hint**: no
+**Success Criteria** (what must be TRUE):
+  1. Gate linter scope is checked against `ai-workspace-kit` ownership before implementation.
+  2. If implemented, it reports missing gate blocks, duplicate gate IDs, stale paths, missing source layers, missing changelog entries, conflicting wording, unresolved refs, and gates without observable outputs.
+  3. Output is review packet evidence only and never makes semantic adoption decisions.
+  4. If not implemented, a decision artifact records why it remains deferred and what evidence would promote it later.
+**Plans**: 2 plans
+
+Plans:
+- [ ] 10-01: Revalidate gate-linter boundary and fixture scope against `ai-workspace-kit`.
+- [ ] 10-02: Implement minimal evidence-only linter or record explicit deferred decision.
+
+### Phase 11: v2 Tool Selection Review
+**Goal**: Choose the next single tool from deferred seeds based on evidence instead of starting several broad tools.
+**Depends on**: Phase 10
+**Requirements**: LEDGER-01, FORENSICS-01, CONFIG-01, SKILL-01, TESTQA-01, UIREG-01
+**UI hint**: no
+**Success Criteria** (what must be TRUE):
+  1. Deferred seed tools are reviewed against actual usage evidence, changelog history, cross-repo requests, and project pain.
+  2. At most one next implementation candidate is promoted.
+  3. Non-selected tools remain seed/backlog items with explicit reasons.
+  4. The promoted tool has ownership, destination, use gate, outputs, non-goals, and fixtures defined before implementation.
+**Plans**: 1 plan
+
+Plans:
+- [ ] 11-01: Run evidence-backed v2 seed review and promote one next tool or defer all.
+
 ## Requirement Coverage
 
 | Requirement | Phase |
@@ -171,12 +291,30 @@ Plans:
 | DOC-02 | Phase 5 |
 | DOC-03 | Phase 5 |
 | DOC-04 | Phase 5 |
+| REL-05 | Phase 6 |
+| REL-06 | Phase 6 |
+| META-01 | Phase 6 |
+| SELF-01 | Phase 6 |
+| XREPO-VALIDATOR-01 | Phase 7 |
+| CLI-01 | Phase 8 |
+| CLI-02 | Phase 8 |
+| REG-01 | Phase 9 |
+| GOV-01 | Phase 9 |
+| GATELINT-01 | Phase 10 |
+| LEDGER-01 | Phase 11 |
+| FORENSICS-01 | Phase 11 |
+| CONFIG-01 | Phase 11 |
+| SKILL-01 | Phase 11 |
+| TESTQA-01 | Phase 11 |
+| UIREG-01 | Phase 11 |
 
-**Coverage:** 45/45 v1 requirements mapped.
+**Coverage:**
+- v1: 45/45 requirements mapped and complete.
+- v2 preliminary: 16/16 requirements mapped to planned or deferred phases.
 
 ## Progress
 
-**Execution Order:** 1 -> 2 -> 3 -> 4 -> 5
+**Execution Order:** 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> 9 -> 10 -> 11
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
@@ -184,4 +322,10 @@ Plans:
 | 2. Shared Safety Harness | 3/3 | Complete | 2026-05-07 |
 | 3. Cross-Repo Capability Request Gate | 3/3 | Complete | 2026-05-07 |
 | 4. Contract Drift Auditor MVP | 3/3 | Complete | 2026-05-07 |
-| 5. Integration and Release Hardening | 2/2 | Complete    | 2026-05-07 |
+| 5. Integration and Release Hardening | 2/2 | Complete | 2026-05-07 |
+| 6. Release Closeout and Tool Metadata | 0/3 | Planned | - |
+| 7. Cross-Repo Compatibility Checker MVP | 0/3 | Planned | - |
+| 8. Contract Drift Auditor CLI Ergonomics | 0/2 | Planned | - |
+| 9. Tool Registry and Workflow Gate Slimming | 0/2 | Planned | - |
+| 10. Evidence-Only Gate Linter Seed MVP | 0/2 | Planned | - |
+| 11. v2 Tool Selection Review | 0/1 | Planned | - |

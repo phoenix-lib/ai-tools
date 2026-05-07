@@ -70,6 +70,16 @@ guidance auditable without mutating target projects.
   or workflow gate change.
 - [ ] Keep `XREPO-VALIDATOR-01` as a deferred v2 prerequisite before automatic
   cross-repo indexer or gate-linter automation.
+- [ ] Close the v1 release baseline with accurate auditor limitations, release
+  packet fixtures, centralized tool metadata, and safe self-audit invocation.
+- [ ] Build the cross-repo compatibility checker before any automatic
+  cross-repo indexer or gate-linter automation.
+- [ ] Improve `contract-drift-auditor` CLI ergonomics for CI and assistant
+  consumers without making findings automatic decisions.
+- [ ] Add a machine-readable tool registry before promoting broad seed tools.
+- [ ] Keep ledger, forensics, config, skill, test quality, UI, and integration
+  tools deferred until evidence-backed v2 tool selection promotes one next
+  candidate.
 
 ### Out of Scope
 
@@ -195,6 +205,7 @@ to inspect it.
 | Treat self-use tools as evidence, not authority | AI Tools should audit itself with validated tools, but the assistant keeps responsibility for scope, relevance, and boundary decisions. | Validated in Phase 03 |
 | Classify new tools before implementation | New tool ideas should go to `standards/`, `shared/`, `tools/<tool-name>/`, seed/backlog, or cross-repo requests based on ownership and maturity. | Validated in Phase 03 |
 | Defer cross-repo protocol automation until a validator exists | Human-reviewed protocol exchange is compatible now, but automatic indexers or gate linters need a read-only checker that validates both repositories together. | Deferred v2 candidate |
+| Start v2 with release closeout, metadata, and cross-repo validation | Release discipline and interop drift are the current risks; broad seed tools should wait until tool registry and validator guardrails exist. | Planned for Phase 06-11 |
 
 ## Evolution
 
@@ -214,4 +225,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state.
 
 ---
-*Last updated: 2026-05-07 after completing Phase 05 Integration and Release Hardening*
+*Last updated: 2026-05-07 after adding preliminary v2 phases*

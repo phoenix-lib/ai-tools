@@ -1,17 +1,17 @@
 ---
 gsd_state_version: 1.0
-milestone: v1.0
-milestone_name: milestone
-status: complete
-stopped_at: Completed Phase 5 Verification
-last_updated: "2026-05-07T18:12:43.291Z"
+milestone: v2.0
+milestone_name: Tooling Hardening
+status: planned
+stopped_at: Preliminary v2 phases drafted
+last_updated: "2026-05-07T21:23:20+03:00"
 last_activity: 2026-05-07
 progress:
-  total_phases: 5
+  total_phases: 11
   completed_phases: 5
-  total_plans: 14
+  total_plans: 27
   completed_plans: 14
-  percent: 100
+  percent: 52
 ---
 
 # Project State
@@ -22,16 +22,16 @@ See: .planning/PROJECT.md (updated 2026-05-07)
 
 **Core value:** Produce deterministic, evidence-backed review packets that make
 AI project guidance auditable without mutating target projects.
-**Current focus:** Phase 5 - Integration and Release Hardening
+**Current focus:** Phase 6 - Release Closeout and Tool Metadata
 
 ## Current Position
 
-Phase: 5 (Integration and Release Hardening) - COMPLETE
-Plan: 2 of 2
-Status: Phase verified complete
+Phase: 6 (Release Closeout and Tool Metadata) - PLANNED
+Plan: Not started
+Status: v2 preliminary roadmap drafted
 Last activity: 2026-05-07
 
-Progress: [##########] 100% of Phase 05 execution complete
+Progress: [#####-----] 52% of mapped plans complete
 
 ## Performance Metrics
 
@@ -103,6 +103,9 @@ Decisions are logged in PROJECT.md Key Decisions table.
 
 - Add a shared packet renderer in Phase 04 so packet-producing tools render
   machine and human outputs from one packet model.
+- Start v2 with release closeout, centralized tool metadata, release packet
+  fixtures, and the cross-repo compatibility checker before promoting broad
+  seed tools.
 
 ### Roadmap Evolution
 
@@ -118,6 +121,9 @@ Decisions are logged in PROJECT.md Key Decisions table.
 - Baseline seed ideas were consolidated into `tools/*/SEED-IDEAS.md`,
   `standards/review-packet/SEED-IDEAS.md`, and `docs/`; obsolete root seed
   folders were removed.
+- Preliminary v2 phases 06-11 were added after Phase 5 to keep release
+  discipline, interop validation, CLI ergonomics, tool registry, and future
+  tool selection ordered by current risk.
 
 ### Pending Todos
 
@@ -136,14 +142,15 @@ None.
 
 | Category | Item | Status | Deferred At |
 |----------|------|--------|-------------|
-| Tooling | Project context ledger | v2 candidate | Initialization |
-| Tooling | Phase forensics tool | v2 candidate | Initialization |
-| Tooling | Config matrix validator | v2 candidate | Initialization |
-| Tooling | UI and integration tools | v2+ candidate | Initialization |
-| Tooling | Mechanical gate linter | v2 candidate | 2026-05-07 cross-repo request |
+| Tooling | Cross-repo compatibility checker | Phase 7 planned | Phase 5 release hardening |
+| Tooling | Mechanical gate linter | Phase 10 planned/revalidate | 2026-05-07 cross-repo request |
+| Tooling | Project context ledger | Deferred until Phase 11 selection review | Initialization |
+| Tooling | Phase forensics tool | Deferred until Phase 11 selection review | Initialization |
+| Tooling | Config matrix validator | Deferred until Phase 11 selection review | Initialization |
+| Tooling | Skill/test/UI/integration tools | Deferred until Phase 11 selection review | Initialization |
 
 ## Session Continuity
 
-Last session: 2026-05-07T18:11:34.992Z
-Stopped at: Completed 05-02-PLAN.md
+Last session: 2026-05-07
+Stopped at: Preliminary v2 phases drafted
 Resume file: None
