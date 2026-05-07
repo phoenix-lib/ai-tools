@@ -28,9 +28,9 @@ gate-linter automation, auto-fix mode, or additional seed tools.
 - [x] Secret-like evidence is path-only by default.
 - [x] Auditor output is isolated outside the audited target project.
 - [x] Target fixture non-mutation is tested.
-- [ ] Release self-audit evidence is recorded.
-- [ ] Manual gate review evidence is recorded.
-- [ ] `CHANGELOG.md` records Phase 05 release hardening validation and upstream
+- [x] Release self-audit evidence is recorded.
+- [x] Manual gate review evidence is recorded.
+- [x] `CHANGELOG.md` records Phase 05 release hardening validation and upstream
   `ai-workspace-kit` impact.
 
 ## Required Artifacts
@@ -52,7 +52,7 @@ Already verified in Phase 4:
 - generated packet directories inside targets are ignored;
 - secret sentinel values from secret-like files do not appear in output.
 
-Plan `05-02` must refresh release evidence with:
+Plan `05-02` refreshed release evidence with:
 
 ```bash
 npm.cmd test
@@ -67,6 +67,14 @@ node tools/contract-drift-auditor/cli.js --project . --out C:\Users\suppo\.codex
 The self-audit output path is outside this repository. Findings are release
 evidence for human review; they are not automatic blockers unless a safety or
 schema issue makes the packet unusable.
+
+Validation results recorded on 2026-05-07:
+
+- `npm.cmd test -- test/contract-drift-auditor/discovery.test.js`: 6/6 pass.
+- `npm.cmd test -- test/contract-drift-auditor/checks.test.js`: 9/9 pass.
+- `npm.cmd test -- test/contract-drift-auditor/integration.test.js`: 4/4 pass.
+- `npm.cmd test -- test/planning/release-docs.test.js`: 3/3 pass.
+- `npm.cmd test`: 89/89 pass.
 
 ## Docs Evidence
 
@@ -92,8 +100,8 @@ run, depend on, or auto-wire either repository into the other.
 
 ## Manual Gate Review
 
-Plan `05-02` must perform assistant-led gate review using current local
-`ai-workspace-kit` guidance. Review:
+Plan `05-02` performed assistant-led gate review using current local
+`ai-workspace-kit` guidance. Reviewed sources:
 
 - `AGENTS.md`;
 - `.planning/gates/registry.json`;
@@ -102,9 +110,12 @@ Plan `05-02` must perform assistant-led gate review using current local
 - `.external/ai-workspace-kit/TOOLING-PLAYBOOK.md`;
 - `.external/ai-workspace-kit/templates/GATE-REGISTRY.json`.
 
-The review must check for conflicting gates, stale assumptions, duplicated
-ownership, irrelevant stages, missing observable artifacts, hidden automation,
-and dependency creep.
+Result: adopt the current gate set for the first release. No release-blocking
+conflict, duplicated `ai-workspace-kit` ownership, hidden automation, or
+dependency creep was found. The `future-gate-review` hook remains manual because
+`ai-workspace-kit` documents the semantic review procedure but does not provide
+a runnable gate-review command yet. No cross-repo outbox request is needed for
+this release.
 
 Mechanical gate-linter output, if added later, is evidence only. The assistant
 still makes the repository-local semantic decision.
@@ -112,16 +123,21 @@ still makes the repository-local semantic decision.
 ## Self-Use Evidence
 
 Phase 4 self-use produced `human_review_required` with noisy historical
-findings. Plan `05-02` must harden self-audit filtering or record remaining
-noise as a release caveat before marking self-audit evidence complete.
+findings. Plan `05-02` hardened self-audit filtering so historical
+`.planning/phases/**` artifacts and nested fixture contracts are not treated as
+current source documents by default.
 
-Release readiness should record:
+Release readiness evidence:
 
-- command run;
-- output path;
-- packet status;
-- finding count;
-- whether findings are blockers, human-review evidence, or caveats.
+- Command: `node tools/contract-drift-auditor/cli.js --project . --out C:\Users\suppo\.codex\memories\ai-tools-self-audit-phase05`
+- Output path: `C:\Users\suppo\.codex\memories\ai-tools-self-audit-phase05`
+- Packet status: `human_review_required`
+- Finding count: 57 total, all `low`; 0 blockers, 0 critical, 0 high,
+  0 medium, 0 required decisions.
+- Interpretation: remaining findings are human-review caveats around optional,
+  example, or shorthand references in current contract/planning docs. They do
+  not block the first release because packet generation, schema validation,
+  secret handling, output isolation, and non-mutation checks all passed.
 
 ## Deferred V2 Work
 

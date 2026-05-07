@@ -16,15 +16,40 @@ major plan execution, and workflow gate change.
 - Changed docs validation: added `test/planning/release-docs.test.js` to check
   required use/non-use guidance, safety guarantees, packet artifacts,
   `ai-workspace-kit` boundary language, and deferred v2 validator/linter scope.
-- Validation: documentation-only plan; focused docs validation should run with
-  `npm.cmd test -- test/planning/release-docs.test.js` and full validation with
-  `npm.cmd test`.
+- Changed auditor filtering behavior: default contract source selection now
+  treats only root `AGENTS.md`/`CLAUDE.md` as current project contracts, excludes
+  historical `.planning/phases/**` from planning source docs, avoids treating
+  nested fixture contracts as current self-audit contracts, ignores descriptive
+  phrases and bare directory placeholders as file references, and resolves
+  repo-qualified `ai-workspace-kit/...` counterpart paths through
+  `.external/ai-workspace-kit`.
+- Changed self-use evidence: release self-audit now writes review output outside
+  the repo at `C:\Users\suppo\.codex\memories\ai-tools-self-audit-phase05`.
+  The packet status is `human_review_required` with 57 low findings, 0 blockers,
+  0 critical/high/medium findings, and 0 required decisions. Remaining findings
+  are release caveats, not automatic blockers.
+- Changed gate review evidence: performed assistant-led release gate review
+  using local `ai-workspace-kit` tooling guidance, local gate registry, cross-repo
+  playbook, and `AGENTS.md`. Current gates are adopted for v1; no hidden
+  automation, dependency creep, duplicated kit-owned behavior, or release-blocking
+  gate conflict was found.
+- Validation: `npm.cmd test -- test/contract-drift-auditor/discovery.test.js`
+  passed 6/6, `npm.cmd test -- test/contract-drift-auditor/checks.test.js`
+  passed 9/9, `npm.cmd test -- test/contract-drift-auditor/integration.test.js`
+  passed 4/4, `npm.cmd test -- test/planning/release-docs.test.js` passed 3/3,
+  and `npm.cmd test` passed 89/89.
 - Upstream impact: Phase 05 planning checked `ai-workspace-kit` local and
   remote HEAD at `2079ab9`; no update was required before release docs work.
-- Breaking changes: none; this entry adds documentation and validation only.
+- Compatibility impact for `ai-workspace-kit`: v1 remains optional external
+  evidence only. No automatic kit dependency, automatic cross-repo validation,
+  automatic tool execution, or mechanical gate-linter automation was added.
+  `XREPO-VALIDATOR-01` and `GATELINT-01` remain deferred v2 work.
+- Breaking changes: none; source-document filtering only reduces false-positive
+  self-audit noise and keeps broad project discovery intact.
 - Migration notes: downstream consumers should read the changelog first, then
   `README.md` and `docs/RELEASE-READINESS.md` before relying on changed AI Tools
-  release guidance.
+  release guidance. Treat self-audit findings as evidence for human review, not
+  as automatic decisions.
 
 ### Phase 04: Contract Drift Auditor MVP
 

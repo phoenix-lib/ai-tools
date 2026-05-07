@@ -15,6 +15,19 @@ function hashFile(projectDir, relativePath) {
   return crypto.createHash("sha256").update(fs.readFileSync(absolutePath)).digest("hex");
 }
 
+function referenceExists(discovery, relativePath) {
+  if (discovery.fileSet.has(relativePath) || fs.existsSync(path.join(discovery.projectDir, relativePath))) {
+    return true;
+  }
+
+  if (relativePath.startsWith("ai-workspace-kit/")) {
+    const counterpartPath = relativePath.slice("ai-workspace-kit/".length);
+    return fs.existsSync(path.join(discovery.projectDir, ".external", "ai-workspace-kit", counterpartPath));
+  }
+
+  return false;
+}
+
 function evidenceRef(discovery, { id, path: evidencePath, evidence_type, reason, line, confidence = "verified", unknown_detail }) {
   const normalizedPath = normalizeEvidencePath(evidencePath);
 
@@ -84,7 +97,7 @@ function checkMissingReferences(discovery, result, references) {
   const seen = new Set();
 
   for (const reference of references) {
-    if (discovery.fileSet.has(reference.path)) {
+    if (referenceExists(discovery, reference.path)) {
       continue;
     }
 

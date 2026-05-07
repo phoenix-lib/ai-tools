@@ -71,6 +71,46 @@ test("project skill references are checked for missing local files", () => {
   });
 });
 
+test("descriptive phrases are not treated as file references", () => {
+  withTempProject({
+    "AGENTS.md": [
+      "# Fixture",
+      "",
+      "## Workflow",
+      "",
+      "- Decision Needed: Should this become Phase 3 for protocol/gate process?",
+      "- Packet output: REVIEW-SUMMARY.json",
+      "- Directory placeholder: outbox/",
+      "- Missing guide: docs/MISSING.md",
+      "",
+      ""
+    ].join("\n"),
+    "package.json": "{\"scripts\":{\"test\":\"node --test\"}}\n"
+  }, (projectDir) => {
+    const findings = runChecks(discoverProject(projectDir)).findings;
+    const summaries = findings.map((finding) => finding.summary);
+
+    assert.ok(summaries.some((summary) => /docs\/MISSING\.md/.test(summary)));
+    assert.equal(summaries.some((summary) => /Phase 3 for protocol\/gate process/.test(summary)), false);
+    assert.equal(summaries.some((summary) => /outbox\//.test(summary)), false);
+  });
+});
+
+test("repo-qualified ai-workspace-kit counterpart paths resolve through external checkout", () => {
+  withTempProject({
+    "AGENTS.md": "# Fixture\n\n## Source Layers\n\n- Counterpart: ai-workspace-kit/CROSS-REPO-CAPABILITY-REQUESTS.md\n",
+    ".external/ai-workspace-kit/CROSS-REPO-CAPABILITY-REQUESTS.md": "# Cross Repo\n",
+    "package.json": "{\"scripts\":{\"test\":\"node --test\"}}\n"
+  }, (projectDir) => {
+    const findings = runChecks(discoverProject(projectDir)).findings;
+
+    assert.equal(
+      findings.some((finding) => /ai-workspace-kit\/CROSS-REPO-CAPABILITY-REQUESTS\.md/.test(finding.summary)),
+      false
+    );
+  });
+});
+
 test("absent tool references are evidence-backed findings, not permission decisions", () => {
   withTempProject({
     "AGENTS.md": "# Fixture\n\n## Workflow\n\n- Use `pnpm test` before release.\n",

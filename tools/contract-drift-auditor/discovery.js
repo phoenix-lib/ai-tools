@@ -4,6 +4,12 @@ const { walkProjectFiles } = require("../../shared/file-walker");
 const { isSecretLikePath, normalizeEvidencePath } = require("../../shared/secret-policy");
 
 const CONTRACT_FILE_NAMES = new Set(["AGENTS.md", "CLAUDE.md"]);
+const CURRENT_PLANNING_FILES = new Set([
+  ".planning/PROJECT.md",
+  ".planning/STATE.md",
+  ".planning/ROADMAP.md",
+  ".planning/REQUIREMENTS.md"
+]);
 
 function sortByPath(left, right) {
   return left.path.localeCompare(right.path);
@@ -28,13 +34,27 @@ function readPackageJson(projectDir, relativePath) {
   }
 }
 
+function isCurrentPlanningDocument(relativePath) {
+  const normalizedPath = normalizeEvidencePath(relativePath);
+
+  return CURRENT_PLANNING_FILES.has(normalizedPath)
+    || normalizedPath.startsWith(".planning/cross-repo/")
+    || normalizedPath.startsWith(".planning/gates/");
+}
+
+function isCurrentContractDocument(relativePath) {
+  const normalizedPath = normalizeEvidencePath(relativePath);
+
+  return CONTRACT_FILE_NAMES.has(normalizedPath);
+}
+
 function discoverProject(projectDir) {
   const root = path.resolve(projectDir);
   const files = walkProjectFiles(root);
   const fileSet = new Set(files);
 
   const contractFiles = files
-    .filter((relativePath) => CONTRACT_FILE_NAMES.has(path.posix.basename(relativePath)))
+    .filter((relativePath) => isCurrentContractDocument(relativePath))
     .map((relativePath) => ({
       path: normalizeEvidencePath(relativePath),
       path_only: isSecretLikePath(relativePath),
@@ -43,7 +63,7 @@ function discoverProject(projectDir) {
     .sort(sortByPath);
 
   const planningFiles = files
-    .filter((relativePath) => relativePath.startsWith(".planning/") && relativePath.endsWith(".md"))
+    .filter((relativePath) => relativePath.endsWith(".md") && isCurrentPlanningDocument(relativePath))
     .map((relativePath) => ({
       path: normalizeEvidencePath(relativePath),
       path_only: isSecretLikePath(relativePath),
@@ -90,5 +110,7 @@ function discoverProject(projectDir) {
 
 module.exports = {
   discoverProject,
+  isCurrentContractDocument,
+  isCurrentPlanningDocument,
   readTextIfSafe
 };

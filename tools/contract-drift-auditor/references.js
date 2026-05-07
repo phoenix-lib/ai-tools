@@ -15,6 +15,10 @@ function isPathLike(value) {
     return false;
   }
 
+  if (/\s/.test(value) || /[<>]/.test(value) || value.endsWith("/")) {
+    return false;
+  }
+
   if (/^(npm|node|git|yarn|pnpm|uv|cargo|go|python)\b/i.test(value)) {
     return false;
   }
@@ -63,7 +67,7 @@ function extractMarkdownReferences(document) {
       candidates.push(backtickMatch[1]);
     }
 
-    const afterColon = line.match(/:\s*([^`]+)$/);
+    const afterColon = line.match(/:\s*([^`\s]+)\s*$/);
     if (afterColon) {
       candidates.push(afterColon[1].trim());
     }

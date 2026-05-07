@@ -1,5 +1,6 @@
 const assert = require("node:assert/strict");
 const fs = require("node:fs");
+const os = require("node:os");
 const path = require("node:path");
 const test = require("node:test");
 const { runAudit } = require("../../tools/contract-drift-auditor");
@@ -12,6 +13,12 @@ const {
 } = require("../shared/fixture-helpers");
 
 const fixedClock = () => new Date("2026-05-07T00:00:00Z");
+
+function writeFile(root, relativePath, content = "") {
+  const filePath = path.join(root, relativePath);
+  fs.mkdirSync(path.dirname(filePath), { recursive: true });
+  fs.writeFileSync(filePath, content);
+}
 
 test("auditor emits required packet artifacts for missing-command fixture", async () => {
   const input = fixtureInputDir("missing-command");
@@ -67,5 +74,39 @@ test("auditor ignores generated packet artifacts inside target evidence", async 
     assert.doesNotMatch(outputText, /old-adoption\//);
   } finally {
     removeTempOutputDir(outDir);
+  }
+});
+
+test("auditor does not report historical planning references as current drift", async () => {
+  const input = fs.mkdtempSync(path.join(os.tmpdir(), "ai-tools-self-audit-input-"));
+  const outDir = createTempOutputDir("self-audit-filtering");
+
+  try {
+    writeFile(input, "AGENTS.md", [
+      "# Contract",
+      "",
+      "## Source Layers",
+      "",
+      "- Current guide: docs/MISSING.md",
+      "- Optional upstream: .external/ai-workspace-kit/TOOLING-PLAYBOOK.md",
+      ""
+    ].join("\n"));
+    writeFile(input, ".planning/ROADMAP.md", "# Roadmap\n");
+    writeFile(input, ".planning/phases/01-old/01-PLAN.md", "Historical ref: docs/HISTORICAL.md\n");
+    writeFile(input, ".external/ai-workspace-kit/package.json", "{\"name\":\"ai-workspace-kit\"}\n");
+    writeFile(input, ".external/ai-workspace-kit/TOOLING-PLAYBOOK.md", "# Tooling\n");
+
+    const before = treeHash(input);
+    await runAudit({ projectDir: input, outDir, clock: fixedClock });
+    const summary = JSON.parse(fs.readFileSync(path.join(outDir, "REVIEW-SUMMARY.json"), "utf8"));
+    const summaries = summary.findings.map((finding) => finding.summary).join("\n");
+
+    assert.match(summaries, /docs\/MISSING\.md/);
+    assert.doesNotMatch(summaries, /docs\/HISTORICAL\.md/);
+    assert.doesNotMatch(summaries, /\.external\/ai-workspace-kit\/TOOLING-PLAYBOOK\.md/);
+    assert.equal(treeHash(input), before);
+  } finally {
+    removeTempOutputDir(outDir);
+    fs.rmSync(input, { recursive: true, force: true });
   }
 });
