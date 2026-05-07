@@ -14,7 +14,14 @@
     },
     "evidence_refs": {
       "items": {
-        "type": "string"
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "$ref": "EVIDENCE-REF.schema.json"
+          }
+        ]
       },
       "minItems": 0,
       "type": "array",
@@ -27,7 +34,14 @@
     },
     "recommended_action_refs": {
       "items": {
-        "type": "string"
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "$ref": "RECOMMENDED-ACTION.schema.json"
+          }
+        ]
       },
       "minItems": 0,
       "type": "array",

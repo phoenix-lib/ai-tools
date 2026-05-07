@@ -1,0 +1,121 @@
+{
+  "$id": "https://ai-tools.local/schemas/review-packet/EVIDENCE-REF.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Evidence reference for local proof. V1 carries paths, hashes or path-only markers, reasons, and confidence. Evidence snippets are not supported.",
+  "properties": {
+    "confidence": {
+      "enum": [
+        "verified",
+        "inferred",
+        "unknown",
+        "stale"
+      ]
+    },
+    "evidence_type": {
+      "description": "Tool-defined evidence category, such as contract_file, package_script, skill_file, generated_artifact, or secret_path.",
+      "minLength": 1,
+      "type": "string"
+    },
+    "id": {
+      "minLength": 1,
+      "pattern": "^[a-z0-9][a-z0-9._-]*$",
+      "type": "string"
+    },
+    "line": {
+      "minimum": 1,
+      "type": "integer"
+    },
+    "path": {
+      "description": "Normalized path relative to the target project, using / separators. Absolute paths, drive-letter paths, and backslashes are not valid evidence paths.",
+      "minLength": 1,
+      "pattern": "^(?![A-Za-z]:)(?!/)(?!.*\\\\).+$",
+      "type": "string"
+    },
+    "path_only": {
+      "description": "True for secret-like or otherwise unreadable evidence. Path-only evidence must not include content hashes or snippets.",
+      "type": "boolean"
+    },
+    "range": {
+      "additionalProperties": false,
+      "properties": {
+        "end": {
+          "minimum": 1,
+          "type": "integer"
+        },
+        "start": {
+          "minimum": 1,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "start",
+        "end"
+      ],
+      "type": "object"
+    },
+    "reason": {
+      "description": "Short explanation of why this source was cited.",
+      "minLength": 1,
+      "type": "string"
+    },
+    "sha256": {
+      "description": "SHA-256 hash for readable evidence. Do not hash secret-like file contents for path-only evidence.",
+      "pattern": "^[a-f0-9]{64}$",
+      "type": "string"
+    },
+    "unknown_detail": {
+      "description": "Required when confidence is unknown and useful when a stale fact needs explanation.",
+      "minLength": 1,
+      "type": "string"
+    }
+  },
+  "required": [
+    "id",
+    "path",
+    "evidence_type",
+    "reason",
+    "confidence",
+    "path_only"
+  ],
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "path_only": {
+            "const": true
+          }
+        },
+        "required": [
+          "path_only"
+        ]
+      },
+      "then": {
+        "not": {
+          "required": [
+            "sha256"
+          ]
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "path_only": {
+            "const": false
+          }
+        },
+        "required": [
+          "path_only"
+        ]
+      },
+      "then": {
+        "required": [
+          "sha256"
+        ]
+      }
+    }
+  ],
+  "title": "Review Packet Evidence Reference",
+  "type": "object"
+}

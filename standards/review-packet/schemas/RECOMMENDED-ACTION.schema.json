@@ -1,0 +1,56 @@
+{
+  "$id": "https://ai-tools.local/schemas/review-packet/RECOMMENDED-ACTION.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Concrete next-step guidance. This schema does not carry patch bodies or automatic apply instructions.",
+  "properties": {
+    "finding_refs": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "human_review_required": {
+      "type": "boolean"
+    },
+    "id": {
+      "minLength": 1,
+      "pattern": "^[a-z0-9][a-z0-9._-]*$",
+      "type": "string"
+    },
+    "rationale": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "suggested_command": {
+      "description": "Optional command suggestion. This is guidance only and does not grant permission or execute anything.",
+      "minLength": 1,
+      "type": "string"
+    },
+    "suggested_file": {
+      "description": "Optional target file guidance using normalized relative paths.",
+      "minLength": 1,
+      "pattern": "^(?![A-Za-z]:)(?!/)(?!.*\\\\).+$",
+      "type": "string"
+    },
+    "summary": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "target_owner": {
+      "description": "Person, team, tool, or workflow expected to act on this recommendation.",
+      "minLength": 1,
+      "type": "string"
+    }
+  },
+  "required": [
+    "id",
+    "summary",
+    "rationale",
+    "target_owner",
+    "human_review_required"
+  ],
+  "title": "Review Packet Recommended Action",
+  "type": "object"
+}

@@ -86,6 +86,43 @@ The packet contract is split into focused schemas:
 - `RECOMMENDED-ACTION.schema.json` owns action guidance, not patches.
 - `TOOL-MANIFEST.schema.json` owns tool identity and run metadata.
 
+## Evidence Refs
+
+Evidence refs identify proof without copying source content. Paths must be
+normalized relative paths using `/`, not absolute local paths. Readable evidence
+uses `sha256` content hashes. Secret-like files use `path_only: true` and must
+not carry content hashes or snippets derived from secret contents.
+
+Every evidence ref needs:
+
+- `id`
+- `path`
+- `evidence_type`
+- `reason`
+- `confidence`
+- `path_only`
+- optional `line` or `range`
+
+## Recommended Actions
+
+Recommended actions are concrete next steps separate from findings. They may
+name a target owner, suggested command, or suggested file, but they are guidance
+only. They are not patches, permission grants, or automatic apply instructions.
+
+## Tool Manifest
+
+The `tool` object in `REVIEW-SUMMARY.json` follows
+`TOOL-MANIFEST.schema.json`. It records tool name, tool version, schema
+versions, input target, generated files, run timestamp, safety profile, policy
+hashes, requested outputs, source commit when available, and read/write
+behavior.
+
+This mirrors useful `ai-workspace-kit` review concepts such as source commit,
+policy hash, generated files, evidence files, blockers, required decisions,
+rejected assumptions, and preserved stricter local rules. It does not copy the
+exact `ai-workspace-kit` adapter manifest and does not make `ai-workspace-kit`
+a runtime dependency.
+
 ## Out of Scope for V1
 
 - `RISK-MATRIX.md`

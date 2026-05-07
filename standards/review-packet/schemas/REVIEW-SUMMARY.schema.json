@@ -107,6 +107,12 @@
     "recommended_actions_file": {
       "const": "RECOMMENDED-ACTIONS.md"
     },
+    "recommended_actions": {
+      "items": {
+        "$ref": "RECOMMENDED-ACTION.schema.json"
+      },
+      "type": "array"
+    },
     "rejected_assumptions": {
       "items": {
         "$ref": "#/$defs/decisionItem"
@@ -148,9 +154,7 @@
       "type": "object"
     },
     "tool": {
-      "additionalProperties": true,
-      "description": "Refined by TOOL-MANIFEST.schema.json in the complete schema set.",
-      "type": "object"
+      "$ref": "TOOL-MANIFEST.schema.json"
     }
   },
   "required": [
@@ -161,6 +165,7 @@
     "target_project",
     "generated_artifacts",
     "findings",
+    "recommended_actions",
     "evidence_file",
     "recommended_actions_file",
     "blockers",
