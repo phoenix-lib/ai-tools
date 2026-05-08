@@ -137,6 +137,11 @@ Decisions are logged in `.planning/PROJECT.md` Key Decisions table.
   review dispositions, ledger scope/diff modes, shared CLI contract, and
   `ai-workspace-kit` LLM instruction compatibility.
 
+- Phase 15-17 scope refined after Phase 14 analysis: review dispositions now
+  include stable finding fingerprints, ledger scope defaults to current, and a
+  post-v2.1 portfolio real-project scan protocol is tracked as a future
+  candidate.
+
 ### Pending Todos
 
 - Start Phase 15: Review Disposition Model.

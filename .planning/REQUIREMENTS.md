@@ -122,13 +122,14 @@
 ### Review Disposition Model
 
 - [ ] **DISP-01**: Human reviewers can record a disposition for a specific finding without deleting or rewriting the original source finding.
-- [ ] **DISP-02**: Dispositions require finding ID, source tool, source path, source check ID, reason, owner, reviewed timestamp, expiry timestamp, evidence refs, tool version, and schema version.
+- [ ] **DISP-02**: Dispositions require finding ID, stable finding fingerprint, source tool, source path, source check ID, reason, owner, reviewed timestamp, expiry timestamp, evidence refs, tool version, and schema version.
 - [ ] **DISP-03**: Expired or stale dispositions remain visible as review-required context instead of silently suppressing findings.
 - [ ] **DISP-04**: Packet consumers can join dispositions to findings as separate human review metadata while preserving original severity, status contribution, and evidence.
+- [ ] **DISP-05**: Finding fingerprints are derived from stable evidence fields such as source tool, source check ID, normalized source path, and normalized target so dispositions survive occurrence-normalized finding ID changes.
 
 ### Ledger Scope and Diff Modes
 
-- [ ] **LEDGER-SCOPE-01**: User can run `project-context-ledger` with `--scope current|planning|history|all` to choose whether current source-of-truth files, planning files, historical phase artifacts, or all supported sources are scanned.
+- [ ] **LEDGER-SCOPE-01**: User can run `project-context-ledger` with `--scope current|planning|history|all`, with `current` as the default, to choose whether current source-of-truth files, active planning files, historical phase artifacts, or all supported sources are scanned.
 - [ ] **LEDGER-SCOPE-02**: User can run `project-context-ledger --since-manifest <CACHE-MANIFEST.json>` to report changed, added, removed, stale, and unchanged facts.
 - [ ] **LEDGER-SCOPE-03**: Current scope treats historical `.planning/phases/**` artifacts as history by default so prior phase references do not dominate current source-of-truth findings.
 - [ ] **LEDGER-SCOPE-04**: Ledger findings distinguish real references from examples, placeholders, `n/a`, and generated packet artifacts to reduce false positives.
@@ -146,6 +147,12 @@
 - [ ] **KITLLM-01**: Cross-repo compatibility checks can inspect `.external/ai-workspace-kit/LLM-PROJECT-INSTRUCTIONS.json` and schema evidence when present.
 - [ ] **KITLLM-02**: The checker reports if kit LLM instructions recommend AI Tools as a dependency, package runner, hidden trigger, automatic gate decision layer, or source of roadmap mutation.
 - [ ] **KITLLM-03**: The checker reports whether kit LLM instructions describe AI Tools review packets as optional evidence compatible with `REVIEW-SUMMARY.json`, `EVIDENCE.json`, `FINDINGS.md`, and `RECOMMENDED-ACTIONS.md`.
+
+## Future Requirements
+
+### Portfolio Real Projects Scan Protocol
+
+- [ ] **PORTFOLIO-SCAN-01**: A future milestone defines a `PROJECT-INVENTORY.json` and safe scan procedure for running `ai-tools` and `ai-workspace-kit` across the user's real projects, with explicit project paths, allowed tools, external output directories, and no automatic mutation or copied `.planning` state.
 
 ## Out of Scope
 
@@ -234,6 +241,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | DISP-02 | Phase 15 | Planned |
 | DISP-03 | Phase 15 | Planned |
 | DISP-04 | Phase 15 | Planned |
+| DISP-05 | Phase 15 | Planned |
 | LEDGER-SCOPE-01 | Phase 16 | Planned |
 | LEDGER-SCOPE-02 | Phase 16 | Planned |
 | LEDGER-SCOPE-03 | Phase 16 | Planned |
@@ -251,13 +259,14 @@ Which phases cover which requirements. Updated during roadmap creation.
 | SKILL-01 | Future | Deferred - trigger: project skills become active maintained artifacts |
 | TESTQA-01 | Future | Deferred - trigger: repeated shallow-test, over-mocking, or missed-behavior evidence |
 | UIREG-01 | Future | Deferred - trigger: frontend or UI regression evidence demand |
+| PORTFOLIO-SCAN-01 | Future | Future milestone candidate - trigger: user-approved inventory of real project paths and scan permissions |
 
 **Coverage:**
 - v1 requirements: 45 total
 - Mapped to phases: 45
 - Unmapped: 0
-- v2.1 requirements: 26 total
-- v2.1 mapped to planned phases: 26
+- v2.1 requirements: 27 total
+- v2.1 mapped to planned phases: 27
 
 ---
 *Requirements defined: 2026-05-07*

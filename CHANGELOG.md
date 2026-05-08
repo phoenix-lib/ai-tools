@@ -5,6 +5,20 @@ major plan execution, and workflow gate change.
 
 ## Unreleased
 
+### Planning Refinement: Evidence Consumption Direction
+
+- Refined Phase 15 Review Disposition Model to require stable finding
+  fingerprints so human review metadata can survive occurrence-normalized
+  finding ID changes.
+- Refined Phase 16 Ledger Scope and Diff Modes to make `current` the default
+  scope and keep historical `.planning/phases/**` references out of current
+  findings by default.
+- Added `PORTFOLIO-SCAN-01` as a post-v2.1 future milestone candidate for
+  scanning the user's real projects from an explicit inventory with external
+  outputs and no automatic mutation or copied `.planning` state.
+- Validation: focused planning tests passed 17/17, `gsd-sdk.cmd query
+  state.validate` passed, and `git diff --check` passed.
+
 ### Phase 14: Ledger Artifact Schemas
 
 - Changed ledger contracts: added strict JSON Schemas under

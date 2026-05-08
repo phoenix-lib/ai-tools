@@ -18,10 +18,12 @@ validator can govern tool intake.
 
 The v2.1 roadmap shifts from producing more evidence to consuming evidence
 well. It starts with a strictly mechanical packet rollup, then stabilizes ledger
-schemas, adds human review disposition metadata, reduces ledger noise through
-scope/diff modes, unifies validated CLI behavior, and checks the new
-`ai-workspace-kit` LLM instruction surface without making AI Tools a runtime
-dependency.
+schemas, adds human review disposition metadata with stable finding
+fingerprints, reduces ledger noise through current-by-default scope/diff modes,
+unifies validated CLI behavior, and checks the new `ai-workspace-kit` LLM
+instruction surface without making AI Tools a runtime dependency. A later
+portfolio milestone should use these foundations to scan the user's real
+projects from an explicit inventory instead of adding another broad auditor.
 
 ## Phases
 
@@ -43,9 +45,9 @@ dependency.
 - [x] **Phase 12: Project Context Ledger MVP** - Build the selected read-only verified project memory tool from Phase 11. (completed 2026-05-08)
 - [x] **Phase 13: Review Packet Rollup MVP** - Build a mechanical packet consumer that validates and aggregates multiple review packets without semantic suppression. (completed 2026-05-08)
 - [x] **Phase 14: Ledger Artifact Schemas** - Stabilize machine-readable schemas for project-context-ledger artifacts before other tools consume them. (completed 2026-05-08)
-- [ ] **Phase 15: Review Disposition Model** - Add explicit human review disposition metadata with owner, expiry, and evidence refs.
-- [ ] **Phase 16: Ledger Scope and Diff Modes** - Reduce ledger noise with current/planning/history scopes and since-manifest diffs.
-- [ ] **Phase 17: Shared CLI Contract** - Apply one CLI contract across validated report tools.
+- [ ] **Phase 15: Review Disposition Model** - Add explicit human review disposition metadata with owner, expiry, evidence refs, and stable finding fingerprints.
+- [ ] **Phase 16: Ledger Scope and Diff Modes** - Reduce ledger noise with current-by-default scope modes and since-manifest diffs.
+- [ ] **Phase 17: Shared CLI Contract** - Apply one CLI contract, including JSON stdout, quiet mode, and fail policy, across validated report tools.
 - [ ] **Phase 18: ai-workspace-kit LLM Instructions Compatibility** - Validate optional AI Tools evidence wording in upstream LLM project instructions.
 
 ## Phase Details
@@ -339,18 +341,20 @@ Plans:
 ### Phase 15: Review Disposition Model
 **Goal**: Add explicit human review context for findings without suppressing original evidence.
 **Depends on**: Phase 14
-**Requirements**: DISP-01, DISP-02, DISP-03, DISP-04
+**Requirements**: DISP-01, DISP-02, DISP-03, DISP-04, DISP-05
 **UI hint**: no
 **Success Criteria** (what must be TRUE):
-  1. A review disposition schema captures finding identity, reason, owner, review time, expiry, evidence refs, tool version, and schema version.
-  2. Dispositions can be joined to packet findings while preserving original severity, status contribution, and evidence refs.
-  3. Expired dispositions are reported as stale review context.
-  4. Docs describe dispositions as human review metadata, not suppression or automatic ignore policy.
+  1. A review disposition schema captures finding ID, stable finding fingerprint, reason, owner, review time, expiry, evidence refs, tool version, and schema version.
+  2. Fingerprints are derived from stable evidence fields such as source tool, source check ID, normalized source path, and normalized target so dispositions survive occurrence-normalized finding ID changes.
+  3. Dispositions can be joined to packet findings while preserving original severity, status contribution, and evidence refs.
+  4. Expired dispositions are reported as stale review context.
+  5. Docs describe dispositions as human review metadata, not suppression or automatic ignore policy.
+  6. Packet consumers may expose a bounded review surface, such as top noisy paths and source checks, while keeping the full packet index available.
 **Plans**: 2 plans
 
 Plans:
 **Wave 1**
-- [ ] 15-01: Define review disposition schema, examples, and lifecycle rules.
+- [ ] 15-01: Define review disposition schema, finding fingerprints, examples, and lifecycle rules.
 
 **Wave 2** *(blocked on Wave 1 completion)*
 - [ ] 15-02: Add disposition consumption to packet consumers with tests for expired and stale entries.
@@ -361,10 +365,11 @@ Plans:
 **Requirements**: LEDGER-SCOPE-01, LEDGER-SCOPE-02, LEDGER-SCOPE-03, LEDGER-SCOPE-04
 **UI hint**: no
 **Success Criteria** (what must be TRUE):
-  1. Ledger supports `--scope current|planning|history|all`.
+  1. Ledger supports `--scope current|planning|history|all` with `current` as the default.
   2. Ledger supports `--since-manifest <CACHE-MANIFEST.json>` and reports changed, added, removed, stale, and unchanged facts.
   3. Historical `.planning/phases/**` artifacts are categorized as history and excluded from current scope by default.
   4. Examples, placeholders, `n/a`, and generated packet artifacts are classified so they do not inflate current findings.
+  5. Self-use evidence records whether current-by-default scope reduces historical planning reference findings without hiding full history mode.
 **Plans**: 2 plans
 
 Plans:
@@ -408,6 +413,28 @@ Plans:
 Plans:
 **Wave 1**
 - [ ] 18-01: Add ai-workspace-kit LLM instruction compatibility checks, fixtures, docs, and self-use evidence.
+
+## Post-v2.1 Candidate: Portfolio Real Projects Scan Protocol
+
+**Goal**: Prepare a safe, explicit protocol for scanning the user's real
+project portfolio with `ai-tools` and `ai-workspace-kit` after evidence
+dispositions, ledger scope/diff modes, shared CLI behavior, and kit instruction
+compatibility are in place.
+
+**Candidate Requirement**: PORTFOLIO-SCAN-01
+
+**Success Criteria** (what must be TRUE before implementation):
+  1. A `PROJECT-INVENTORY.json` format captures project path, repo name,
+     project type, allowed tools, expected AI guidance, and external output
+     directory.
+  2. The protocol runs tools only from explicit inventory entries and preserves
+     read-only, external-output, no-secret-content, and no-copied-`.planning`
+     boundaries.
+  3. Portfolio output aggregates review packets mechanically and records which
+     projects need human review without making automatic roadmap, gate, merge,
+     install, or mutation decisions.
+  4. The first portfolio run is treated as research evidence for a future
+     milestone, not as automatic requirements generation.
 
 ## Requirement Coverage
 
@@ -483,6 +510,7 @@ Plans:
 | DISP-02 | Phase 15 |
 | DISP-03 | Phase 15 |
 | DISP-04 | Phase 15 |
+| DISP-05 | Phase 15 |
 | LEDGER-SCOPE-01 | Phase 16 |
 | LEDGER-SCOPE-02 | Phase 16 |
 | LEDGER-SCOPE-03 | Phase 16 |
@@ -500,11 +528,12 @@ Plans:
 | SKILL-01 | Future |
 | TESTQA-01 | Future |
 | UIREG-01 | Future |
+| PORTFOLIO-SCAN-01 | Future |
 
 **Coverage:**
 - v1: 45/45 requirements mapped and complete.
 - v2 preliminary: 16/16 requirements mapped to complete, planned, or deferred phases.
-- v2.1: 26/26 requirements mapped to planned phases 13-18.
+- v2.1: 27/27 requirements mapped to planned phases 13-18.
 
 ## Gate Resolution
 
