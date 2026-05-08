@@ -1,0 +1,20 @@
+[
+  {
+    "confidence": "verified",
+    "evidence_type": "source_file",
+    "id": "ev.one",
+    "path": "src/one.js",
+    "path_only": false,
+    "reason": "First evidence path.",
+    "sha256": "2222222222222222222222222222222222222222222222222222222222222222"
+  },
+  {
+    "confidence": "verified",
+    "evidence_type": "source_file",
+    "id": "ev.two",
+    "path": "src/two.js",
+    "path_only": false,
+    "reason": "Second evidence path.",
+    "sha256": "3333333333333333333333333333333333333333333333333333333333333333"
+  }
+]

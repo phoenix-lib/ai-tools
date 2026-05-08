@@ -1,0 +1,11 @@
+[
+  {
+    "confidence": "verified",
+    "evidence_type": "source_file",
+    "id": "ev.file",
+    "path": "src/duplicate-a.js",
+    "path_only": false,
+    "reason": "First duplicate fixture file.",
+    "sha256": "5555555555555555555555555555555555555555555555555555555555555555"
+  }
+]

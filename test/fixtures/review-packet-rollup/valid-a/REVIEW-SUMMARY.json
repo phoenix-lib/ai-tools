@@ -1,0 +1,126 @@
+{
+  "blockers": [],
+  "counts": {
+    "blockers": 0,
+    "findings_by_severity": {
+      "critical": 0,
+      "high": 0,
+      "info": 1,
+      "low": 0,
+      "medium": 1
+    },
+    "preserved_stricter_local_rules": 0,
+    "rejected_assumptions": 0,
+    "required_decisions": 0,
+    "total_findings": 2
+  },
+  "evidence_file": "EVIDENCE.json",
+  "findings": [
+    {
+      "confidence": "verified",
+      "evidence_refs": [
+        "ev.shared"
+      ],
+      "id": "shared.finding",
+      "recommended_action_refs": [
+        "act.shared"
+      ],
+      "severity": "medium",
+      "source_check_id": "alpha.shared",
+      "status_contribution": "human_review_required",
+      "summary": "Alpha packet reports a shared source finding.",
+      "title": "Shared source finding from alpha"
+    },
+    {
+      "confidence": "verified",
+      "evidence_refs": [
+        "ev.config"
+      ],
+      "id": "alpha.info",
+      "recommended_action_refs": [],
+      "severity": "info",
+      "source_check_id": "alpha.info",
+      "status_contribution": "info",
+      "summary": "Alpha packet includes informational evidence.",
+      "title": "Alpha informational evidence"
+    }
+  ],
+  "generated_artifacts": [
+    "REVIEW-SUMMARY.json",
+    "EVIDENCE.json",
+    "FINDINGS.md",
+    "RECOMMENDED-ACTIONS.md"
+  ],
+  "preserved_stricter_local_rules": [],
+  "recommended_actions": [
+    {
+      "finding_refs": [
+        "shared.finding"
+      ],
+      "human_review_required": true,
+      "id": "act.shared",
+      "rationale": "The source finding needs human review in the source packet.",
+      "suggested_file": "src/shared.js",
+      "summary": "Review the shared source finding.",
+      "target_owner": "project maintainer"
+    }
+  ],
+  "recommended_actions_file": "RECOMMENDED-ACTIONS.md",
+  "rejected_assumptions": [],
+  "required_decisions": [],
+  "schema_version": "review-packet/v1",
+  "status": "human_review_required",
+  "target_project": {
+    "path": "fixtures/alpha"
+  },
+  "tool": {
+    "generated_files": [
+      {
+        "path": "REVIEW-SUMMARY.json"
+      },
+      {
+        "path": "EVIDENCE.json"
+      },
+      {
+        "path": "FINDINGS.md"
+      },
+      {
+        "path": "RECOMMENDED-ACTIONS.md"
+      }
+    ],
+    "input": {
+      "args": [
+        "--project",
+        "fixtures/alpha",
+        "--out",
+        "packet"
+      ],
+      "target_path": "fixtures/alpha"
+    },
+    "policy_hashes": {
+      "fixture": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "read_write_behavior": "review_output_only",
+    "requested_outputs": [
+      "REVIEW-SUMMARY.json",
+      "EVIDENCE.json",
+      "FINDINGS.md",
+      "RECOMMENDED-ACTIONS.md"
+    ],
+    "run_timestamp": "2026-05-08T00:00:00Z",
+    "safety_profile": {
+      "review_only": true,
+      "secret_policy": "path-only-secret-evidence",
+      "target_mutation": "none"
+    },
+    "schema_versions": {
+      "review_packet": "review-packet/v1"
+    },
+    "source_commit": null,
+    "target_project": {
+      "path": "fixtures/alpha"
+    },
+    "tool_name": "alpha-reviewer",
+    "tool_version": "0.1.0"
+  }
+}

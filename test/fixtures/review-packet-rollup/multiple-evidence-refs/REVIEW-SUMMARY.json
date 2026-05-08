@@ -1,0 +1,94 @@
+{
+  "blockers": [],
+  "counts": {
+    "blockers": 0,
+    "findings_by_severity": {
+      "critical": 0,
+      "high": 0,
+      "info": 0,
+      "low": 1,
+      "medium": 0
+    },
+    "preserved_stricter_local_rules": 0,
+    "rejected_assumptions": 0,
+    "required_decisions": 0,
+    "total_findings": 1
+  },
+  "evidence_file": "EVIDENCE.json",
+  "findings": [
+    {
+      "confidence": "verified",
+      "evidence_refs": [
+        "ev.one",
+        "ev.two"
+      ],
+      "id": "multi.evidence",
+      "recommended_action_refs": [],
+      "severity": "low",
+      "source_check_id": "multi.evidence",
+      "status_contribution": "human_review_required",
+      "summary": "One finding cites two separate evidence paths.",
+      "title": "Finding with multiple evidence refs"
+    }
+  ],
+  "generated_artifacts": [
+    "REVIEW-SUMMARY.json",
+    "EVIDENCE.json",
+    "FINDINGS.md",
+    "RECOMMENDED-ACTIONS.md"
+  ],
+  "preserved_stricter_local_rules": [],
+  "recommended_actions": [],
+  "recommended_actions_file": "RECOMMENDED-ACTIONS.md",
+  "rejected_assumptions": [],
+  "required_decisions": [],
+  "schema_version": "review-packet/v1",
+  "status": "human_review_required",
+  "target_project": {
+    "path": "fixtures/multi"
+  },
+  "tool": {
+    "generated_files": [
+      {
+        "path": "REVIEW-SUMMARY.json"
+      },
+      {
+        "path": "EVIDENCE.json"
+      },
+      {
+        "path": "FINDINGS.md"
+      },
+      {
+        "path": "RECOMMENDED-ACTIONS.md"
+      }
+    ],
+    "input": {
+      "target_path": "fixtures/multi"
+    },
+    "policy_hashes": {
+      "fixture": "1111111111111111111111111111111111111111111111111111111111111111"
+    },
+    "read_write_behavior": "review_output_only",
+    "requested_outputs": [
+      "REVIEW-SUMMARY.json",
+      "EVIDENCE.json",
+      "FINDINGS.md",
+      "RECOMMENDED-ACTIONS.md"
+    ],
+    "run_timestamp": "2026-05-08T00:00:00Z",
+    "safety_profile": {
+      "review_only": true,
+      "secret_policy": "path-only-secret-evidence",
+      "target_mutation": "none"
+    },
+    "schema_versions": {
+      "review_packet": "review-packet/v1"
+    },
+    "source_commit": null,
+    "target_project": {
+      "path": "fixtures/multi"
+    },
+    "tool_name": "multi-reviewer",
+    "tool_version": "0.1.0"
+  }
+}

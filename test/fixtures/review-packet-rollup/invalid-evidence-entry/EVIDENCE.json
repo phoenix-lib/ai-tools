@@ -1,0 +1,10 @@
+[
+  {
+    "confidence": "verified",
+    "evidence_type": "source_file",
+    "id": "ev.invalid",
+    "path": "src/invalid.js",
+    "path_only": false,
+    "reason": "This entry intentionally omits sha256."
+  }
+]

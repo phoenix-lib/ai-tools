@@ -1,0 +1,20 @@
+[
+  {
+    "confidence": "verified",
+    "evidence_type": "source_file",
+    "id": "ev.shared",
+    "path": "src/shared.js",
+    "path_only": false,
+    "reason": "Shared source file cited by beta packet.",
+    "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+  },
+  {
+    "confidence": "inferred",
+    "evidence_type": "planning_document",
+    "id": "ev.docs",
+    "path": "docs/plan.md",
+    "path_only": false,
+    "reason": "Documentation file cited by beta packet.",
+    "sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+  }
+]
