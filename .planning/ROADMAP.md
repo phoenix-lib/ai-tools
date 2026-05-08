@@ -354,7 +354,7 @@ Plans:
 
 Plans:
 **Wave 1**
-- [ ] 15-01: Define review disposition schema, finding fingerprints, examples, and lifecycle rules.
+- [x] 15-01: Define review disposition schema, finding fingerprints, examples, and lifecycle rules.
 
 **Wave 2** *(blocked on Wave 1 completion)*
 - [ ] 15-02: Add disposition consumption to packet consumers with tests for expired and stale entries.
@@ -609,7 +609,7 @@ compatibility are in place.
 | 12. Project Context Ledger MVP | 1/1 | Complete    | 2026-05-08 |
 | 13. Review Packet Rollup MVP | 2/2 | Complete    | 2026-05-08 |
 | 14. Ledger Artifact Schemas | 2/2 | Complete    | 2026-05-08 |
-| 15. Review Disposition Model | 0/2 | Planned | |
+| 15. Review Disposition Model | 1/2 | In Progress|  |
 | 16. Ledger Scope and Diff Modes | 0/2 | Planned | |
 | 17. Shared CLI Contract | 0/2 | Planned | |
 | 18. ai-workspace-kit LLM Instructions Compatibility | 0/1 | Planned | |
