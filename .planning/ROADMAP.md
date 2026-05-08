@@ -212,7 +212,7 @@ Plans:
 
 Plans:
 **Wave 1**
-- [ ] 09-01: Add tool registry schema/data and registry-backed docs validation.
+- [x] 09-01: Add tool registry schema/data and registry-backed docs validation.
 
 **Wave 2** *(blocked on Wave 1 completion)*
 - [ ] 09-02: Slim `AGENTS.md` and move detailed gate policy into workflow gate documentation.
