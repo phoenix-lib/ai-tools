@@ -1,0 +1,38 @@
+{
+  "gates": [
+    {
+      "automation_boundary": "Evidence only.",
+      "description": "Selects discuss mode.",
+      "id": "discuss-mode",
+      "name": "Discuss Mode Gate",
+      "observable_outputs": [
+        "Gate Resolution entry"
+      ],
+      "required_artifacts": [
+        ".planning/PROJECT.md",
+        "SUMMARY.md or VERIFICATION.md Gate Resolution when relevant"
+      ],
+      "required_fields": [
+        "mode",
+        "approval_source"
+      ],
+      "skip_allowed": false,
+      "skip_reason_required": true,
+      "stages": [
+        "discuss"
+      ]
+    }
+  ],
+  "interop": {
+    "field_name_mapping": {
+      "required_artifacts": "requiredArtifacts",
+      "schema_version": "schemaVersion",
+      "skip_allowed": "skipAllowed"
+    },
+    "stage_aliases": {
+      "release": "phase-boundary",
+      "replan": "plan",
+      "verification": "verify"
+    }
+  }
+}

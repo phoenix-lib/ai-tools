@@ -1,0 +1,22 @@
+{
+  "gates": [
+    {
+      "automation_boundary": "Evidence only.",
+      "description": "Checks upstream freshness.",
+      "id": "upstream-freshness",
+      "name": "Upstream Freshness",
+      "observable_outputs": [
+        "Gate Resolution entry"
+      ],
+      "required_artifacts": [],
+      "required_fields": [
+        "local_commit"
+      ],
+      "skip_allowed": false,
+      "skip_reason_required": true,
+      "stages": [
+        "plan"
+      ]
+    }
+  ]
+}

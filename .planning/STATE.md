@@ -1,17 +1,17 @@
 ---
 gsd_state_version: 1.0
 milestone: v2.0
-milestone_name: Tooling Hardening
-status: in_progress
-stopped_at: Phase 9 complete
-last_updated: "2026-05-08T05:40:00+03:00"
-last_activity: "2026-05-08 -- Phase 9 completed for tool registry and workflow gate slimming"
+milestone_name: milestone
+status: complete
+stopped_at: Phase 12 complete; milestone complete
+last_updated: "2026-05-08T04:01:02.370Z"
+last_activity: 2026-05-08
 progress:
-  total_phases: 11
-  completed_phases: 9
-  total_plans: 27
-  completed_plans: 24
-  percent: 89
+  total_phases: 12
+  completed_phases: 12
+  total_plans: 28
+  completed_plans: 28
+  percent: 100
 ---
 
 # Project State
@@ -22,22 +22,22 @@ See: .planning/PROJECT.md (updated 2026-05-08)
 
 **Core value:** Produce deterministic, evidence-backed review packets that make
 AI project guidance auditable without mutating target projects.
-**Current focus:** Phase 10 - Evidence-Only Gate Linter Seed MVP
+**Current focus:** Phase 12 - Project Context Ledger MVP complete
 
 ## Current Position
 
-Phase: 10 (Evidence-Only Gate Linter Seed MVP) - READY TO DISCUSS
-Plan: 0 of 2
-Status: Phase 9 complete; next command is `$gsd-discuss-phase 10`.
-Last activity: 2026-05-08 -- Phase 9 completed.
+Phase: 12
+Plan: 1 of 1
+Status: Phase complete and verified
+Last activity: 2026-05-08
 
-Progress: [#########-] 89% of mapped plans complete
+Progress: [##########] 100% of mapped plans complete; Phase 12 has 1 plan
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 22
+- Total plans completed: 28
 - Average duration: n/a
 - Total execution time: n/a
 
@@ -54,6 +54,9 @@ Progress: [#########-] 89% of mapped plans complete
 | 07 | 3/3 | Complete |
 | 08 | 2/2 | Complete |
 | 09 | 2/2 | Complete |
+| 10 | 2/2 | Complete |
+| 11 | 1/1 | Complete |
+| 12 | 1/1 | Complete |
 
 ## Accumulated Context
 
@@ -72,6 +75,11 @@ Decisions are logged in PROJECT.md Key Decisions table.
 - Treat AI Tools self-use output as evidence, not authority.
 - Start v2 with release closeout, centralized metadata, and cross-repo
   validation before promoting broad seed tools.
+- Phase 11 promoted only `project-context-ledger` as the next implementation
+  candidate; all other broad seed tools remain deferred until trigger evidence
+  appears.
+- Phase 12 validated `project-context-ledger` as optional read-only evidence,
+  not workflow authority.
 
 ### Completed Work
 
@@ -105,6 +113,20 @@ Decisions are logged in PROJECT.md Key Decisions table.
   seed/tool coverage tests, focused workflow gate docs, root `AGENTS.md`
   slimming, upstream update-impact fields, changelog/docs updates, self-use
   evidence, and 141/141 tests passing.
+- Phase 10 validated `gates-scan` as an evidence-only mechanical gate linter:
+  explicit project/out CLI, output isolation, mutating flag rejection,
+  fixture-backed gate checks, shared packet output, docs/registry/changelog
+  updates, self-use evidence, and 171/171 tests passing.
+- Phase 11 validated the v2 tool selection review: exactly one candidate,
+  `project-context-ledger`, was promoted to planned; non-selected broad seed
+  tools stayed deferred with trigger evidence; Phase 12 was added for the
+  ledger MVP; selection/registry tests passed 10/10; full tests passed 175/175;
+  self-use packets had no blockers or required decisions.
+- Phase 12 validated `project-context-ledger` as a read-only project context
+  ledger: explicit project/out CLI, output isolation, mutating flag rejection,
+  shared packet plus six ledger JSON artifacts, secret path-only handling,
+  generated packet exclusion, no-mutation tests, self-use evidence, and 188/188
+  tests passing.
 
 ### Roadmap Evolution
 
@@ -114,30 +136,35 @@ Decisions are logged in PROJECT.md Key Decisions table.
 - Preliminary v2 phases 06-11 were added after Phase 5 to keep release
   discipline, interop validation, CLI ergonomics, tool registry, and future
   tool selection ordered by current risk.
+- Phase 12 was added after Phase 11 selected `project-context-ledger` as the
+  next single implementation candidate.
+- Phase 12 completed the mapped v2 roadmap.
 
 ### Pending Todos
 
-- Discuss Phase 10 for `GATELINT-01` / `gates-scan` boundary and fixture scope.
+- No mapped phase todos remain.
 
 ### Blockers/Concerns
 
 - Automatic cross-repo indexer or gate-linter automation should remain blocked
   unless the Phase 7 read-only compatibility checker is run as evidence and
   reviewed by the assistant.
+- Future broad seed tools should remain deferred until their trigger evidence
+  appears.
 
 ## Deferred Items
 
 | Category | Item | Status | Deferred At |
 |----------|------|--------|-------------|
 | Tooling | Cross-repo compatibility checker | Completed in Phase 7 | Phase 5 release hardening |
-| Tooling | Mechanical gate linter | Phase 10 planned/revalidate | 2026-05-07 cross-repo request |
-| Tooling | Project context ledger | Deferred until Phase 11 selection review | Initialization |
-| Tooling | Phase forensics tool | Deferred until Phase 11 selection review | Initialization |
-| Tooling | Config matrix validator | Deferred until Phase 11 selection review | Initialization |
-| Tooling | Skill/test/UI/integration tools | Deferred until Phase 11 selection review | Initialization |
+| Tooling | Mechanical gate linter | Completed in Phase 10 | 2026-05-07 cross-repo request |
+| Tooling | Project context ledger | Completed in Phase 12 | Phase 11 selection review |
+| Tooling | Phase forensics tool | Deferred until failed-phase or plan/reality mismatch evidence appears | Phase 11 selection review |
+| Tooling | Config matrix validator | Deferred until config-heavy environment evidence appears | Phase 11 selection review |
+| Tooling | Skill/test/UI/integration tools | Deferred until their trigger evidence appears | Phase 11 selection review |
 
 ## Session Continuity
 
-Last session: 2026-05-08T05:40:00+03:00
-Stopped at: Phase 9 complete
-Resume file: .planning/phases/09-tool-registry-and-workflow-gate-slimming/09-VERIFICATION.md
+Last session: 2026-05-08T04:01:02.370Z
+Stopped at: Phase 12 complete; milestone complete
+Resume file: n/a

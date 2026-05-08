@@ -20,6 +20,11 @@ The first v2 capability adds `cross-repo-compatibility-checker` as a
 read-only validator for `ai-tools` / `ai-workspace-kit` protocol compatibility.
 Phase 9 adds `tools/registry.json` as the machine-readable capability catalog
 and `.planning/gates/WORKFLOW-GATES.md` as the detailed workflow gate playbook.
+Phase 10 adds `gates-scan` as an evidence-only mechanical gate linter for
+phase-boundary, registry, and workflow gate documentation review.
+Phase 12 adds `project-context-ledger` as a read-only project memory evidence
+producer for facts, commands, contracts, skills, decisions, and cache source
+hashes.
 
 ## Definition of Done
 
@@ -43,6 +48,10 @@ and `.planning/gates/WORKFLOW-GATES.md` as the detailed workflow gate playbook.
   conveniences: `--format json`, `--quiet`, and `--fail-on`.
 - [x] Phase 09 tool registry and workflow gate documentation are planned as
   governance hardening before broad seed tool expansion.
+- [x] Phase 10 post-v1 `gates-scan` CLI is documented as evidence-only
+  mechanical gate review support, not gate adoption automation.
+- [x] Phase 12 post-v1 `project-context-ledger` CLI is documented as optional
+  project context evidence, not automatic workflow or roadmap authority.
 
 ## Required Artifacts
 
@@ -53,6 +62,8 @@ and `.planning/gates/WORKFLOW-GATES.md` as the detailed workflow gate playbook.
 - `tools/contract-drift-auditor/examples/human-review/`
 - `tools/contract-drift-auditor/examples/blocked-safety/`
 - `tools/cross-repo-compatibility-checker/README.md`
+- `tools/gates-scan/README.md`
+- `tools/project-context-ledger/README.md`
 - `tools/registry.json`
 - `tools/registry.schema.json`
 - `.planning/gates/WORKFLOW-GATES.md`
@@ -131,6 +142,17 @@ expected outputs, use gate, self-use policy, evidence refs, and non-goals.
 `.planning/gates/WORKFLOW-GATES.md` keeps detailed gate procedures out of the
 root `AGENTS.md` entrypoint while preserving evidence-only boundaries.
 
+Phase 10 gate-linter hardening adds `gates-scan` as a read-only evidence
+producer. It reports mechanical gate issues through the shared packet artifacts
+and does not mutate scanned projects, decide gate applicability, or replace
+assistant-led semantic review.
+
+Phase 12 context-ledger hardening adds `project-context-ledger` as a read-only
+evidence producer. It emits the shared packet artifacts plus `FACTS.json`,
+`COMMANDS.json`, `CONTRACTS.json`, `SKILLS.json`, `DECISIONS.json`, and
+`CACHE-MANIFEST.json`, while rejecting target-local output paths and mutating
+flags.
+
 ## Docs Evidence
 
 Plan `05-01` adds mechanical docs validation:
@@ -172,8 +194,8 @@ dependency creep was found. The `future-gate-review` hook remains manual because
 a runnable gate-review command yet. No cross-repo outbox request is needed for
 this release.
 
-Mechanical gate-linter output, if added later, is evidence only. The assistant
-still makes the repository-local semantic decision.
+Mechanical gate-linter output from Phase 10 `gates-scan` is evidence only. The
+assistant still makes the repository-local semantic decision.
 
 ## Self-Use Evidence
 
@@ -242,14 +264,41 @@ Phase 7 cross-repo checker evidence:
   remaining finding is a neighboring repo protocol artifact gap, not an AI
   Tools implementation blocker.
 
+Phase 10 gates-scan evidence:
+
+- Reusable command: `node tools/gates-scan/cli.js --project . --out <external-dir>`
+- Phase 10 self-use command: `node tools/gates-scan/cli.js --project . --out C:\Users\suppo\.codex\memories\ai-tools-gates-scan-phase10`
+- Phase 10 output path: `C:\Users\suppo\.codex\memories\ai-tools-gates-scan-phase10`
+- Packet status: `human_review_required`
+- Finding count: 20 total, 2 medium and 18 low; 0 blockers, 0 required
+  decisions.
+- Interpretation: mechanical gate-linter output is review evidence only and
+  does not create automatic phase, gate, or release decisions.
+
+Phase 12 project-context-ledger evidence:
+
+- Reusable command: `node tools/project-context-ledger/cli.js --project . --out <external-dir>`
+- Phase 12 self-use command: `node tools/project-context-ledger/cli.js --project . --out C:\Users\suppo\.codex\memories\ai-tools-context-ledger-phase12`
+- Phase 12 output path: `C:\Users\suppo\.codex\memories\ai-tools-context-ledger-phase12`
+- Packet status: `human_review_required`
+- Finding count: 280 total, 2 medium and 278 low; 0 blockers, 0 required
+  decisions.
+- Interpretation: context ledger output is evidence only and does not create
+  automatic workflow, gate, roadmap, phase, install, fetch, or mutation
+  decisions.
+
 ## Deferred V2 Work
 
-- `XREPO-VALIDATOR-01`: read-only cross-repo compatibility checker. This is a
-  prerequisite before automatic cross-repo indexer or gate-linter automation.
-- `GATELINT-01`: evidence-only mechanical gate linter for missing gate blocks,
-  duplicate IDs, stale paths, conflicting wording, unresolved references, and
-  gates without observable artifact output.
+`XREPO-VALIDATOR-01`, `GATELINT-01`, and `LEDGER-01` are implemented after v1 as
+read-only evidence producers. Automatic cross-repo indexing, automatic
+gate-linter decisions, automatic context adoption, auto-fix mode, and additional
+seed tools remain deferred.
 
-`XREPO-VALIDATOR-01` is implemented after v1 as the first v2 capability.
-Mechanical gate linter automation remains deferred and is not part of the v1
-release. The mechanical gate linter is not part of the v1 release.
+The mechanical gate linter remains not part of the v1 release. Its Phase 10
+post-v1 implementation is evidence-only and must not be treated as automatic
+gate adoption, release approval, or target-project mutation authority.
+
+The project context ledger remains not part of the v1 release. Its Phase 12
+post-v1 implementation is evidence-only and must not be treated as automatic
+workflow routing, roadmap mutation, phase approval, or target-project mutation
+authority.

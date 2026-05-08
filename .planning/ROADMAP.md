@@ -31,8 +31,9 @@ validator can govern tool intake.
 - [x] **Phase 7: Cross-Repo Compatibility Checker MVP** - Build the smallest read-only validator for AI Tools / `ai-workspace-kit` protocol compatibility before any automatic cross-repo automation. Completed 2026-05-08.
 - [x] **Phase 8: Contract Drift Auditor CLI Ergonomics** - Add machine stdout, quiet mode, fail-on policy, and documented exit codes without making findings automatic decisions. Completed 2026-05-08.
 - [x] **Phase 9: Tool Registry and Workflow Gate Slimming** - Create the machine-readable tool registry and move detailed gate policy out of root `AGENTS.md` into focused workflow docs. Completed 2026-05-08.
-- [ ] **Phase 10: Evidence-Only Gate Linter Seed MVP** - Build or formally re-defer the mechanical gate-linter only after the cross-repo validator and tool registry are in place.
-- [ ] **Phase 11: v2 Tool Selection Review** - Reassess deferred seed tools and choose the next single tool only from repeated evidence-backed demand.
+- [x] **Phase 10: Evidence-Only Gate Linter Seed MVP** - Build or formally re-defer the mechanical gate-linter only after the cross-repo validator and tool registry are in place. Completed 2026-05-08.
+- [x] **Phase 11: v2 Tool Selection Review** - Reassess deferred seed tools and choose the next single tool only from repeated evidence-backed demand. (completed 2026-05-08)
+- [x] **Phase 12: Project Context Ledger MVP** - Build the selected read-only verified project memory tool from Phase 11. (completed 2026-05-08)
 
 ## Phase Details
 
@@ -222,7 +223,8 @@ Cross-cutting constraints:
   adoption/bootstrap, generated-contract review, or kit doctor behavior.
 - Treat AI Tools self-use output as evidence only; tools do not make semantic
   gate decisions or auto-create phases.
-- Keep `gates-scan` / `GATELINT-01` registered as planned Phase 10 work only.
+- Phase 10 may promote `gates-scan` / `GATELINT-01` only as evidence-only
+  mechanical review, not semantic gate automation.
 
 ### Phase 10: Evidence-Only Gate Linter Seed MVP
 **Goal**: Promote or explicitly re-defer `GATELINT-01` after the validator and tool registry can bound its scope.
@@ -237,8 +239,17 @@ Cross-cutting constraints:
 **Plans**: 2 plans
 
 Plans:
-- [ ] 10-01: Revalidate gate-linter boundary and fixture scope against `ai-workspace-kit`.
-- [ ] 10-02: Implement minimal evidence-only linter or record explicit deferred decision.
+**Wave 1**
+- [x] 10-01: Revalidate gate-linter boundary and fixture scope against `ai-workspace-kit`.
+
+**Wave 2** *(blocked on Wave 1 completion)*
+- [x] 10-02: Implement minimal evidence-only linter or record explicit deferred decision.
+
+Cross-cutting constraints:
+- Keep `gates-scan` as AI Tools-owned external mechanical evidence.
+- Do not implement semantic gate adoption, revision, rejection, automatic GSD
+  execution, phase creation, kit dependency, or target-project mutation.
+- Emit standard review packet artifacts from shared packet mechanics.
 
 ### Phase 11: v2 Tool Selection Review
 **Goal**: Choose the next single tool from deferred seeds based on evidence instead of starting several broad tools.
@@ -253,7 +264,24 @@ Plans:
 **Plans**: 1 plan
 
 Plans:
-- [ ] 11-01: Run evidence-backed v2 seed review and promote one next tool or defer all.
+- [x] 11-01: Run evidence-backed v2 seed review and promote one next tool or defer all.
+
+### Phase 12: Project Context Ledger MVP
+**Goal**: Build a read-only project context ledger that scans a project into verified fact, command, contract, skill, decision, evidence, and cache manifest artifacts.
+**Depends on**: Phase 11
+**Requirements**: LEDGER-01
+**UI hint**: no
+**Success Criteria** (what must be TRUE):
+  1. User can run `project-context-ledger --project <path> --out <dir>` or the final planned equivalent without mutating the target project.
+  2. The ledger emits shared review packet artifacts plus `FACTS.json`, `COMMANDS.json`, `CONTRACTS.json`, `SKILLS.json`, `DECISIONS.json`, `EVIDENCE.json`, and `CACHE-MANIFEST.json`.
+  3. Facts include evidence refs, confidence, source hash, and last checked timestamp.
+  4. Secret-like files remain path-only and generated review packets inside target trees are ignored.
+  5. The tool is optional evidence only and does not replace reading relevant source files or make automatic workflow decisions.
+**Plans**: 1 plan
+
+Plans:
+**Wave 1**
+- [x] 12-01: Implement the selected project context ledger MVP.
 
 ## Requirement Coverage
 
@@ -314,12 +342,12 @@ Plans:
 | REG-01 | Phase 9 |
 | GOV-01 | Phase 9 |
 | GATELINT-01 | Phase 10 |
-| LEDGER-01 | Phase 11 |
-| FORENSICS-01 | Phase 11 |
-| CONFIG-01 | Phase 11 |
-| SKILL-01 | Phase 11 |
-| TESTQA-01 | Phase 11 |
-| UIREG-01 | Phase 11 |
+| LEDGER-01 | Phase 12 |
+| FORENSICS-01 | Future |
+| CONFIG-01 | Future |
+| SKILL-01 | Future |
+| TESTQA-01 | Future |
+| UIREG-01 | Future |
 
 **Coverage:**
 - v1: 45/45 requirements mapped and complete.
@@ -327,7 +355,7 @@ Plans:
 
 ## Progress
 
-**Execution Order:** 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> 9 -> 10 -> 11
+**Execution Order:** 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> 9 -> 10 -> 11 -> 12
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
@@ -340,5 +368,6 @@ Plans:
 | 7. Cross-Repo Compatibility Checker MVP | 3/3 | Complete | 2026-05-08 |
 | 8. Contract Drift Auditor CLI Ergonomics | 2/2 | Complete | 2026-05-08 |
 | 9. Tool Registry and Workflow Gate Slimming | 2/2 | Complete | 2026-05-08 |
-| 10. Evidence-Only Gate Linter Seed MVP | 0/2 | Planned | - |
-| 11. v2 Tool Selection Review | 0/1 | Planned | - |
+| 10. Evidence-Only Gate Linter Seed MVP | 2/2 | Complete | 2026-05-08 |
+| 11. v2 Tool Selection Review | 1/1 | Complete    | 2026-05-08 |
+| 12. Project Context Ledger MVP | 1/1 | Complete    | 2026-05-08 |

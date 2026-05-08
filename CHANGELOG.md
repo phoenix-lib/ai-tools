@@ -5,6 +5,117 @@ major plan execution, and workflow gate change.
 
 ## Unreleased
 
+### Phase 12: Project Context Ledger MVP
+
+- Changed tool capabilities: added runnable review-only
+  `project-context-ledger --project <path> --out <dir>` support for project
+  facts, commands, assistant contracts, skills, decisions, generated packet
+  exclusions, secret path-only evidence, and cache source hashes.
+- Changed packet outputs: `project-context-ledger` emits the shared
+  `REVIEW-SUMMARY.json`, `EVIDENCE.json`, `FINDINGS.md`, and
+  `RECOMMENDED-ACTIONS.md` artifacts plus `FACTS.json`, `COMMANDS.json`,
+  `CONTRACTS.json`, `SKILLS.json`, `DECISIONS.json`, and
+  `CACHE-MANIFEST.json`.
+- Changed docs and registry: added `tools/project-context-ledger/README.md`,
+  package bin/script metadata, tests, fixture coverage, and promoted the
+  `tools/registry.json` `project-context-ledger` entry from planned to
+  validated.
+- Validation: focused Phase 12 tests passed 27/27 and full `npm.cmd test`
+  passed 188/188.
+- Self-use result: Phase 12 `project-context-ledger` wrote output outside the
+  repository at
+  `C:\Users\suppo\.codex\memories\ai-tools-context-ledger-phase12`; packet
+  status was `human_review_required` with 280 findings, 0 blockers, and 0
+  required decisions. `gates-scan` wrote
+  `C:\Users\suppo\.codex\memories\ai-tools-gates-scan-phase12`; packet status
+  was `human_review_required` with 26 findings, 0 blockers, and 0 required
+  decisions. `contract-drift-auditor` wrote
+  `C:\Users\suppo\.codex\memories\ai-tools-self-audit-phase12`; packet status
+  was `human_review_required` with 48 low findings, 0 blockers, and 0 required
+  decisions.
+- Upstream impact: Phase 12 planning refreshed embedded `ai-workspace-kit` to
+  `bbb009a` and reviewed freshness-impact, dependency lifecycle, and optional
+  tool guidance changes. The ledger remains an optional external evidence
+  producer and does not copy `.planning` state, execute target commands,
+  install dependencies, fetch, pull, or make workflow decisions.
+- Compatibility impact for `ai-workspace-kit`: downstream workflows can consume
+  ledger packet output as optional evidence, but no runtime dependency,
+  automatic gate decision, roadmap mutation, or kit-owned adoption/bootstrap
+  behavior was introduced.
+- Breaking changes: none for existing CLIs or review packet schemas.
+- Migration notes: use `project-context-ledger` as pre-work evidence for
+  project facts and cache inputs; keep assistant judgment responsible for
+  deciding which ledger facts matter.
+
+### Phase 11: v2 Tool Selection Review
+
+- Changed planning scope: reviewed deferred v2 seed tools against local
+  evidence, changelog history, cross-repo boundaries, registry metadata, and
+  project pain.
+- Changed tool registry: promoted only `project-context-ledger` from deferred
+  to planned. No package bin, package script, CLI implementation, fixture
+  output, or generated ledger artifact was added.
+- Changed deferred tool disposition: kept phase forensics, config, skill, test
+  quality, UI regression, runtime capability, local integration, and domain
+  contract tools deferred with trigger evidence for future promotion.
+- Changed roadmap and requirements: added Phase 12 as the planned Project
+  Context Ledger MVP implementation phase for `LEDGER-01`; remaining broad
+  seed requirements stay deferred for future evidence.
+- Validation: focused selection/registry tests passed 10/10 and full
+  `npm.cmd test` passed 175/175.
+- Self-use result: Phase 11 `gates-scan` wrote output outside the repository at
+  `C:\Users\suppo\.codex\memories\ai-tools-gates-scan-phase11`; packet status
+  was `human_review_required` with 23 findings, 0 blockers, and 0 required
+  decisions. `contract-drift-auditor` wrote
+  `C:\Users\suppo\.codex\memories\ai-tools-self-audit-phase11`; packet status
+  was `human_review_required` with 47 low findings, 0 blockers, and 0 required
+  decisions.
+- Upstream impact: Phase 11 refreshed embedded `ai-workspace-kit` to `b5903a4`
+  and reviewed updated interop, freshness-impact, and dependency lifecycle
+  guidance. The update did not add kit-owned behavior, package-manager tooling,
+  dependency scanning, automatic tool execution, or runtime dependency.
+- Compatibility impact for `ai-workspace-kit`: downstream freshness checks can
+  see which AI Tools candidate is planned next, but no automatic install, run,
+  dependency, gate decision, roadmap mutation, or copied `.planning` state was
+  introduced.
+- Breaking changes: none for existing CLIs or review packet schemas.
+- Migration notes: treat the planned ledger as a future optional evidence
+  source; continue to use existing validated tools until Phase 12 implements
+  and validates the ledger.
+
+### Phase 10: Evidence-Only Gate Linter Seed MVP
+
+- Changed tool capabilities: added runnable review-only
+  `gates-scan --project <path> --out <dir>` support for mechanical gate
+  registry, gate resolution, stale path, changelog impact, unresolved
+  reference, and conflicting wording evidence.
+- Changed docs and registry: added `tools/gates-scan/README.md`,
+  `tools/gates-scan/SEED-IDEAS.md`, package bin/script metadata, and promoted
+  the `tools/registry.json` `gates-scan` entry from planned to validated.
+- Packet semantics unchanged: `gates-scan` emits the shared
+  `REVIEW-SUMMARY.json`, `EVIDENCE.json`, `FINDINGS.md`, and
+  `RECOMMENDED-ACTIONS.md` artifacts and treats findings as evidence only.
+- Validation: `npm.cmd test -- test/gates-scan/*.test.js` passed 30/30,
+  focused registry/metadata/release docs tests passed 15/15, and full
+  `npm.cmd test` passed 171/171.
+- Self-use result: Phase 10 `gates-scan` wrote output outside the repository at
+  `C:\Users\suppo\.codex\memories\ai-tools-gates-scan-phase10`; packet status
+  was `human_review_required` with 20 findings, 0 blockers, and 0 required
+  decisions. `contract-drift-auditor` self-use wrote
+  `C:\Users\suppo\.codex\memories\ai-tools-self-audit-phase10`; packet status
+  was `human_review_required` with 40 low findings, 0 blockers, and 0 required
+  decisions.
+- Upstream impact: Phase 10 planning refreshed embedded `ai-workspace-kit` to
+  `e225f77` and kept assistant-led semantic gate review, adoption/bootstrap,
+  and generated-contract ownership with `ai-workspace-kit`.
+- Compatibility impact for `ai-workspace-kit`: downstream freshness checks can
+  see that AI Tools now has a mechanical gate evidence producer, but no runtime
+  dependency, automatic gate decision, install, pull/fetch, `.planning`
+  mutation, or kit-owned gate implementation was added.
+- Breaking changes: none for existing CLIs or review packet schemas.
+- Migration notes: use `gates-scan` as evidence before or during semantic gate
+  review; do not treat it as approval, rejection, or auto-fix authority.
+
 ### Phase 09: Tool Registry and Workflow Gate Slimming
 
 - Changed governance artifacts: added `tools/registry.json` and

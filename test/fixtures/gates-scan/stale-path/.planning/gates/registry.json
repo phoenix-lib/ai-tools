@@ -1,0 +1,24 @@
+{
+  "gates": [
+    {
+      "automation_boundary": "Evidence only.",
+      "description": "Requires a real artifact.",
+      "id": "artifact-gate",
+      "name": "Artifact Gate",
+      "observable_outputs": [
+        "Gate Resolution entry"
+      ],
+      "required_artifacts": [
+        ".planning/MISSING.md"
+      ],
+      "required_fields": [
+        "decision"
+      ],
+      "skip_allowed": true,
+      "skip_reason_required": true,
+      "stages": [
+        "plan"
+      ]
+    }
+  ]
+}

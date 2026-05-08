@@ -1,0 +1,40 @@
+{
+  "gates": [
+    {
+      "automation_boundary": "Evidence only.",
+      "description": "A",
+      "id": "discuss-mode",
+      "name": "A",
+      "observable_outputs": [
+        "Gate Resolution entry"
+      ],
+      "required_artifacts": [],
+      "required_fields": [
+        "mode"
+      ],
+      "skip_allowed": true,
+      "skip_reason_required": true,
+      "stages": [
+        "discuss"
+      ]
+    },
+    {
+      "automation_boundary": "Evidence only.",
+      "description": "B",
+      "id": "discuss-mode",
+      "name": "B",
+      "observable_outputs": [
+        "Gate Resolution entry"
+      ],
+      "required_artifacts": [],
+      "required_fields": [
+        "mode"
+      ],
+      "skip_allowed": true,
+      "skip_reason_required": true,
+      "stages": [
+        "discuss"
+      ]
+    }
+  ]
+}

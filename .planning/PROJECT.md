@@ -69,6 +69,19 @@ guidance auditable without mutating target projects.
 - [x] Add a machine-readable tool registry and slim root `AGENTS.md` by moving
   detailed gate policy into focused workflow gate documentation. Validated in
   Phase 09: Tool Registry and Workflow Gate Slimming.
+- [x] Build `gates-scan` as an evidence-only mechanical gate linter with
+  explicit `--project` and `--out`, fixture-backed checks, shared review packet
+  output, and self-use evidence. Validated in Phase 10: Evidence-Only Gate
+  Linter Seed MVP.
+- [x] Review deferred v2 seed tools and promote exactly one next
+  implementation candidate from evidence. `project-context-ledger` was promoted
+  to planned and the other broad seeds stayed deferred. Validated in Phase 11:
+  v2 Tool Selection Review.
+- [x] Build `project-context-ledger` as a read-only optional evidence tool with
+  explicit `--project` and `--out`, shared review packet output, six ledger JSON
+  artifacts, target non-mutation proof, secret path-only evidence, generated
+  packet exclusion, and self-use evidence. Validated in Phase 12: Project
+  Context Ledger MVP.
 
 ### Active
 
@@ -81,9 +94,8 @@ guidance auditable without mutating target projects.
   reusable changes.
 - [ ] Maintain `CHANGELOG.md` after every completed phase, executed major plan,
   or workflow gate change.
-- [ ] Keep ledger, forensics, config, skill, test quality, UI, and integration
-  tools deferred until evidence-backed v2 tool selection promotes one next
-  candidate.
+- [ ] Keep forensics, config, skill, test quality, UI, runtime, integration,
+  and domain tools deferred until their Phase 11 trigger evidence appears.
 
 ### Out of Scope
 
@@ -127,7 +139,8 @@ Important seed areas:
 - `tools/tool-usage-registry/SEED-IDEAS.md`
 - `tools/ui-regression-screenshot-comparator/SEED-IDEAS.md`
 - `tools/local-integration-harness/SEED-IDEAS.md`
-- future `gate-linter` seed from the `ai-workspace-kit` cross-repo request
+- implemented `gates-scan` gate-linter seed from the `ai-workspace-kit`
+  cross-repo request
 - implemented `cross-repo-compatibility-checker` for validating `ai-tools` and
   `ai-workspace-kit` protocol threads before any automatic indexer/gate-linter
 
@@ -203,7 +216,7 @@ to inspect it.
 | Insert Cross-Repo Capability Request Gate before the first heavy auditor | The two repos need a structured request/decision protocol before external tool work starts consuming or influencing upstream contracts. | Validated in Phase 03 |
 | Maintain a project changelog after major work | Future agents need a compact history before reading deeper planning artifacts. | Active |
 | Plan ai-workspace-kit gate review as a future hook | The upstream command does not exist yet, so AI Tools should reserve the review stage without pretending it is currently runnable. | Validated in Phase 05 |
-| Treat future mechanical gate-linter output as evidence only | Gate relevance and boundary decisions remain assistant-owned semantic review; tools can surface evidence but not decide adoption. | Deferred v2 candidate |
+| Treat mechanical gate-linter output as evidence only | Gate relevance and boundary decisions remain assistant-owned semantic review; tools can surface evidence but not decide adoption. | Validated in Phase 10 |
 | Validate shared safety harness before auditor work | The first heavy auditor should consume already-tested read-only, secret-safe, deterministic primitives instead of inventing safety behavior locally. | Validated in Phase 02 |
 | Add shared packet renderer before broad tool expansion | Schemas alone are not enough; packet-producing tools need one renderer so JSON, Markdown, and CLI status cannot drift. | Validated in Phase 04 |
 | Treat self-use tools as evidence, not authority | AI Tools should audit itself with validated tools, but the assistant keeps responsibility for scope, relevance, and boundary decisions. | Validated in Phase 03 |
@@ -213,6 +226,8 @@ to inspect it.
 | Keep release examples generated from the shared packet model | Committed examples are useful only if JSON and Markdown stay internally consistent with packet semantics. | Validated in Phase 06 |
 | Keep CLI fail policy opt-in | Packet status is evidence; shell failure should be a caller-selected policy so default auditor runs remain non-breaking. | Validated in Phase 08 |
 | Use a machine-readable tool registry before broad tool expansion | Future agents need deterministic capability routing, self-use policy, and non-goals before promoting seed tools. | Validated in Phase 09 |
+| Promote `gates-scan` only as external mechanical evidence | The scanner should find deterministic gate evidence gaps without approving, rejecting, revising, or auto-running gates. | Validated in Phase 10 |
+| Promote `project-context-ledger` as the next v2 tool | Repeated project fact, command, contract, planning, packet, and decision context loading is the strongest current evidence-backed demand. | Validated in Phase 12 |
 
 ## Evolution
 
@@ -232,4 +247,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state.
 
 ---
-*Last updated: 2026-05-08 after completing Phase 9 tool registry and workflow gate slimming*
+*Last updated: 2026-05-08 after completing Phase 12 Project Context Ledger MVP*

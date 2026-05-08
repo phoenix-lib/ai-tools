@@ -1,0 +1,30 @@
+{
+  "gates": [
+    {
+      "automation_boundary": "Evidence only.",
+      "description": "Interop gate.",
+      "id": "interop-gate",
+      "name": "Interop Gate",
+      "observable_outputs": [
+        "Gate Resolution entry"
+      ],
+      "required_artifacts": [],
+      "required_fields": [
+        "decision"
+      ],
+      "skip_allowed": true,
+      "skip_reason_required": true,
+      "stages": [
+        "plan"
+      ]
+    }
+  ],
+  "interop": {
+    "field_name_mapping": {
+      "required_artifacts": "wrongName"
+    },
+    "stage_aliases": {
+      "release": "release"
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "gates": [
+    {
+      "automation_boundary": "Evidence only.",
+      "description": "No outputs.",
+      "id": "silent-gate",
+      "name": "Silent Gate",
+      "observable_outputs": [],
+      "required_artifacts": [],
+      "required_fields": [
+        "decision"
+      ],
+      "skip_allowed": true,
+      "skip_reason_required": true,
+      "stages": [
+        "plan"
+      ]
+    }
+  ]
+}

@@ -5,7 +5,10 @@ const test = require("node:test");
 const {
   CONTRACT_DRIFT_AUDITOR_TOOL_NAME,
   CROSS_REPO_COMPATIBILITY_CHECKER_TOOL_NAME,
+  GATES_SCAN_TOOL_NAME,
   POLICY_HASH_SOURCES,
+  PROJECT_CONTEXT_LEDGER_ARTIFACTS,
+  PROJECT_CONTEXT_LEDGER_TOOL_NAME,
   REQUIRED_PACKET_ARTIFACTS,
   REVIEW_PACKET_SCHEMA_VERSION,
   loadPackageVersion
@@ -17,11 +20,21 @@ test("exports stable review packet constants", () => {
   assert.equal(REVIEW_PACKET_SCHEMA_VERSION, "review-packet/v1");
   assert.equal(CONTRACT_DRIFT_AUDITOR_TOOL_NAME, "contract-drift-auditor");
   assert.equal(CROSS_REPO_COMPATIBILITY_CHECKER_TOOL_NAME, "cross-repo-compatibility-checker");
+  assert.equal(GATES_SCAN_TOOL_NAME, "gates-scan");
+  assert.equal(PROJECT_CONTEXT_LEDGER_TOOL_NAME, "project-context-ledger");
   assert.deepEqual(REQUIRED_PACKET_ARTIFACTS, [
     "REVIEW-SUMMARY.json",
     "EVIDENCE.json",
     "FINDINGS.md",
     "RECOMMENDED-ACTIONS.md"
+  ]);
+  assert.deepEqual(PROJECT_CONTEXT_LEDGER_ARTIFACTS, [
+    "FACTS.json",
+    "COMMANDS.json",
+    "CONTRACTS.json",
+    "SKILLS.json",
+    "DECISIONS.json",
+    "CACHE-MANIFEST.json"
   ]);
 });
 

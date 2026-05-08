@@ -158,9 +158,12 @@
       "compatible_packet_standard": "review-packet/v1",
       "destination": "tools/gates-scan/",
       "evidence_refs": [
-        ".planning/REQUIREMENTS.md",
-        ".planning/ROADMAP.md",
-        ".planning/research/GATES-SCAN-ROADMAP-REVIEW.md"
+        "package.json",
+        "tools/gates-scan/README.md",
+        "tools/gates-scan/SEED-IDEAS.md",
+        ".planning/phases/10-evidence-only-gate-linter-seed-mvp/10-VERIFICATION.md",
+        "test/gates-scan/integration.test.js",
+        "test/gates-scan/schema-output.test.js"
       ],
       "expected_outputs": [
         "REVIEW-SUMMARY.json",
@@ -169,28 +172,29 @@
         "RECOMMENDED-ACTIONS.md"
       ],
       "id": "gates-scan",
-      "maturity": "planned",
+      "maturity": "validated",
       "name": "Gates Scan",
       "non_goals": [
-        "Do not implement the CLI in Phase 9.",
+        "Do not mutate the scanned target project.",
         "Do not make semantic gate adoption decisions.",
         "Do not duplicate ai-workspace-kit assistant-led gate review ownership."
       ],
       "owner": "ai-tools",
+      "package_bin": "gates-scan",
       "phase": "10",
       "requirements": [
         "GATELINT-01"
       ],
       "self_use": {
-        "reason": "After implementation, use as evidence for workflow gate changes and phase-boundary reviews.",
-        "required": false,
+        "reason": "Run after workflow gate, gate registry, source-layer, changelog, or phase-boundary documentation changes.",
+        "required": true,
         "stages": [
           "verify",
           "phase-boundary",
           "maintenance"
         ]
       },
-      "status_notes": "Planned Phase 10 evidence-only mechanical linter.",
+      "status_notes": "Validated Phase 10 evidence-only mechanical gate linter.",
       "use_gate": "self-use"
     },
     {
@@ -262,7 +266,7 @@
           "maintenance"
         ]
       },
-      "status_notes": "Deferred until Phase 11 selection review.",
+      "status_notes": "Deferred after Phase 11 selection review until config-heavy project or environment-refactor evidence exists.",
       "use_gate": "new-tool-intake"
     },
     {
@@ -295,7 +299,7 @@
           "maintenance"
         ]
       },
-      "status_notes": "Deferred seed.",
+      "status_notes": "Deferred after Phase 11 selection review until stable domain contract formats or domain-heavy work creates repeated need.",
       "use_gate": "new-tool-intake"
     },
     {
@@ -328,7 +332,7 @@
           "maintenance"
         ]
       },
-      "status_notes": "Deferred seed.",
+      "status_notes": "Deferred after Phase 11 selection review until repeated integration evidence exists after runtime capability checks.",
       "use_gate": "new-tool-intake"
     },
     {
@@ -365,42 +369,68 @@
           "maintenance"
         ]
       },
-      "status_notes": "Deferred until Phase 11 selection review.",
+      "status_notes": "Deferred after Phase 11 selection review until failed phases, rollbacks, disputed verification, or plan/reality mismatches create repeated evidence.",
       "use_gate": "new-tool-intake"
     },
     {
       "activation_stage": [
+        "research",
+        "plan",
+        "verify",
+        "phase-boundary",
         "maintenance"
       ],
+      "compatible_packet_standard": "review-packet/v1",
       "destination": "tools/project-context-ledger/",
       "evidence_refs": [
-        "tools/project-context-ledger/SEED-IDEAS.md"
+        "package.json",
+        "tools/project-context-ledger/README.md",
+        "tools/project-context-ledger/SEED-IDEAS.md",
+        ".planning/phases/11-v2-tool-selection-review/11-SELECTION-REVIEW.md",
+        ".planning/phases/12-project-context-ledger-mvp/12-VERIFICATION.md",
+        "test/project-context-ledger/integration.test.js",
+        "test/project-context-ledger/schema-output.test.js"
       ],
       "expected_outputs": [
         "REVIEW-SUMMARY.json",
         "EVIDENCE.json",
         "FINDINGS.md",
-        "RECOMMENDED-ACTIONS.md"
+        "RECOMMENDED-ACTIONS.md",
+        "FACTS.json",
+        "COMMANDS.json",
+        "CONTRACTS.json",
+        "SKILLS.json",
+        "DECISIONS.json",
+        "CACHE-MANIFEST.json"
       ],
       "id": "project-context-ledger",
-      "maturity": "deferred",
+      "maturity": "validated",
       "name": "Project Context Ledger",
       "non_goals": [
-        "Do not implement before registry and gate guardrails are stable.",
-        "Do not mutate target project context."
+        "Do not mutate target project context.",
+        "Do not read secret-like file contents by default.",
+        "Do not replace reading relevant source files.",
+        "Do not become an ai-workspace-kit runtime dependency.",
+        "Do not make automatic workflow, gate, roadmap, or phase decisions."
       ],
       "owner": "ai-tools",
+      "package_bin": "project-context-ledger",
       "requirements": [
         "LEDGER-01"
       ],
       "self_use": {
-        "reason": "Future candidate for milestone context refresh after promotion.",
-        "required": false,
+        "reason": "Run for evidence-backed project memory before discuss, plan, verify, phase-boundary, maintenance, and resume workflows.",
+        "required": true,
         "stages": [
+          "research",
+          "plan",
+          "verify",
+          "phase-boundary",
           "maintenance"
         ]
       },
-      "status_notes": "Deferred until Phase 11 selection review.",
+      "phase": "12",
+      "status_notes": "Validated Phase 12 read-only project context ledger CLI with shared review packet and six ledger JSON artifacts.",
       "use_gate": "new-tool-intake"
     },
     {
@@ -436,7 +466,7 @@
           "maintenance"
         ]
       },
-      "status_notes": "Deferred seed.",
+      "status_notes": "Deferred after Phase 11 selection review until explicit runtime service, hardware, browser API, port, or local capability demand exists.",
       "use_gate": "new-tool-intake"
     },
     {
@@ -473,7 +503,7 @@
           "maintenance"
         ]
       },
-      "status_notes": "Deferred until Phase 11 selection review.",
+      "status_notes": "Deferred after Phase 11 selection review until project skills become active maintained artifacts.",
       "use_gate": "new-tool-intake"
     },
     {
@@ -510,7 +540,7 @@
           "maintenance"
         ]
       },
-      "status_notes": "Deferred until Phase 11 selection review.",
+      "status_notes": "Deferred after Phase 11 selection review until repeated shallow-test, over-mocking, or missed-behavior evidence exists.",
       "use_gate": "new-tool-intake"
     },
     {
@@ -547,7 +577,7 @@
           "maintenance"
         ]
       },
-      "status_notes": "Deferred until Phase 11 selection review.",
+      "status_notes": "Deferred after Phase 11 selection review until frontend or UI regression evidence demand exists.",
       "use_gate": "new-tool-intake"
     }
   ],

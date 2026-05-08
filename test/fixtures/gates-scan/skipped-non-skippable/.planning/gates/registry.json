@@ -1,0 +1,22 @@
+{
+  "gates": [
+    {
+      "automation_boundary": "Ask the user.",
+      "description": "Discuss mode.",
+      "id": "discuss-mode",
+      "name": "Discuss Mode",
+      "observable_outputs": [
+        "Gate Resolution entry"
+      ],
+      "required_artifacts": [],
+      "required_fields": [
+        "mode"
+      ],
+      "skip_allowed": false,
+      "skip_reason_required": true,
+      "stages": [
+        "discuss"
+      ]
+    }
+  ]
+}

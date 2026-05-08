@@ -172,13 +172,13 @@ Which phases cover which requirements. Updated during roadmap creation.
 | CLI-02 | Phase 8 | Complete |
 | REG-01 | Phase 9 | Complete |
 | GOV-01 | Phase 9 | Complete |
-| GATELINT-01 | Phase 10 | Planned |
-| LEDGER-01 | Phase 11 | Deferred |
-| FORENSICS-01 | Phase 11 | Deferred |
-| CONFIG-01 | Phase 11 | Deferred |
-| SKILL-01 | Phase 11 | Deferred |
-| TESTQA-01 | Phase 11 | Deferred |
-| UIREG-01 | Phase 11 | Deferred |
+| GATELINT-01 | Phase 10 | Complete |
+| LEDGER-01 | Phase 12 | Complete |
+| FORENSICS-01 | Future | Deferred - trigger: failed phases, rollbacks, disputed verification, or repeated plan/reality mismatches |
+| CONFIG-01 | Future | Deferred - trigger: config-heavy environment or deployment/refactor evidence |
+| SKILL-01 | Future | Deferred - trigger: project skills become active maintained artifacts |
+| TESTQA-01 | Future | Deferred - trigger: repeated shallow-test, over-mocking, or missed-behavior evidence |
+| UIREG-01 | Future | Deferred - trigger: frontend or UI regression evidence demand |
 
 **Coverage:**
 - v1 requirements: 45 total
@@ -187,4 +187,4 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 ---
 *Requirements defined: 2026-05-07*
-*Last updated: 2026-05-08 after completing Phase 9 tool registry and workflow gate slimming*
+*Last updated: 2026-05-08 after Phase 12 completed Project Context Ledger MVP*

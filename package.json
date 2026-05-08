@@ -5,11 +5,15 @@
   "type": "commonjs",
   "bin": {
     "contract-drift-auditor": "tools/contract-drift-auditor/cli.js",
-    "cross-repo-compatibility-checker": "tools/cross-repo-compatibility-checker/cli.js"
+    "cross-repo-compatibility-checker": "tools/cross-repo-compatibility-checker/cli.js",
+    "gates-scan": "tools/gates-scan/cli.js",
+    "project-context-ledger": "tools/project-context-ledger/cli.js"
   },
   "scripts": {
     "contract-drift-auditor": "node tools/contract-drift-auditor/cli.js",
     "cross-repo-compatibility-checker": "node tools/cross-repo-compatibility-checker/cli.js",
+    "gates-scan": "node tools/gates-scan/cli.js",
+    "project-context-ledger": "node tools/project-context-ledger/cli.js",
     "test": "node --test"
   },
   "devDependencies": {

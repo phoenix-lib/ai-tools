@@ -5,10 +5,10 @@ packet standards. The project focuses on deterministic, evidence-backed output
 that assistants, humans, CI jobs, and GSD workflows can inspect without mutating
 target projects.
 
-The current usable capabilities are `contract-drift-auditor` and
-`cross-repo-compatibility-checker`. `tools/registry.json` is the
-machine-readable capability catalog for implemented, planned, seed-only, and
-deferred tools.
+The current usable capabilities are `contract-drift-auditor`,
+`cross-repo-compatibility-checker`, `gates-scan`, and
+`project-context-ledger`. `tools/registry.json` is the machine-readable capability catalog
+for implemented, planned, seed-only, and deferred tools.
 
 ## Current Tools
 
@@ -48,6 +48,38 @@ or directly:
 
 ```bash
 node tools/cross-repo-compatibility-checker/cli.js --ai-tools <path> --ai-workspace-kit <path> --out <dir>
+```
+
+`gates-scan` performs evidence-only mechanical checks over local workflow gate
+registries, gate resolution blocks, changelog impact notes, referenced paths,
+and wording that may need semantic review.
+
+Run it from this repository:
+
+```bash
+npm run gates-scan -- --project <path> --out <dir>
+```
+
+or directly:
+
+```bash
+node tools/gates-scan/cli.js --project <path> --out <dir>
+```
+
+`project-context-ledger` records project facts, commands, assistant contracts,
+skills, decisions, generated packet exclusions, secret path-only evidence, and
+cache source hashes.
+
+Run it from this repository:
+
+```bash
+npm run project-context-ledger -- --project <path> --out <dir>
+```
+
+or directly:
+
+```bash
+node tools/project-context-ledger/cli.js --project <path> --out <dir>
 ```
 
 This repository is currently `private: true`; do not assume a published package
@@ -103,6 +135,24 @@ Use `cross-repo-compatibility-checker` when:
   `Thread ID` metadata and valid counterpart paths;
 - gate registry snake_case/camelCase mapping or stage aliases may have drifted.
 
+Use `gates-scan` when:
+
+- workflow gate registry or gate documentation changes need mechanical review;
+- a phase boundary needs evidence for missing gate resolution blocks, stale
+  paths, duplicate IDs, unresolved references, or missing changelog impact;
+- assistant-led gate review would benefit from deterministic evidence while
+  keeping semantic adoption decisions with the assistant and reviewer.
+
+Use `project-context-ledger` when:
+
+- project commands, contracts, planning state, skills, or decisions need a
+  deterministic evidence ledger before discuss, plan, verify, phase-boundary,
+  maintenance, or resume work;
+- generated packet directories need to be excluded from source evidence while
+  still being recorded as ignored packet inputs;
+- downstream agents need cache manifest hashes and confidence-marked facts
+  without executing target project commands.
+
 ## When Not to Use
 
 Do not use this auditor as:
@@ -132,6 +182,10 @@ run kit workflows automatically.
   safety, and output interpretation.
 - `tools/cross-repo-compatibility-checker/README.md` - cross-repo checker
   usage, protocol checks, gate registry checks, and evidence-only boundaries.
+- `tools/gates-scan/README.md` - mechanical gate linter usage, checks, packet
+  outputs, and evidence-only boundaries.
+- `tools/project-context-ledger/README.md` - project ledger usage, outputs,
+  secret policy, generated packet exclusions, and non-goals.
 - `standards/review-packet/README.md` - shared packet schema and evidence
   semantics.
 - `docs/RELEASE-READINESS.md` - first-release checklist and evidence.

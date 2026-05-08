@@ -71,17 +71,38 @@ test("validated packet tools declare shared review packet outputs", () => {
   }
 });
 
-test("gates-scan remains planned and is not a Phase 9 CLI", () => {
+test("gates-scan is a validated Phase 10 evidence-only CLI", () => {
   const packageJson = readJson("package.json");
   const registry = registryById();
   const entry = registry.get("gates-scan");
 
   assert.ok(entry, "gates-scan registry entry must exist");
-  assert.equal(entry.maturity, "planned");
+  assert.equal(entry.maturity, "validated");
   assert.equal(entry.phase, "10");
-  assert.equal(Object.hasOwn(packageJson.bin, "gates-scan"), false, "Phase 9 must not add gates-scan bin");
-  assert.match(entry.non_goals.join("\n"), /Do not implement the CLI in Phase 9/);
+  assert.equal(packageJson.bin["gates-scan"], "tools/gates-scan/cli.js");
+  assert.equal(entry.package_bin, "gates-scan");
+  assert.equal(entry.self_use.required, true);
+  assert.ok(entry.self_use.stages.includes("phase-boundary"));
+  assert.match(entry.non_goals.join("\n"), /Do not mutate the scanned target project/);
   assert.match(entry.non_goals.join("\n"), /semantic gate adoption decisions/);
+});
+
+test("project-context-ledger is a validated Phase 12 read-only CLI", () => {
+  const packageJson = readJson("package.json");
+  const registry = registryById();
+  const entry = registry.get("project-context-ledger");
+
+  assert.ok(entry, "project-context-ledger registry entry must exist");
+  assert.equal(entry.maturity, "validated");
+  assert.equal(entry.phase, "12");
+  assert.equal(packageJson.bin["project-context-ledger"], "tools/project-context-ledger/cli.js");
+  assert.equal(entry.package_bin, "project-context-ledger");
+  assert.equal(entry.self_use.required, true);
+  assert.ok(entry.self_use.stages.includes("phase-boundary"));
+  assert.ok(entry.expected_outputs.includes("FACTS.json"));
+  assert.ok(entry.expected_outputs.includes("CACHE-MANIFEST.json"));
+  assert.match(entry.non_goals.join("\n"), /Do not mutate target project context/);
+  assert.match(entry.non_goals.join("\n"), /workflow, gate, roadmap, or phase decisions/);
 });
 
 test("seed idea directories are represented in the registry", () => {

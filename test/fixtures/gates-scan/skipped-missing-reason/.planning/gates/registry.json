@@ -1,0 +1,22 @@
+{
+  "gates": [
+    {
+      "automation_boundary": "Evidence only.",
+      "description": "Optional gate.",
+      "id": "optional-gate",
+      "name": "Optional Gate",
+      "observable_outputs": [
+        "Gate Resolution entry"
+      ],
+      "required_artifacts": [],
+      "required_fields": [
+        "reason"
+      ],
+      "skip_allowed": true,
+      "skip_reason_required": true,
+      "stages": [
+        "plan"
+      ]
+    }
+  ]
+}

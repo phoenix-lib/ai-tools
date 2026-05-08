@@ -1,5 +1,40 @@
 # ai-workspace-kit Upstream Review
 
+## Phase 12 Planning Freshness Check
+
+**Checked:** 2026-05-08 during `$gsd-plan-phase 12`
+**Local before update:** `b5903a445fce2a3387a697e4fcaa99181617f96c`
+**Remote HEAD:** `bbb009a7274a9fc8648431789b7ff4b5154015b3`
+**Local after update:** `bbb009a7274a9fc8648431789b7ff4b5154015b3`
+**Branch:** `master`
+**Checkout status before update:** clean
+**Result:** local `.external/ai-workspace-kit` fast-forwarded to upstream HEAD.
+
+The upstream `CHANGELOG.md` was read first. Relevant Phase 12 planning inputs:
+
+- Phase 21 expands `upstream-freshness` into AI-Tools Freshness and Update
+  Impact semantics while preserving the same registry id.
+- Phase 21 adds structured update-impact fields covering previous/current
+  commit, update action, changelog status, changed areas, current repo impact,
+  current phase impact, downstream consumer impact, reusable practices,
+  boundary decision, cross-repo request decision, self-use evidence, and no
+  install/run/dependency confirmation.
+- Phase 21 adds dependency lifecycle review guidance as semantic review
+  material only. It does not add a package-manager runner, dependency updater,
+  vulnerability scanner, abandoned-package detector, automatic permission
+  grant, or `ai-tools` runtime dependency.
+
+Phase 12 planning impact:
+
+- Record the full update-impact review in
+  `.planning/phases/12-project-context-ledger-mvp/12-UPSTREAM-UPDATE-REVIEW.md`.
+- Keep `project-context-ledger` evidence-only and optional.
+- Do not expand the ledger into dependency lifecycle review, vulnerability
+  scanning, abandoned package detection, package-manager execution, permission
+  granting, or automatic workflow/gate/roadmap decisions.
+- Prefer existing Node built-ins and shared AI Tools helpers; if execution adds
+  a dependency, record dependency lifecycle review before relying on it.
+
 ## Phase 9 Planning Freshness Check
 
 **Checked:** 2026-05-08 during `$gsd-plan-phase 9`

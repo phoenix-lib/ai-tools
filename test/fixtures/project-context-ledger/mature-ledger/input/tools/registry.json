@@ -1,0 +1,10 @@
+{
+  "schema_version": "1.0",
+  "tools": [
+    {
+      "id": "fixture-tool",
+      "maturity": "validated",
+      "owner": "fixture"
+    }
+  ]
+}
