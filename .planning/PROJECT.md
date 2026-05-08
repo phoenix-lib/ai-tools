@@ -108,6 +108,9 @@ auditor or making `ai-workspace-kit` depend on AI Tools.
   stable finding fingerprints, and rollup-side `DISPOSITION-INDEX.json`
   consumption without rewriting source findings. Validated in Phase 15: Review
   Disposition Model.
+- [x] Add ledger scope and diff modes so current source-of-truth facts can be
+  separated from historical phase artifacts and explicit cache-manifest diffs
+  can be reviewed. Validated in Phase 16: Ledger Scope and Diff Modes.
 
 ### Active
 
@@ -122,8 +125,6 @@ auditor or making `ai-workspace-kit` depend on AI Tools.
   or workflow gate change.
 - [ ] Keep forensics, config, skill, test quality, UI, runtime, integration,
   and domain tools deferred until their Phase 11 trigger evidence appears.
-- [ ] Add ledger scope and diff modes so current source-of-truth facts can be
-  separated from historical phase artifacts.
 - [ ] Unify validated tool CLI behavior around machine stdout, quiet mode,
   fail policy, mutating flag rejection, and documented exit codes.
 - [ ] Validate that `ai-workspace-kit` machine-readable LLM instructions can
@@ -264,6 +265,7 @@ to inspect it.
 | Start v2.1 with evidence consumption, not another broad auditor | Phase 12 self-use showed ledger output is useful but noisy; the next risk is signal quality, packet consumption, and shared contracts. | Active |
 | Keep review packet rollup mechanical | Rollup may validate, aggregate, group, and index packet evidence, but must not decide that findings are safe to ignore or automatically resolved. | Validated in Phase 13 and extended in Phase 15 |
 | Treat review dispositions as human review context | Dispositions should carry owner, reason, expiry, evidence refs, and tool/schema versions while preserving the original finding. | Validated in Phase 15 |
+| Use current-by-default ledger scope and explicit diff evidence | Current source evidence should not be dominated by historical phase artifacts, and changed ledger facts should be reviewable without becoming automatic priority or suppression logic. | Validated in Phase 16 |
 | Incorporate `ai-workspace-kit` LLM instructions as optional interop evidence | Upstream now publishes `.external/ai-workspace-kit/LLM-PROJECT-INSTRUCTIONS.json`; AI Tools may validate optional evidence wording without becoming a kit dependency. | Active |
 
 ## Evolution
@@ -284,4 +286,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state.
 
 ---
-*Last updated: 2026-05-08 after completing Phase 15 Review Disposition Model*
+*Last updated: 2026-05-08 after completing Phase 16 Ledger Scope and Diff Modes*

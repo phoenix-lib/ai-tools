@@ -1,17 +1,17 @@
----
+﻿---
 gsd_state_version: 1.0
 milestone: v2.1
-milestone_name: "Candidate: Portfolio Real Projects Scan Protocol"
-status: executing
-stopped_at: Phase 16 context gathered
-last_updated: "2026-05-08T10:57:08.899Z"
-last_activity: 2026-05-08 -- Phase 16 execution started
+milestone_name: "Evidence Consumption & Signal Quality"
+status: planning
+stopped_at: Phase 16 completed
+last_updated: "2026-05-08T11:16:05.274Z"
+last_activity: 2026-05-08 -- Phase 16 completed; Phase 17 ready to discuss
 progress:
   total_phases: 18
-  completed_phases: 15
-  total_plans: 36
-  completed_plans: 34
-  percent: 94
+  completed_phases: 16
+  total_plans: 39
+  completed_plans: 36
+  percent: 92
 ---
 
 # Project State
@@ -22,22 +22,22 @@ See: .planning/PROJECT.md (updated 2026-05-08)
 
 **Core value:** Produce deterministic, evidence-backed review packets that make
 AI project guidance auditable without mutating target projects.
-**Current focus:** Phase 16 — Ledger Scope and Diff Modes
+**Current focus:** Phase 17 - Shared CLI Contract
 
 ## Current Position
 
-Phase: 16 (Ledger Scope and Diff Modes) — EXECUTING
-Plan: 1 of 2
-Status: Executing Phase 16
-Last activity: 2026-05-08 -- Phase 16 execution started
+Phase: 17
+Plan: Not started
+Status: Ready for Phase 17 discussion
+Last activity: 2026-05-08 -- Phase 16 completed
 
-Progress: Phase 14 complete; Phase 15 is ready to execute.
+Progress: Phase 16 complete; Phase 17 is ready to discuss.
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total v2.1 plans completed: 4
+- Total v2.1 plans completed: 8
 - Average duration: n/a
 - Total execution time: n/a
 
@@ -47,8 +47,8 @@ Progress: Phase 14 complete; Phase 15 is ready to execute.
 |-------|-------|--------|
 | 13 | 2/2 | Complete |
 | 14 | 2/2 | Complete |
-| 15 | 0/2 | Planned |
-| 16 | 0/2 | Planned |
+| 15 | 2/2 | Complete |
+| 16 | 2/2 | Complete |
 | 17 | 0/2 | Planned |
 | 18 | 0/1 | Planned |
 | Phase 14 P14-01 | 44 min | 4 tasks | 9 files |
@@ -84,11 +84,11 @@ Decisions are logged in `.planning/PROJECT.md` Key Decisions table.
 - Review packet rollup is planned as a mechanical packet consumer, not a
   semantic suppression or gate decision engine.
 
-- Review dispositions are planned as human review metadata with owner, reason,
-  expiry, and evidence refs.
+- Review dispositions are validated as human review metadata with owner,
+  reason, expiry, evidence refs, and stable finding fingerprints.
 
-- Ledger scope and diff work should reduce current-source noise from historical
-  phase artifacts.
+- Ledger scope and diff modes reduce current-source noise from historical
+  phase artifacts and keep changed-fact comparison mechanical evidence only.
 
 - Upstream `ai-workspace-kit` now includes
   `.external/ai-workspace-kit/LLM-PROJECT-INSTRUCTIONS.json`; AI Tools will
@@ -119,6 +119,12 @@ Decisions are logged in `.planning/PROJECT.md` Key Decisions table.
   ledger JSON Schemas, generated-output schema validation, deterministic
   occurrence-normalized record IDs, self-use evidence, and 226/226 tests
   passing.
+- Phase 15 validated human review dispositions with stable finding
+  fingerprints, strict disposition schemas, rollup-side
+  `DISPOSITION-INDEX.json`, self-use evidence, and 240/240 tests passing.
+- Phase 16 validated ledger scope and diff modes with current-by-default
+  filtering, source categories, manifest `ledger_records`, explicit
+  `LEDGER-DIFF.json`, self-use evidence, and 247/247 tests passing.
 
 ### Roadmap Evolution
 
@@ -144,7 +150,7 @@ Decisions are logged in `.planning/PROJECT.md` Key Decisions table.
 
 ### Pending Todos
 
-- Start Phase 15: Review Disposition Model.
+- Start Phase 17: Shared CLI Contract.
 
 ### Blockers/Concerns
 

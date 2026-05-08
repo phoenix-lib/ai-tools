@@ -129,10 +129,10 @@
 
 ### Ledger Scope and Diff Modes
 
-- [ ] **LEDGER-SCOPE-01**: User can run `project-context-ledger` with `--scope current|planning|history|all`, with `current` as the default, to choose whether current source-of-truth files, active planning files, historical phase artifacts, or all supported sources are scanned.
-- [ ] **LEDGER-SCOPE-02**: User can run `project-context-ledger --since-manifest <CACHE-MANIFEST.json>` to report changed, added, removed, stale, and unchanged facts.
-- [ ] **LEDGER-SCOPE-03**: Current scope treats historical `.planning/phases/**` artifacts as history by default so prior phase references do not dominate current source-of-truth findings.
-- [ ] **LEDGER-SCOPE-04**: Ledger findings distinguish real references from examples, placeholders, `n/a`, and generated packet artifacts to reduce false positives.
+- [x] **LEDGER-SCOPE-01**: User can run `project-context-ledger` with `--scope current|planning|history|all`, with `current` as the default, to choose whether current source-of-truth files, active planning files, historical phase artifacts, or all supported sources are scanned.
+- [x] **LEDGER-SCOPE-02**: User can run `project-context-ledger --since-manifest <CACHE-MANIFEST.json>` to report changed, added, removed, stale, and unchanged facts.
+- [x] **LEDGER-SCOPE-03**: Current scope treats historical `.planning/phases/**` artifacts as history by default so prior phase references do not dominate current source-of-truth findings.
+- [x] **LEDGER-SCOPE-04**: Ledger findings distinguish real references from examples, placeholders, `n/a`, and generated packet artifacts to reduce false positives.
 
 ### Shared CLI Contract
 
@@ -237,15 +237,15 @@ Which phases cover which requirements. Updated during roadmap creation.
 | LEDGER-SCHEMA-02 | Phase 14 | Complete |
 | LEDGER-SCHEMA-03 | Phase 14 | Complete |
 | LEDGER-SCHEMA-04 | Phase 14 | Complete |
-| DISP-01 | Phase 15 | Planned |
-| DISP-02 | Phase 15 | Planned |
-| DISP-03 | Phase 15 | Planned |
-| DISP-04 | Phase 15 | Planned |
-| DISP-05 | Phase 15 | Planned |
-| LEDGER-SCOPE-01 | Phase 16 | Planned |
-| LEDGER-SCOPE-02 | Phase 16 | Planned |
-| LEDGER-SCOPE-03 | Phase 16 | Planned |
-| LEDGER-SCOPE-04 | Phase 16 | Planned |
+| DISP-01 | Phase 15 | Complete |
+| DISP-02 | Phase 15 | Complete |
+| DISP-03 | Phase 15 | Complete |
+| DISP-04 | Phase 15 | Complete |
+| DISP-05 | Phase 15 | Complete |
+| LEDGER-SCOPE-01 | Phase 16 | Complete |
+| LEDGER-SCOPE-02 | Phase 16 | Complete |
+| LEDGER-SCOPE-03 | Phase 16 | Complete |
+| LEDGER-SCOPE-04 | Phase 16 | Complete |
 | CLI-CONTRACT-01 | Phase 17 | Planned |
 | CLI-CONTRACT-02 | Phase 17 | Planned |
 | CLI-CONTRACT-03 | Phase 17 | Planned |
@@ -270,4 +270,4 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 ---
 *Requirements defined: 2026-05-07*
-*Last updated: 2026-05-08 after starting milestone v2.1 Evidence Consumption & Signal Quality*
+*Last updated: 2026-05-08 after completing Phase 16 Ledger Scope and Diff Modes*

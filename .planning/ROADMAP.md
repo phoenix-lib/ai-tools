@@ -46,7 +46,7 @@ projects from an explicit inventory instead of adding another broad auditor.
 - [x] **Phase 13: Review Packet Rollup MVP** - Build a mechanical packet consumer that validates and aggregates multiple review packets without semantic suppression. (completed 2026-05-08)
 - [x] **Phase 14: Ledger Artifact Schemas** - Stabilize machine-readable schemas for project-context-ledger artifacts before other tools consume them. (completed 2026-05-08)
 - [x] **Phase 15: Review Disposition Model** - Add explicit human review disposition metadata with owner, expiry, evidence refs, and stable finding fingerprints. (completed 2026-05-08)
-- [ ] **Phase 16: Ledger Scope and Diff Modes** - Reduce ledger noise with current-by-default scope modes and since-manifest diffs.
+- [x] **Phase 16: Ledger Scope and Diff Modes** - Reduce ledger noise with current-by-default scope modes and since-manifest diffs. (completed 2026-05-08)
 - [ ] **Phase 17: Shared CLI Contract** - Apply one CLI contract, including JSON stdout, quiet mode, and fail policy, across validated report tools.
 - [ ] **Phase 18: ai-workspace-kit LLM Instructions Compatibility** - Validate optional AI Tools evidence wording in upstream LLM project instructions.
 
@@ -374,10 +374,10 @@ Plans:
 
 Plans:
 **Wave 1**
-- [ ] 16-01: Add ledger source categories, scope filtering, and current/history fixture coverage.
+- [x] 16-01: Add ledger source categories, scope filtering, and current/history fixture coverage.
 
 **Wave 2** *(blocked on Wave 1 completion)*
-- [ ] 16-02: Add since-manifest diff mode, changed-fact reporting, docs, and self-use evidence.
+- [x] 16-02: Add since-manifest diff mode, changed-fact reporting, docs, and self-use evidence.
 
 ### Phase 17: Shared CLI Contract
 **Goal**: Unify report CLI ergonomics across validated AI Tools without changing evidence-only defaults.
@@ -610,6 +610,6 @@ compatibility are in place.
 | 13. Review Packet Rollup MVP | 2/2 | Complete    | 2026-05-08 |
 | 14. Ledger Artifact Schemas | 2/2 | Complete    | 2026-05-08 |
 | 15. Review Disposition Model | 2/2 | Complete    | 2026-05-08 |
-| 16. Ledger Scope and Diff Modes | 0/2 | Planned | |
+| 16. Ledger Scope and Diff Modes | 2/2 | Complete    | 2026-05-08 |
 | 17. Shared CLI Contract | 0/2 | Planned | |
 | 18. ai-workspace-kit LLM Instructions Compatibility | 0/1 | Planned | |
