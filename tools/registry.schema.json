@@ -1,0 +1,171 @@
+{
+  "$id": "https://ai-tools.local/schemas/tools/registry.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "tools": {
+      "items": {
+        "$ref": "#/$defs/tool"
+      },
+      "minItems": 1,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "updated": {
+      "format": "date",
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_version",
+    "updated",
+    "tools"
+  ],
+  "type": "object",
+  "$defs": {
+    "nonEmptyString": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "nonEmptyStringArray": {
+      "items": {
+        "$ref": "#/$defs/nonEmptyString"
+      },
+      "minItems": 1,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "selfUse": {
+      "additionalProperties": false,
+      "properties": {
+        "reason": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "required": {
+          "type": "boolean"
+        },
+        "stages": {
+          "items": {
+            "enum": [
+              "discuss",
+              "research",
+              "plan",
+              "execute",
+              "verify",
+              "phase-boundary",
+              "release",
+              "maintenance"
+            ],
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "required",
+        "stages",
+        "reason"
+      ],
+      "type": "object"
+    },
+    "tool": {
+      "additionalProperties": false,
+      "properties": {
+        "activation_stage": {
+          "items": {
+            "enum": [
+              "discuss",
+              "research",
+              "plan",
+              "execute",
+              "verify",
+              "phase-boundary",
+              "release",
+              "maintenance"
+            ],
+            "type": "string"
+          },
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "compatible_packet_standard": {
+          "type": "string"
+        },
+        "destination": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "evidence_refs": {
+          "$ref": "#/$defs/nonEmptyStringArray"
+        },
+        "expected_outputs": {
+          "$ref": "#/$defs/nonEmptyStringArray"
+        },
+        "id": {
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+          "type": "string"
+        },
+        "maturity": {
+          "enum": [
+            "validated",
+            "implemented",
+            "planned",
+            "seed-only",
+            "deferred"
+          ],
+          "type": "string"
+        },
+        "name": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "non_goals": {
+          "$ref": "#/$defs/nonEmptyStringArray"
+        },
+        "owner": {
+          "enum": [
+            "ai-tools",
+            "ai-workspace-kit",
+            "shared-boundary"
+          ],
+          "type": "string"
+        },
+        "package_bin": {
+          "type": "string"
+        },
+        "phase": {
+          "type": "string"
+        },
+        "requirements": {
+          "$ref": "#/$defs/nonEmptyStringArray"
+        },
+        "self_use": {
+          "$ref": "#/$defs/selfUse"
+        },
+        "status_notes": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "use_gate": {
+          "$ref": "#/$defs/nonEmptyString"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "owner",
+        "destination",
+        "maturity",
+        "activation_stage",
+        "expected_outputs",
+        "use_gate",
+        "self_use",
+        "non_goals",
+        "evidence_refs"
+      ],
+      "type": "object"
+    }
+  }
+}

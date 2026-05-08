@@ -1,0 +1,555 @@
+{
+  "schema_version": "1.0",
+  "tools": [
+    {
+      "activation_stage": [
+        "research",
+        "plan",
+        "verify",
+        "release",
+        "maintenance"
+      ],
+      "compatible_packet_standard": "review-packet/v1",
+      "destination": "tools/contract-drift-auditor/",
+      "evidence_refs": [
+        "package.json",
+        "tools/contract-drift-auditor/README.md",
+        "tools/contract-drift-auditor/SEED-IDEAS.md",
+        ".planning/phases/04-contract-drift-auditor-mvp/04-VERIFICATION.md"
+      ],
+      "expected_outputs": [
+        "REVIEW-SUMMARY.json",
+        "EVIDENCE.json",
+        "FINDINGS.md",
+        "RECOMMENDED-ACTIONS.md"
+      ],
+      "id": "contract-drift-auditor",
+      "maturity": "validated",
+      "name": "Contract Drift Auditor",
+      "non_goals": [
+        "Do not mutate the audited target project.",
+        "Do not read secret-like file contents by default.",
+        "Do not replace ai-workspace-kit adoption/bootstrap contracts."
+      ],
+      "owner": "ai-tools",
+      "package_bin": "contract-drift-auditor",
+      "phase": "4",
+      "requirements": [
+        "DRIFT-01",
+        "DRIFT-02",
+        "DRIFT-03",
+        "DRIFT-04",
+        "DRIFT-05",
+        "DRIFT-06",
+        "DRIFT-07"
+      ],
+      "self_use": {
+        "reason": "Run after contract, source-layer, AGENTS, or gate documentation changes when drift evidence is relevant.",
+        "required": true,
+        "stages": [
+          "execute",
+          "verify",
+          "release"
+        ]
+      },
+      "status_notes": "Validated read-only CLI with review packet output and optional machine stdout.",
+      "use_gate": "self-use"
+    },
+    {
+      "activation_stage": [
+        "research",
+        "plan",
+        "verify",
+        "phase-boundary",
+        "maintenance"
+      ],
+      "compatible_packet_standard": "review-packet/v1",
+      "destination": "tools/cross-repo-compatibility-checker/",
+      "evidence_refs": [
+        "package.json",
+        "tools/cross-repo-compatibility-checker/README.md",
+        "tools/cross-repo-compatibility-checker/SEED-IDEAS.md",
+        ".planning/phases/07-cross-repo-compatibility-checker-mvp/07-VERIFICATION.md"
+      ],
+      "expected_outputs": [
+        "REVIEW-SUMMARY.json",
+        "EVIDENCE.json",
+        "FINDINGS.md",
+        "RECOMMENDED-ACTIONS.md"
+      ],
+      "id": "cross-repo-compatibility-checker",
+      "maturity": "validated",
+      "name": "Cross-Repo Compatibility Checker",
+      "non_goals": [
+        "Do not install, run, fetch, or mutate the neighboring repository.",
+        "Do not make ai-workspace-kit a dependency.",
+        "Do not make compatibility findings automatic roadmap decisions."
+      ],
+      "owner": "ai-tools",
+      "package_bin": "cross-repo-compatibility-checker",
+      "phase": "7",
+      "requirements": [
+        "XREPO-VALIDATOR-01"
+      ],
+      "self_use": {
+        "reason": "Run after cross-repo protocol, gate registry interop, or ai-workspace-kit reference changes.",
+        "required": true,
+        "stages": [
+          "research",
+          "plan",
+          "verify",
+          "phase-boundary"
+        ]
+      },
+      "status_notes": "Validated read-only two-repo protocol checker.",
+      "use_gate": "self-use"
+    },
+    {
+      "activation_stage": [
+        "plan",
+        "execute",
+        "verify",
+        "maintenance"
+      ],
+      "destination": "tools/registry.json",
+      "evidence_refs": [
+        "tools/registry.json",
+        "tools/registry.schema.json",
+        "tools/tool-usage-registry/SEED-IDEAS.md",
+        ".planning/phases/09-tool-registry-and-workflow-gate-slimming/09-CONTEXT.md"
+      ],
+      "expected_outputs": [
+        "tools/registry.json",
+        "tools/registry.schema.json",
+        "test/planning/tool-registry.test.js"
+      ],
+      "id": "tool-registry",
+      "maturity": "implemented",
+      "name": "Tool Registry",
+      "non_goals": [
+        "Do not auto-run tools from registry data.",
+        "Do not replace the workflow gate registry.",
+        "Do not implement gates-scan checks in Phase 9."
+      ],
+      "owner": "ai-tools",
+      "phase": "9",
+      "requirements": [
+        "REG-01"
+      ],
+      "self_use": {
+        "reason": "Use as planning evidence for self-use and new-tool-intake routing.",
+        "required": true,
+        "stages": [
+          "plan",
+          "execute",
+          "verify",
+          "maintenance"
+        ]
+      },
+      "status_notes": "Machine-readable capability catalog created in Phase 9.",
+      "use_gate": "new-tool-intake"
+    },
+    {
+      "activation_stage": [
+        "verify",
+        "phase-boundary",
+        "maintenance"
+      ],
+      "compatible_packet_standard": "review-packet/v1",
+      "destination": "tools/gates-scan/",
+      "evidence_refs": [
+        ".planning/REQUIREMENTS.md",
+        ".planning/ROADMAP.md",
+        ".planning/research/GATES-SCAN-ROADMAP-REVIEW.md"
+      ],
+      "expected_outputs": [
+        "REVIEW-SUMMARY.json",
+        "EVIDENCE.json",
+        "FINDINGS.md",
+        "RECOMMENDED-ACTIONS.md"
+      ],
+      "id": "gates-scan",
+      "maturity": "planned",
+      "name": "Gates Scan",
+      "non_goals": [
+        "Do not implement the CLI in Phase 9.",
+        "Do not make semantic gate adoption decisions.",
+        "Do not duplicate ai-workspace-kit assistant-led gate review ownership."
+      ],
+      "owner": "ai-tools",
+      "phase": "10",
+      "requirements": [
+        "GATELINT-01"
+      ],
+      "self_use": {
+        "reason": "After implementation, use as evidence for workflow gate changes and phase-boundary reviews.",
+        "required": false,
+        "stages": [
+          "verify",
+          "phase-boundary",
+          "maintenance"
+        ]
+      },
+      "status_notes": "Planned Phase 10 evidence-only mechanical linter.",
+      "use_gate": "self-use"
+    },
+    {
+      "activation_stage": [
+        "research",
+        "plan",
+        "maintenance"
+      ],
+      "destination": ".external/ai-workspace-kit/",
+      "evidence_refs": [
+        "tools/ai-workspace-kit-internal-gates/SEED-IDEAS.md",
+        ".external/ai-workspace-kit/templates/GATE-REGISTRY.json",
+        ".external/ai-workspace-kit/templates/GATE-RESOLUTION.md"
+      ],
+      "expected_outputs": [
+        "none"
+      ],
+      "id": "ai-workspace-kit-internal-gates",
+      "maturity": "seed-only",
+      "name": "ai-workspace-kit Internal Gates",
+      "non_goals": [
+        "Do not implement kit-owned adoption/bootstrap gates in AI Tools.",
+        "Do not run or depend on ai-workspace-kit automatically.",
+        "Do not copy upstream .planning state."
+      ],
+      "owner": "ai-workspace-kit",
+      "self_use": {
+        "reason": "Use as boundary evidence when a tool idea overlaps kit-owned gate/adoption behavior.",
+        "required": false,
+        "stages": [
+          "research",
+          "plan",
+          "maintenance"
+        ]
+      },
+      "status_notes": "Boundary entry prevents duplicate AI Tools ownership.",
+      "use_gate": "cross-repo-outgoing"
+    },
+    {
+      "activation_stage": [
+        "plan",
+        "maintenance"
+      ],
+      "destination": "tools/config-matrix-validator/",
+      "evidence_refs": [
+        "tools/config-matrix-validator/SEED-IDEAS.md"
+      ],
+      "expected_outputs": [
+        "REVIEW-SUMMARY.json",
+        "EVIDENCE.json",
+        "FINDINGS.md",
+        "RECOMMENDED-ACTIONS.md"
+      ],
+      "id": "config-matrix-validator",
+      "maturity": "deferred",
+      "name": "Config Matrix Validator",
+      "non_goals": [
+        "Do not implement before evidence-backed v2 tool selection.",
+        "Do not mutate runtime or deployment configuration."
+      ],
+      "owner": "ai-tools",
+      "requirements": [
+        "CONFIG-01"
+      ],
+      "self_use": {
+        "reason": "Future candidate for config-heavy project review after promotion.",
+        "required": false,
+        "stages": [
+          "maintenance"
+        ]
+      },
+      "status_notes": "Deferred until Phase 11 selection review.",
+      "use_gate": "new-tool-intake"
+    },
+    {
+      "activation_stage": [
+        "plan",
+        "maintenance"
+      ],
+      "destination": "tools/domain-contract-test-generator/",
+      "evidence_refs": [
+        "tools/domain-contract-test-generator/SEED-IDEAS.md"
+      ],
+      "expected_outputs": [
+        "REVIEW-SUMMARY.json",
+        "EVIDENCE.json",
+        "FINDINGS.md",
+        "RECOMMENDED-ACTIONS.md"
+      ],
+      "id": "domain-contract-test-generator",
+      "maturity": "deferred",
+      "name": "Domain Contract Test Generator",
+      "non_goals": [
+        "Do not implement before the next tool is selected.",
+        "Do not generate tests without explicit domain evidence."
+      ],
+      "owner": "ai-tools",
+      "self_use": {
+        "reason": "Future candidate for domain-heavy phases after promotion.",
+        "required": false,
+        "stages": [
+          "maintenance"
+        ]
+      },
+      "status_notes": "Deferred seed.",
+      "use_gate": "new-tool-intake"
+    },
+    {
+      "activation_stage": [
+        "plan",
+        "maintenance"
+      ],
+      "destination": "tools/local-integration-harness/",
+      "evidence_refs": [
+        "tools/local-integration-harness/SEED-IDEAS.md"
+      ],
+      "expected_outputs": [
+        "REVIEW-SUMMARY.json",
+        "EVIDENCE.json",
+        "FINDINGS.md",
+        "RECOMMENDED-ACTIONS.md"
+      ],
+      "id": "local-integration-harness",
+      "maturity": "deferred",
+      "name": "Local Integration Harness",
+      "non_goals": [
+        "Do not implement before repeated integration evidence exists.",
+        "Do not run target project services automatically."
+      ],
+      "owner": "ai-tools",
+      "self_use": {
+        "reason": "Future candidate for local integration evidence after promotion.",
+        "required": false,
+        "stages": [
+          "maintenance"
+        ]
+      },
+      "status_notes": "Deferred seed.",
+      "use_gate": "new-tool-intake"
+    },
+    {
+      "activation_stage": [
+        "verify",
+        "maintenance"
+      ],
+      "destination": "tools/phase-forensics-tool/",
+      "evidence_refs": [
+        "tools/phase-forensics-tool/SEED-IDEAS.md"
+      ],
+      "expected_outputs": [
+        "REVIEW-SUMMARY.json",
+        "EVIDENCE.json",
+        "FINDINGS.md",
+        "RECOMMENDED-ACTIONS.md"
+      ],
+      "id": "phase-forensics-tool",
+      "maturity": "deferred",
+      "name": "Phase Forensics Tool",
+      "non_goals": [
+        "Do not implement before repeated failed-phase evidence exists.",
+        "Do not replace assistant postmortem judgment."
+      ],
+      "owner": "ai-tools",
+      "requirements": [
+        "FORENSICS-01"
+      ],
+      "self_use": {
+        "reason": "Future candidate after failed or disputed phase execution.",
+        "required": false,
+        "stages": [
+          "verify",
+          "maintenance"
+        ]
+      },
+      "status_notes": "Deferred until Phase 11 selection review.",
+      "use_gate": "new-tool-intake"
+    },
+    {
+      "activation_stage": [
+        "maintenance"
+      ],
+      "destination": "tools/project-context-ledger/",
+      "evidence_refs": [
+        "tools/project-context-ledger/SEED-IDEAS.md"
+      ],
+      "expected_outputs": [
+        "REVIEW-SUMMARY.json",
+        "EVIDENCE.json",
+        "FINDINGS.md",
+        "RECOMMENDED-ACTIONS.md"
+      ],
+      "id": "project-context-ledger",
+      "maturity": "deferred",
+      "name": "Project Context Ledger",
+      "non_goals": [
+        "Do not implement before registry and gate guardrails are stable.",
+        "Do not mutate target project context."
+      ],
+      "owner": "ai-tools",
+      "requirements": [
+        "LEDGER-01"
+      ],
+      "self_use": {
+        "reason": "Future candidate for milestone context refresh after promotion.",
+        "required": false,
+        "stages": [
+          "maintenance"
+        ]
+      },
+      "status_notes": "Deferred until Phase 11 selection review.",
+      "use_gate": "new-tool-intake"
+    },
+    {
+      "activation_stage": [
+        "research",
+        "plan",
+        "maintenance"
+      ],
+      "destination": "tools/runtime-capability-inspector/",
+      "evidence_refs": [
+        "tools/runtime-capability-inspector/SEED-IDEAS.md"
+      ],
+      "expected_outputs": [
+        "REVIEW-SUMMARY.json",
+        "EVIDENCE.json",
+        "FINDINGS.md",
+        "RECOMMENDED-ACTIONS.md"
+      ],
+      "id": "runtime-capability-inspector",
+      "maturity": "deferred",
+      "name": "Runtime Capability Inspector",
+      "non_goals": [
+        "Do not implement before explicit runtime evidence demand exists.",
+        "Do not execute target project commands without approval."
+      ],
+      "owner": "ai-tools",
+      "self_use": {
+        "reason": "Future candidate for command and permission evidence after promotion.",
+        "required": false,
+        "stages": [
+          "research",
+          "plan",
+          "maintenance"
+        ]
+      },
+      "status_notes": "Deferred seed.",
+      "use_gate": "new-tool-intake"
+    },
+    {
+      "activation_stage": [
+        "verify",
+        "maintenance"
+      ],
+      "destination": "tools/skill-linter/",
+      "evidence_refs": [
+        "tools/skill-linter/SEED-IDEAS.md"
+      ],
+      "expected_outputs": [
+        "REVIEW-SUMMARY.json",
+        "EVIDENCE.json",
+        "FINDINGS.md",
+        "RECOMMENDED-ACTIONS.md"
+      ],
+      "id": "skill-linter",
+      "maturity": "deferred",
+      "name": "Skill Linter",
+      "non_goals": [
+        "Do not implement before skill evidence demand exists.",
+        "Do not replace assistant skill review."
+      ],
+      "owner": "ai-tools",
+      "requirements": [
+        "SKILL-01"
+      ],
+      "self_use": {
+        "reason": "Future candidate for skill changes after promotion.",
+        "required": false,
+        "stages": [
+          "verify",
+          "maintenance"
+        ]
+      },
+      "status_notes": "Deferred until Phase 11 selection review.",
+      "use_gate": "new-tool-intake"
+    },
+    {
+      "activation_stage": [
+        "verify",
+        "maintenance"
+      ],
+      "destination": "tools/test-quality-auditor/",
+      "evidence_refs": [
+        "tools/test-quality-auditor/SEED-IDEAS.md"
+      ],
+      "expected_outputs": [
+        "REVIEW-SUMMARY.json",
+        "EVIDENCE.json",
+        "FINDINGS.md",
+        "RECOMMENDED-ACTIONS.md"
+      ],
+      "id": "test-quality-auditor",
+      "maturity": "deferred",
+      "name": "Test Quality Auditor",
+      "non_goals": [
+        "Do not implement before repeated test-quality findings justify it.",
+        "Do not treat mechanical findings as final test adequacy decisions."
+      ],
+      "owner": "ai-tools",
+      "requirements": [
+        "TESTQA-01"
+      ],
+      "self_use": {
+        "reason": "Future candidate after non-trivial test-suite changes.",
+        "required": false,
+        "stages": [
+          "verify",
+          "maintenance"
+        ]
+      },
+      "status_notes": "Deferred until Phase 11 selection review.",
+      "use_gate": "new-tool-intake"
+    },
+    {
+      "activation_stage": [
+        "verify",
+        "maintenance"
+      ],
+      "destination": "tools/ui-regression-screenshot-comparator/",
+      "evidence_refs": [
+        "tools/ui-regression-screenshot-comparator/SEED-IDEAS.md"
+      ],
+      "expected_outputs": [
+        "REVIEW-SUMMARY.json",
+        "EVIDENCE.json",
+        "FINDINGS.md",
+        "RECOMMENDED-ACTIONS.md"
+      ],
+      "id": "ui-regression-screenshot-comparator",
+      "maturity": "deferred",
+      "name": "UI Regression Screenshot Comparator",
+      "non_goals": [
+        "Do not implement before UI evidence demand exists.",
+        "Do not replace human UX review."
+      ],
+      "owner": "ai-tools",
+      "requirements": [
+        "UIREG-01"
+      ],
+      "self_use": {
+        "reason": "Future candidate for UI changes after promotion.",
+        "required": false,
+        "stages": [
+          "verify",
+          "maintenance"
+        ]
+      },
+      "status_notes": "Deferred until Phase 11 selection review.",
+      "use_gate": "new-tool-intake"
+    }
+  ],
+  "updated": "2026-05-08"
+}
