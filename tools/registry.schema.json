@@ -136,6 +136,15 @@
         "package_bin": {
           "type": "string"
         },
+        "packet_role": {
+          "enum": [
+            "producer",
+            "consumer",
+            "catalog",
+            "boundary"
+          ],
+          "type": "string"
+        },
         "phase": {
           "type": "string"
         },

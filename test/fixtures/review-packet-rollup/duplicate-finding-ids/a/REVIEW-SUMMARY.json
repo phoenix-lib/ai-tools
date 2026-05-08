@@ -6,13 +6,13 @@
       "critical": 0,
       "high": 0,
       "info": 0,
-      "low": 1,
+      "low": 2,
       "medium": 0
     },
     "preserved_stricter_local_rules": 0,
     "rejected_assumptions": 0,
     "required_decisions": 0,
-    "total_findings": 1
+    "total_findings": 2
   },
   "evidence_file": "EVIDENCE.json",
   "findings": [
@@ -28,6 +28,19 @@
       "status_contribution": "human_review_required",
       "summary": "First duplicate id packet.",
       "title": "Duplicate finding id"
+    },
+    {
+      "confidence": "verified",
+      "evidence_refs": [
+        "ev.file"
+      ],
+      "id": "duplicate.finding",
+      "recommended_action_refs": [],
+      "severity": "low",
+      "source_check_id": "duplicate",
+      "status_contribution": "human_review_required",
+      "summary": "Second duplicate id in the same packet.",
+      "title": "Duplicate finding id repeated"
     }
   ],
   "generated_artifacts": [

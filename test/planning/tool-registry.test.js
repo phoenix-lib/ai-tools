@@ -105,6 +105,24 @@ test("project-context-ledger is a validated Phase 12 read-only CLI", () => {
   assert.match(entry.non_goals.join("\n"), /workflow, gate, roadmap, or phase decisions/);
 });
 
+test("review-packet-rollup is a Phase 13 packet consumer CLI", () => {
+  const packageJson = readJson("package.json");
+  const registry = registryById();
+  const entry = registry.get("review-packet-rollup");
+
+  assert.ok(entry, "review-packet-rollup registry entry must exist");
+  assert.equal(entry.maturity, "validated");
+  assert.equal(entry.phase, "13");
+  assert.equal(entry.packet_role, "consumer");
+  assert.equal(packageJson.bin["review-packet-rollup"], "tools/review-packet-rollup/cli.js");
+  assert.equal(entry.package_bin, "review-packet-rollup");
+  assert.equal(entry.self_use.required, true);
+  assert.ok(entry.expected_outputs.includes("PACKET-INDEX.json"));
+  assert.ok(entry.expected_outputs.includes("ROLLUP-GROUPS.json"));
+  assert.match(entry.non_goals.join("\n"), /Do not run source tools/);
+  assert.match(entry.non_goals.join("\n"), /safe-to-ignore/);
+});
+
 test("seed idea directories are represented in the registry", () => {
   const registry = readJson("tools/registry.json");
   const entries = registry.tools;

@@ -8,6 +8,14 @@ planned, seed-only, and deferred AI Tools capabilities. Use it to check owner,
 maturity, activation stage, expected outputs, self-use routing, and non-goals
 before relying on or promoting a tool.
 
+Runnable validated or implemented capabilities currently include:
+
+- `contract-drift-auditor`
+- `cross-repo-compatibility-checker`
+- `gates-scan`
+- `project-context-ledger`
+- `review-packet-rollup`
+
 Before implementing a tool:
 
 1. Read `tools/registry.json` and run the New Tool Intake and Placement Gate.
@@ -27,6 +35,7 @@ Current seeds:
 - `local-integration-harness`
 - `phase-forensics-tool`
 - `project-context-ledger`
+- `review-packet-rollup`
 - `runtime-capability-inspector`
 - `skill-linter`
 - `test-quality-auditor`

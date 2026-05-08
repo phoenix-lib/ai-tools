@@ -5,6 +5,52 @@ major plan execution, and workflow gate change.
 
 ## Unreleased
 
+### Phase 13: Review Packet Rollup MVP
+
+- Changed tool capabilities: added runnable review-only
+  `review-packet-rollup --packets <dir...> --out <dir>` support for consuming
+  two or more existing review packet directories.
+- Changed packet outputs: `review-packet-rollup` emits the shared
+  `REVIEW-SUMMARY.json`, `EVIDENCE.json`, `FINDINGS.md`, and
+  `RECOMMENDED-ACTIONS.md` artifacts plus `PACKET-INDEX.json` and
+  `ROLLUP-GROUPS.json`.
+- Changed aggregation semantics: input `REVIEW-SUMMARY.json` and
+  `EVIDENCE.json` files are validated before aggregation; invalid packets
+  become blocked rollup findings while valid packets remain included. Duplicate
+  source finding IDs are occurrence-normalized so mechanical group counts do
+  not collapse repeated source findings.
+- Changed grouping surface: output groups findings by source tool, source
+  status, severity, `source_check_id`, `status_contribution`, and source path.
+  It does not assign safe-to-ignore labels, suppress findings, or make gate,
+  merge, roadmap, disposition, install, fetch, pull, or source-running
+  decisions.
+- Changed docs and registry: added `tools/review-packet-rollup/README.md`,
+  package bin/script metadata, registry `packet_role: consumer`, tests, fixture
+  coverage, and promoted the `tools/registry.json` `review-packet-rollup` entry
+  to validated.
+- Validation: focused Phase 13 rollup tests passed 29/29,
+  registry/metadata/release docs tests passed 17/17, full `npm.cmd test`
+  passed 218/218, and `git diff --check` passed.
+- Self-use result: Phase 13 `review-packet-rollup` wrote output outside the
+  repository at
+  `C:\Users\suppo\.codex\memories\ai-tools-review-packet-rollup-phase13`;
+  packet status was `human_review_required` with 401 findings, 0 blockers, and
+  0 required decisions. Mechanical by-tool counts were 299
+  `project-context-ledger`, 75 `contract-drift-auditor`, 26 `gates-scan`, and 1
+  `cross-repo-compatibility-checker`.
+- Upstream impact: no `ai-workspace-kit` source was changed. The tool consumes
+  existing packet directories as optional external evidence and keeps
+  adoption/bootstrap, generated local guidance, and permission policy with
+  `ai-workspace-kit`.
+- Compatibility impact for `ai-workspace-kit`: downstream workflows can consume
+  rollup packets as optional evidence, but no runtime dependency, automatic
+  tool execution, automatic gate decision, roadmap mutation, suppression layer,
+  or copied `.planning` state was introduced.
+- Breaking changes: none for existing CLIs or review packet schemas.
+- Migration notes: use rollup when multiple AI Tools packet outputs need one
+  mechanical review surface; continue reading source packet details before
+  making human or assistant decisions.
+
 ### Phase 12: Project Context Ledger MVP
 
 - Changed tool capabilities: added runnable review-only

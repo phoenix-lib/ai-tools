@@ -10,6 +10,8 @@ const {
   PROJECT_CONTEXT_LEDGER_ARTIFACTS,
   PROJECT_CONTEXT_LEDGER_TOOL_NAME,
   REQUIRED_PACKET_ARTIFACTS,
+  REVIEW_PACKET_ROLLUP_ARTIFACTS,
+  REVIEW_PACKET_ROLLUP_TOOL_NAME,
   REVIEW_PACKET_SCHEMA_VERSION,
   loadPackageVersion
 } = require("../../shared/tool-metadata");
@@ -22,6 +24,7 @@ test("exports stable review packet constants", () => {
   assert.equal(CROSS_REPO_COMPATIBILITY_CHECKER_TOOL_NAME, "cross-repo-compatibility-checker");
   assert.equal(GATES_SCAN_TOOL_NAME, "gates-scan");
   assert.equal(PROJECT_CONTEXT_LEDGER_TOOL_NAME, "project-context-ledger");
+  assert.equal(REVIEW_PACKET_ROLLUP_TOOL_NAME, "review-packet-rollup");
   assert.deepEqual(REQUIRED_PACKET_ARTIFACTS, [
     "REVIEW-SUMMARY.json",
     "EVIDENCE.json",
@@ -35,6 +38,10 @@ test("exports stable review packet constants", () => {
     "SKILLS.json",
     "DECISIONS.json",
     "CACHE-MANIFEST.json"
+  ]);
+  assert.deepEqual(REVIEW_PACKET_ROLLUP_ARTIFACTS, [
+    "PACKET-INDEX.json",
+    "ROLLUP-GROUPS.json"
   ]);
 });
 

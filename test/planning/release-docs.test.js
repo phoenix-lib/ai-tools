@@ -151,7 +151,11 @@ test("release readiness doc is checkable and preserves deferred boundaries", () 
       "tools/registry.schema.json",
       ".planning/gates/WORKFLOW-GATES.md",
       "machine-readable capability catalog",
-      "self-use policy"
+      "self-use policy",
+      "review-packet-rollup",
+      "PACKET-INDEX.json",
+      "ROLLUP-GROUPS.json",
+      "optional packet evidence consumption"
     ],
     "release readiness"
   );

@@ -30,6 +30,16 @@ test("normalization prefixes duplicate source finding ids and refs", () => {
   assert.deepEqual(alpha.recommended_action_refs, ["packet-01-valid-a.act.shared"]);
 });
 
+test("normalization preserves duplicate finding ids within one source packet", () => {
+  const normalized = normalize(fixture("duplicate-finding-ids", "a"), fixture("valid-a"));
+  const ids = normalized.findings.map((finding) => finding.id);
+
+  assert.ok(ids.includes("packet-01-a.duplicate.finding"));
+  assert.ok(ids.includes("packet-01-a.duplicate.finding.occurrence-2"));
+  assert.equal(new Set(ids).size, ids.length);
+  assert.equal(normalized.summary_model.counts.total_findings, 4);
+});
+
 test("normalized findings remain schema-valid and carry no extra fields", () => {
   const normalized = normalize(fixture("valid-a"), fixture("valid-b"));
   const ajv = createReviewPacketAjv();

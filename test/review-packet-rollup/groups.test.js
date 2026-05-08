@@ -60,6 +60,19 @@ test("one finding with multiple evidence refs appears in multiple source path gr
   assert.deepEqual(two.finding_refs, ["packet-02-multiple-evidence-refs.multi.evidence"]);
 });
 
+test("groups count duplicate finding ids after occurrence normalization", () => {
+  const result = groups(fixture("duplicate-finding-ids", "a"), fixture("valid-a"));
+  const duplicateTool = result.by_tool.find((group) => group.key === "duplicate-a");
+  const duplicateCheck = result.by_source_check_id.find((group) => group.key === "duplicate");
+
+  assert.equal(duplicateTool.count, 2);
+  assert.equal(duplicateCheck.count, 2);
+  assert.deepEqual(duplicateCheck.finding_refs, [
+    "packet-01-a.duplicate.finding",
+    "packet-01-a.duplicate.finding.occurrence-2"
+  ]);
+});
+
 test("groups do not include semantic disposition or priority fields", () => {
   const result = groups(fixture("valid-a"), fixture("valid-b"));
   const serialized = JSON.stringify(result);

@@ -6,9 +6,10 @@ that assistants, humans, CI jobs, and GSD workflows can inspect without mutating
 target projects.
 
 The current usable capabilities are `contract-drift-auditor`,
-`cross-repo-compatibility-checker`, `gates-scan`, and
-`project-context-ledger`. `tools/registry.json` is the machine-readable capability catalog
-for implemented, planned, seed-only, and deferred tools.
+`cross-repo-compatibility-checker`, `gates-scan`,
+`project-context-ledger`, and `review-packet-rollup`.
+`tools/registry.json` is the machine-readable capability catalog for
+implemented, planned, seed-only, and deferred tools.
 
 ## Current Tools
 
@@ -82,6 +83,24 @@ or directly:
 node tools/project-context-ledger/cli.js --project <path> --out <dir>
 ```
 
+`review-packet-rollup` consumes two or more existing review packet directories,
+validates their machine artifacts, preserves source findings, and emits one
+mechanically grouped packet plus provenance JSON.
+It can support later portfolio-wide review after source tools produce packets,
+but it does not scan projects, run source tools, or create portfolio manifests.
+
+Run it from this repository:
+
+```bash
+npm run review-packet-rollup -- --packets <dir-a> <dir-b> --out <dir>
+```
+
+or directly:
+
+```bash
+node tools/review-packet-rollup/cli.js --packets <dir-a> <dir-b> --out <dir>
+```
+
 This repository is currently `private: true`; do not assume a published package
 or global install path.
 
@@ -98,6 +117,10 @@ Every v1 auditor packet emits:
 projections rendered from the same packet model so status, severity counts,
 evidence refs, and recommended actions cannot drift.
 
+Packet consumers may emit additional JSON artifacts for their own mechanical
+views. `review-packet-rollup` adds `PACKET-INDEX.json` and
+`ROLLUP-GROUPS.json`.
+
 ## Safety Guarantees
 
 AI Tools commands are review-only.
@@ -106,6 +129,7 @@ AI Tools commands are review-only.
 - No target project mutation.
 - No automatic fixes.
 - No target command execution.
+- No source tool execution by packet consumers.
 - No installs or dependency downloads.
 - `--out` must be outside the audited target project or outside both checked
   repositories for cross-repo validation.
@@ -153,6 +177,14 @@ Use `project-context-ledger` when:
 - downstream agents need cache manifest hashes and confidence-marked facts
   without executing target project commands.
 
+Use `review-packet-rollup` when:
+
+- multiple AI Tools packet outputs need one mechanical review surface;
+- a phase boundary needs combined counts and grouped findings by tool, severity,
+  status contribution, check id, and source path;
+- assistants need provenance across packet directories without running source
+  tools or deciding which findings can be ignored.
+
 ## When Not to Use
 
 Do not use this auditor as:
@@ -162,6 +194,7 @@ Do not use this auditor as:
 - an auto-fix tool;
 - a replacement for human review of findings;
 - proof that a command is safe to run;
+- a finding suppression, safe-ignore, or review disposition mechanism;
 - a dependency that `ai-workspace-kit` or a target project must install.
 
 ## ai-workspace-kit Boundary
@@ -186,6 +219,8 @@ run kit workflows automatically.
   outputs, and evidence-only boundaries.
 - `tools/project-context-ledger/README.md` - project ledger usage, outputs,
   secret policy, generated packet exclusions, and non-goals.
+- `tools/review-packet-rollup/README.md` - packet rollup usage, provenance,
+  grouping, invalid packet behavior, and non-goals.
 - `standards/review-packet/README.md` - shared packet schema and evidence
   semantics.
 - `docs/RELEASE-READINESS.md` - first-release checklist and evidence.

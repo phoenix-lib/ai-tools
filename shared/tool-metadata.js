@@ -6,6 +6,7 @@ const CONTRACT_DRIFT_AUDITOR_TOOL_NAME = "contract-drift-auditor";
 const CROSS_REPO_COMPATIBILITY_CHECKER_TOOL_NAME = "cross-repo-compatibility-checker";
 const GATES_SCAN_TOOL_NAME = "gates-scan";
 const PROJECT_CONTEXT_LEDGER_TOOL_NAME = "project-context-ledger";
+const REVIEW_PACKET_ROLLUP_TOOL_NAME = "review-packet-rollup";
 
 const REQUIRED_PACKET_ARTIFACTS = Object.freeze([
   "REVIEW-SUMMARY.json",
@@ -21,6 +22,11 @@ const PROJECT_CONTEXT_LEDGER_ARTIFACTS = Object.freeze([
   "SKILLS.json",
   "DECISIONS.json",
   "CACHE-MANIFEST.json"
+]);
+
+const REVIEW_PACKET_ROLLUP_ARTIFACTS = Object.freeze([
+  "PACKET-INDEX.json",
+  "ROLLUP-GROUPS.json"
 ]);
 
 const POLICY_HASH_SOURCES = Object.freeze({
@@ -46,6 +52,8 @@ module.exports = {
   PROJECT_CONTEXT_LEDGER_ARTIFACTS,
   PROJECT_CONTEXT_LEDGER_TOOL_NAME,
   REQUIRED_PACKET_ARTIFACTS,
+  REVIEW_PACKET_ROLLUP_ARTIFACTS,
+  REVIEW_PACKET_ROLLUP_TOOL_NAME,
   REVIEW_PACKET_SCHEMA_VERSION,
   loadPackageVersion
 };

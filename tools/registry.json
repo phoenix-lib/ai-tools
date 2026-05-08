@@ -435,6 +435,64 @@
     },
     {
       "activation_stage": [
+        "plan",
+        "verify",
+        "phase-boundary",
+        "maintenance"
+      ],
+      "compatible_packet_standard": "review-packet/v1",
+      "destination": "tools/review-packet-rollup/",
+      "evidence_refs": [
+        "package.json",
+        "tools/review-packet-rollup/README.md",
+        ".planning/phases/13-review-packet-rollup-mvp/13-CONTEXT.md",
+        ".planning/phases/13-review-packet-rollup-mvp/13-VERIFICATION.md",
+        "test/review-packet-rollup/integration.test.js",
+        "test/review-packet-rollup/schema-output.test.js"
+      ],
+      "expected_outputs": [
+        "REVIEW-SUMMARY.json",
+        "EVIDENCE.json",
+        "FINDINGS.md",
+        "RECOMMENDED-ACTIONS.md",
+        "PACKET-INDEX.json",
+        "ROLLUP-GROUPS.json"
+      ],
+      "id": "review-packet-rollup",
+      "maturity": "validated",
+      "name": "Review Packet Rollup",
+      "non_goals": [
+        "Do not run source tools or scan target projects.",
+        "Do not mutate input packet directories or target projects.",
+        "Do not mark findings safe-to-ignore or suppress source findings.",
+        "Do not make automatic gate, merge, roadmap, disposition, install, fetch, or pull decisions."
+      ],
+      "owner": "ai-tools",
+      "package_bin": "review-packet-rollup",
+      "packet_role": "consumer",
+      "phase": "13",
+      "requirements": [
+        "ROLLUP-01",
+        "ROLLUP-02",
+        "ROLLUP-03",
+        "ROLLUP-04",
+        "ROLLUP-05",
+        "ROLLUP-06"
+      ],
+      "self_use": {
+        "reason": "Run at phase boundaries or maintenance when multiple AI Tools review packets need mechanical aggregation.",
+        "required": true,
+        "stages": [
+          "verify",
+          "phase-boundary",
+          "maintenance"
+        ]
+      },
+      "status_notes": "Validated Phase 13 mechanical packet consumer with shared review packet output, packet index, rollup groups, full tests, and self-use evidence.",
+      "use_gate": "new-tool-intake"
+    },
+    {
+      "activation_stage": [
         "research",
         "plan",
         "maintenance"

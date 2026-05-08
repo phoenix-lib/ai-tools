@@ -11,6 +11,35 @@ function prefixedId(packet, sourceId) {
   return `${packet.packet_id}.${sourceId}`;
 }
 
+function occurrenceId(packet, sourceId, occurrence) {
+  const baseId = prefixedId(packet, sourceId);
+  return occurrence === 1 ? baseId : `${baseId}.occurrence-${occurrence}`;
+}
+
+function unique(values) {
+  return [...new Set(values)];
+}
+
+function buildFindingIdPlan(packet) {
+  const counts = new Map();
+  const findingIdMap = new Map();
+  const normalizedIds = [];
+
+  for (const finding of packet.summary.findings ?? []) {
+    const occurrence = (counts.get(finding.id) ?? 0) + 1;
+    counts.set(finding.id, occurrence);
+
+    const normalizedId = occurrenceId(packet, finding.id, occurrence);
+    normalizedIds.push(normalizedId);
+
+    const refs = findingIdMap.get(finding.id) ?? [];
+    refs.push(normalizedId);
+    findingIdMap.set(finding.id, refs);
+  }
+
+  return { findingIdMap, normalizedIds };
+}
+
 function decisionItem(packet, item) {
   return {
     id: prefixedId(packet, item.id),
@@ -26,7 +55,7 @@ function mapRecommendedAction(packet, action, findingIdMap) {
   };
 
   if (Array.isArray(action.finding_refs)) {
-    mapped.finding_refs = action.finding_refs.map((ref) => findingIdMap.get(ref) ?? prefixedId(packet, ref));
+    mapped.finding_refs = unique(action.finding_refs.flatMap((ref) => findingIdMap.get(ref) ?? [prefixedId(packet, ref)]));
   }
 
   return mapped;
@@ -169,16 +198,14 @@ function normalizeLoadedPackets(packetRecords) {
       addEvidence(result, copyEvidenceRef(packet, ref));
     }
 
-    const findingIdMap = new Map();
-    for (const sourceFinding of packet.summary.findings ?? []) {
-      findingIdMap.set(sourceFinding.id, prefixedId(packet, sourceFinding.id));
-    }
+    const { findingIdMap, normalizedIds } = buildFindingIdPlan(packet);
 
     for (const sourceAction of packet.summary.recommended_actions ?? []) {
       result.recommended_actions.push(mapRecommendedAction(packet, sourceAction, findingIdMap));
     }
 
-    for (const sourceFinding of packet.summary.findings ?? []) {
+    for (const [findingIndex, sourceFinding] of (packet.summary.findings ?? []).entries()) {
+      const findingId = normalizedIds[findingIndex];
       const evidenceRefs = [];
       const actionRefs = (sourceFinding.recommended_action_refs ?? []).map((ref) => {
         if (typeof ref === "string") return prefixedId(packet, ref);
@@ -214,7 +241,7 @@ function normalizeLoadedPackets(packetRecords) {
       const finding = {
         confidence: sourceFinding.confidence,
         evidence_refs: evidenceRefs,
-        id: prefixedId(packet, sourceFinding.id),
+        id: findingId,
         recommended_action_refs: actionRefs,
         severity: sourceFinding.severity,
         source_check_id: sourceFinding.source_check_id,

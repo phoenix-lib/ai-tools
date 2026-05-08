@@ -25,6 +25,9 @@ phase-boundary, registry, and workflow gate documentation review.
 Phase 12 adds `project-context-ledger` as a read-only project memory evidence
 producer for facts, commands, contracts, skills, decisions, and cache source
 hashes.
+Phase 13 adds `review-packet-rollup` as a mechanical packet consumer for
+combining existing review packets without running source tools or making
+semantic suppression decisions.
 
 ## Definition of Done
 
@@ -52,6 +55,9 @@ hashes.
   mechanical gate review support, not gate adoption automation.
 - [x] Phase 12 post-v1 `project-context-ledger` CLI is documented as optional
   project context evidence, not automatic workflow or roadmap authority.
+- [x] Phase 13 post-v1 `review-packet-rollup` CLI is documented as optional
+  packet evidence consumption, not a gate, merge, roadmap, suppression, or
+  disposition authority.
 
 ## Required Artifacts
 
@@ -64,6 +70,7 @@ hashes.
 - `tools/cross-repo-compatibility-checker/README.md`
 - `tools/gates-scan/README.md`
 - `tools/project-context-ledger/README.md`
+- `tools/review-packet-rollup/README.md`
 - `tools/registry.json`
 - `tools/registry.schema.json`
 - `.planning/gates/WORKFLOW-GATES.md`
@@ -152,6 +159,11 @@ evidence producer. It emits the shared packet artifacts plus `FACTS.json`,
 `COMMANDS.json`, `CONTRACTS.json`, `SKILLS.json`, `DECISIONS.json`, and
 `CACHE-MANIFEST.json`, while rejecting target-local output paths and mutating
 flags.
+
+Phase 13 rollup hardening adds `review-packet-rollup` as a read-only packet
+consumer. It emits the shared packet artifacts plus `PACKET-INDEX.json` and
+`ROLLUP-GROUPS.json`, while rejecting output inside any input packet directory
+and refusing source-running or mutating flags. It provides optional packet evidence consumption, not another source auditor or decision engine.
 
 ## Docs Evidence
 
@@ -287,12 +299,29 @@ Phase 12 project-context-ledger evidence:
   automatic workflow, gate, roadmap, phase, install, fetch, or mutation
   decisions.
 
+Phase 13 review-packet-rollup evidence:
+
+- Reusable command: `node tools/review-packet-rollup/cli.js --packets <packet-dir-a> <packet-dir-b> --out <external-dir>`
+- Phase 13 self-use command: `node tools/review-packet-rollup/cli.js --packets C:\Users\suppo\.codex\memories\ai-tools-v21-ledger-20260508-final C:\Users\suppo\.codex\memories\ai-tools-v21-gates-scan-20260508-final C:\Users\suppo\.codex\memories\ai-tools-v21-contract-drift-20260508-final C:\Users\suppo\.codex\memories\ai-tools-v21-cross-repo-20260508-final --out C:\Users\suppo\.codex\memories\ai-tools-review-packet-rollup-phase13`
+- Phase 13 output path: `C:\Users\suppo\.codex\memories\ai-tools-review-packet-rollup-phase13`
+- Packet status: `human_review_required`
+- Finding count: 401 total, 396 low and 5 medium; 0 blockers, 0 required
+  decisions.
+- Mechanical groups: by tool, 299 `project-context-ledger`, 75
+  `contract-drift-auditor`, 26 `gates-scan`, and 1
+  `cross-repo-compatibility-checker`; by status contribution, 401
+  `human_review_required`.
+- Interpretation: rollup output is evidence only. It groups existing packet
+  findings mechanically and does not create automatic workflow, gate, roadmap,
+  phase, install, fetch, source-running, disposition, suppression, or mutation
+  decisions.
+
 ## Deferred V2 Work
 
-`XREPO-VALIDATOR-01`, `GATELINT-01`, and `LEDGER-01` are implemented after v1 as
-read-only evidence producers. Automatic cross-repo indexing, automatic
-gate-linter decisions, automatic context adoption, auto-fix mode, and additional
-seed tools remain deferred.
+`XREPO-VALIDATOR-01`, `GATELINT-01`, `LEDGER-01`, and the Phase 13 packet
+rollup are implemented after v1 as read-only evidence producers or consumers.
+Automatic cross-repo indexing, automatic gate-linter decisions, automatic
+context adoption, auto-fix mode, and additional seed tools remain deferred.
 
 The mechanical gate linter remains not part of the v1 release. Its Phase 10
 post-v1 implementation is evidence-only and must not be treated as automatic
