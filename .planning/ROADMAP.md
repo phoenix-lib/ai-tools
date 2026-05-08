@@ -41,7 +41,7 @@ dependency.
 - [x] **Phase 10: Evidence-Only Gate Linter Seed MVP** - Build or formally re-defer the mechanical gate-linter only after the cross-repo validator and tool registry are in place. Completed 2026-05-08.
 - [x] **Phase 11: v2 Tool Selection Review** - Reassess deferred seed tools and choose the next single tool only from repeated evidence-backed demand. (completed 2026-05-08)
 - [x] **Phase 12: Project Context Ledger MVP** - Build the selected read-only verified project memory tool from Phase 11. (completed 2026-05-08)
-- [ ] **Phase 13: Review Packet Rollup MVP** - Build a mechanical packet consumer that validates and aggregates multiple review packets without semantic suppression.
+- [x] **Phase 13: Review Packet Rollup MVP** - Build a mechanical packet consumer that validates and aggregates multiple review packets without semantic suppression. (completed 2026-05-08)
 - [ ] **Phase 14: Ledger Artifact Schemas** - Stabilize machine-readable schemas for project-context-ledger artifacts before other tools consume them.
 - [ ] **Phase 15: Review Disposition Model** - Add explicit human review disposition metadata with owner, expiry, and evidence refs.
 - [ ] **Phase 16: Ledger Scope and Diff Modes** - Reduce ledger noise with current/planning/history scopes and since-manifest diffs.
@@ -315,7 +315,7 @@ Plans:
 - [x] 13-01: Define rollup fixtures, input validation, packet provenance, and grouping model.
 
 **Wave 2** *(blocked on Wave 1 completion)*
-- [ ] 13-02: Implement rollup CLI, packet rendering, docs, registry metadata, tests, and self-use evidence.
+- [x] 13-02: Implement rollup CLI, packet rendering, docs, registry metadata, tests, and self-use evidence.
 
 ### Phase 14: Ledger Artifact Schemas
 **Goal**: Make ledger artifacts safe for downstream consumers by adding stable JSON schemas and validation tests.
@@ -525,7 +525,7 @@ Plans:
 - **Status:** Resolved for Review Packet Rollup MVP planning.
 - **Owner:** `ai-tools`.
 - **Destination:** `tools/review-packet-rollup/` plus shared packet mechanics where reusable.
-- **Maturity:** Planned.
+- **Maturity:** Validated in Phase 13.
 - **Activation stage:** plan, verify, phase-boundary, maintenance.
 - **Outputs:** Standard review packet artifacts plus `PACKET-INDEX.json` and `ROLLUP-GROUPS.json`.
 - **Non-goals:** No semantic suppression, no safe-to-ignore decisions, no target-project mutation, no automatic gate/merge/roadmap decisions, and no `ai-workspace-kit` dependency.
@@ -533,12 +533,32 @@ Plans:
 
 ### self-use
 
-- **Status:** Resolved for v2.1 milestone planning; refresh again during Phase 13 planning/execution.
-- **Capability:** Validated packet producers and project-context-ledger evidence.
-- **Maturity:** `contract-drift-auditor`, `cross-repo-compatibility-checker`, `gates-scan`, and `project-context-ledger` are validated.
-- **Run or skip reason:** Ran applicable validated tools read-only after writing the v2.1 planning artifacts.
-- **Evidence summary:** `project-context-ledger` wrote `C:\Users\suppo\.codex\memories\ai-tools-v21-ledger-20260508-final` with `human_review_required`, 299 findings, 0 blockers, and 0 required decisions. `gates-scan` wrote `C:\Users\suppo\.codex\memories\ai-tools-v21-gates-scan-20260508-final` with `human_review_required`, 26 findings, 0 blockers, and 0 required decisions. `contract-drift-auditor` wrote `C:\Users\suppo\.codex\memories\ai-tools-v21-contract-drift-20260508-final` with `human_review_required`, 75 low findings, 0 blockers, and 0 required decisions. `cross-repo-compatibility-checker` wrote `C:\Users\suppo\.codex\memories\ai-tools-v21-cross-repo-20260508-final` with `human_review_required`, 1 medium finding, 0 blockers, and 0 required decisions.
-- **Planning impact:** Findings support v2.1's focus on rollup, schemas, scope/diff, dispositions, and CLI consistency; no finding blocks the milestone.
+- **Status:** Resolved for Phase 13 execution.
+- **Capability:** Validated packet producers, `project-context-ledger`, and
+  `review-packet-rollup` evidence.
+- **Maturity:** `contract-drift-auditor`,
+  `cross-repo-compatibility-checker`, `gates-scan`,
+  `project-context-ledger`, and `review-packet-rollup` are validated.
+- **Run or skip reason:** Ran applicable validated tools read-only after
+  writing the v2.1 planning artifacts, then ran `review-packet-rollup` during
+  Phase 13 verification.
+- **Evidence summary:** `project-context-ledger` wrote
+  `C:\Users\suppo\.codex\memories\ai-tools-v21-ledger-20260508-final` with
+  `human_review_required`, 299 findings, 0 blockers, and 0 required decisions.
+  `gates-scan` wrote
+  `C:\Users\suppo\.codex\memories\ai-tools-v21-gates-scan-20260508-final` with
+  `human_review_required`, 26 findings, 0 blockers, and 0 required decisions.
+  `contract-drift-auditor` wrote
+  `C:\Users\suppo\.codex\memories\ai-tools-v21-contract-drift-20260508-final`
+  with `human_review_required`, 75 low findings, 0 blockers, and 0 required
+  decisions. `cross-repo-compatibility-checker` wrote
+  `C:\Users\suppo\.codex\memories\ai-tools-v21-cross-repo-20260508-final` with
+  `human_review_required`, 1 medium finding, 0 blockers, and 0 required
+  decisions. `review-packet-rollup` wrote
+  `C:\Users\suppo\.codex\memories\ai-tools-review-packet-rollup-phase13` with
+  `human_review_required`, 401 findings, 0 blockers, and 0 required decisions.
+- **Planning impact:** Findings support v2.1's focus on schemas, scope/diff,
+  dispositions, and CLI consistency; no finding blocks the milestone.
 
 ## Progress
 
@@ -558,7 +578,7 @@ Plans:
 | 10. Evidence-Only Gate Linter Seed MVP | 2/2 | Complete | 2026-05-08 |
 | 11. v2 Tool Selection Review | 1/1 | Complete    | 2026-05-08 |
 | 12. Project Context Ledger MVP | 1/1 | Complete    | 2026-05-08 |
-| 13. Review Packet Rollup MVP | 1/2 | In Progress|  |
+| 13. Review Packet Rollup MVP | 2/2 | Complete    | 2026-05-08 |
 | 14. Ledger Artifact Schemas | 0/2 | Planned | |
 | 15. Review Disposition Model | 0/2 | Planned | |
 | 16. Ledger Scope and Diff Modes | 0/2 | Planned | |

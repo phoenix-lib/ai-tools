@@ -105,12 +105,12 @@
 
 ### Review Packet Rollup Consumer
 
-- [ ] **ROLLUP-01**: User can run `review-packet-rollup --packets <dir...> --out <dir>` over two or more existing review packet directories without mutating any packet source or target project.
-- [ ] **ROLLUP-02**: Tool consumers can validate every input `REVIEW-SUMMARY.json` and `EVIDENCE.json` before aggregation, with invalid or missing packet artifacts reported as findings.
-- [ ] **ROLLUP-03**: Tool consumers can view combined counts grouped mechanically by source tool, status, severity, `source_check_id`, `status_contribution`, and source path.
-- [ ] **ROLLUP-04**: Human reviewers can see blockers, required decisions, and `human_review_required` contributors separated from low-severity informational groups.
-- [ ] **ROLLUP-05**: Tool consumers can inspect rollup provenance through packet input paths, input hashes, source tool names, tool versions, schema versions, and generated `PACKET-INDEX.json` / `ROLLUP-GROUPS.json` artifacts.
-- [ ] **ROLLUP-06**: The rollup does not decide that findings are safe to ignore, suppress source findings, or turn evidence into automatic gate, roadmap, or merge decisions.
+- [x] **ROLLUP-01**: User can run `review-packet-rollup --packets <dir...> --out <dir>` over two or more existing review packet directories without mutating any packet source or target project.
+- [x] **ROLLUP-02**: Tool consumers can validate every input `REVIEW-SUMMARY.json` and `EVIDENCE.json` before aggregation, with invalid or missing packet artifacts reported as findings.
+- [x] **ROLLUP-03**: Tool consumers can view combined counts grouped mechanically by source tool, status, severity, `source_check_id`, `status_contribution`, and source path.
+- [x] **ROLLUP-04**: Human reviewers can see blockers, required decisions, and `human_review_required` contributors separated from low-severity informational groups.
+- [x] **ROLLUP-05**: Tool consumers can inspect rollup provenance through packet input paths, input hashes, source tool names, tool versions, schema versions, and generated `PACKET-INDEX.json` / `ROLLUP-GROUPS.json` artifacts.
+- [x] **ROLLUP-06**: The rollup does not decide that findings are safe to ignore, suppress source findings, or turn evidence into automatic gate, roadmap, or merge decisions.
 
 ### Ledger Artifact Schemas
 
@@ -220,12 +220,12 @@ Which phases cover which requirements. Updated during roadmap creation.
 | GOV-01 | Phase 9 | Complete |
 | GATELINT-01 | Phase 10 | Complete |
 | LEDGER-01 | Phase 12 | Complete |
-| ROLLUP-01 | Phase 13 | Planned |
-| ROLLUP-02 | Phase 13 | Planned |
-| ROLLUP-03 | Phase 13 | Planned |
-| ROLLUP-04 | Phase 13 | Planned |
-| ROLLUP-05 | Phase 13 | Planned |
-| ROLLUP-06 | Phase 13 | Planned |
+| ROLLUP-01 | Phase 13 | Complete |
+| ROLLUP-02 | Phase 13 | Complete |
+| ROLLUP-03 | Phase 13 | Complete |
+| ROLLUP-04 | Phase 13 | Complete |
+| ROLLUP-05 | Phase 13 | Complete |
+| ROLLUP-06 | Phase 13 | Complete |
 | LEDGER-SCHEMA-01 | Phase 14 | Planned |
 | LEDGER-SCHEMA-02 | Phase 14 | Planned |
 | LEDGER-SCHEMA-03 | Phase 14 | Planned |
