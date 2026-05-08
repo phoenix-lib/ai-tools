@@ -1,0 +1,44 @@
+{
+  "$id": "https://ai-tools.local/schemas/project-context-ledger/DECISIONS.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "DECISIONS.json contains extracted context and registry decisions with evidence references.",
+  "items": {
+    "additionalProperties": false,
+    "properties": {
+      "confidence": {
+        "$ref": "https://ai-tools.local/schemas/project-context-ledger/LEDGER-COMMON.schema.json#/$defs/confidence"
+      },
+      "evidence_refs": {
+        "$ref": "https://ai-tools.local/schemas/project-context-ledger/LEDGER-COMMON.schema.json#/$defs/evidenceRefs"
+      },
+      "id": {
+        "$ref": "https://ai-tools.local/schemas/project-context-ledger/LEDGER-COMMON.schema.json#/$defs/recordId"
+      },
+      "source_path": {
+        "$ref": "https://ai-tools.local/schemas/project-context-ledger/LEDGER-COMMON.schema.json#/$defs/relativePath"
+      },
+      "text": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "type": {
+        "enum": [
+          "context_decision",
+          "tool_registry_maturity"
+        ]
+      },
+      "value": true
+    },
+    "required": [
+      "id",
+      "type",
+      "text",
+      "confidence",
+      "evidence_refs",
+      "source_path"
+    ],
+    "type": "object"
+  },
+  "title": "Project Context Ledger Decisions",
+  "type": "array"
+}

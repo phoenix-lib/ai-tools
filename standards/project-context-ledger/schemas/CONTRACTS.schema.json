@@ -1,0 +1,46 @@
+{
+  "$id": "https://ai-tools.local/schemas/project-context-ledger/CONTRACTS.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "CONTRACTS.json contains assistant contracts and referenced contract paths with evidence references.",
+  "items": {
+    "additionalProperties": false,
+    "properties": {
+      "confidence": {
+        "$ref": "https://ai-tools.local/schemas/project-context-ledger/LEDGER-COMMON.schema.json#/$defs/confidence"
+      },
+      "evidence_refs": {
+        "$ref": "https://ai-tools.local/schemas/project-context-ledger/LEDGER-COMMON.schema.json#/$defs/evidenceRefs"
+      },
+      "id": {
+        "$ref": "https://ai-tools.local/schemas/project-context-ledger/LEDGER-COMMON.schema.json#/$defs/recordId"
+      },
+      "path": {
+        "$ref": "https://ai-tools.local/schemas/project-context-ledger/LEDGER-COMMON.schema.json#/$defs/relativePath"
+      },
+      "source_path": {
+        "$ref": "https://ai-tools.local/schemas/project-context-ledger/LEDGER-COMMON.schema.json#/$defs/relativePath"
+      },
+      "source_sha256": {
+        "$ref": "https://ai-tools.local/schemas/project-context-ledger/LEDGER-COMMON.schema.json#/$defs/sha256"
+      },
+      "type": {
+        "enum": [
+          "assistant_contract",
+          "source_layer_reference",
+          "file_reference"
+        ]
+      }
+    },
+    "required": [
+      "id",
+      "type",
+      "path",
+      "confidence",
+      "evidence_refs",
+      "source_path"
+    ],
+    "type": "object"
+  },
+  "title": "Project Context Ledger Contracts",
+  "type": "array"
+}

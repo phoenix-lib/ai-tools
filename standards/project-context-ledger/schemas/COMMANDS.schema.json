@@ -1,0 +1,54 @@
+{
+  "$id": "https://ai-tools.local/schemas/project-context-ledger/COMMANDS.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "COMMANDS.json contains package, bin, and documented command facts with evidence references.",
+  "items": {
+    "additionalProperties": false,
+    "properties": {
+      "command": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "confidence": {
+        "$ref": "https://ai-tools.local/schemas/project-context-ledger/LEDGER-COMMON.schema.json#/$defs/confidence"
+      },
+      "evidence_refs": {
+        "$ref": "https://ai-tools.local/schemas/project-context-ledger/LEDGER-COMMON.schema.json#/$defs/evidenceRefs"
+      },
+      "id": {
+        "$ref": "https://ai-tools.local/schemas/project-context-ledger/LEDGER-COMMON.schema.json#/$defs/recordId"
+      },
+      "kind": {
+        "enum": [
+          "package_script",
+          "package_bin",
+          "documented_command"
+        ]
+      },
+      "name": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "package_path": {
+        "$ref": "https://ai-tools.local/schemas/project-context-ledger/LEDGER-COMMON.schema.json#/$defs/relativePath"
+      },
+      "source_path": {
+        "$ref": "https://ai-tools.local/schemas/project-context-ledger/LEDGER-COMMON.schema.json#/$defs/relativePath"
+      },
+      "source_sha256": {
+        "$ref": "https://ai-tools.local/schemas/project-context-ledger/LEDGER-COMMON.schema.json#/$defs/sha256"
+      }
+    },
+    "required": [
+      "id",
+      "kind",
+      "command",
+      "confidence",
+      "evidence_refs",
+      "source_path"
+    ],
+    "type": "object"
+  },
+  "title": "Project Context Ledger Commands",
+  "type": "array"
+}

@@ -1,0 +1,74 @@
+{
+  "$id": "https://ai-tools.local/schemas/project-context-ledger/FACTS.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "FACTS.json contains verified, inferred, unknown, or stale project facts with evidence references.",
+  "items": {
+    "additionalProperties": false,
+    "anyOf": [
+      {
+        "properties": {
+          "text": true
+        },
+        "required": [
+          "text"
+        ]
+      },
+      {
+        "properties": {
+          "value": true
+        },
+        "required": [
+          "value"
+        ]
+      }
+    ],
+    "properties": {
+      "category": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "confidence": {
+        "$ref": "https://ai-tools.local/schemas/project-context-ledger/LEDGER-COMMON.schema.json#/$defs/confidence"
+      },
+      "evidence_refs": {
+        "$ref": "https://ai-tools.local/schemas/project-context-ledger/LEDGER-COMMON.schema.json#/$defs/evidenceRefs"
+      },
+      "id": {
+        "$ref": "https://ai-tools.local/schemas/project-context-ledger/LEDGER-COMMON.schema.json#/$defs/recordId"
+      },
+      "last_checked": {
+        "$ref": "https://ai-tools.local/schemas/project-context-ledger/LEDGER-COMMON.schema.json#/$defs/timestamp"
+      },
+      "source_path": {
+        "$ref": "https://ai-tools.local/schemas/project-context-ledger/LEDGER-COMMON.schema.json#/$defs/relativePath"
+      },
+      "source_sha256": {
+        "$ref": "https://ai-tools.local/schemas/project-context-ledger/LEDGER-COMMON.schema.json#/$defs/sha256"
+      },
+      "stale_reason": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "text": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "unknown_detail": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "value": true
+    },
+    "required": [
+      "id",
+      "category",
+      "confidence",
+      "evidence_refs",
+      "source_path",
+      "last_checked"
+    ],
+    "type": "object"
+  },
+  "title": "Project Context Ledger Facts",
+  "type": "array"
+}

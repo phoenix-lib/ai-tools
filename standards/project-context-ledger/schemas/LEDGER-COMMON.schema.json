@@ -1,0 +1,48 @@
+{
+  "$id": "https://ai-tools.local/schemas/project-context-ledger/LEDGER-COMMON.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$defs": {
+    "confidence": {
+      "enum": [
+        "verified",
+        "inferred",
+        "unknown",
+        "stale"
+      ]
+    },
+    "evidenceRefs": {
+      "items": {
+        "$ref": "#/$defs/evidenceRefId"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "evidenceRefId": {
+      "minLength": 1,
+      "pattern": "^[a-z0-9][a-z0-9._-]*$",
+      "type": "string"
+    },
+    "recordId": {
+      "minLength": 1,
+      "pattern": "^[a-z0-9][a-z0-9._-]*$",
+      "type": "string"
+    },
+    "relativePath": {
+      "minLength": 1,
+      "pattern": "^(?![A-Za-z]:)(?!/)(?!.*\\\\).+$",
+      "type": "string"
+    },
+    "sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "type": "string"
+    },
+    "timestamp": {
+      "format": "date-time",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Shared definitions for project-context-ledger artifact schemas.",
+  "title": "Project Context Ledger Common Definitions",
+  "type": "object"
+}

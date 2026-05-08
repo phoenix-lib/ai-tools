@@ -1,0 +1,222 @@
+{
+  "$id": "https://ai-tools.local/schemas/project-context-ledger/CACHE-MANIFEST.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "CACHE-MANIFEST.json records ledger artifact versioning, scanned sources, generated artifacts, and policy metadata.",
+  "properties": {
+    "ignored_generated_packet_dirs": {
+      "items": {
+        "$ref": "https://ai-tools.local/schemas/project-context-ledger/LEDGER-COMMON.schema.json#/$defs/relativePath"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "ledger_artifacts": {
+      "items": {
+        "enum": [
+          "FACTS.json",
+          "COMMANDS.json",
+          "CONTRACTS.json",
+          "SKILLS.json",
+          "DECISIONS.json",
+          "CACHE-MANIFEST.json"
+        ]
+      },
+      "minItems": 6,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "packet_artifacts": {
+      "items": {
+        "enum": [
+          "REVIEW-SUMMARY.json",
+          "EVIDENCE.json",
+          "FINDINGS.md",
+          "RECOMMENDED-ACTIONS.md"
+        ]
+      },
+      "minItems": 4,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "path_only_secret_paths": {
+      "items": {
+        "$ref": "https://ai-tools.local/schemas/project-context-ledger/LEDGER-COMMON.schema.json#/$defs/relativePath"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "policy_hashes": {
+      "additionalProperties": {
+        "$ref": "https://ai-tools.local/schemas/project-context-ledger/LEDGER-COMMON.schema.json#/$defs/sha256"
+      },
+      "type": "object"
+    },
+    "previous_manifest": {
+      "oneOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "compared": {
+              "const": false
+            },
+            "reason": {
+              "minLength": 1,
+              "type": "string"
+            }
+          },
+          "required": [
+            "compared",
+            "reason"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "changed_sources": {
+              "items": {
+                "additionalProperties": false,
+                "properties": {
+                  "current_sha256": {
+                    "anyOf": [
+                      {
+                        "$ref": "https://ai-tools.local/schemas/project-context-ledger/LEDGER-COMMON.schema.json#/$defs/sha256"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "path": {
+                    "$ref": "https://ai-tools.local/schemas/project-context-ledger/LEDGER-COMMON.schema.json#/$defs/relativePath"
+                  },
+                  "previous_sha256": {
+                    "anyOf": [
+                      {
+                        "$ref": "https://ai-tools.local/schemas/project-context-ledger/LEDGER-COMMON.schema.json#/$defs/sha256"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "path",
+                  "previous_sha256",
+                  "current_sha256"
+                ],
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "compared": {
+              "const": true
+            }
+          },
+          "required": [
+            "compared",
+            "changed_sources"
+          ],
+          "type": "object"
+        }
+      ]
+    },
+    "run_timestamp": {
+      "$ref": "https://ai-tools.local/schemas/project-context-ledger/LEDGER-COMMON.schema.json#/$defs/timestamp"
+    },
+    "scanned_sources": {
+      "items": {
+        "additionalProperties": false,
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "path_only": {
+                  "const": true
+                }
+              },
+              "required": [
+                "path_only"
+              ]
+            },
+            "then": {
+              "properties": {
+                "sha256": false
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "path_only": {
+                  "const": false
+                }
+              },
+              "required": [
+                "path_only"
+              ]
+            },
+            "then": {
+              "required": [
+                "sha256"
+              ]
+            }
+          }
+        ],
+        "properties": {
+          "path": {
+            "$ref": "https://ai-tools.local/schemas/project-context-ledger/LEDGER-COMMON.schema.json#/$defs/relativePath"
+          },
+          "path_only": {
+            "type": "boolean"
+          },
+          "sha256": {
+            "$ref": "https://ai-tools.local/schemas/project-context-ledger/LEDGER-COMMON.schema.json#/$defs/sha256"
+          }
+        },
+        "required": [
+          "path",
+          "path_only"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "schema_version": {
+      "const": "project-context-ledger/v1"
+    },
+    "tool": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "const": "project-context-ledger"
+        },
+        "version": {
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "version"
+      ],
+      "type": "object"
+    }
+  },
+  "required": [
+    "schema_version",
+    "run_timestamp",
+    "tool",
+    "ledger_artifacts",
+    "packet_artifacts",
+    "scanned_sources",
+    "policy_hashes",
+    "ignored_generated_packet_dirs",
+    "path_only_secret_paths",
+    "previous_manifest"
+  ],
+  "title": "Project Context Ledger Cache Manifest",
+  "type": "object"
+}

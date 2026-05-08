@@ -1,0 +1,39 @@
+{
+  "$id": "https://ai-tools.local/schemas/project-context-ledger/SKILLS.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "SKILLS.json contains discovered project skill files with evidence references.",
+  "items": {
+    "additionalProperties": false,
+    "properties": {
+      "confidence": {
+        "$ref": "https://ai-tools.local/schemas/project-context-ledger/LEDGER-COMMON.schema.json#/$defs/confidence"
+      },
+      "evidence_refs": {
+        "$ref": "https://ai-tools.local/schemas/project-context-ledger/LEDGER-COMMON.schema.json#/$defs/evidenceRefs"
+      },
+      "id": {
+        "$ref": "https://ai-tools.local/schemas/project-context-ledger/LEDGER-COMMON.schema.json#/$defs/recordId"
+      },
+      "name": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "path": {
+        "$ref": "https://ai-tools.local/schemas/project-context-ledger/LEDGER-COMMON.schema.json#/$defs/relativePath"
+      },
+      "source_sha256": {
+        "$ref": "https://ai-tools.local/schemas/project-context-ledger/LEDGER-COMMON.schema.json#/$defs/sha256"
+      }
+    },
+    "required": [
+      "id",
+      "name",
+      "path",
+      "confidence",
+      "evidence_refs"
+    ],
+    "type": "object"
+  },
+  "title": "Project Context Ledger Skills",
+  "type": "array"
+}
