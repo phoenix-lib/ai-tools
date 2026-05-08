@@ -26,7 +26,8 @@ const PROJECT_CONTEXT_LEDGER_ARTIFACTS = Object.freeze([
 
 const REVIEW_PACKET_ROLLUP_ARTIFACTS = Object.freeze([
   "PACKET-INDEX.json",
-  "ROLLUP-GROUPS.json"
+  "ROLLUP-GROUPS.json",
+  "DISPOSITION-INDEX.json"
 ]);
 
 const POLICY_HASH_SOURCES = Object.freeze({

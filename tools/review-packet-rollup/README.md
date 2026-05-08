@@ -11,7 +11,7 @@ decide that any finding can be ignored.
 ## Usage
 
 ```bash
-review-packet-rollup --packets <dir-a> <dir-b> [dir-c ...] --out <dir>
+review-packet-rollup --packets <dir-a> <dir-b> [dir-c ...] [--dispositions <file...>] --out <dir>
 ```
 
 `--packets` requires two or more existing packet directories. Each input packet
@@ -35,10 +35,11 @@ It also writes rollup artifacts:
 
 - `PACKET-INDEX.json`
 - `ROLLUP-GROUPS.json`
+- `DISPOSITION-INDEX.json`
 
 `REVIEW-SUMMARY.json` remains schema-valid against the shared packet schema.
-The two rollup artifacts are listed in the tool manifest requested/generated
-files, not in the summary `generated_artifacts` enum.
+The rollup artifacts are listed in the tool manifest requested/generated files,
+not in the summary `generated_artifacts` enum.
 
 ## Packet Index
 
@@ -70,6 +71,28 @@ counts still represent every source finding.
 Group records contain counts, packet ids, finding refs, and evidence refs. They
 do not contain priority, disposition, suppression, or safe-to-ignore labels.
 
+## Dispositions
+
+`--dispositions <file...>` accepts explicit `REVIEW-DISPOSITIONS.json` files
+validated against the review disposition standard. Dispositions are human review
+metadata. They do not change source finding severity, status contribution,
+evidence refs, blockers, required decisions, packet counts, or rollup status
+derivation.
+
+`DISPOSITION-INDEX.json` records:
+
+- matched active dispositions;
+- unmatched dispositions;
+- expired dispositions;
+- stale schema or tool-version context;
+- invalid disposition files;
+- findings without an active disposition.
+
+The index also includes a small mechanical dashboard of counts and top source
+checks/paths without active dispositions. It is a review surface only, not a
+priority ranking, safe-to-ignore decision, merge gate, roadmap decision, or
+suppression policy. The full index remains the source of truth.
+
 Future portfolio-wide scans can use rollup output as a review surface after
 source tools have produced packets elsewhere. Portfolio manifests, tool
 execution, and source-project scanning are outside this command's scope.
@@ -90,5 +113,7 @@ Rollup status is derived from normalized findings and copied decision arrays:
 - Does not execute source tools.
 - Does not install, fetch, pull, or run project commands.
 - Rejects output inside any input packet directory.
+- Reads disposition files only when explicitly provided and never writes to
+  those input files.
 - Treats findings as evidence for human or assistant review, not as automatic
   gate, merge, roadmap, or disposition decisions.

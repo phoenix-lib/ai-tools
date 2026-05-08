@@ -19,6 +19,57 @@ major plan execution, and workflow gate change.
 - Validation: focused planning tests passed 17/17, `gsd-sdk.cmd query
   state.validate` passed, and `git diff --check` passed.
 
+### Phase 15: Review Disposition Model
+
+- Changed review disposition contracts: added
+  `standards/review-disposition/` with a strict
+  `REVIEW-DISPOSITIONS.json` schema for human-authored review metadata,
+  required owner/reason/review/expiry/version/evidence fields, and explicit
+  non-suppression semantics.
+- Changed finding identity: added `shared/finding-fingerprint.js` to derive
+  deterministic `fp.<sha256>` fingerprints from stable evidence fields such as
+  source tool, source check id, source path, target, and optional source
+  packet id, while excluding title, summary, severity, status contribution, and
+  occurrence-normalized finding ids.
+- Changed rollup consumer output: `review-packet-rollup` now accepts optional
+  `--dispositions <file...>` input and emits `DISPOSITION-INDEX.json` with
+  matched, unmatched, expired, stale, invalid, and findings-without-active-
+  disposition sections plus a mechanical dashboard.
+- Preserved packet semantics: active dispositions do not alter source finding
+  severity, status contribution, evidence refs, blockers, required decisions,
+  packet counts, or rollup status derivation. `REVIEW-SUMMARY.json`
+  `generated_artifacts` remains the standard packet artifact list.
+- Changed docs and registry: updated `tools/review-packet-rollup/README.md`,
+  `docs/RELEASE-READINESS.md`, and `tools/registry.json` to describe review
+  dispositions as human review metadata, not safe-to-ignore, suppression, gate,
+  merge, roadmap, install, fetch, pull, or mutation authority.
+- Validation: focused disposition schema/fingerprint/rollup tests passed
+  31/31, registry/release docs tests passed 13/13, full `npm.cmd test` passed
+  240/240, and `git diff --check` passed.
+- Self-use result: Phase 15 `review-packet-rollup` wrote output outside the
+  repository at
+  `C:\Users\suppo\.codex\memories\ai-tools-review-dispositions-phase15-final`
+  using explicit disposition input from
+  `C:\Users\suppo\.codex\memories\ai-tools-review-dispositions-phase15-input`.
+  Packet status remained `human_review_required` with 401 findings, 396 low,
+  5 medium, 0 blockers, and 0 required decisions. `DISPOSITION-INDEX.json`
+  recorded 1 matched active disposition, 400 findings without active
+  disposition, and 0 expired, unmatched, stale, or invalid disposition records.
+- Upstream impact: no `ai-workspace-kit` source was changed. Review
+  dispositions remain optional AI Tools evidence metadata.
+- Compatibility impact for `ai-workspace-kit`: downstream workflows may
+  inspect `DISPOSITION-INDEX.json` as optional review context, but no runtime
+  dependency, automatic tool execution, hidden trigger, gate decision, roadmap
+  mutation, source finding suppression, copied `.planning` state, or target
+  project mutation was introduced.
+- Breaking changes: `review-packet-rollup` now writes the additional
+  tool-specific `DISPOSITION-INDEX.json` artifact on rollup runs. Standard
+  review packet artifact names and summary `generated_artifacts` are unchanged.
+- Migration notes: consumers that inspect rollup tool manifest outputs should
+  allow `DISPOSITION-INDEX.json`; consumers should continue treating
+  `REVIEW-SUMMARY.json` findings as the source evidence and disposition index
+  entries as review metadata only.
+
 ### Phase 14: Ledger Artifact Schemas
 
 - Changed ledger contracts: added strict JSON Schemas under

@@ -15,6 +15,7 @@ const {
 const { buildRollupGroups } = require("./groups");
 const { loadPacketDirectories, resolvePacketDirs } = require("./packet-loader");
 const { normalizeLoadedPackets } = require("./normalize");
+const { buildDispositionIndex } = require("./dispositions");
 
 const ALL_ARTIFACTS = Object.freeze([...REQUIRED_PACKET_ARTIFACTS, ...REVIEW_PACKET_ROLLUP_ARTIFACTS]);
 
@@ -35,7 +36,9 @@ function createPolicyHashes(rootDir) {
   for (const [policyName, relativePath] of Object.entries({
     review_packet_rollup_groups: "tools/review-packet-rollup/groups.js",
     review_packet_rollup_normalize: "tools/review-packet-rollup/normalize.js",
-    review_packet_rollup_packet_loader: "tools/review-packet-rollup/packet-loader.js"
+    review_packet_rollup_packet_loader: "tools/review-packet-rollup/packet-loader.js",
+    review_packet_rollup_dispositions: "tools/review-packet-rollup/dispositions.js",
+    review_disposition_schema: "standards/review-disposition/schemas/REVIEW-DISPOSITIONS.schema.json"
   })) {
     const absolutePath = path.join(rootDir, relativePath);
     if (fs.existsSync(absolutePath)) {
@@ -87,6 +90,11 @@ async function runRollup(options) {
   const packetRecords = loadPacketDirectories(packetDirs);
   const normalized = normalizeLoadedPackets(packetRecords);
   const groups = buildRollupGroups(normalized);
+  const dispositionIndex = buildDispositionIndex(normalized, {
+    dispositionFiles: options.dispositionFiles ?? [],
+    now: new Date(timestamp),
+    rootDir: path.join(__dirname, "../..")
+  });
   const summaryModel = {
     blockers: normalized.blockers,
     findings: normalized.findings,
@@ -119,6 +127,7 @@ async function runRollup(options) {
 
   const packetArtifacts = writePacketArtifacts(packet, outDir);
   const rollupArtifacts = {
+    "DISPOSITION-INDEX.json": canonicalJson(dispositionIndex),
     "PACKET-INDEX.json": canonicalJson(normalized.packet_index),
     "ROLLUP-GROUPS.json": canonicalJson(groups)
   };
@@ -133,6 +142,7 @@ async function runRollup(options) {
       ...rollupArtifacts
     },
     groups,
+    disposition_index: dispositionIndex,
     normalized,
     outDir,
     packet,

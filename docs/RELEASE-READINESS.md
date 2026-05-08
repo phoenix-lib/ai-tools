@@ -31,6 +31,10 @@ semantic suppression decisions.
 Phase 14 adds strict JSON Schemas for the six `project-context-ledger` ledger
 artifacts and generated-output validation for schema-valid deterministic ledger
 packets.
+Phase 15 adds the `REVIEW-DISPOSITIONS.json` sidecar schema, stable finding
+fingerprints, and `review-packet-rollup` disposition indexing through
+`DISPOSITION-INDEX.json` without changing source finding severity, status
+contribution, evidence refs, or packet status derivation.
 
 ## Definition of Done
 
@@ -64,6 +68,9 @@ packets.
 - [x] Phase 14 post-v1 ledger artifact schemas are documented as optional
   evidence-consumer contracts, not runtime dependencies, gate authority,
   suppression rules, dispositions, or portfolio scanners.
+- [x] Phase 15 post-v1 review dispositions are documented as human review
+  metadata, not source finding rewrites, suppression, or automatic gate
+  authority.
 
 ## Required Artifacts
 
@@ -79,6 +86,8 @@ packets.
 - `tools/review-packet-rollup/README.md`
 - `standards/project-context-ledger/README.md`
 - `standards/project-context-ledger/schemas/`
+- `standards/review-disposition/README.md`
+- `standards/review-disposition/schemas/`
 - `tools/registry.json`
 - `tools/registry.schema.json`
 - `.planning/gates/WORKFLOW-GATES.md`
@@ -181,6 +190,15 @@ record IDs, and joins from ledger `evidence_refs` to generated `EVIDENCE.json`.
 The schemas are optional evidence-consumer contracts and do not authorize
 workflow, gate, roadmap, merge, suppression, disposition, portfolio scan,
 install, fetch, run, or mutation decisions.
+
+Phase 15 review disposition hardening adds `standards/review-disposition/`
+with a strict `REVIEW-DISPOSITIONS.json` schema and stable
+`shared/finding-fingerprint.js` helper. `review-packet-rollup` now emits
+`DISPOSITION-INDEX.json` as a separate tool-specific artifact that records
+matched, unmatched, expired, stale, invalid, and undispositioned review
+context. It does not modify source findings, source packet counts, severity,
+status contribution, evidence refs, blockers, required decisions, or packet
+status derivation.
 
 Phase 14 self-use wrote ledger output outside the repository at:
 
@@ -359,11 +377,23 @@ Phase 14 ledger artifact schema evidence:
 - Interpretation: schema validation makes ledger packets safer for downstream
   consumers. It does not make ledger facts automatic workflow decisions.
 
+Phase 15 review disposition evidence:
+
+- Reusable command:
+  `node tools/review-packet-rollup/cli.js --packets <packet-dir-a> <packet-dir-b> --dispositions <REVIEW-DISPOSITIONS.json> --out <external-dir>`
+- Focused validation commands:
+  `npm.cmd test -- test/review-disposition/schema-contract.test.js test/review-disposition/finding-fingerprint.test.js`
+  and
+  `npm.cmd test -- test/review-packet-rollup/dispositions.test.js test/review-packet-rollup/integration.test.js test/review-packet-rollup/schema-output.test.js test/review-packet-rollup/normalize.test.js`
+- Interpretation: dispositions are optional human review metadata joined by
+  stable finding fingerprints. They are not safe-to-ignore labels,
+  suppressions, source finding rewrites, or automatic gate decisions.
+
 ## Deferred V2 Work
 
 `XREPO-VALIDATOR-01`, `GATELINT-01`, `LEDGER-01`, the Phase 13 packet
-rollup, and the Phase 14 ledger schemas are implemented after v1 as read-only
-evidence producers, consumers, or contracts.
+rollup, the Phase 14 ledger schemas, and Phase 15 review dispositions are
+implemented after v1 as read-only evidence producers, consumers, or contracts.
 Automatic cross-repo indexing, automatic gate-linter decisions, automatic
 context adoption, auto-fix mode, and additional seed tools remain deferred.
 
@@ -375,3 +405,8 @@ The project context ledger remains not part of the v1 release. Its Phase 12
 post-v1 implementation and Phase 14 schema hardening are evidence-only and must
 not be treated as automatic workflow routing, roadmap mutation, phase approval,
 suppression, disposition, portfolio scan, or target-project mutation authority.
+
+Review dispositions remain not part of the v1 release. Their Phase 15
+implementation is a human review metadata layer and must not be treated as
+automatic suppression, safe-to-ignore policy, gate approval, roadmap mutation,
+merge decision, portfolio scan, or target-project mutation authority.

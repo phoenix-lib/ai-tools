@@ -53,6 +53,7 @@ async function generatePacket() {
   return {
     evidence: JSON.parse(fs.readFileSync(path.join(outDir, "EVIDENCE.json"), "utf8")),
     evidenceText: fs.readFileSync(path.join(outDir, "EVIDENCE.json"), "utf8"),
+    dispositionIndexText: fs.readFileSync(path.join(outDir, "DISPOSITION-INDEX.json"), "utf8"),
     groupsText: fs.readFileSync(path.join(outDir, "ROLLUP-GROUPS.json"), "utf8"),
     indexText: fs.readFileSync(path.join(outDir, "PACKET-INDEX.json"), "utf8"),
     outDir,
@@ -99,6 +100,7 @@ test("generated rollup JSON artifacts are deterministic with a fixed clock", asy
 
   try {
     assert.equal(first.summaryText, second.summaryText);
+    assert.equal(first.dispositionIndexText, second.dispositionIndexText);
     assert.equal(first.evidenceText, second.evidenceText);
     assert.equal(first.indexText, second.indexText);
     assert.equal(first.groupsText, second.groupsText);

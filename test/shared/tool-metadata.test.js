@@ -41,7 +41,8 @@ test("exports stable review packet constants", () => {
   ]);
   assert.deepEqual(REVIEW_PACKET_ROLLUP_ARTIFACTS, [
     "PACKET-INDEX.json",
-    "ROLLUP-GROUPS.json"
+    "ROLLUP-GROUPS.json",
+    "DISPOSITION-INDEX.json"
   ]);
 });
 

@@ -32,7 +32,8 @@ test("help prints usage", async () => {
   const code = await main(["--help"], io);
 
   assert.equal(code, 0);
-  assert.match(io.output.stdout, /review-packet-rollup --packets <dir\.\.\.> --out <dir>/);
+  assert.match(io.output.stdout, /review-packet-rollup --packets <dir\.\.\.> \[--dispositions <file\.\.\.>\] --out <dir>/);
+  assert.match(io.output.stdout, /--dispositions <file\.\.\.>/);
 });
 
 test("missing args and one packet return non-zero before writes", async () => {
@@ -64,6 +65,7 @@ test("external output path is accepted", async () => {
     assert.equal(code, 0);
     assert.match(io.output.stdout, /review-packet-rollup completed: human_review_required/);
     assert.equal(fs.existsSync(path.join(outDir, "PACKET-INDEX.json")), true);
+    assert.equal(fs.existsSync(path.join(outDir, "DISPOSITION-INDEX.json")), true);
   } finally {
     fs.rmSync(outDir, { force: true, recursive: true });
   }

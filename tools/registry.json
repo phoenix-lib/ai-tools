@@ -457,8 +457,14 @@
       "evidence_refs": [
         "package.json",
         "tools/review-packet-rollup/README.md",
+        "standards/review-disposition/README.md",
+        "standards/review-disposition/schemas/REVIEW-DISPOSITIONS.schema.json",
         ".planning/phases/13-review-packet-rollup-mvp/13-CONTEXT.md",
         ".planning/phases/13-review-packet-rollup-mvp/13-VERIFICATION.md",
+        ".planning/phases/15-review-disposition-model/15-01-SUMMARY.md",
+        "test/review-disposition/schema-contract.test.js",
+        "test/review-disposition/finding-fingerprint.test.js",
+        "test/review-packet-rollup/dispositions.test.js",
         "test/review-packet-rollup/integration.test.js",
         "test/review-packet-rollup/schema-output.test.js"
       ],
@@ -468,7 +474,8 @@
         "FINDINGS.md",
         "RECOMMENDED-ACTIONS.md",
         "PACKET-INDEX.json",
-        "ROLLUP-GROUPS.json"
+        "ROLLUP-GROUPS.json",
+        "DISPOSITION-INDEX.json"
       ],
       "id": "review-packet-rollup",
       "maturity": "validated",
@@ -477,7 +484,8 @@
         "Do not run source tools or scan target projects.",
         "Do not mutate input packet directories or target projects.",
         "Do not mark findings safe-to-ignore or suppress source findings.",
-        "Do not make automatic gate, merge, roadmap, disposition, install, fetch, or pull decisions."
+        "Do not make automatic gate, merge, roadmap, disposition, install, fetch, or pull decisions.",
+        "Do not treat human review dispositions as source finding rewrites or automatic suppression policy."
       ],
       "owner": "ai-tools",
       "package_bin": "review-packet-rollup",
@@ -500,7 +508,7 @@
           "maintenance"
         ]
       },
-      "status_notes": "Validated Phase 13 mechanical packet consumer with shared review packet output, packet index, rollup groups, full tests, and self-use evidence.",
+      "status_notes": "Validated Phase 13 mechanical packet consumer with shared review packet output, packet index, rollup groups, full tests, and self-use evidence. Phase 15 adds optional REVIEW-DISPOSITIONS.json consumption and DISPOSITION-INDEX.json as separate human review metadata, not suppression.",
       "use_gate": "new-tool-intake"
     },
     {

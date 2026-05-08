@@ -119,6 +119,7 @@ test("review-packet-rollup is a Phase 13 packet consumer CLI", () => {
   assert.equal(entry.self_use.required, true);
   assert.ok(entry.expected_outputs.includes("PACKET-INDEX.json"));
   assert.ok(entry.expected_outputs.includes("ROLLUP-GROUPS.json"));
+  assert.ok(entry.expected_outputs.includes("DISPOSITION-INDEX.json"));
   assert.match(entry.non_goals.join("\n"), /Do not run source tools/);
   assert.match(entry.non_goals.join("\n"), /safe-to-ignore/);
 });

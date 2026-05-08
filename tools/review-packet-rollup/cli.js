@@ -2,14 +2,15 @@
 
 const { runRollup } = require("./index");
 
-const USAGE = `review-packet-rollup --packets <dir...> --out <dir>
+const USAGE = `review-packet-rollup --packets <dir...> [--dispositions <file...>] --out <dir>
 
 Mechanical consumer for existing review packet directories.
 
 Options:
-  --packets <dir...>  Two or more review packet directories.
-  --out <dir>         Output directory outside every input packet directory.
-  --help              Show this help.
+  --packets <dir...>       Two or more review packet directories.
+  --dispositions <file...> Optional REVIEW-DISPOSITIONS.json files to join.
+  --out <dir>              Output directory outside every input packet directory.
+  --help                   Show this help.
 `;
 
 const REVIEW_ONLY_REJECTED_FLAGS = new Set(["--fix", "--write", "--pull", "--fetch", "--install", "--run", "--execute"]);
@@ -17,6 +18,7 @@ const REVIEW_ONLY_REJECTED_FLAGS = new Set(["--fix", "--write", "--pull", "--fet
 function parseArgs(argv) {
   const parsed = {
     help: false,
+    dispositions: [],
     out: null,
     packets: []
   };
@@ -39,6 +41,16 @@ function parseArgs(argv) {
       index += 1;
       while (index < argv.length && !argv[index].startsWith("--")) {
         parsed.packets.push(argv[index]);
+        index += 1;
+      }
+      index -= 1;
+      continue;
+    }
+
+    if (arg === "--dispositions") {
+      index += 1;
+      while (index < argv.length && !argv[index].startsWith("--")) {
+        parsed.dispositions.push(argv[index]);
         index += 1;
       }
       index -= 1;
@@ -75,6 +87,7 @@ async function main(argv = process.argv.slice(2), io = {}) {
 
     const result = await runRollup({
       argv,
+      dispositionFiles: args.dispositions,
       outDir: args.out,
       packetDirs: args.packets
     });
