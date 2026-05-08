@@ -16,6 +16,14 @@ or:
 node tools/contract-drift-auditor/cli.js --project <path> --out <dir>
 ```
 
+Useful optional modes:
+
+```bash
+node tools/contract-drift-auditor/cli.js --project <path> --out <dir> --format json
+node tools/contract-drift-auditor/cli.js --project <path> --out <dir> --quiet
+node tools/contract-drift-auditor/cli.js --project <path> --out <dir> --fail-on human_review_required
+```
+
 Required output artifacts:
 
 - `REVIEW-SUMMARY.json`
@@ -25,6 +33,44 @@ Required output artifacts:
 
 The JSON summary is the machine source of truth. Markdown files are rendered
 from the same packet model so status and counts cannot diverge.
+
+CLI stdout is a convenience projection. In `--format json` mode, stdout is one
+compact JSON object containing packet status, counts, generated artifact names,
+and output directory. Consumers that need findings, evidence refs, recommended
+actions, or tool metadata should read `REVIEW-SUMMARY.json` and `EVIDENCE.json`
+from `--out`.
+
+### CLI Output and Exit Codes
+
+Default successful output is a short human line:
+
+```text
+contract-drift-auditor completed: human_review_required.
+```
+
+`--quiet` suppresses this human success line. It does not suppress help output,
+stderr errors, or explicit `--format json` output.
+
+`--fail-on blocked|human_review_required|never` controls shell exit policy:
+
+- `never`: generated packets exit `0` for all packet statuses. This is the
+  default.
+- `blocked`: exit `1` only when packet status is `blocked`.
+- `human_review_required`: exit `1` when packet status is
+  `human_review_required` or `blocked`.
+
+Exit code meanings:
+
+- `0`: packet artifacts were generated and the selected fail policy did not
+  match.
+- `1`: packet artifacts were generated and the selected fail policy matched the
+  packet status.
+- `2`: usage, unsafe output, invalid enum, or runtime error prevented normal
+  completion.
+
+`--fail-on` is caller-selected shell policy. It is not a semantic approval or
+rejection decision; packet findings remain evidence for assistant or human
+review.
 
 ## When to Use
 

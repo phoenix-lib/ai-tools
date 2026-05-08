@@ -29,7 +29,7 @@ validator can govern tool intake.
 - [x] **Phase 5: Integration and Release Hardening** - Align docs, optional ai-workspace-kit integration, and first-release readiness. (completed 2026-05-07)
 - [x] **Phase 6: Release Closeout and Tool Metadata** - Fix post-Phase-5 doc drift, add release packet fixtures, centralize tool metadata, and preserve safe self-audit invocation. Completed 2026-05-07.
 - [x] **Phase 7: Cross-Repo Compatibility Checker MVP** - Build the smallest read-only validator for AI Tools / `ai-workspace-kit` protocol compatibility before any automatic cross-repo automation. Completed 2026-05-08.
-- [ ] **Phase 8: Contract Drift Auditor CLI Ergonomics** - Add machine stdout, quiet mode, fail-on policy, and documented exit codes without making findings automatic decisions.
+- [x] **Phase 8: Contract Drift Auditor CLI Ergonomics** - Add machine stdout, quiet mode, fail-on policy, and documented exit codes without making findings automatic decisions. Completed 2026-05-08.
 - [ ] **Phase 9: Tool Registry and Workflow Gate Slimming** - Create the machine-readable tool registry and move detailed gate policy out of root `AGENTS.md` into focused workflow docs.
 - [ ] **Phase 10: Evidence-Only Gate Linter Seed MVP** - Build or formally re-defer the mechanical gate-linter only after the cross-repo validator and tool registry are in place.
 - [ ] **Phase 11: v2 Tool Selection Review** - Reassess deferred seed tools and choose the next single tool only from repeated evidence-backed demand.
@@ -192,10 +192,10 @@ Plans:
 
 Plans:
 **Wave 1**
-- [ ] 08-01: Add CLI output modes and stable exit-code policy.
+- [x] 08-01: Add CLI output modes and stable exit-code policy.
 
 **Wave 2** *(blocked on Wave 1 completion)*
-- [ ] 08-02: Update docs, tests, and release examples for CI/assistant consumption.
+- [x] 08-02: Update docs, tests, and release examples for CI/assistant consumption.
 
 ### Phase 9: Tool Registry and Workflow Gate Slimming
 **Goal**: Make tool intake and self-use machine-readable before adding more tools, while keeping root assistant guidance lightweight.
@@ -328,7 +328,7 @@ Plans:
 | 5. Integration and Release Hardening | 2/2 | Complete | 2026-05-07 |
 | 6. Release Closeout and Tool Metadata | 3/3 | Complete | 2026-05-07 |
 | 7. Cross-Repo Compatibility Checker MVP | 3/3 | Complete | 2026-05-08 |
-| 8. Contract Drift Auditor CLI Ergonomics | 0/2 | Planned | - |
+| 8. Contract Drift Auditor CLI Ergonomics | 2/2 | Complete | 2026-05-08 |
 | 9. Tool Registry and Workflow Gate Slimming | 0/2 | Planned | - |
 | 10. Evidence-Only Gate Linter Seed MVP | 0/2 | Planned | - |
 | 11. v2 Tool Selection Review | 0/1 | Planned | - |

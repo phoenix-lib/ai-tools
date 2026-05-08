@@ -5,6 +5,36 @@ major plan execution, and workflow gate change.
 
 ## Unreleased
 
+### Phase 08: Contract Drift Auditor CLI Ergonomics
+
+- Changed tool capabilities: `contract-drift-auditor` now supports
+  `--format json`, `--quiet`, and
+  `--fail-on blocked|human_review_required|never`.
+- Changed CLI stdout: default human success output now includes packet status,
+  and JSON stdout is a compact projection of `REVIEW-SUMMARY.json` status,
+  counts, generated artifact names, and output directory.
+- Changed exit policy: generated packets still exit `0` by default because
+  `--fail-on never` is the default. Callers may opt into exit `1` for
+  `blocked` or `human_review_required` packet statuses.
+- Packet semantics unchanged: required artifacts remain `REVIEW-SUMMARY.json`,
+  `EVIDENCE.json`, `FINDINGS.md`, and `RECOMMENDED-ACTIONS.md`; stdout is not a
+  replacement packet artifact.
+- Self-use result: Phase 8 JSON self-audit wrote output outside the repository
+  at `C:\Users\suppo\.codex\memories\ai-tools-self-audit-phase08-json`; packet
+  status was `human_review_required` with 54 low findings, 0 blockers, and 0
+  required decisions.
+- Validation: focused CLI tests, schema-output tests, docs validation, and full
+  `npm.cmd test` are required for this phase. Self-use output is evidence only.
+- Compatibility impact for `ai-workspace-kit`: downstream freshness checks can
+  read this entry to see that CLI projection and shell policy changed, but the
+  packet contract did not. No runtime dependency, automatic tool execution,
+  install, pull/fetch, `.planning` mutation, or duplicated adoption/bootstrap
+  behavior was added.
+- Breaking changes: none by default.
+- Migration notes: CI can opt into `--fail-on human_review_required` or
+  `--fail-on blocked`; assistants and downstream tools should still read packet
+  artifacts for details and treat findings as review evidence.
+
 ### Phase 07: Cross-Repo Compatibility Checker MVP
 
 - Changed tool capabilities: added a runnable review-only

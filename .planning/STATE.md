@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v2.0
 milestone_name: Tooling Hardening
-status: planned
-stopped_at: Phase 8 planned
+status: in_progress
+stopped_at: Phase 8 completed
 last_updated: "2026-05-08T04:48:00+03:00"
-last_activity: "2026-05-08 -- Phase 8 research and two execution plans created for contract-drift-auditor CLI ergonomics"
+last_activity: "2026-05-08 -- Phase 8 completed: contract-drift-auditor CLI now supports JSON stdout, quiet mode, and opt-in fail policy"
 progress:
   total_phases: 11
-  completed_phases: 7
+  completed_phases: 8
   total_plans: 27
-  completed_plans: 20
-  percent: 74
+  completed_plans: 22
+  percent: 81
 ---
 
 # Project State
@@ -22,22 +22,22 @@ See: .planning/PROJECT.md (updated 2026-05-08)
 
 **Core value:** Produce deterministic, evidence-backed review packets that make
 AI project guidance auditable without mutating target projects.
-**Current focus:** Phase 8 - Contract Drift Auditor CLI Ergonomics
+**Current focus:** Phase 9 - Tool Registry and Workflow Gate Slimming
 
 ## Current Position
 
-Phase: 8 (Contract Drift Auditor CLI Ergonomics) - READY TO EXECUTE
+Phase: 9 (Tool Registry and Workflow Gate Slimming) - READY TO DISCUSS
 Plan: 0 of 2
-Status: Phase 8 planned; next command is `$gsd-execute-phase 8`.
-Last activity: 2026-05-08 -- Phase 8 research and plans created.
+Status: Phase 8 completed; next command is `$gsd-discuss-phase 9`.
+Last activity: 2026-05-08 -- Phase 8 completed.
 
-Progress: [#######---] 74% of mapped plans complete
+Progress: [########--] 81% of mapped plans complete
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 20
+- Total plans completed: 22
 - Average duration: n/a
 - Total execution time: n/a
 
@@ -52,7 +52,8 @@ Progress: [#######---] 74% of mapped plans complete
 | 05 | 2/2 | Complete |
 | 06 | 3/3 | Complete |
 | 07 | 3/3 | Complete |
-| 08 | 0/2 | Planned |
+| 08 | 2/2 | Complete |
+| 09 | 0/2 | Planned |
 
 ## Accumulated Context
 
@@ -97,6 +98,9 @@ Decisions are logged in PROJECT.md Key Decisions table.
   transfer validation, gate registry mapping checks, shared review packet
   output, docs, changelog compatibility notes, self-use evidence, and 124/124
   tests passing.
+- Phase 08 validated `contract-drift-auditor` CLI ergonomics: compact JSON
+  stdout, quiet mode, opt-in `--fail-on` policy, documentation, changelog
+  compatibility notes, self-use evidence, and 132/132 tests passing.
 
 ### Roadmap Evolution
 
@@ -109,7 +113,7 @@ Decisions are logged in PROJECT.md Key Decisions table.
 
 ### Pending Todos
 
-- Execute Phase 8 for `CLI-01` and `CLI-02`.
+- Discuss Phase 9 for `REG-01` and `GOV-01`.
 
 ### Blockers/Concerns
 
@@ -131,5 +135,5 @@ Decisions are logged in PROJECT.md Key Decisions table.
 ## Session Continuity
 
 Last session: 2026-05-08T04:48:00+03:00
-Stopped at: Phase 8 planned
-Resume file: .planning/phases/08-contract-drift-auditor-cli-ergonomics/08-01-PLAN.md
+Stopped at: Phase 8 completed
+Resume file: None

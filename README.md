@@ -27,6 +27,11 @@ or directly:
 node tools/contract-drift-auditor/cli.js --project <path> --out <dir>
 ```
 
+For CI or assistant consumers, the auditor also supports
+`--format json`, `--quiet`, and `--fail-on blocked|human_review_required|never`.
+These flags change CLI projection and shell policy only; `REVIEW-SUMMARY.json`
+remains the machine source of truth.
+
 `cross-repo-compatibility-checker` validates cross-repo capability request and
 gate registry compatibility between sibling `ai-tools` and `ai-workspace-kit`
 checkouts.

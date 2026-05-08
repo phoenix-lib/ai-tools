@@ -168,8 +168,8 @@ Which phases cover which requirements. Updated during roadmap creation.
 | META-01 | Phase 6 | Complete |
 | SELF-01 | Phase 6 | Complete |
 | XREPO-VALIDATOR-01 | Phase 7 | Complete |
-| CLI-01 | Phase 8 | Planned |
-| CLI-02 | Phase 8 | Planned |
+| CLI-01 | Phase 8 | Complete |
+| CLI-02 | Phase 8 | Complete |
 | REG-01 | Phase 9 | Planned |
 | GOV-01 | Phase 9 | Planned |
 | GATELINT-01 | Phase 10 | Planned |
@@ -187,4 +187,4 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 ---
 *Requirements defined: 2026-05-07*
-*Last updated: 2026-05-08 after completing Phase 7 cross-repo compatibility checker MVP*
+*Last updated: 2026-05-08 after completing Phase 8 contract drift auditor CLI ergonomics*

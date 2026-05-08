@@ -49,6 +49,18 @@ test("root README is the release entrypoint", () => {
     ],
     "root README"
   );
+
+  assertIncludesAll(
+    readme,
+    [
+      "--format json",
+      "--quiet",
+      "--fail-on blocked|human_review_required|never",
+      "REVIEW-SUMMARY.json",
+      "machine source of truth"
+    ],
+    "root README CLI ergonomics"
+  );
 });
 
 test("contract drift auditor docs explain usage, non-usage, safety, and packet semantics", () => {
@@ -75,7 +87,14 @@ test("contract drift auditor docs explain usage, non-usage, safety, and packet s
       "current contract/planning docs",
       "conservative text parsing",
       "ai-workspace-kit Compatibility",
-      "optional external evidence"
+      "optional external evidence",
+      "CLI Output and Exit Codes",
+      "--format json",
+      "--quiet",
+      "--fail-on blocked|human_review_required|never",
+      "Exit code meanings",
+      "caller-selected shell policy",
+      "stdout is a convenience projection"
     ],
     "auditor README"
   );
@@ -109,7 +128,13 @@ test("release readiness doc is checkable and preserves deferred boundaries", () 
       "optional external evidence",
       "XREPO-VALIDATOR-01",
       "GATELINT-01",
-      "not part of the v1 release"
+      "not part of the v1 release",
+      "Phase 8 CLI ergonomics evidence",
+      "--format json",
+      "--quiet",
+      "--fail-on never",
+      "packet files remain the source of truth",
+      "optional caller conveniences"
     ],
     "release readiness"
   );

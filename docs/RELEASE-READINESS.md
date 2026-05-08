@@ -37,6 +37,8 @@ read-only validator for `ai-tools` / `ai-workspace-kit` protocol compatibility.
 - [x] Manual gate review evidence is recorded.
 - [x] `CHANGELOG.md` records Phase 05 and Phase 06 release validation and
   upstream `ai-workspace-kit` impact.
+- [x] Phase 08 post-v1 CLI ergonomics are documented as optional caller
+  conveniences: `--format json`, `--quiet`, and `--fail-on`.
 
 ## Required Artifacts
 
@@ -110,6 +112,12 @@ Final Phase 6 validation results recorded on 2026-05-07:
 - `npm.cmd test -- test/planning/release-docs.test.js`: 4/4 pass.
 - `npm.cmd test`: 99/99 pass.
 
+Phase 8 CLI ergonomics are post-v1 hardening. They do not change required
+packet artifacts or schema semantics. `--format json` is compact machine
+stdout projected from the packet summary, `--quiet` suppresses human success
+chatter, and `--fail-on blocked|human_review_required|never` is optional
+caller-selected shell policy.
+
 ## Docs Evidence
 
 Plan `05-01` adds mechanical docs validation:
@@ -173,6 +181,25 @@ Release readiness evidence:
   example, or shorthand references in current contract/planning docs. They do
   not block the first release because packet generation, schema validation,
   secret handling, output isolation, and non-mutation checks all passed.
+
+Phase 8 CLI ergonomics evidence:
+
+- Reusable command: `node tools/contract-drift-auditor/cli.js --project . --out <external-dir> --format json --fail-on never`
+- Reusable quiet command: `node tools/contract-drift-auditor/cli.js --project . --out <external-dir> --quiet`
+- Phase 8 JSON command: `node tools/contract-drift-auditor/cli.js --project . --out C:\Users\suppo\.codex\memories\ai-tools-self-audit-phase08-json --format json --fail-on never`
+- Phase 8 JSON output path: `C:\Users\suppo\.codex\memories\ai-tools-self-audit-phase08-json`
+- Phase 8 quiet command: `node tools/contract-drift-auditor/cli.js --project . --out C:\Users\suppo\.codex\memories\ai-tools-self-audit-phase08-quiet --quiet`
+- Phase 8 quiet output path: `C:\Users\suppo\.codex\memories\ai-tools-self-audit-phase08-quiet`
+- Packet status: `human_review_required`
+- Finding count: 54 total, all `low`; 0 blockers, 0 critical, 0 high,
+  0 medium, 0 required decisions.
+- Interpretation: JSON stdout parsed and matched generated
+  `REVIEW-SUMMARY.json` status/counts. The `--quiet` run exited `0` and emitted
+  no auditor success line. Remaining findings are human-review caveats in
+  current contract/planning documentation, not automatic blockers.
+- Compatibility note: packet files remain the source of truth. Machine stdout
+  and `--fail-on` are optional caller conveniences and do not create an
+  `ai-workspace-kit` dependency or automatic approval/failure decision.
 
 Final Phase 6 evidence:
 
