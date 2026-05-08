@@ -219,6 +219,24 @@ function changedPreviousSources(previousManifest, currentSources) {
     .sort((left, right) => left.path.localeCompare(right.path));
 }
 
+function withUniqueRecordIds(records) {
+  const counts = new Map();
+
+  return records.map((record) => {
+    const occurrence = (counts.get(record.id) ?? 0) + 1;
+    counts.set(record.id, occurrence);
+
+    if (occurrence === 1) {
+      return record;
+    }
+
+    return {
+      ...record,
+      id: `${record.id}.occurrence-${occurrence}`
+    };
+  });
+}
+
 function buildLedger(discovery, options) {
   const timestamp = options.timestamp;
   const rootDir = path.join(__dirname, "../..");
@@ -336,6 +354,7 @@ function buildLedger(discovery, options) {
         evidence_refs: [evidenceId],
         id: `contract.${slug(document.path)}`,
         path: document.path,
+        source_path: document.path,
         source_sha256: sourceHash(discovery, document.path),
         type: "assistant_contract"
       });
@@ -346,7 +365,7 @@ function buildLedger(discovery, options) {
       decisions.push({
         confidence: "verified",
         evidence_refs: [evidenceId],
-        id: `decision.${match[1].toLowerCase()}`,
+        id: `decision.context.${slug(document.path)}.${match[1].toLowerCase()}`,
         source_path: document.path,
         text: match[2].trim(),
         type: "context_decision"
@@ -573,6 +592,7 @@ function buildLedger(discovery, options) {
     },
     run_timestamp: timestamp,
     scanned_sources: scannedSources,
+    schema_version: "project-context-ledger/v1",
     tool: {
       name: "project-context-ledger",
       version: loadPackageVersion(rootDir)
@@ -581,11 +601,11 @@ function buildLedger(discovery, options) {
 
   const artifactModels = {
     "CACHE-MANIFEST.json": cacheManifest,
-    "COMMANDS.json": commands.sort((left, right) => left.id.localeCompare(right.id)),
-    "CONTRACTS.json": contracts.sort((left, right) => left.id.localeCompare(right.id)),
-    "DECISIONS.json": decisions.sort((left, right) => left.id.localeCompare(right.id)),
-    "FACTS.json": facts.sort((left, right) => left.id.localeCompare(right.id)),
-    "SKILLS.json": skills.sort((left, right) => left.id.localeCompare(right.id))
+    "COMMANDS.json": withUniqueRecordIds(commands).sort((left, right) => left.id.localeCompare(right.id)),
+    "CONTRACTS.json": withUniqueRecordIds(contracts).sort((left, right) => left.id.localeCompare(right.id)),
+    "DECISIONS.json": withUniqueRecordIds(decisions).sort((left, right) => left.id.localeCompare(right.id)),
+    "FACTS.json": withUniqueRecordIds(facts).sort((left, right) => left.id.localeCompare(right.id)),
+    "SKILLS.json": withUniqueRecordIds(skills).sort((left, right) => left.id.localeCompare(right.id))
   };
 
   result.evidence.sort((left, right) => left.id.localeCompare(right.id));

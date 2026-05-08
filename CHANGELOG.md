@@ -5,6 +5,51 @@ major plan execution, and workflow gate change.
 
 ## Unreleased
 
+### Phase 14: Ledger Artifact Schemas
+
+- Changed ledger contracts: added strict JSON Schemas under
+  `standards/project-context-ledger/schemas/` for `FACTS.json`,
+  `COMMANDS.json`, `CONTRACTS.json`, `SKILLS.json`, `DECISIONS.json`, and
+  `CACHE-MANIFEST.json`, with shared definitions documented in
+  `standards/project-context-ledger/README.md`.
+- Changed generated ledger output: `project-context-ledger` now writes
+  `schema_version: project-context-ledger/v1` in `CACHE-MANIFEST.json`,
+  includes `source_path` on direct contract records, namespaces context
+  decision IDs by source path, and occurrence-normalizes duplicate ledger
+  record IDs deterministically.
+- Changed validation surface: generated ledger artifact tests now validate all
+  six ledger artifacts against the Phase 14 schemas, assert deterministic
+  output, require unique record IDs per record artifact, and verify ledger
+  `evidence_refs` join to generated `EVIDENCE.json`.
+- Changed docs and registry: updated `tools/project-context-ledger/README.md`,
+  `docs/RELEASE-READINESS.md`, and `tools/registry.json` to mark schemas as
+  optional evidence-consumer contracts, not runtime dependencies or decision
+  authority.
+- Validation: focused schema tests passed 10/10, generated ledger integration
+  tests passed 6/6, registry/release/schema docs tests passed 17/17, full
+  `npm.cmd test` passed 225/225, and `git diff --check` passed.
+- Self-use result: Phase 14 `project-context-ledger` wrote output outside the
+  repository at
+  `C:\Users\suppo\.codex\memories\ai-tools-ledger-schemas-phase14-final`;
+  packet status was `human_review_required` with 383 findings, 381 low, 2
+  medium, 0 blockers, and 0 required decisions. `CACHE-MANIFEST.json` recorded
+  `schema_version: project-context-ledger/v1`, 396 scanned sources, 8 ignored
+  generated packet directories, and 8 path-only secret paths. All ledger record
+  artifacts had unique record IDs.
+- Upstream impact: no `ai-workspace-kit` source was changed. The schemas remain
+  optional AI Tools evidence contracts for consumers of ledger packets.
+- Compatibility impact for `ai-workspace-kit`: no runtime dependency,
+  automatic workflow decision, gate decision, roadmap mutation, merge decision,
+  suppression/disposition layer, portfolio scanner, source command execution,
+  or target-project mutation authority was introduced.
+- Breaking changes: artifact filenames and top-level shapes are unchanged, but
+  consumers that keyed directly on previous context decision IDs or duplicate
+  ledger record IDs may observe deterministic ID changes.
+- Migration notes: validate ledger packets against
+  `standards/project-context-ledger/schemas/` and treat
+  `CACHE-MANIFEST.json` `schema_version` as the contract marker; continue using
+  evidence refs rather than record IDs alone for durable interpretation.
+
 ### Phase 13: Review Packet Rollup MVP
 
 - Changed tool capabilities: added runnable review-only

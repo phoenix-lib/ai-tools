@@ -51,7 +51,9 @@ test("ledger run emits packet and ledger artifacts without mutating target proje
     assert.ok(commands.some((command) => command.kind === "package_script" && command.name === "test"));
     assert.ok(commands.some((command) => command.kind === "package_bin" && command.name === "fixture-cli"));
     assert.ok(contracts.some((contract) => contract.path === "docs/MISSING.md" && contract.confidence === "stale"));
+    assert.ok(contracts.every((contract) => typeof contract.source_path === "string" && contract.source_path.length > 0));
     assert.ok(skills.some((skill) => skill.name === "project-ops"));
+    assert.equal(cacheManifest.schema_version, "project-context-ledger/v1");
     assert.ok(cacheManifest.ignored_generated_packet_dirs.includes("old-review"));
     assert.ok(cacheManifest.path_only_secret_paths.includes("config/.env.local"));
     assert.equal(outputText.includes("SECRET_SENTINEL_DO_NOT_LEAK"), false);

@@ -386,9 +386,14 @@
         "package.json",
         "tools/project-context-ledger/README.md",
         "tools/project-context-ledger/SEED-IDEAS.md",
+        "standards/project-context-ledger/README.md",
+        "standards/project-context-ledger/schemas/FACTS.schema.json",
+        "standards/project-context-ledger/schemas/CACHE-MANIFEST.schema.json",
         ".planning/phases/11-v2-tool-selection-review/11-SELECTION-REVIEW.md",
         ".planning/phases/12-project-context-ledger-mvp/12-VERIFICATION.md",
+        ".planning/phases/14-ledger-artifact-schemas/14-01-SUMMARY.md",
         "test/project-context-ledger/integration.test.js",
+        "test/project-context-ledger/ledger-schema-contract.test.js",
         "test/project-context-ledger/schema-output.test.js"
       ],
       "expected_outputs": [
@@ -415,6 +420,7 @@
       ],
       "owner": "ai-tools",
       "package_bin": "project-context-ledger",
+      "packet_role": "producer",
       "requirements": [
         "LEDGER-01"
       ],
@@ -430,7 +436,7 @@
         ]
       },
       "phase": "12",
-      "status_notes": "Validated Phase 12 read-only project context ledger CLI with shared review packet and six ledger JSON artifacts.",
+      "status_notes": "Validated Phase 12 read-only project context ledger CLI with shared review packet and six ledger JSON artifacts; Phase 14 adds strict ledger artifact schemas and generated-output schema validation.",
       "use_gate": "new-tool-intake"
     },
     {

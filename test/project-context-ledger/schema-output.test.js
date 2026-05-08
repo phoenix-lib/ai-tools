@@ -6,6 +6,7 @@ const test = require("node:test");
 const Ajv2020 = require("ajv/dist/2020");
 const addFormats = require("ajv-formats");
 const { runLedger } = require("../../tools/project-context-ledger");
+const { buildLedger } = require("../../tools/project-context-ledger/ledger");
 const {
   PROJECT_CONTEXT_LEDGER_ARTIFACTS,
   PROJECT_CONTEXT_LEDGER_TOOL_NAME,
@@ -14,7 +15,8 @@ const {
   loadPackageVersion
 } = require("../../shared/tool-metadata");
 
-const schemaDir = path.join(process.cwd(), "standards/review-packet/schemas");
+const reviewSchemaDir = path.join(process.cwd(), "standards/review-packet/schemas");
+const ledgerSchemaDir = path.join(process.cwd(), "standards/project-context-ledger/schemas");
 const fixtureProject = path.join(
   process.cwd(),
   "test",
@@ -23,12 +25,24 @@ const fixtureProject = path.join(
   "mature-ledger",
   "input"
 );
+const ledgerPublicSchemaNames = [
+  "FACTS.schema.json",
+  "COMMANDS.schema.json",
+  "CONTRACTS.schema.json",
+  "SKILLS.schema.json",
+  "DECISIONS.schema.json",
+  "CACHE-MANIFEST.schema.json"
+];
 
-function readSchema(name) {
-  return JSON.parse(fs.readFileSync(path.join(schemaDir, name), "utf8"));
+function readReviewSchema(name) {
+  return JSON.parse(fs.readFileSync(path.join(reviewSchemaDir, name), "utf8"));
 }
 
-function createAjv() {
+function readLedgerSchema(name) {
+  return JSON.parse(fs.readFileSync(path.join(ledgerSchemaDir, name), "utf8"));
+}
+
+function createReviewAjv() {
   const ajv = new Ajv2020({ allErrors: true, strict: true });
   addFormats(ajv);
 
@@ -39,7 +53,19 @@ function createAjv() {
     "FINDING.schema.json",
     "REVIEW-SUMMARY.schema.json"
   ]) {
-    ajv.addSchema(readSchema(schemaName));
+    ajv.addSchema(readReviewSchema(schemaName));
+  }
+
+  return ajv;
+}
+
+function createLedgerAjv() {
+  const ajv = new Ajv2020({ allErrors: true, strict: true });
+  addFormats(ajv);
+  ajv.addSchema(readLedgerSchema("LEDGER-COMMON.schema.json"));
+
+  for (const schemaName of ledgerPublicSchemaNames) {
+    ajv.addSchema(readLedgerSchema(schemaName));
   }
 
   return ajv;
@@ -58,6 +84,14 @@ async function generatePacket() {
     evidence: JSON.parse(fs.readFileSync(path.join(outDir, "EVIDENCE.json"), "utf8")),
     evidenceText: fs.readFileSync(path.join(outDir, "EVIDENCE.json"), "utf8"),
     factsText: fs.readFileSync(path.join(outDir, "FACTS.json"), "utf8"),
+    ledgerArtifacts: Object.fromEntries(PROJECT_CONTEXT_LEDGER_ARTIFACTS.map((artifact) => [
+      artifact,
+      JSON.parse(fs.readFileSync(path.join(outDir, artifact), "utf8"))
+    ])),
+    ledgerTexts: Object.fromEntries(PROJECT_CONTEXT_LEDGER_ARTIFACTS.map((artifact) => [
+      artifact,
+      fs.readFileSync(path.join(outDir, artifact), "utf8")
+    ])),
     outDir,
     summary: JSON.parse(fs.readFileSync(path.join(outDir, "REVIEW-SUMMARY.json"), "utf8")),
     summaryText: fs.readFileSync(path.join(outDir, "REVIEW-SUMMARY.json"), "utf8")
@@ -66,7 +100,7 @@ async function generatePacket() {
 
 test("generated ledger packet validates against review packet schemas", async () => {
   const packet = await generatePacket();
-  const ajv = createAjv();
+  const ajv = createReviewAjv();
   const validateSummary = ajv.getSchema("https://ai-tools.local/schemas/review-packet/REVIEW-SUMMARY.schema.json");
   const validateEvidence = ajv.getSchema("https://ai-tools.local/schemas/review-packet/EVIDENCE-REF.schema.json");
   const validateAction = ajv.getSchema("https://ai-tools.local/schemas/review-packet/RECOMMENDED-ACTION.schema.json");
@@ -100,6 +134,73 @@ test("generated ledger packet validates against review packet schemas", async ()
   }
 });
 
+test("generated ledger artifacts validate against ledger schemas", async () => {
+  const packet = await generatePacket();
+  const ajv = createLedgerAjv();
+  const evidenceIds = new Set(packet.evidence.map((ref) => ref.id));
+
+  try {
+    for (const artifact of PROJECT_CONTEXT_LEDGER_ARTIFACTS) {
+      const schemaName = artifact.replace(".json", ".schema.json");
+      const validate = ajv.getSchema(`https://ai-tools.local/schemas/project-context-ledger/${schemaName}`);
+      assert.equal(validate(packet.ledgerArtifacts[artifact]), true, `${artifact}: ${ajv.errorsText(validate.errors)}`);
+    }
+
+    assert.equal(packet.ledgerArtifacts["CACHE-MANIFEST.json"].schema_version, "project-context-ledger/v1");
+
+    for (const artifact of PROJECT_CONTEXT_LEDGER_ARTIFACTS.filter((name) => name !== "CACHE-MANIFEST.json")) {
+      const records = packet.ledgerArtifacts[artifact];
+      assert.equal(
+        new Set(records.map((record) => record.id)).size,
+        records.length,
+        `${artifact} record ids should be stable and unique`
+      );
+
+      for (const record of records) {
+        for (const evidenceRef of record.evidence_refs) {
+          assert.equal(evidenceIds.has(evidenceRef), true, `${artifact} ${record.id} cites missing evidence ${evidenceRef}`);
+        }
+      }
+    }
+  } finally {
+    fs.rmSync(packet.outDir, { force: true, recursive: true });
+  }
+});
+
+test("duplicate ledger source records receive deterministic occurrence ids", () => {
+  const result = buildLedger({
+    contractFiles: [],
+    fileSet: new Set(["AGENTS.md", "docs/KNOWN.md"]),
+    files: ["AGENTS.md"],
+    packageFiles: [],
+    planningFiles: [],
+    projectDir: fixtureProject,
+    references: [
+      {
+        line: 1,
+        path: "docs/KNOWN.md",
+        source_layer: false,
+        source_path: "AGENTS.md"
+      },
+      {
+        line: 1,
+        path: "docs/KNOWN.md",
+        source_layer: false,
+        source_path: "AGENTS.md"
+      }
+    ]
+  }, {
+    outDir: path.join(os.tmpdir(), "unused-ledger-out"),
+    timestamp: "2026-05-08T00:00:00.000Z"
+  });
+  const ids = result.ledger["CONTRACTS.json"].map((record) => record.id);
+
+  assert.deepEqual(ids, [
+    "contract.reference.agents-md.1.docs-known-md",
+    "contract.reference.agents-md.1.docs-known-md.occurrence-2"
+  ]);
+});
+
 test("generated ledger JSON artifacts are deterministic with a fixed clock", async () => {
   const first = await generatePacket();
   const second = await generatePacket();
@@ -107,8 +208,9 @@ test("generated ledger JSON artifacts are deterministic with a fixed clock", asy
   try {
     assert.equal(first.summaryText, second.summaryText);
     assert.equal(first.evidenceText, second.evidenceText);
-    assert.equal(first.factsText, second.factsText);
-    assert.equal(first.cacheManifestText, second.cacheManifestText);
+    for (const artifact of PROJECT_CONTEXT_LEDGER_ARTIFACTS) {
+      assert.equal(first.ledgerTexts[artifact], second.ledgerTexts[artifact], `${artifact} should be deterministic`);
+    }
   } finally {
     fs.rmSync(first.outDir, { force: true, recursive: true });
     fs.rmSync(second.outDir, { force: true, recursive: true });

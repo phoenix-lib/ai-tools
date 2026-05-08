@@ -28,6 +28,9 @@ hashes.
 Phase 13 adds `review-packet-rollup` as a mechanical packet consumer for
 combining existing review packets without running source tools or making
 semantic suppression decisions.
+Phase 14 adds strict JSON Schemas for the six `project-context-ledger` ledger
+artifacts and generated-output validation for schema-valid deterministic ledger
+packets.
 
 ## Definition of Done
 
@@ -58,6 +61,9 @@ semantic suppression decisions.
 - [x] Phase 13 post-v1 `review-packet-rollup` CLI is documented as optional
   packet evidence consumption, not a gate, merge, roadmap, suppression, or
   disposition authority.
+- [x] Phase 14 post-v1 ledger artifact schemas are documented as optional
+  evidence-consumer contracts, not runtime dependencies, gate authority,
+  suppression rules, dispositions, or portfolio scanners.
 
 ## Required Artifacts
 
@@ -71,6 +77,8 @@ semantic suppression decisions.
 - `tools/gates-scan/README.md`
 - `tools/project-context-ledger/README.md`
 - `tools/review-packet-rollup/README.md`
+- `standards/project-context-ledger/README.md`
+- `standards/project-context-ledger/schemas/`
 - `tools/registry.json`
 - `tools/registry.schema.json`
 - `.planning/gates/WORKFLOW-GATES.md`
@@ -164,6 +172,28 @@ Phase 13 rollup hardening adds `review-packet-rollup` as a read-only packet
 consumer. It emits the shared packet artifacts plus `PACKET-INDEX.json` and
 `ROLLUP-GROUPS.json`, while rejecting output inside any input packet directory
 and refusing source-running or mutating flags. It provides optional packet evidence consumption, not another source auditor or decision engine.
+
+Phase 14 ledger schema hardening adds `standards/project-context-ledger/`
+schemas for `FACTS.json`, `COMMANDS.json`, `CONTRACTS.json`, `SKILLS.json`,
+`DECISIONS.json`, and `CACHE-MANIFEST.json`. Generated ledger output is tested
+against those schemas, with additional checks for deterministic output, unique
+record IDs, and joins from ledger `evidence_refs` to generated `EVIDENCE.json`.
+The schemas are optional evidence-consumer contracts and do not authorize
+workflow, gate, roadmap, merge, suppression, disposition, portfolio scan,
+install, fetch, run, or mutation decisions.
+
+Phase 14 self-use wrote ledger output outside the repository at:
+
+```bash
+node tools/project-context-ledger/cli.js --project . --out C:\Users\suppo\.codex\memories\ai-tools-ledger-schemas-phase14-final
+```
+
+Result: `human_review_required` with 383 findings, 381 low, 2 medium, 0
+blockers, and 0 required decisions. The generated `CACHE-MANIFEST.json` used
+`schema_version: project-context-ledger/v1`, recorded 396 scanned sources, 8
+ignored generated packet directories, and 8 path-only secret paths. All ledger
+record artifacts had unique record IDs after deterministic occurrence
+normalization.
 
 ## Docs Evidence
 
@@ -316,10 +346,24 @@ Phase 13 review-packet-rollup evidence:
   phase, install, fetch, source-running, disposition, suppression, or mutation
   decisions.
 
+Phase 14 ledger artifact schema evidence:
+
+- Reusable command: `node tools/project-context-ledger/cli.js --project . --out <external-dir>`
+- Focused validation commands:
+  `npm.cmd test -- test/project-context-ledger/ledger-schema-contract.test.js`
+  and
+  `npm.cmd test -- test/project-context-ledger/schema-output.test.js test/project-context-ledger/integration.test.js`
+- Schema contract: `standards/project-context-ledger/schemas/` validates all
+  six ledger artifacts; `CACHE-MANIFEST.json` carries
+  `schema_version: "project-context-ledger/v1"`.
+- Interpretation: schema validation makes ledger packets safer for downstream
+  consumers. It does not make ledger facts automatic workflow decisions.
+
 ## Deferred V2 Work
 
-`XREPO-VALIDATOR-01`, `GATELINT-01`, `LEDGER-01`, and the Phase 13 packet
-rollup are implemented after v1 as read-only evidence producers or consumers.
+`XREPO-VALIDATOR-01`, `GATELINT-01`, `LEDGER-01`, the Phase 13 packet
+rollup, and the Phase 14 ledger schemas are implemented after v1 as read-only
+evidence producers, consumers, or contracts.
 Automatic cross-repo indexing, automatic gate-linter decisions, automatic
 context adoption, auto-fix mode, and additional seed tools remain deferred.
 
@@ -328,6 +372,6 @@ post-v1 implementation is evidence-only and must not be treated as automatic
 gate adoption, release approval, or target-project mutation authority.
 
 The project context ledger remains not part of the v1 release. Its Phase 12
-post-v1 implementation is evidence-only and must not be treated as automatic
-workflow routing, roadmap mutation, phase approval, or target-project mutation
-authority.
+post-v1 implementation and Phase 14 schema hardening are evidence-only and must
+not be treated as automatic workflow routing, roadmap mutation, phase approval,
+suppression, disposition, portfolio scan, or target-project mutation authority.
