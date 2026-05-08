@@ -45,7 +45,7 @@ projects from an explicit inventory instead of adding another broad auditor.
 - [x] **Phase 12: Project Context Ledger MVP** - Build the selected read-only verified project memory tool from Phase 11. (completed 2026-05-08)
 - [x] **Phase 13: Review Packet Rollup MVP** - Build a mechanical packet consumer that validates and aggregates multiple review packets without semantic suppression. (completed 2026-05-08)
 - [x] **Phase 14: Ledger Artifact Schemas** - Stabilize machine-readable schemas for project-context-ledger artifacts before other tools consume them. (completed 2026-05-08)
-- [ ] **Phase 15: Review Disposition Model** - Add explicit human review disposition metadata with owner, expiry, evidence refs, and stable finding fingerprints.
+- [x] **Phase 15: Review Disposition Model** - Add explicit human review disposition metadata with owner, expiry, evidence refs, and stable finding fingerprints. (completed 2026-05-08)
 - [ ] **Phase 16: Ledger Scope and Diff Modes** - Reduce ledger noise with current-by-default scope modes and since-manifest diffs.
 - [ ] **Phase 17: Shared CLI Contract** - Apply one CLI contract, including JSON stdout, quiet mode, and fail policy, across validated report tools.
 - [ ] **Phase 18: ai-workspace-kit LLM Instructions Compatibility** - Validate optional AI Tools evidence wording in upstream LLM project instructions.
@@ -357,7 +357,7 @@ Plans:
 - [x] 15-01: Define review disposition schema, finding fingerprints, examples, and lifecycle rules.
 
 **Wave 2** *(blocked on Wave 1 completion)*
-- [ ] 15-02: Add disposition consumption to packet consumers with tests for expired and stale entries.
+- [x] 15-02: Add disposition consumption to packet consumers with tests for expired and stale entries.
 
 ### Phase 16: Ledger Scope and Diff Modes
 **Goal**: Reduce project-context-ledger noise and make changed facts easier to review.
@@ -609,7 +609,7 @@ compatibility are in place.
 | 12. Project Context Ledger MVP | 1/1 | Complete    | 2026-05-08 |
 | 13. Review Packet Rollup MVP | 2/2 | Complete    | 2026-05-08 |
 | 14. Ledger Artifact Schemas | 2/2 | Complete    | 2026-05-08 |
-| 15. Review Disposition Model | 1/2 | In Progress|  |
+| 15. Review Disposition Model | 2/2 | Complete   | 2026-05-08 |
 | 16. Ledger Scope and Diff Modes | 0/2 | Planned | |
 | 17. Shared CLI Contract | 0/2 | Planned | |
 | 18. ai-workspace-kit LLM Instructions Compatibility | 0/1 | Planned | |

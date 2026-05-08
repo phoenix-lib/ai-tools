@@ -123,8 +123,8 @@
 
 - [x] **DISP-01**: Human reviewers can record a disposition for a specific finding without deleting or rewriting the original source finding.
 - [x] **DISP-02**: Dispositions require finding ID, stable finding fingerprint, source tool, source path, source check ID, reason, owner, reviewed timestamp, expiry timestamp, evidence refs, tool version, and schema version.
-- [ ] **DISP-03**: Expired or stale dispositions remain visible as review-required context instead of silently suppressing findings.
-- [ ] **DISP-04**: Packet consumers can join dispositions to findings as separate human review metadata while preserving original severity, status contribution, and evidence.
+- [x] **DISP-03**: Expired or stale dispositions remain visible as review-required context instead of silently suppressing findings.
+- [x] **DISP-04**: Packet consumers can join dispositions to findings as separate human review metadata while preserving original severity, status contribution, and evidence.
 - [x] **DISP-05**: Finding fingerprints are derived from stable evidence fields such as source tool, source check ID, normalized source path, and normalized target so dispositions survive occurrence-normalized finding ID changes.
 
 ### Ledger Scope and Diff Modes
