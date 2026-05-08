@@ -3,9 +3,9 @@ gsd_state_version: 1.0
 milestone: v2.0
 milestone_name: Tooling Hardening
 status: planned
-stopped_at: Phase 7 completed
-last_updated: "2026-05-08T04:24:21+03:00"
-last_activity: "2026-05-08 -- Phase 7 completed with cross-repo compatibility checker MVP, self-use evidence, and 124/124 tests passing"
+stopped_at: Phase 8 context gathered
+last_updated: "2026-05-08T04:34:10+03:00"
+last_activity: "2026-05-08 -- Phase 8 context gathered for contract-drift-auditor CLI ergonomics"
 progress:
   total_phases: 11
   completed_phases: 7
@@ -26,10 +26,10 @@ AI project guidance auditable without mutating target projects.
 
 ## Current Position
 
-Phase: 8 (Contract Drift Auditor CLI Ergonomics) - READY FOR DISCUSSION
+Phase: 8 (Contract Drift Auditor CLI Ergonomics) - READY TO PLAN
 Plan: 0 of 2
-Status: Phase 7 complete; next command is `$gsd-discuss-phase 8`.
-Last activity: 2026-05-08 -- Phase 7 completed and verified.
+Status: Phase 8 context gathered; next command is `$gsd-plan-phase 8`.
+Last activity: 2026-05-08 -- Phase 8 discuss context captured.
 
 Progress: [#######---] 74% of mapped plans complete
 
@@ -109,7 +109,7 @@ Decisions are logged in PROJECT.md Key Decisions table.
 
 ### Pending Todos
 
-- Begin Phase 8 discussion for `CLI-01` and `CLI-02`.
+- Plan Phase 8 for `CLI-01` and `CLI-02`.
 
 ### Blockers/Concerns
 
@@ -130,6 +130,6 @@ Decisions are logged in PROJECT.md Key Decisions table.
 
 ## Session Continuity
 
-Last session: 2026-05-08T04:24:21+03:00
-Stopped at: Phase 7 completed
-Resume file: .planning/ROADMAP.md
+Last session: 2026-05-08T04:34:10+03:00
+Stopped at: Phase 8 context gathered
+Resume file: .planning/phases/08-contract-drift-auditor-cli-ergonomics/08-CONTEXT.md
