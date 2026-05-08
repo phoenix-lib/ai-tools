@@ -1,5 +1,62 @@
 # ai-workspace-kit Upstream Review
 
+## Phase 9 Planning Freshness Check
+
+**Checked:** 2026-05-08 during `$gsd-plan-phase 9`
+**Local before update:** `7bc432cce309178bdbcdf5715af6f6187c7ee568`
+**Remote HEAD:** `485da622e292e34a4e8f929f2212b441239c55f1`
+**Local after update:** `485da622e292e34a4e8f929f2212b441239c55f1`
+**Branch:** `master`
+**Checkout status before update:** clean
+**Result:** local `.external/ai-workspace-kit` fast-forwarded to upstream HEAD.
+
+The upstream `CHANGELOG.md` was read first. Relevant Phase 9 planning inputs:
+
+- Phase 19 adds an adoption smoke suite and `scripts/doctor.js`, a read-only
+  self-maintenance command for kit schemas, templates, contract index, review
+  packet artifacts, ignore assumptions, mandatory guidance, and `ai-tools`
+  boundary.
+- The kit gate registry now includes `documentation-impact`,
+  `consumer-practice-impact`, and `gate-review` guidance as assistant-led
+  gates with observable output.
+- `templates/GATE-RESOLUTION.md` now documents reusable gate output, including
+  consumer practice impact decisions and evidence-only mechanical tool output.
+- `AI-WORKSPACE-CONTRACT.json` now states that consumer practice changes must
+  be evidence-backed before becoming portable guidance and reiterates that
+  gate-linter execution remains an external `ai-tools` capability.
+- Upstream still does not add an `ai-tools` runtime dependency, runner, hidden
+  automation path, or gate-linter execution.
+
+AI Tools self-use evidence during Phase 9 planning:
+
+- Command:
+  `node tools/cross-repo-compatibility-checker/cli.js --ai-tools . --ai-workspace-kit .external\ai-workspace-kit --out C:\Users\suppo\.codex\memories\ai-tools-cross-repo-check-phase09-plan`
+- Packet status: `human_review_required`
+- Findings: 1 medium, 0 blockers, 0 required decisions.
+- Finding: local embedded kit decision
+  `ai-workspace-kit/.planning/cross-repo/decisions/2026-05-07-ai-tools-review-packet-standard.md`
+  is missing required field `Reason`.
+
+Phase 9 planning impact:
+
+- Adopt the pattern of a machine-readable source-of-truth artifact plus focused
+  contract tests: `tools/registry.json`, `tools/registry.schema.json`, and
+  planning tests should govern AI Tools capability routing.
+- Extend the existing local `upstream-freshness` gate with update-impact fields
+  rather than creating a duplicate gate id. Required review should cover
+  changed source layers, usable ideas, boundary classification, current repo
+  impact, current phase impact, consumer practice impact, self-use evidence,
+  cross-repo request decision, outcome, and no install/run/dependency
+  confirmation.
+- Add AI Tools-side guidance analogous to kit's consumer practice impact, but
+  keep it scoped to future AI Tools consumers and downstream playbooks. Do not
+  copy kit adoption/bootstrap behavior.
+- Keep future `gates-scan` / `GATELINT-01` as Phase 10 evidence-only work.
+  Phase 9 should register it and define its use gate, not implement a scanner.
+- The medium compatibility finding is not a Phase 9 blocker because it is an
+  upstream legacy decision field issue with no required decision in the current
+  packet. It should remain cross-repo evidence until kit fixes that artifact.
+
 ## Phase 8 Planning Freshness Check
 
 **Checked:** 2026-05-08 during `$gsd-plan-phase 8`

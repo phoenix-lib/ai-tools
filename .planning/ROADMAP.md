@@ -211,8 +211,18 @@ Plans:
 **Plans**: 2 plans
 
 Plans:
+**Wave 1**
 - [ ] 09-01: Add tool registry schema/data and registry-backed docs validation.
+
+**Wave 2** *(blocked on Wave 1 completion)*
 - [ ] 09-02: Slim `AGENTS.md` and move detailed gate policy into workflow gate documentation.
+
+Cross-cutting constraints:
+- Preserve the `ai-workspace-kit` ownership boundary and do not implement
+  adoption/bootstrap, generated-contract review, or kit doctor behavior.
+- Treat AI Tools self-use output as evidence only; tools do not make semantic
+  gate decisions or auto-create phases.
+- Keep `gates-scan` / `GATELINT-01` registered as planned Phase 10 work only.
 
 ### Phase 10: Evidence-Only Gate Linter Seed MVP
 **Goal**: Promote or explicitly re-defer `GATELINT-01` after the validator and tool registry can bound its scope.
