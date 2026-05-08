@@ -30,6 +30,7 @@ auditor or making `ai-workspace-kit` depend on AI Tools.
 - Shared CLI contract for validated tools.
 - Optional `ai-workspace-kit` LLM instruction compatibility checks that preserve
   the no-runtime-dependency boundary.
+- Package readiness and consumer UX hardening before real portfolio scans.
 
 ## Requirements
 
@@ -130,6 +131,9 @@ auditor or making `ai-workspace-kit` depend on AI Tools.
 - [ ] Validate that `ai-workspace-kit` machine-readable LLM instructions can
   cite AI Tools outputs only as optional evidence, not as a runtime dependency,
   runner, or automatic gate decision layer.
+- [ ] Prepare AI Tools as a consumable local/npm package with publish metadata,
+  package file allowlist, install/pack smoke tests, top-level dispatcher, and
+  concise consumer quickstart guidance.
 
 ### Out of Scope
 
@@ -267,6 +271,7 @@ to inspect it.
 | Treat review dispositions as human review context | Dispositions should carry owner, reason, expiry, evidence refs, and tool/schema versions while preserving the original finding. | Validated in Phase 15 |
 | Use current-by-default ledger scope and explicit diff evidence | Current source evidence should not be dominated by historical phase artifacts, and changed ledger facts should be reviewable without becoming automatic priority or suppression logic. | Validated in Phase 16 |
 | Incorporate `ai-workspace-kit` LLM instructions as optional interop evidence | Upstream now publishes `.external/ai-workspace-kit/LLM-PROJECT-INSTRUCTIONS.json`; AI Tools may validate optional evidence wording without becoming a kit dependency. | Active |
+| Add package readiness before portfolio scans | Real multi-project use needs a stable installable surface, package smoke tests, a discoverable top-level command, and concise consumer recipes before broad portfolio execution. | Planned for Phase 19 |
 
 ## Evolution
 
@@ -286,4 +291,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state.
 
 ---
-*Last updated: 2026-05-08 after completing Phase 16 Ledger Scope and Diff Modes*
+*Last updated: 2026-05-08 after adding Phase 19 Package Readiness and Consumer UX*

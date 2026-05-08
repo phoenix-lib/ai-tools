@@ -148,6 +148,15 @@
 - [ ] **KITLLM-02**: The checker reports if kit LLM instructions recommend AI Tools as a dependency, package runner, hidden trigger, automatic gate decision layer, or source of roadmap mutation.
 - [ ] **KITLLM-03**: The checker reports whether kit LLM instructions describe AI Tools review packets as optional evidence compatible with `REVIEW-SUMMARY.json`, `EVIDENCE.json`, `FINDINGS.md`, and `RECOMMENDED-ACTIONS.md`.
 
+### Package Readiness and Consumer UX
+
+- [ ] **PKG-01**: `package.json` declares explicit package metadata needed for safe local/npm consumption, including license, repository, Node engine range, package manager assumptions, and package file allowlist.
+- [ ] **PKG-02**: Package smoke tests prove `npm pack --dry-run` includes required CLIs, shared modules, schemas, standards, and docs while excluding `.planning`, raw test fixtures, generated memories, and unrelated development artifacts.
+- [ ] **PKG-03**: A temporary install smoke test can install the packed artifact, run every package bin with `--help`, and execute at least one read-only scan with output outside the target project.
+- [ ] **PKG-04**: A top-level `ai-tools` dispatcher can list validated capabilities, describe a tool from `tools/registry.json`, and route to existing validated CLIs without changing their direct bin compatibility.
+- [ ] **PKG-05**: Consumer documentation provides concise recipes for single-project scan, phase-boundary evidence, packet rollup, ledger diff, and optional `ai-workspace-kit` evidence use.
+- [ ] **PKG-06**: Package readiness remains optional evidence tooling and does not introduce automatic target-project mutation, install hooks, hidden tool execution, mandatory `ai-workspace-kit` dependency, or copied `.planning` state.
+
 ## Future Requirements
 
 ### Portfolio Real Projects Scan Protocol
@@ -254,6 +263,12 @@ Which phases cover which requirements. Updated during roadmap creation.
 | KITLLM-01 | Phase 18 | Planned |
 | KITLLM-02 | Phase 18 | Planned |
 | KITLLM-03 | Phase 18 | Planned |
+| PKG-01 | Phase 19 | Planned |
+| PKG-02 | Phase 19 | Planned |
+| PKG-03 | Phase 19 | Planned |
+| PKG-04 | Phase 19 | Planned |
+| PKG-05 | Phase 19 | Planned |
+| PKG-06 | Phase 19 | Planned |
 | FORENSICS-01 | Future | Deferred - trigger: failed phases, rollbacks, disputed verification, or repeated plan/reality mismatches |
 | CONFIG-01 | Future | Deferred - trigger: config-heavy environment or deployment/refactor evidence |
 | SKILL-01 | Future | Deferred - trigger: project skills become active maintained artifacts |
@@ -265,9 +280,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 - v1 requirements: 45 total
 - Mapped to phases: 45
 - Unmapped: 0
-- v2.1 requirements: 27 total
-- v2.1 mapped to planned phases: 27
+- v2.1 requirements: 33 total
+- v2.1 mapped to planned phases: 33
 
 ---
 *Requirements defined: 2026-05-07*
-*Last updated: 2026-05-08 after completing Phase 16 Ledger Scope and Diff Modes*
+*Last updated: 2026-05-08 after adding Phase 19 Package Readiness and Consumer UX*

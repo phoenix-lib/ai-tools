@@ -21,9 +21,10 @@ well. It starts with a strictly mechanical packet rollup, then stabilizes ledger
 schemas, adds human review disposition metadata with stable finding
 fingerprints, reduces ledger noise through current-by-default scope/diff modes,
 unifies validated CLI behavior, and checks the new `ai-workspace-kit` LLM
-instruction surface without making AI Tools a runtime dependency. A later
-portfolio milestone should use these foundations to scan the user's real
-projects from an explicit inventory instead of adding another broad auditor.
+instruction surface without making AI Tools a runtime dependency. It then
+hardens AI Tools as a consumable package before a later portfolio milestone
+uses these foundations to scan the user's real projects from an explicit
+inventory instead of adding another broad auditor.
 
 ## Phases
 
@@ -49,6 +50,7 @@ projects from an explicit inventory instead of adding another broad auditor.
 - [x] **Phase 16: Ledger Scope and Diff Modes** - Reduce ledger noise with current-by-default scope modes and since-manifest diffs. (completed 2026-05-08)
 - [ ] **Phase 17: Shared CLI Contract** - Apply one CLI contract, including JSON stdout, quiet mode, and fail policy, across validated report tools.
 - [ ] **Phase 18: ai-workspace-kit LLM Instructions Compatibility** - Validate optional AI Tools evidence wording in upstream LLM project instructions.
+- [ ] **Phase 19: Package Readiness and Consumer UX** - Make AI Tools practical to install, discover, smoke test, and run before real portfolio scans.
 
 ## Phase Details
 
@@ -414,12 +416,32 @@ Plans:
 **Wave 1**
 - [ ] 18-01: Add ai-workspace-kit LLM instruction compatibility checks, fixtures, docs, and self-use evidence.
 
+### Phase 19: Package Readiness and Consumer UX
+**Goal**: Make AI Tools consumable as a local/npm package before using it across real project portfolios.
+**Depends on**: Phase 18
+**Requirements**: PKG-01, PKG-02, PKG-03, PKG-04, PKG-05, PKG-06
+**UI hint**: no
+**Success Criteria** (what must be TRUE):
+  1. `package.json` has explicit package metadata, Node engine range, package-manager assumptions, and a package file allowlist.
+  2. `npm pack --dry-run` and install smoke tests prove packaged CLIs can run outside the repository checkout.
+  3. A top-level `ai-tools` dispatcher lists validated tools, describes registry entries, and routes to existing direct bin commands without breaking them.
+  4. Consumer documentation gives short recipes for single-project scan, phase-boundary evidence, rollup, ledger diff, and optional `ai-workspace-kit` use.
+  5. Packaging remains optional evidence tooling and does not add install hooks, target-project mutation, hidden tool execution, mandatory `ai-workspace-kit` dependency, or copied `.planning` state.
+**Plans**: 2 plans
+
+Plans:
+**Wave 1**
+- [ ] 19-01: Add package metadata, file allowlist, pack dry-run checks, and install smoke tests.
+
+**Wave 2** *(blocked on Wave 1 completion)*
+- [ ] 19-02: Add top-level dispatcher, registry describe/list commands, consumer quickstart, and docs validation.
+
 ## Post-v2.1 Candidate: Portfolio Real Projects Scan Protocol
 
 **Goal**: Prepare a safe, explicit protocol for scanning the user's real
 project portfolio with `ai-tools` and `ai-workspace-kit` after evidence
-dispositions, ledger scope/diff modes, shared CLI behavior, and kit instruction
-compatibility are in place.
+dispositions, ledger scope/diff modes, shared CLI behavior, kit instruction
+compatibility, and package readiness are in place.
 
 **Candidate Requirement**: PORTFOLIO-SCAN-01
 
@@ -523,6 +545,12 @@ compatibility are in place.
 | KITLLM-01 | Phase 18 |
 | KITLLM-02 | Phase 18 |
 | KITLLM-03 | Phase 18 |
+| PKG-01 | Phase 19 |
+| PKG-02 | Phase 19 |
+| PKG-03 | Phase 19 |
+| PKG-04 | Phase 19 |
+| PKG-05 | Phase 19 |
+| PKG-06 | Phase 19 |
 | FORENSICS-01 | Future |
 | CONFIG-01 | Future |
 | SKILL-01 | Future |
@@ -533,7 +561,7 @@ compatibility are in place.
 **Coverage:**
 - v1: 45/45 requirements mapped and complete.
 - v2 preliminary: 16/16 requirements mapped to complete, planned, or deferred phases.
-- v2.1: 27/27 requirements mapped to planned phases 13-18.
+- v2.1: 33/33 requirements mapped to planned phases 13-19.
 
 ## Gate Resolution
 
@@ -591,7 +619,7 @@ compatibility are in place.
 
 ## Progress
 
-**Execution Order:** 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> 9 -> 10 -> 11 -> 12 -> 13 -> 14 -> 15 -> 16 -> 17 -> 18
+**Execution Order:** 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> 9 -> 10 -> 11 -> 12 -> 13 -> 14 -> 15 -> 16 -> 17 -> 18 -> 19
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
@@ -613,3 +641,4 @@ compatibility are in place.
 | 16. Ledger Scope and Diff Modes | 2/2 | Complete    | 2026-05-08 |
 | 17. Shared CLI Contract | 0/2 | Planned | |
 | 18. ai-workspace-kit LLM Instructions Compatibility | 0/1 | Planned | |
+| 19. Package Readiness and Consumer UX | 0/2 | Planned | |

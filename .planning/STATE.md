@@ -7,11 +7,11 @@ stopped_at: Phase 16 completed
 last_updated: "2026-05-08T11:16:05.274Z"
 last_activity: 2026-05-08 -- Phase 16 completed; Phase 17 ready to discuss
 progress:
-  total_phases: 18
+  total_phases: 19
   completed_phases: 16
-  total_plans: 39
+  total_plans: 41
   completed_plans: 36
-  percent: 92
+  percent: 88
 ---
 
 # Project State
@@ -51,6 +51,7 @@ Progress: Phase 16 complete; Phase 17 is ready to discuss.
 | 16 | 2/2 | Complete |
 | 17 | 0/2 | Planned |
 | 18 | 0/1 | Planned |
+| 19 | 0/2 | Planned |
 | Phase 14 P14-01 | 44 min | 4 tasks | 9 files |
 | Phase 14 P14-02 | 19 min | 5 tasks | 8 files |
 
@@ -93,6 +94,9 @@ Decisions are logged in `.planning/PROJECT.md` Key Decisions table.
 - Upstream `ai-workspace-kit` now includes
   `.external/ai-workspace-kit/LLM-PROJECT-INSTRUCTIONS.json`; AI Tools will
   validate optional evidence wording while preserving the tandem boundary.
+- Package readiness should be completed before real portfolio scans so AI
+  Tools has a stable installable surface, dispatcher, smoke tests, and concise
+  consumer recipes.
 
 ### Completed Work
 
@@ -139,14 +143,18 @@ Decisions are logged in `.planning/PROJECT.md` Key Decisions table.
   next single implementation candidate.
 
 - Phase 12 completed the mapped v2 roadmap.
-- Milestone v2.1 adds Phases 13-18: review packet rollup, ledger schemas,
+- Milestone v2.1 adds Phases 13-19: review packet rollup, ledger schemas,
   review dispositions, ledger scope/diff modes, shared CLI contract, and
-  `ai-workspace-kit` LLM instruction compatibility.
+  `ai-workspace-kit` LLM instruction compatibility, followed by package
+  readiness and consumer UX hardening.
 
 - Phase 15-17 scope refined after Phase 14 analysis: review dispositions now
   include stable finding fingerprints, ledger scope defaults to current, and a
   post-v2.1 portfolio real-project scan protocol is tracked as a future
   candidate.
+- Phase 19 was added after package analysis showed real portfolio scans need
+  package metadata, file allowlist, pack/install smoke tests, a top-level
+  dispatcher, and consumer quickstart docs before broad local use.
 
 ### Pending Todos
 

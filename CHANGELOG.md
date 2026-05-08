@@ -5,6 +5,28 @@ major plan execution, and workflow gate change.
 
 ## Unreleased
 
+### Planning Refinement: Package Readiness Before Portfolio Scans
+
+- Added Phase 19: Package Readiness and Consumer UX after Phase 18 so the
+  package surface is hardened before running AI Tools across the user's real
+  projects.
+- Added package-readiness requirements `PKG-01` through `PKG-06` covering
+  package metadata, Node engine and file allowlist, `npm pack --dry-run`,
+  temporary install smoke tests, top-level `ai-tools` dispatcher, registry
+  list/describe commands, consumer quickstart recipes, and no hidden mutation
+  or dependency behavior.
+- Preserved Phase 17 as the shared CLI contract phase and Phase 18 as the
+  `ai-workspace-kit` LLM instruction compatibility phase instead of overloading
+  either with package release work.
+- Updated roadmap, requirements, project context, and state totals from
+  Phases 13-18 / 27 v2.1 requirements to Phases 13-19 / 33 v2.1 requirements.
+- Upstream impact: no `ai-workspace-kit` source was changed. Packaging remains
+  optional AI Tools evidence tooling and does not add runtime dependency,
+  install hooks, automatic tool execution, target-project mutation, or copied
+  `.planning` state.
+- Validation: focused planning tests passed 32/32,
+  `gsd-sdk.cmd query state.validate` passed, and `git diff --check` passed.
+
 ### Planning Refinement: Evidence Consumption Direction
 
 - Refined Phase 15 Review Disposition Model to require stable finding
