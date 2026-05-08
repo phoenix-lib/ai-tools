@@ -41,23 +41,31 @@ function isInsideOrEqual(parentDir, candidateDir) {
 }
 
 function assertSafeOutputDir(targetDir, outDir) {
-  const targetReal = realOrResolved(targetDir);
+  assertSafeOutputDirOutsideAll([targetDir], outDir);
+}
+
+function assertSafeOutputDirOutsideAll(targetDirs, outDir) {
   const outputReal = realOrResolved(outDir);
 
-  if (isInsideOrEqual(targetReal, outputReal)) {
-    throw new Error(
-      [
-        "Rejected unsafe output path: output directory must be outside the target project.",
-        `Target: ${targetReal}`,
-        `Output: ${outputReal}`,
-        "Use a separate review directory outside the target project."
-      ].join("\n")
-    );
+  for (const targetDir of targetDirs) {
+    const targetReal = realOrResolved(targetDir);
+
+    if (isInsideOrEqual(targetReal, outputReal)) {
+      throw new Error(
+        [
+          "Rejected unsafe output path: output directory must be outside the target project.",
+          `Target: ${targetReal}`,
+          `Output: ${outputReal}`,
+          "Use a separate review directory outside the target project."
+        ].join("\n")
+      );
+    }
   }
 }
 
 module.exports = {
   assertSafeOutputDir,
+  assertSafeOutputDirOutsideAll,
   isInsideOrEqual,
   realOrResolved
 };

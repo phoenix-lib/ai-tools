@@ -1,0 +1,16 @@
+{
+  "gates": [],
+  "interop": {
+    "compatibility": "ai-tools-specific",
+    "kit_schema_direct_compatibility": false,
+    "field_name_mapping": {
+      "schema_version": "schemaVersion",
+      "required_artifacts": "requiredArtifacts"
+    },
+    "stage_aliases": {
+      "verification": "verify",
+      "replan": "plan"
+    }
+  },
+  "schema_version": "1.0"
+}

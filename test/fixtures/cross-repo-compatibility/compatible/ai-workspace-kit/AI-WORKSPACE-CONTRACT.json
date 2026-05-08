@@ -1,0 +1,9 @@
+{
+  "schemaVersion": "1.0.0",
+  "externalToolBoundaries": [
+    {
+      "capability": "gate linting",
+      "owner": "ai-tools"
+    }
+  ]
+}

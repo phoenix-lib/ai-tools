@@ -4,6 +4,7 @@ const path = require("node:path");
 const test = require("node:test");
 const {
   CONTRACT_DRIFT_AUDITOR_TOOL_NAME,
+  CROSS_REPO_COMPATIBILITY_CHECKER_TOOL_NAME,
   POLICY_HASH_SOURCES,
   REQUIRED_PACKET_ARTIFACTS,
   REVIEW_PACKET_SCHEMA_VERSION,
@@ -15,6 +16,7 @@ const root = process.cwd();
 test("exports stable review packet constants", () => {
   assert.equal(REVIEW_PACKET_SCHEMA_VERSION, "review-packet/v1");
   assert.equal(CONTRACT_DRIFT_AUDITOR_TOOL_NAME, "contract-drift-auditor");
+  assert.equal(CROSS_REPO_COMPATIBILITY_CHECKER_TOOL_NAME, "cross-repo-compatibility-checker");
   assert.deepEqual(REQUIRED_PACKET_ARTIFACTS, [
     "REVIEW-SUMMARY.json",
     "EVIDENCE.json",

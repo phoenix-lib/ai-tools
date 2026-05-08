@@ -1,0 +1,18 @@
+{
+  "gates": [],
+  "interop": {
+    "compatibility": "ai-tools-specific",
+    "kit_schema_direct_compatibility": false,
+    "field_name_mapping": {
+      "schema_version": "schemaVersion",
+      "required_artifacts": "requiredArtifacts",
+      "skip_allowed": "skipAllowed"
+    },
+    "stage_aliases": {
+      "verification": "verify",
+      "release": "phase-boundary",
+      "replan": "plan"
+    }
+  },
+  "schema_version": "1.0"
+}

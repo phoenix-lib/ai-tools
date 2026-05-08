@@ -16,6 +16,9 @@ The first release includes:
 The first release does not include automatic cross-repo indexing, mechanical
 gate-linter automation, auto-fix mode, or additional seed tools.
 
+The first v2 capability adds `cross-repo-compatibility-checker` as a
+read-only validator for `ai-tools` / `ai-workspace-kit` protocol compatibility.
+
 ## Definition of Done
 
 - [x] Shared packet schema exists under `standards/review-packet/schemas/`.
@@ -43,6 +46,7 @@ gate-linter automation, auto-fix mode, or additional seed tools.
 - `tools/contract-drift-auditor/examples/pass/`
 - `tools/contract-drift-auditor/examples/human-review/`
 - `tools/contract-drift-auditor/examples/blocked-safety/`
+- `tools/cross-repo-compatibility-checker/README.md`
 - `docs/RELEASE-READINESS.md`
 - `test/planning/release-docs.test.js`
 - `CHANGELOG.md`
@@ -183,6 +187,21 @@ Final Phase 6 evidence:
   release packet examples, schema validation, secret handling, output
   isolation, non-mutation checks, and final full tests passed.
 
+Phase 7 cross-repo checker evidence:
+
+- Reusable command: `node tools/cross-repo-compatibility-checker/cli.js --ai-tools <path> --ai-workspace-kit <path> --out <external-dir>`
+- Phase 7 self-use command: `node tools/cross-repo-compatibility-checker/cli.js --ai-tools . --ai-workspace-kit C:\projects\ai-workspace-kit --out C:\Users\suppo\.codex\memories\ai-tools-cross-repo-check-phase07`
+- Phase 7 output path: `C:\Users\suppo\.codex\memories\ai-tools-cross-repo-check-phase07`
+- Packet status: `human_review_required`
+- Finding count: 1 total, `medium`; 0 blockers, 0 critical, 0 high, 0 low,
+  0 required decisions.
+- Finding summary: local sibling `ai-workspace-kit` decision artifact
+  `ai-workspace-kit/.planning/cross-repo/decisions/2026-05-07-ai-tools-review-packet-standard.md`
+  is missing required field `Reason`.
+- Interpretation: the checker is working as evidence-only validation. The
+  remaining finding is a neighboring repo protocol artifact gap, not an AI
+  Tools implementation blocker.
+
 ## Deferred V2 Work
 
 - `XREPO-VALIDATOR-01`: read-only cross-repo compatibility checker. This is a
@@ -191,5 +210,6 @@ Final Phase 6 evidence:
   duplicate IDs, stale paths, conflicting wording, unresolved references, and
   gates without observable artifact output.
 
-Neither deferred item is part of the v1 release. The cross-repo validator and
-mechanical gate linter are not part of the v1 release.
+`XREPO-VALIDATOR-01` is implemented after v1 as the first v2 capability.
+Mechanical gate linter automation remains deferred and is not part of the v1
+release. The mechanical gate linter is not part of the v1 release.

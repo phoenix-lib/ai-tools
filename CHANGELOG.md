@@ -5,6 +5,46 @@ major plan execution, and workflow gate change.
 
 ## Unreleased
 
+### Phase 07: Cross-Repo Compatibility Checker MVP
+
+- Changed tool capabilities: added a runnable review-only
+  `cross-repo-compatibility-checker --ai-tools <path> --ai-workspace-kit <path> --out <dir>`
+  CLI for validating `ai-tools` / `ai-workspace-kit` cross-repo protocol
+  compatibility.
+- Changed protocol validation: the checker validates required protocol fields,
+  canonical request IDs, `Thread ID`, `Origin`, `Mirror required`, mirrored
+  counterpart IDs/paths, manual-transfer decision evidence, and portable
+  repo-qualified counterpart paths.
+- Changed gate validation: the checker compares AI Tools snake_case gate
+  registry metadata with kit camelCase expectations through documented interop
+  mappings and stage aliases. Direct schema identity is not required when the
+  mapping is explicit.
+- Changed packet output: the checker emits the standard
+  `REVIEW-SUMMARY.json`, `EVIDENCE.json`, `FINDINGS.md`, and
+  `RECOMMENDED-ACTIONS.md` artifacts through the shared packet renderer.
+- Changed docs: added `tools/cross-repo-compatibility-checker/README.md`,
+  updated root `README.md`, and recorded Phase 7 self-use evidence in
+  `docs/RELEASE-READINESS.md`.
+- Self-use result: Phase 7 checker wrote output outside both repositories at
+  `C:\Users\suppo\.codex\memories\ai-tools-cross-repo-check-phase07`; packet
+  status was `human_review_required` with 1 medium finding, 0 blockers, and 0
+  required decisions.
+- Self-use finding: local sibling `ai-workspace-kit` decision artifact
+  `ai-workspace-kit/.planning/cross-repo/decisions/2026-05-07-ai-tools-review-packet-standard.md`
+  is missing required field `Reason`.
+- Validation: focused checker tests and full `npm.cmd test` are required for
+  this phase. The checker remains evidence-only, so `human_review_required`
+  self-use output is not an automatic blocker.
+- Compatibility impact for `ai-workspace-kit`: downstream freshness checks now
+  have a concrete validator for protocol drift. No runtime dependency,
+  automatic tool execution, install, pull/fetch, `.planning` mutation,
+  automatic phase creation, or duplicated adoption/bootstrap behavior was
+  added.
+- Breaking changes: none.
+- Migration notes: use the new checker before automatic cross-repo indexer or
+  gate-linter work. Treat findings as evidence for assistant or human review,
+  not as acceptance/rejection decisions.
+
 ### Local ai-workspace-kit Review
 
 - Reviewed sibling local checkout `C:\projects\ai-workspace-kit` at

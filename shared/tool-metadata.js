@@ -3,6 +3,7 @@ const path = require("node:path");
 
 const REVIEW_PACKET_SCHEMA_VERSION = "review-packet/v1";
 const CONTRACT_DRIFT_AUDITOR_TOOL_NAME = "contract-drift-auditor";
+const CROSS_REPO_COMPATIBILITY_CHECKER_TOOL_NAME = "cross-repo-compatibility-checker";
 
 const REQUIRED_PACKET_ARTIFACTS = Object.freeze([
   "REVIEW-SUMMARY.json",
@@ -28,6 +29,7 @@ function loadPackageVersion(rootDir = path.join(__dirname, "..")) {
 
 module.exports = {
   CONTRACT_DRIFT_AUDITOR_TOOL_NAME,
+  CROSS_REPO_COMPATIBILITY_CHECKER_TOOL_NAME,
   POLICY_HASH_SOURCES,
   REQUIRED_PACKET_ARTIFACTS,
   REVIEW_PACKET_SCHEMA_VERSION,

@@ -4,10 +4,12 @@
   "private": true,
   "type": "commonjs",
   "bin": {
-    "contract-drift-auditor": "tools/contract-drift-auditor/cli.js"
+    "contract-drift-auditor": "tools/contract-drift-auditor/cli.js",
+    "cross-repo-compatibility-checker": "tools/cross-repo-compatibility-checker/cli.js"
   },
   "scripts": {
     "contract-drift-auditor": "node tools/contract-drift-auditor/cli.js",
+    "cross-repo-compatibility-checker": "node tools/cross-repo-compatibility-checker/cli.js",
     "test": "node --test"
   },
   "devDependencies": {

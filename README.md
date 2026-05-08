@@ -5,9 +5,10 @@ packet standards. The project focuses on deterministic, evidence-backed output
 that assistants, humans, CI jobs, and GSD workflows can inspect without mutating
 target projects.
 
-The current usable v1 capability is `contract-drift-auditor`.
+The current usable capabilities are `contract-drift-auditor` and
+`cross-repo-compatibility-checker`.
 
-## Current Tool
+## Current Tools
 
 `contract-drift-auditor` reviews local assistant contracts against project
 evidence. It checks whether guidance such as `AGENTS.md`, `CLAUDE.md`,
@@ -24,6 +25,22 @@ or directly:
 
 ```bash
 node tools/contract-drift-auditor/cli.js --project <path> --out <dir>
+```
+
+`cross-repo-compatibility-checker` validates cross-repo capability request and
+gate registry compatibility between sibling `ai-tools` and `ai-workspace-kit`
+checkouts.
+
+Run it from this repository:
+
+```bash
+npm run cross-repo-compatibility-checker -- --ai-tools <path> --ai-workspace-kit <path> --out <dir>
+```
+
+or directly:
+
+```bash
+node tools/cross-repo-compatibility-checker/cli.js --ai-tools <path> --ai-workspace-kit <path> --out <dir>
 ```
 
 This repository is currently `private: true`; do not assume a published package
@@ -44,14 +61,15 @@ evidence refs, and recommended actions cannot drift.
 
 ## Safety Guarantees
 
-`contract-drift-auditor` is review-only.
+AI Tools commands are review-only.
 
 - Review-only by default.
 - No target project mutation.
 - No automatic fixes.
 - No target command execution.
 - No installs or dependency downloads.
-- `--out` must be outside the audited target project.
+- `--out` must be outside the audited target project or outside both checked
+  repositories for cross-repo validation.
 - Secret-like paths are path-only evidence. Secret contents are not read,
   quoted, hashed into packet output, or rendered into Markdown.
 - Generated AI Tools or `ai-workspace-kit` packet directories inside a target
@@ -69,6 +87,14 @@ Use `contract-drift-auditor` when:
   downstream agents rely on;
 - an optional `ai-workspace-kit` adoption or maintenance review needs external
   drift evidence in a shared packet format.
+
+Use `cross-repo-compatibility-checker` when:
+
+- `ai-tools` or `ai-workspace-kit` changes cross-repo request templates,
+  decisions, gate registries, or interop docs;
+- a phase boundary needs evidence that mirrored requests still share semantic
+  `Thread ID` metadata and valid counterpart paths;
+- gate registry snake_case/camelCase mapping or stage aliases may have drifted.
 
 ## When Not to Use
 
@@ -97,6 +123,8 @@ run kit workflows automatically.
 
 - `tools/contract-drift-auditor/README.md` - auditor-specific usage, checks,
   safety, and output interpretation.
+- `tools/cross-repo-compatibility-checker/README.md` - cross-repo checker
+  usage, protocol checks, gate registry checks, and evidence-only boundaries.
 - `standards/review-packet/README.md` - shared packet schema and evidence
   semantics.
 - `docs/RELEASE-READINESS.md` - first-release checklist and evidence.

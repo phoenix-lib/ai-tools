@@ -1,0 +1,22 @@
+{
+  "gates": [],
+  "interop": {
+    "compatibility": "ai-tools-specific",
+    "kit_schema_direct_compatibility": false,
+    "field_name_mapping": {
+      "automation_boundary": "automationBoundary",
+      "observable_outputs": "observableOutputs",
+      "required_artifacts": "requiredArtifacts",
+      "required_fields": "requiredFields",
+      "schema_version": "schemaVersion",
+      "skip_allowed": "skipAllowed",
+      "skip_reason_required": "skipReasonRequired"
+    },
+    "stage_aliases": {
+      "verification": "verify",
+      "release": "phase-boundary",
+      "replan": "plan"
+    }
+  },
+  "schema_version": "1.0"
+}

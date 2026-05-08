@@ -28,8 +28,11 @@ test("root README is the release entrypoint", () => {
     [
       "AI Tools",
       "contract-drift-auditor",
+      "cross-repo-compatibility-checker",
       "npm run contract-drift-auditor -- --project <path> --out <dir>",
       "node tools/contract-drift-auditor/cli.js --project <path> --out <dir>",
+      "npm run cross-repo-compatibility-checker -- --ai-tools <path> --ai-workspace-kit <path> --out <dir>",
+      "node tools/cross-repo-compatibility-checker/cli.js --ai-tools <path> --ai-workspace-kit <path> --out <dir>",
       "REVIEW-SUMMARY.json",
       "EVIDENCE.json",
       "FINDINGS.md",
@@ -131,4 +134,32 @@ test("release readiness documents portable self-audit guidance", () => {
   assert.notEqual(reusableCommandIndex, -1, "release readiness must label reusable command");
   const reusableCommandLine = docs.slice(reusableCommandIndex, docs.indexOf("\n", reusableCommandIndex));
   assert.equal(reusableCommandLine.includes("C:\\Users"), false, "reusable self-audit command must not be machine-local");
+});
+
+test("cross-repo compatibility checker docs explain usage and boundaries", () => {
+  const docs = read("tools/cross-repo-compatibility-checker/README.md");
+
+  assertIncludesAll(
+    docs,
+    [
+      "cross-repo-compatibility-checker",
+      "--ai-tools <path>",
+      "--ai-workspace-kit <path>",
+      "--out <dir>",
+      "outside both input repositories",
+      "Thread ID",
+      "Counterpart path",
+      "manual-transfer",
+      "Mirror required: false",
+      "stage aliases",
+      "evidence-only",
+      "does not",
+      "install dependencies",
+      "fetch or pull",
+      "mutate `.planning`",
+      "implement `gates-scan`",
+      "ai-workspace-kit"
+    ],
+    "cross-repo checker README"
+  );
 });
