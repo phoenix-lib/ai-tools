@@ -1,10 +1,10 @@
 ---
 gsd_state_version: 1.0
 milestone: v2.1
-milestone_name: milestone
+milestone_name: "Candidate: Portfolio Real Projects Scan Protocol"
 status: Ready for discussion
-stopped_at: Completed Phase 14; ready for Phase 15 discuss
-last_updated: "2026-05-08T09:56:51.517Z"
+stopped_at: Phase 15 context gathered
+last_updated: "2026-05-08T10:16:29.214Z"
 last_activity: 2026-05-08
 progress:
   total_phases: 18
@@ -172,6 +172,6 @@ Decisions are logged in `.planning/PROJECT.md` Key Decisions table.
 
 ## Session Continuity
 
-Last session: 2026-05-08T09:56:51.513Z
-Stopped at: Completed Phase 14; ready for Phase 15 discuss
-Resume file: None
+Last session: 2026-05-08T10:16:29.210Z
+Stopped at: Phase 15 context gathered
+Resume file: .planning/phases/15-review-disposition-model/15-CONTEXT.md
