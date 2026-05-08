@@ -5,6 +5,38 @@ major plan execution, and workflow gate change.
 
 ## Unreleased
 
+### Phase 09: Tool Registry and Workflow Gate Slimming
+
+- Changed governance artifacts: added `tools/registry.json` and
+  `tools/registry.schema.json` as the machine-readable capability catalog for
+  implemented, validated, planned, seed-only, and deferred tools.
+- Changed docs and gates: moved detailed workflow gate policy from root
+  `AGENTS.md` into `.planning/gates/WORKFLOW-GATES.md` while preserving hard
+  safety rules, source layers, discuss-mode preflight, and canonical links in
+  `AGENTS.md`.
+- Changed gate registry: extended the existing `upstream-freshness` gate with
+  Kit Update Self-Check / update-impact fields including changed source layers,
+  usable ideas, current repo impact, current phase impact, consumer practice
+  impact, self-use output, cross-repo request decision, and no
+  install/run/dependency confirmation.
+- Validation: focused registry and workflow gate tests plus full `npm.cmd test`
+  are required for this phase. Self-use output is evidence only.
+- Upstream impact: Phase 09 planning updated embedded `ai-workspace-kit` from
+  `7bc432c` to `485da62`, read upstream `CHANGELOG.md`, reviewed Phase 19
+  smoke/doctor and consumer-practice guidance, and adopted the reusable
+  machine-readable contract/index pattern without copying kit-owned doctor,
+  smoke, adoption, or bootstrap behavior.
+- Compatibility impact for `ai-workspace-kit`: downstream freshness checks can
+  read this entry to see that AI Tools governance and registry surfaces changed,
+  but packet artifacts, runtime dependency policy, and no-automation boundaries
+  did not. No automatic tool execution, install, pull/fetch, `.planning`
+  mutation, phase creation, or duplicated adoption/bootstrap behavior was added.
+- Breaking changes: none for CLIs or review packet schemas.
+- Migration notes: future agents should read `tools/registry.json` before
+  promoting or using a tool, and read `.planning/gates/WORKFLOW-GATES.md` for
+  detailed gate procedure instead of relying on long policy bodies in
+  `AGENTS.md`.
+
 ### Phase 08: Contract Drift Auditor CLI Ergonomics
 
 - Changed tool capabilities: `contract-drift-auditor` now supports

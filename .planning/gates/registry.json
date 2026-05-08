@@ -37,7 +37,7 @@
     },
     {
       "automation_boundary": "Fetch or pull only with explicit permission when network or remote mutation policy requires it; use upstream as design input, not as automatic authority.",
-      "description": "Checks the local ai-workspace-kit reference against reachable upstream before planning or major replanning.",
+      "description": "Checks the local ai-workspace-kit reference against reachable upstream before planning or major replanning, then records update-impact self-check findings when upstream changed or the phase depends on upstream contracts.",
       "id": "upstream-freshness",
       "name": "ai-workspace-kit Upstream Freshness Gate",
       "observable_outputs": [
@@ -45,7 +45,15 @@
         "remote HEAD or unknown",
         "checkout dirty status",
         "changelog or release-note status",
-        "phase planning impact"
+        "phase planning impact",
+        "changed source layers",
+        "usable ideas",
+        "current repo impact",
+        "current phase impact",
+        "consumer practice impact",
+        "self-use check output",
+        "phase-local upstream update review artifact for substantial updates",
+        "no install/run/dependency confirmation"
       ],
       "required_artifacts": [
         ".planning/research/AI-WORKSPACE-KIT-UPSTREAM-REVIEW.md",
@@ -56,6 +64,21 @@
         "remote_head",
         "dirty_status",
         "changelog_status",
+        "old_commit",
+        "new_commit",
+        "update_action",
+        "changelog_reviewed",
+        "changed_source_layers",
+        "usable_ideas",
+        "boundary_classification",
+        "current_repo_impact",
+        "current_phase_impact",
+        "consumer_practice_impact",
+        "self_use_check_output",
+        "cross_repo_request_needed",
+        "decision",
+        "evidence",
+        "no_install_run_dependency",
         "planning_impact"
       ],
       "skip_allowed": false,
@@ -301,5 +324,5 @@
     }
   },
   "schema_version": "1.0",
-  "updated": "2026-05-07"
+  "updated": "2026-05-08"
 }

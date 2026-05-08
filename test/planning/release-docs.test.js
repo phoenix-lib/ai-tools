@@ -29,6 +29,7 @@ test("root README is the release entrypoint", () => {
       "AI Tools",
       "contract-drift-auditor",
       "cross-repo-compatibility-checker",
+      "tools/registry.json",
       "npm run contract-drift-auditor -- --project <path> --out <dir>",
       "node tools/contract-drift-auditor/cli.js --project <path> --out <dir>",
       "npm run cross-repo-compatibility-checker -- --ai-tools <path> --ai-workspace-kit <path> --out <dir>",
@@ -60,6 +61,17 @@ test("root README is the release entrypoint", () => {
       "machine source of truth"
     ],
     "root README CLI ergonomics"
+  );
+
+  assertIncludesAll(
+    readme,
+    [
+      "machine-readable capability catalog",
+      ".planning/gates/WORKFLOW-GATES.md",
+      "self-use routing",
+      "non-goals"
+    ],
+    "root README registry and gate docs"
   );
 });
 
@@ -134,7 +146,12 @@ test("release readiness doc is checkable and preserves deferred boundaries", () 
       "--quiet",
       "--fail-on never",
       "packet files remain the source of truth",
-      "optional caller conveniences"
+      "optional caller conveniences",
+      "tools/registry.json",
+      "tools/registry.schema.json",
+      ".planning/gates/WORKFLOW-GATES.md",
+      "machine-readable capability catalog",
+      "self-use policy"
     ],
     "release readiness"
   );

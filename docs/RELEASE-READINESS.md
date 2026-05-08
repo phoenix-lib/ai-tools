@@ -18,6 +18,8 @@ gate-linter automation, auto-fix mode, or additional seed tools.
 
 The first v2 capability adds `cross-repo-compatibility-checker` as a
 read-only validator for `ai-tools` / `ai-workspace-kit` protocol compatibility.
+Phase 9 adds `tools/registry.json` as the machine-readable capability catalog
+and `.planning/gates/WORKFLOW-GATES.md` as the detailed workflow gate playbook.
 
 ## Definition of Done
 
@@ -39,6 +41,8 @@ read-only validator for `ai-tools` / `ai-workspace-kit` protocol compatibility.
   upstream `ai-workspace-kit` impact.
 - [x] Phase 08 post-v1 CLI ergonomics are documented as optional caller
   conveniences: `--format json`, `--quiet`, and `--fail-on`.
+- [x] Phase 09 tool registry and workflow gate documentation are planned as
+  governance hardening before broad seed tool expansion.
 
 ## Required Artifacts
 
@@ -49,6 +53,9 @@ read-only validator for `ai-tools` / `ai-workspace-kit` protocol compatibility.
 - `tools/contract-drift-auditor/examples/human-review/`
 - `tools/contract-drift-auditor/examples/blocked-safety/`
 - `tools/cross-repo-compatibility-checker/README.md`
+- `tools/registry.json`
+- `tools/registry.schema.json`
+- `.planning/gates/WORKFLOW-GATES.md`
 - `docs/RELEASE-READINESS.md`
 - `test/planning/release-docs.test.js`
 - `CHANGELOG.md`
@@ -117,6 +124,12 @@ packet artifacts or schema semantics. `--format json` is compact machine
 stdout projected from the packet summary, `--quiet` suppresses human success
 chatter, and `--fail-on blocked|human_review_required|never` is optional
 caller-selected shell policy.
+
+Phase 9 governance hardening adds a registry and focused workflow gate docs.
+`tools/registry.json` records capability owner, maturity, activation stage,
+expected outputs, use gate, self-use policy, evidence refs, and non-goals.
+`.planning/gates/WORKFLOW-GATES.md` keeps detailed gate procedures out of the
+root `AGENTS.md` entrypoint while preserving evidence-only boundaries.
 
 ## Docs Evidence
 

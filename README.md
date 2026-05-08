@@ -6,7 +6,9 @@ that assistants, humans, CI jobs, and GSD workflows can inspect without mutating
 target projects.
 
 The current usable capabilities are `contract-drift-auditor` and
-`cross-repo-compatibility-checker`.
+`cross-repo-compatibility-checker`. `tools/registry.json` is the
+machine-readable capability catalog for implemented, planned, seed-only, and
+deferred tools.
 
 ## Current Tools
 
@@ -133,6 +135,9 @@ run kit workflows automatically.
 - `standards/review-packet/README.md` - shared packet schema and evidence
   semantics.
 - `docs/RELEASE-READINESS.md` - first-release checklist and evidence.
-- `tools/README.md` - future tool seed routing and intake guidance.
+- `tools/README.md` and `tools/registry.json` - future tool seed routing,
+  intake guidance, maturity, self-use routing, and non-goals.
+- `.planning/gates/WORKFLOW-GATES.md` - detailed workflow gate procedures and
+  evidence-only boundaries.
 - `CHANGELOG.md` - changed contracts, gates, schemas, tool capabilities, and
   compatibility impact.
