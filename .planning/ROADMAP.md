@@ -42,7 +42,7 @@ dependency.
 - [x] **Phase 11: v2 Tool Selection Review** - Reassess deferred seed tools and choose the next single tool only from repeated evidence-backed demand. (completed 2026-05-08)
 - [x] **Phase 12: Project Context Ledger MVP** - Build the selected read-only verified project memory tool from Phase 11. (completed 2026-05-08)
 - [x] **Phase 13: Review Packet Rollup MVP** - Build a mechanical packet consumer that validates and aggregates multiple review packets without semantic suppression. (completed 2026-05-08)
-- [ ] **Phase 14: Ledger Artifact Schemas** - Stabilize machine-readable schemas for project-context-ledger artifacts before other tools consume them.
+- [x] **Phase 14: Ledger Artifact Schemas** - Stabilize machine-readable schemas for project-context-ledger artifacts before other tools consume them. (completed 2026-05-08)
 - [ ] **Phase 15: Review Disposition Model** - Add explicit human review disposition metadata with owner, expiry, and evidence refs.
 - [ ] **Phase 16: Ledger Scope and Diff Modes** - Reduce ledger noise with current/planning/history scopes and since-manifest diffs.
 - [ ] **Phase 17: Shared CLI Contract** - Apply one CLI contract across validated report tools.
@@ -334,7 +334,7 @@ Plans:
 - [x] 14-01: Define ledger artifact schemas and fixture expectations.
 
 **Wave 2** *(blocked on Wave 1 completion)*
-- [ ] 14-02: Wire ledger schema validation into tests, docs, and generated artifact checks.
+- [x] 14-02: Wire ledger schema validation into tests, docs, and generated artifact checks.
 
 ### Phase 15: Review Disposition Model
 **Goal**: Add explicit human review context for findings without suppressing original evidence.
@@ -579,7 +579,7 @@ Plans:
 | 11. v2 Tool Selection Review | 1/1 | Complete    | 2026-05-08 |
 | 12. Project Context Ledger MVP | 1/1 | Complete    | 2026-05-08 |
 | 13. Review Packet Rollup MVP | 2/2 | Complete    | 2026-05-08 |
-| 14. Ledger Artifact Schemas | 1/2 | In Progress|  |
+| 14. Ledger Artifact Schemas | 2/2 | Complete   | 2026-05-08 |
 | 15. Review Disposition Model | 0/2 | Planned | |
 | 16. Ledger Scope and Diff Modes | 0/2 | Planned | |
 | 17. Shared CLI Contract | 0/2 | Planned | |
