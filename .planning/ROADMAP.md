@@ -16,6 +16,13 @@ protocol drift, then improve the first auditor's CLI ergonomics. Broad seed
 tools stay deferred until the existing packet standard, registry, gates, and
 validator can govern tool intake.
 
+The v2.1 roadmap shifts from producing more evidence to consuming evidence
+well. It starts with a strictly mechanical packet rollup, then stabilizes ledger
+schemas, adds human review disposition metadata, reduces ledger noise through
+scope/diff modes, unifies validated CLI behavior, and checks the new
+`ai-workspace-kit` LLM instruction surface without making AI Tools a runtime
+dependency.
+
 ## Phases
 
 **Phase Numbering:**
@@ -34,6 +41,12 @@ validator can govern tool intake.
 - [x] **Phase 10: Evidence-Only Gate Linter Seed MVP** - Build or formally re-defer the mechanical gate-linter only after the cross-repo validator and tool registry are in place. Completed 2026-05-08.
 - [x] **Phase 11: v2 Tool Selection Review** - Reassess deferred seed tools and choose the next single tool only from repeated evidence-backed demand. (completed 2026-05-08)
 - [x] **Phase 12: Project Context Ledger MVP** - Build the selected read-only verified project memory tool from Phase 11. (completed 2026-05-08)
+- [ ] **Phase 13: Review Packet Rollup MVP** - Build a mechanical packet consumer that validates and aggregates multiple review packets without semantic suppression.
+- [ ] **Phase 14: Ledger Artifact Schemas** - Stabilize machine-readable schemas for project-context-ledger artifacts before other tools consume them.
+- [ ] **Phase 15: Review Disposition Model** - Add explicit human review disposition metadata with owner, expiry, and evidence refs.
+- [ ] **Phase 16: Ledger Scope and Diff Modes** - Reduce ledger noise with current/planning/history scopes and since-manifest diffs.
+- [ ] **Phase 17: Shared CLI Contract** - Apply one CLI contract across validated report tools.
+- [ ] **Phase 18: ai-workspace-kit LLM Instructions Compatibility** - Validate optional AI Tools evidence wording in upstream LLM project instructions.
 
 ## Phase Details
 
@@ -283,6 +296,119 @@ Plans:
 **Wave 1**
 - [x] 12-01: Implement the selected project context ledger MVP.
 
+### Phase 13: Review Packet Rollup MVP
+**Goal**: Build a strictly mechanical consumer for multiple review packet directories.
+**Depends on**: Phase 12
+**Requirements**: ROLLUP-01, ROLLUP-02, ROLLUP-03, ROLLUP-04, ROLLUP-05, ROLLUP-06
+**UI hint**: no
+**Success Criteria** (what must be TRUE):
+  1. User can run `review-packet-rollup --packets <dir...> --out <dir>` with at least two packet directories and no target-project mutation.
+  2. Input `REVIEW-SUMMARY.json` and `EVIDENCE.json` artifacts are validated before aggregation.
+  3. Output groups findings by source tool, status, severity, `source_check_id`, `status_contribution`, and source path.
+  4. Blockers, required decisions, and `human_review_required` contributors are listed separately.
+  5. Output includes standard review packet artifacts plus `PACKET-INDEX.json` and `ROLLUP-GROUPS.json` with packet provenance and input hashes.
+  6. The tool never marks findings safe-to-ignore, suppresses findings, or makes gate/merge/roadmap decisions.
+**Plans**: 2 plans
+
+Plans:
+**Wave 1**
+- [ ] 13-01: Define rollup fixtures, input validation, packet provenance, and grouping model.
+
+**Wave 2** *(blocked on Wave 1 completion)*
+- [ ] 13-02: Implement rollup CLI, packet rendering, docs, registry metadata, tests, and self-use evidence.
+
+### Phase 14: Ledger Artifact Schemas
+**Goal**: Make ledger artifacts safe for downstream consumers by adding stable JSON schemas and validation tests.
+**Depends on**: Phase 13
+**Requirements**: LEDGER-SCHEMA-01, LEDGER-SCHEMA-02, LEDGER-SCHEMA-03, LEDGER-SCHEMA-04
+**UI hint**: no
+**Success Criteria** (what must be TRUE):
+  1. Schemas exist for `FACTS.json`, `COMMANDS.json`, `CONTRACTS.json`, `SKILLS.json`, `DECISIONS.json`, and `CACHE-MANIFEST.json`.
+  2. Schemas require IDs, evidence refs, confidence, source metadata, and version fields where applicable.
+  3. `project-context-ledger` generated artifacts validate against the schemas.
+  4. Fixtures prove deterministic schema-valid ledger output.
+**Plans**: 2 plans
+
+Plans:
+**Wave 1**
+- [ ] 14-01: Define ledger artifact schemas and fixture expectations.
+
+**Wave 2** *(blocked on Wave 1 completion)*
+- [ ] 14-02: Wire ledger schema validation into tests, docs, and generated artifact checks.
+
+### Phase 15: Review Disposition Model
+**Goal**: Add explicit human review context for findings without suppressing original evidence.
+**Depends on**: Phase 14
+**Requirements**: DISP-01, DISP-02, DISP-03, DISP-04
+**UI hint**: no
+**Success Criteria** (what must be TRUE):
+  1. A review disposition schema captures finding identity, reason, owner, review time, expiry, evidence refs, tool version, and schema version.
+  2. Dispositions can be joined to packet findings while preserving original severity, status contribution, and evidence refs.
+  3. Expired dispositions are reported as stale review context.
+  4. Docs describe dispositions as human review metadata, not suppression or automatic ignore policy.
+**Plans**: 2 plans
+
+Plans:
+**Wave 1**
+- [ ] 15-01: Define review disposition schema, examples, and lifecycle rules.
+
+**Wave 2** *(blocked on Wave 1 completion)*
+- [ ] 15-02: Add disposition consumption to packet consumers with tests for expired and stale entries.
+
+### Phase 16: Ledger Scope and Diff Modes
+**Goal**: Reduce project-context-ledger noise and make changed facts easier to review.
+**Depends on**: Phase 14
+**Requirements**: LEDGER-SCOPE-01, LEDGER-SCOPE-02, LEDGER-SCOPE-03, LEDGER-SCOPE-04
+**UI hint**: no
+**Success Criteria** (what must be TRUE):
+  1. Ledger supports `--scope current|planning|history|all`.
+  2. Ledger supports `--since-manifest <CACHE-MANIFEST.json>` and reports changed, added, removed, stale, and unchanged facts.
+  3. Historical `.planning/phases/**` artifacts are categorized as history and excluded from current scope by default.
+  4. Examples, placeholders, `n/a`, and generated packet artifacts are classified so they do not inflate current findings.
+**Plans**: 2 plans
+
+Plans:
+**Wave 1**
+- [ ] 16-01: Add ledger source categories, scope filtering, and current/history fixture coverage.
+
+**Wave 2** *(blocked on Wave 1 completion)*
+- [ ] 16-02: Add since-manifest diff mode, changed-fact reporting, docs, and self-use evidence.
+
+### Phase 17: Shared CLI Contract
+**Goal**: Unify report CLI ergonomics across validated AI Tools without changing evidence-only defaults.
+**Depends on**: Phase 13
+**Requirements**: CLI-CONTRACT-01, CLI-CONTRACT-02, CLI-CONTRACT-03, CLI-CONTRACT-04, CLI-CONTRACT-05
+**UI hint**: no
+**Success Criteria** (what must be TRUE):
+  1. A shared CLI helper covers common parsing, help text, machine JSON stdout, quiet mode, fail policy, and mutating flag rejection.
+  2. `contract-drift-auditor`, `cross-repo-compatibility-checker`, `gates-scan`, `project-context-ledger`, and `review-packet-rollup` use the shared contract where applicable.
+  3. Default CLI behavior remains evidence-only and non-breaking.
+  4. Tests cover Windows behavior, exit policy, quiet mode, JSON stdout, help text, and mutating flag rejection.
+**Plans**: 2 plans
+
+Plans:
+**Wave 1**
+- [ ] 17-01: Extract shared CLI contract helper and migrate one representative tool.
+
+**Wave 2** *(blocked on Wave 1 completion)*
+- [ ] 17-02: Migrate remaining validated tools, update docs/examples, and add cross-tool CLI tests.
+
+### Phase 18: ai-workspace-kit LLM Instructions Compatibility
+**Goal**: Keep new upstream LLM instruction guidance compatible with AI Tools as optional evidence only.
+**Depends on**: Phase 17
+**Requirements**: KITLLM-01, KITLLM-02, KITLLM-03
+**UI hint**: no
+**Success Criteria** (what must be TRUE):
+  1. Cross-repo compatibility checker reads `.external/ai-workspace-kit/LLM-PROJECT-INSTRUCTIONS.json` and its schema when present in `ai-workspace-kit`.
+  2. Checker reports if upstream instructions describe AI Tools as dependency, package runner, hidden trigger, automatic decision authority, or roadmap mutator.
+  3. Checker reports whether upstream instructions keep AI Tools review packets optional and compatible with standard packet artifact names.
+  4. Output remains review packet evidence only and does not run or install either repository.
+**Plans**: 1 plan
+
+Plans:
+**Wave 1**
+- [ ] 18-01: Add ai-workspace-kit LLM instruction compatibility checks, fixtures, docs, and self-use evidence.
+
 ## Requirement Coverage
 
 | Requirement | Phase |
@@ -343,6 +469,32 @@ Plans:
 | GOV-01 | Phase 9 |
 | GATELINT-01 | Phase 10 |
 | LEDGER-01 | Phase 12 |
+| ROLLUP-01 | Phase 13 |
+| ROLLUP-02 | Phase 13 |
+| ROLLUP-03 | Phase 13 |
+| ROLLUP-04 | Phase 13 |
+| ROLLUP-05 | Phase 13 |
+| ROLLUP-06 | Phase 13 |
+| LEDGER-SCHEMA-01 | Phase 14 |
+| LEDGER-SCHEMA-02 | Phase 14 |
+| LEDGER-SCHEMA-03 | Phase 14 |
+| LEDGER-SCHEMA-04 | Phase 14 |
+| DISP-01 | Phase 15 |
+| DISP-02 | Phase 15 |
+| DISP-03 | Phase 15 |
+| DISP-04 | Phase 15 |
+| LEDGER-SCOPE-01 | Phase 16 |
+| LEDGER-SCOPE-02 | Phase 16 |
+| LEDGER-SCOPE-03 | Phase 16 |
+| LEDGER-SCOPE-04 | Phase 16 |
+| CLI-CONTRACT-01 | Phase 17 |
+| CLI-CONTRACT-02 | Phase 17 |
+| CLI-CONTRACT-03 | Phase 17 |
+| CLI-CONTRACT-04 | Phase 17 |
+| CLI-CONTRACT-05 | Phase 17 |
+| KITLLM-01 | Phase 18 |
+| KITLLM-02 | Phase 18 |
+| KITLLM-03 | Phase 18 |
 | FORENSICS-01 | Future |
 | CONFIG-01 | Future |
 | SKILL-01 | Future |
@@ -352,10 +504,45 @@ Plans:
 **Coverage:**
 - v1: 45/45 requirements mapped and complete.
 - v2 preliminary: 16/16 requirements mapped to complete, planned, or deferred phases.
+- v2.1: 26/26 requirements mapped to planned phases 13-18.
+
+## Gate Resolution
+
+### upstream-freshness
+
+- **Status:** Resolved for v2.1 planning.
+- **Local commit before update:** `bbb009a7274a9fc8648431789b7ff4b5154015b3`.
+- **Remote HEAD:** `683afc795a4554ac0689418a2ad6246ac9694e3a`.
+- **Update action:** Fast-forwarded `.external/ai-workspace-kit` to `683afc795a4554ac0689418a2ad6246ac9694e3a` with user-approved `git -C .external\ai-workspace-kit pull --ff-only`.
+- **Changelog status:** Upstream `.external/ai-workspace-kit/CHANGELOG.md` reviewed. It records `.external/ai-workspace-kit/LLM-PROJECT-INSTRUCTIONS.json`, `.external/ai-workspace-kit/schemas/llm-project-instructions.schema.json`, and no `ai-tools` runtime dependency.
+- **Changed source layers:** `.external/ai-workspace-kit/AGENTS.md`, `.external/ai-workspace-kit/AI-BOOTSTRAP.md`, `.external/ai-workspace-kit/AI-WORKSPACE-CONTRACT.json`, `.external/ai-workspace-kit/CHANGELOG.md`, `.external/ai-workspace-kit/CONSUMER-CONFIDENCE-CHECKLIST.md`, `.external/ai-workspace-kit/LLM-PROJECT-INSTRUCTIONS.json`, `.external/ai-workspace-kit/QUICKSTART.md`, `.external/ai-workspace-kit/README.md`, `.external/ai-workspace-kit/schemas/llm-project-instructions.schema.json`, `.external/ai-workspace-kit/scripts/doctor.js`, and related tests.
+- **Planning impact:** Added Phase 18 to validate that upstream LLM instructions describe AI Tools as optional evidence only.
+- **Boundary decision:** AI Tools may check optional evidence wording; `ai-workspace-kit` still owns adoption/bootstrap and generated local guidance.
+- **No install/run/dependency confirmation:** No package install, target-project mutation, or runtime dependency was introduced.
+
+### new-tool-intake
+
+- **Status:** Resolved for Review Packet Rollup MVP planning.
+- **Owner:** `ai-tools`.
+- **Destination:** `tools/review-packet-rollup/` plus shared packet mechanics where reusable.
+- **Maturity:** Planned.
+- **Activation stage:** plan, verify, phase-boundary, maintenance.
+- **Outputs:** Standard review packet artifacts plus `PACKET-INDEX.json` and `ROLLUP-GROUPS.json`.
+- **Non-goals:** No semantic suppression, no safe-to-ignore decisions, no target-project mutation, no automatic gate/merge/roadmap decisions, and no `ai-workspace-kit` dependency.
+- **Decision:** Implement as a packet consumer, not another domain auditor.
+
+### self-use
+
+- **Status:** Resolved for v2.1 milestone planning; refresh again during Phase 13 planning/execution.
+- **Capability:** Validated packet producers and project-context-ledger evidence.
+- **Maturity:** `contract-drift-auditor`, `cross-repo-compatibility-checker`, `gates-scan`, and `project-context-ledger` are validated.
+- **Run or skip reason:** Ran applicable validated tools read-only after writing the v2.1 planning artifacts.
+- **Evidence summary:** `project-context-ledger` wrote `C:\Users\suppo\.codex\memories\ai-tools-v21-ledger-20260508-final` with `human_review_required`, 299 findings, 0 blockers, and 0 required decisions. `gates-scan` wrote `C:\Users\suppo\.codex\memories\ai-tools-v21-gates-scan-20260508-final` with `human_review_required`, 26 findings, 0 blockers, and 0 required decisions. `contract-drift-auditor` wrote `C:\Users\suppo\.codex\memories\ai-tools-v21-contract-drift-20260508-final` with `human_review_required`, 75 low findings, 0 blockers, and 0 required decisions. `cross-repo-compatibility-checker` wrote `C:\Users\suppo\.codex\memories\ai-tools-v21-cross-repo-20260508-final` with `human_review_required`, 1 medium finding, 0 blockers, and 0 required decisions.
+- **Planning impact:** Findings support v2.1's focus on rollup, schemas, scope/diff, dispositions, and CLI consistency; no finding blocks the milestone.
 
 ## Progress
 
-**Execution Order:** 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> 9 -> 10 -> 11 -> 12
+**Execution Order:** 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> 9 -> 10 -> 11 -> 12 -> 13 -> 14 -> 15 -> 16 -> 17 -> 18
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
@@ -371,3 +558,9 @@ Plans:
 | 10. Evidence-Only Gate Linter Seed MVP | 2/2 | Complete | 2026-05-08 |
 | 11. v2 Tool Selection Review | 1/1 | Complete    | 2026-05-08 |
 | 12. Project Context Ledger MVP | 1/1 | Complete    | 2026-05-08 |
+| 13. Review Packet Rollup MVP | 0/2 | Planned | |
+| 14. Ledger Artifact Schemas | 0/2 | Planned | |
+| 15. Review Disposition Model | 0/2 | Planned | |
+| 16. Ledger Scope and Diff Modes | 0/2 | Planned | |
+| 17. Shared CLI Contract | 0/2 | Planned | |
+| 18. ai-workspace-kit LLM Instructions Compatibility | 0/1 | Planned | |

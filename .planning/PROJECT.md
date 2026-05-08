@@ -16,6 +16,21 @@ audits without taking these tools as mandatory product dependencies.
 Produce deterministic, evidence-backed review packets that make AI project
 guidance auditable without mutating target projects.
 
+## Current Milestone: v2.1 Evidence Consumption & Signal Quality
+
+**Goal:** Make existing review packets and ledger artifacts easier to validate,
+aggregate, scope, diff, and consume without adding another broad semantic
+auditor or making `ai-workspace-kit` depend on AI Tools.
+
+**Target features:**
+- Mechanical review packet rollup for multiple packet directories.
+- Stable schemas for project-context-ledger artifacts.
+- Human review disposition records with owner, expiry, and evidence refs.
+- Ledger scope and diff modes that reduce historical planning noise.
+- Shared CLI contract for validated tools.
+- Optional `ai-workspace-kit` LLM instruction compatibility checks that preserve
+  the no-runtime-dependency boundary.
+
 ## Requirements
 
 ### Validated
@@ -96,6 +111,19 @@ guidance auditable without mutating target projects.
   or workflow gate change.
 - [ ] Keep forensics, config, skill, test quality, UI, runtime, integration,
   and domain tools deferred until their Phase 11 trigger evidence appears.
+- [ ] Build a mechanical review packet rollup consumer before adding another
+  broad auditor.
+- [ ] Stabilize ledger artifact schemas before using ledger output as substrate
+  for other tools.
+- [ ] Represent reviewed findings as explicit human review dispositions with
+  expiry and evidence, not hidden suppression or auto-ignore.
+- [ ] Add ledger scope and diff modes so current source-of-truth facts can be
+  separated from historical phase artifacts.
+- [ ] Unify validated tool CLI behavior around machine stdout, quiet mode,
+  fail policy, mutating flag rejection, and documented exit codes.
+- [ ] Validate that `ai-workspace-kit` machine-readable LLM instructions can
+  cite AI Tools outputs only as optional evidence, not as a runtime dependency,
+  runner, or automatic gate decision layer.
 
 ### Out of Scope
 
@@ -228,6 +256,10 @@ to inspect it.
 | Use a machine-readable tool registry before broad tool expansion | Future agents need deterministic capability routing, self-use policy, and non-goals before promoting seed tools. | Validated in Phase 09 |
 | Promote `gates-scan` only as external mechanical evidence | The scanner should find deterministic gate evidence gaps without approving, rejecting, revising, or auto-running gates. | Validated in Phase 10 |
 | Promote `project-context-ledger` as the next v2 tool | Repeated project fact, command, contract, planning, packet, and decision context loading is the strongest current evidence-backed demand. | Validated in Phase 12 |
+| Start v2.1 with evidence consumption, not another broad auditor | Phase 12 self-use showed ledger output is useful but noisy; the next risk is signal quality, packet consumption, and shared contracts. | Active |
+| Keep review packet rollup mechanical | Rollup may validate, aggregate, group, and index packet evidence, but must not decide that findings are safe to ignore or automatically resolved. | Active |
+| Treat review dispositions as human review context | Dispositions should carry owner, reason, expiry, evidence refs, and tool/schema versions while preserving the original finding. | Active |
+| Incorporate `ai-workspace-kit` LLM instructions as optional interop evidence | Upstream now publishes `.external/ai-workspace-kit/LLM-PROJECT-INSTRUCTIONS.json`; AI Tools may validate optional evidence wording without becoming a kit dependency. | Active |
 
 ## Evolution
 
@@ -247,4 +279,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state.
 
 ---
-*Last updated: 2026-05-08 after completing Phase 12 Project Context Ledger MVP*
+*Last updated: 2026-05-08 after starting milestone v2.1 Evidence Consumption & Signal Quality*

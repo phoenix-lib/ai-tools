@@ -101,6 +101,52 @@
 - **UIREG-01**: User can compare UI screenshots with layout and interaction checks.
 - **GATELINT-01**: User can run an evidence-only mechanical gate linter that reports missing required gate blocks, duplicate gate IDs, stale file paths, missing source layers, missing changelog entries, conflicting required or forbidden wording, unresolved references, and gates without observable artifact output.
 
+## v2.1 Requirements
+
+### Review Packet Rollup Consumer
+
+- [ ] **ROLLUP-01**: User can run `review-packet-rollup --packets <dir...> --out <dir>` over two or more existing review packet directories without mutating any packet source or target project.
+- [ ] **ROLLUP-02**: Tool consumers can validate every input `REVIEW-SUMMARY.json` and `EVIDENCE.json` before aggregation, with invalid or missing packet artifacts reported as findings.
+- [ ] **ROLLUP-03**: Tool consumers can view combined counts grouped mechanically by source tool, status, severity, `source_check_id`, `status_contribution`, and source path.
+- [ ] **ROLLUP-04**: Human reviewers can see blockers, required decisions, and `human_review_required` contributors separated from low-severity informational groups.
+- [ ] **ROLLUP-05**: Tool consumers can inspect rollup provenance through packet input paths, input hashes, source tool names, tool versions, schema versions, and generated `PACKET-INDEX.json` / `ROLLUP-GROUPS.json` artifacts.
+- [ ] **ROLLUP-06**: The rollup does not decide that findings are safe to ignore, suppress source findings, or turn evidence into automatic gate, roadmap, or merge decisions.
+
+### Ledger Artifact Schemas
+
+- [ ] **LEDGER-SCHEMA-01**: Tool consumers can validate `FACTS.json` entries with evidence refs, confidence, source hash, source category, and last checked timestamp.
+- [ ] **LEDGER-SCHEMA-02**: Tool consumers can validate `COMMANDS.json`, `CONTRACTS.json`, `SKILLS.json`, and `DECISIONS.json` with stable IDs, evidence refs, confidence, and source metadata.
+- [ ] **LEDGER-SCHEMA-03**: Tool consumers can validate `CACHE-MANIFEST.json` with tool version, schema version, scanned roots, source hashes, generated artifact list, and excluded path policy metadata.
+- [ ] **LEDGER-SCHEMA-04**: `project-context-ledger` tests prove generated ledger artifacts validate against the schemas and remain deterministic.
+
+### Review Disposition Model
+
+- [ ] **DISP-01**: Human reviewers can record a disposition for a specific finding without deleting or rewriting the original source finding.
+- [ ] **DISP-02**: Dispositions require finding ID, source tool, source path, source check ID, reason, owner, reviewed timestamp, expiry timestamp, evidence refs, tool version, and schema version.
+- [ ] **DISP-03**: Expired or stale dispositions remain visible as review-required context instead of silently suppressing findings.
+- [ ] **DISP-04**: Packet consumers can join dispositions to findings as separate human review metadata while preserving original severity, status contribution, and evidence.
+
+### Ledger Scope and Diff Modes
+
+- [ ] **LEDGER-SCOPE-01**: User can run `project-context-ledger` with `--scope current|planning|history|all` to choose whether current source-of-truth files, planning files, historical phase artifacts, or all supported sources are scanned.
+- [ ] **LEDGER-SCOPE-02**: User can run `project-context-ledger --since-manifest <CACHE-MANIFEST.json>` to report changed, added, removed, stale, and unchanged facts.
+- [ ] **LEDGER-SCOPE-03**: Current scope treats historical `.planning/phases/**` artifacts as history by default so prior phase references do not dominate current source-of-truth findings.
+- [ ] **LEDGER-SCOPE-04**: Ledger findings distinguish real references from examples, placeholders, `n/a`, and generated packet artifacts to reduce false positives.
+
+### Shared CLI Contract
+
+- [ ] **CLI-CONTRACT-01**: Validated report CLIs share parsing for `--project`, `--out`, `--format json`, `--quiet`, and `--fail-on blocked|human_review_required|never` where applicable.
+- [ ] **CLI-CONTRACT-02**: Validated report CLIs render compact machine stdout from the same summary object used for packet artifacts.
+- [ ] **CLI-CONTRACT-03**: Validated report CLIs use documented stable exit codes while default behavior remains evidence-only and non-breaking.
+- [ ] **CLI-CONTRACT-04**: Validated report CLIs reject mutating flags consistently and keep help text aligned with review-only safety rules.
+- [ ] **CLI-CONTRACT-05**: Shared CLI tests cover Windows behavior, quiet mode, JSON stdout, fail policy, help, and mutating flag rejection across validated tools.
+
+### ai-workspace-kit LLM Instruction Compatibility
+
+- [ ] **KITLLM-01**: Cross-repo compatibility checks can inspect `.external/ai-workspace-kit/LLM-PROJECT-INSTRUCTIONS.json` and schema evidence when present.
+- [ ] **KITLLM-02**: The checker reports if kit LLM instructions recommend AI Tools as a dependency, package runner, hidden trigger, automatic gate decision layer, or source of roadmap mutation.
+- [ ] **KITLLM-03**: The checker reports whether kit LLM instructions describe AI Tools review packets as optional evidence compatible with `REVIEW-SUMMARY.json`, `EVIDENCE.json`, `FINDINGS.md`, and `RECOMMENDED-ACTIONS.md`.
+
 ## Out of Scope
 
 | Feature | Reason |
@@ -174,6 +220,32 @@ Which phases cover which requirements. Updated during roadmap creation.
 | GOV-01 | Phase 9 | Complete |
 | GATELINT-01 | Phase 10 | Complete |
 | LEDGER-01 | Phase 12 | Complete |
+| ROLLUP-01 | Phase 13 | Planned |
+| ROLLUP-02 | Phase 13 | Planned |
+| ROLLUP-03 | Phase 13 | Planned |
+| ROLLUP-04 | Phase 13 | Planned |
+| ROLLUP-05 | Phase 13 | Planned |
+| ROLLUP-06 | Phase 13 | Planned |
+| LEDGER-SCHEMA-01 | Phase 14 | Planned |
+| LEDGER-SCHEMA-02 | Phase 14 | Planned |
+| LEDGER-SCHEMA-03 | Phase 14 | Planned |
+| LEDGER-SCHEMA-04 | Phase 14 | Planned |
+| DISP-01 | Phase 15 | Planned |
+| DISP-02 | Phase 15 | Planned |
+| DISP-03 | Phase 15 | Planned |
+| DISP-04 | Phase 15 | Planned |
+| LEDGER-SCOPE-01 | Phase 16 | Planned |
+| LEDGER-SCOPE-02 | Phase 16 | Planned |
+| LEDGER-SCOPE-03 | Phase 16 | Planned |
+| LEDGER-SCOPE-04 | Phase 16 | Planned |
+| CLI-CONTRACT-01 | Phase 17 | Planned |
+| CLI-CONTRACT-02 | Phase 17 | Planned |
+| CLI-CONTRACT-03 | Phase 17 | Planned |
+| CLI-CONTRACT-04 | Phase 17 | Planned |
+| CLI-CONTRACT-05 | Phase 17 | Planned |
+| KITLLM-01 | Phase 18 | Planned |
+| KITLLM-02 | Phase 18 | Planned |
+| KITLLM-03 | Phase 18 | Planned |
 | FORENSICS-01 | Future | Deferred - trigger: failed phases, rollbacks, disputed verification, or repeated plan/reality mismatches |
 | CONFIG-01 | Future | Deferred - trigger: config-heavy environment or deployment/refactor evidence |
 | SKILL-01 | Future | Deferred - trigger: project skills become active maintained artifacts |
@@ -184,7 +256,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 - v1 requirements: 45 total
 - Mapped to phases: 45
 - Unmapped: 0
+- v2.1 requirements: 26 total
+- v2.1 mapped to planned phases: 26
 
 ---
 *Requirements defined: 2026-05-07*
-*Last updated: 2026-05-08 after Phase 12 completed Project Context Ledger MVP*
+*Last updated: 2026-05-08 after starting milestone v2.1 Evidence Consumption & Signal Quality*
