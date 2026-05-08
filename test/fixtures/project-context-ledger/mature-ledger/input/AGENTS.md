@@ -4,6 +4,9 @@
 
 - Project guide: `README.md`
 - Missing reference: `docs/MISSING.md`
+- Example reference: `docs/EXAMPLE-MISSING.md`
+- Placeholder reference: `docs/PLACEHOLDER.md`
+- Not applicable reference: n/a `docs/NA-MISSING.md`
 - Local skill: `.codex/skills/project-ops/SKILL.md`
 - Secret policy example: `config/.env.local`
 

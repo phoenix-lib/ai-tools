@@ -4,10 +4,15 @@ const { walkProjectFiles } = require("../../shared/file-walker");
 const { isGeneratedPacketDir, shouldIgnoreDir } = require("../../shared/ignore-policy");
 const { isSecretLikePath, normalizeEvidencePath } = require("../../shared/secret-policy");
 const { extractMarkdownReferences } = require("../contract-drift-auditor/references");
-
-const CONTRACT_FILE_NAMES = new Set(["AGENTS.md", "CLAUDE.md"]);
-const PLANNING_FILE_RE = /^\.planning\/(?:PROJECT|STATE|ROADMAP|REQUIREMENTS)\.md$/;
-const PHASE_ARTIFACT_RE = /^\.planning\/phases\/[^/]+\/[^/]+-(?:CONTEXT|SUMMARY|VERIFICATION)\.md$/;
+const {
+  categorizeSourcePath,
+  classifyReference,
+  isActivePlanningPath,
+  isContractPath,
+  isSkillPath,
+  normalizeScope,
+  sourceIncludedInScope
+} = require("./scope");
 
 function normalizeSlashes(value) {
   return value.replace(/\\/g, "/");
@@ -41,23 +46,6 @@ function readJsonIfSafe(root, relativePath) {
       value: null
     };
   }
-}
-
-function isContractPath(relativePath) {
-  return CONTRACT_FILE_NAMES.has(normalizeEvidencePath(relativePath));
-}
-
-function isPlanningPath(relativePath) {
-  const normalized = normalizeEvidencePath(relativePath);
-
-  return PLANNING_FILE_RE.test(normalized)
-    || PHASE_ARTIFACT_RE.test(normalized)
-    || normalized.startsWith(".planning/gates/")
-    || normalized.startsWith(".planning/cross-repo/");
-}
-
-function isSkillPath(relativePath) {
-  return /(^|\/)(\.codex|\.agents)\/skills\/[^/]+\/SKILL\.md$/.test(normalizeEvidencePath(relativePath));
 }
 
 function listGeneratedPacketDirs(root) {
@@ -98,12 +86,14 @@ function makeDocument(root, relativePath) {
   return {
     content: readTextIfSafe(root, relativePath),
     path: normalizeEvidencePath(relativePath),
-    path_only: isSecretLikePath(relativePath)
+    path_only: isSecretLikePath(relativePath),
+    source_category: categorizeSourcePath(relativePath)
   };
 }
 
 function discoverProject(options) {
   const root = path.resolve(options.projectDir);
+  const scope = normalizeScope(options.scope);
   const blockers = [];
 
   if (!fs.existsSync(root) || !fs.statSync(root).isDirectory()) {
@@ -118,21 +108,27 @@ function discoverProject(options) {
   }
 
   const files = walkProjectFiles(root);
+  const scopedFiles = files.filter((relativePath) => sourceIncludedInScope(relativePath, scope));
   const fileSet = new Set(files);
+  const scopedFileSet = new Set(scopedFiles);
+  const sourceCategories = new Map(files.map((relativePath) => [
+    normalizeEvidencePath(relativePath),
+    categorizeSourcePath(relativePath)
+  ]));
   const generatedPacketDirs = listGeneratedPacketDirs(root);
   const secretPaths = files.filter((relativePath) => isSecretLikePath(relativePath)).sort();
 
-  const contractFiles = files
+  const contractFiles = scopedFiles
     .filter(isContractPath)
     .map((relativePath) => makeDocument(root, relativePath))
     .sort(sortByPath);
 
-  const planningFiles = files
-    .filter((relativePath) => relativePath.endsWith(".md") && isPlanningPath(relativePath))
+  const planningFiles = scopedFiles
+    .filter((relativePath) => relativePath.endsWith(".md") && (isActivePlanningPath(relativePath) || categorizeSourcePath(relativePath) === "history"))
     .map((relativePath) => makeDocument(root, relativePath))
     .sort(sortByPath);
 
-  const skillFiles = files
+  const skillFiles = scopedFiles
     .filter(isSkillPath)
     .map((relativePath) => ({
       ...makeDocument(root, relativePath),
@@ -140,7 +136,7 @@ function discoverProject(options) {
     }))
     .sort(sortByPath);
 
-  const packageFiles = files
+  const packageFiles = scopedFiles
     .filter((relativePath) => path.posix.basename(relativePath) === "package.json")
     .map((relativePath) => {
       const packageJson = readJsonIfSafe(root, relativePath);
@@ -154,14 +150,16 @@ function discoverProject(options) {
         path: normalized,
         root: rootPath,
         scripts: packageJson.value?.scripts && typeof packageJson.value.scripts === "object" ? packageJson.value.scripts : {},
+        source_category: categorizeSourcePath(normalized),
         value: packageJson.value
       };
     })
     .sort(sortByPath);
 
-  const registry = fileSet.has("tools/registry.json")
+  const registry = scopedFileSet.has("tools/registry.json")
     ? {
         path: "tools/registry.json",
+        source_category: categorizeSourcePath("tools/registry.json"),
         ...readJsonIfSafe(root, "tools/registry.json")
       }
     : null;
@@ -173,8 +171,19 @@ function discoverProject(options) {
 
   for (const document of sourceDocuments) {
     const extracted = extractMarkdownReferences(document);
-    references.push(...extracted.references);
-    documentedCommands.push(...extracted.commands);
+    const lines = (document.content ?? "").split(/\r?\n/);
+    references.push(...extracted.references.map((reference) => ({
+      ...reference,
+      reference_kind: classifyReference(reference, {
+        generatedPacketDirs,
+        line: lines[reference.line - 1] ?? ""
+      }),
+      source_category: document.source_category
+    })));
+    documentedCommands.push(...extracted.commands.map((command) => ({
+      ...command,
+      source_category: document.source_category
+    })));
   }
 
   return {
@@ -191,6 +200,9 @@ function discoverProject(options) {
     registry,
     secretPaths,
     skillFiles,
+    scope,
+    sourceCategories,
+    scopedFiles,
     sourceDocuments
   };
 }
@@ -198,7 +210,7 @@ function discoverProject(options) {
 module.exports = {
   discoverProject,
   isContractPath,
-  isPlanningPath,
+  isPlanningPath: isActivePlanningPath,
   isSkillPath,
   listGeneratedPacketDirs
 };

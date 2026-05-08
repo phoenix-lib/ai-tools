@@ -17,6 +17,9 @@
       "source_path": {
         "$ref": "https://ai-tools.local/schemas/project-context-ledger/LEDGER-COMMON.schema.json#/$defs/relativePath"
       },
+      "source_category": {
+        "$ref": "https://ai-tools.local/schemas/project-context-ledger/LEDGER-COMMON.schema.json#/$defs/sourceCategory"
+      },
       "text": {
         "minLength": 1,
         "type": "string"
@@ -35,6 +38,7 @@
       "text",
       "confidence",
       "evidence_refs",
+      "source_category",
       "source_path"
     ],
     "type": "object"

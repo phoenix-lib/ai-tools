@@ -147,6 +147,8 @@ test("generated ledger artifacts validate against ledger schemas", async () => {
     }
 
     assert.equal(packet.ledgerArtifacts["CACHE-MANIFEST.json"].schema_version, "project-context-ledger/v1");
+    assert.equal(packet.ledgerArtifacts["CACHE-MANIFEST.json"].scope, "current");
+    assert.ok(packet.ledgerArtifacts["CACHE-MANIFEST.json"].scanned_sources.every((source) => typeof source.source_category === "string"));
 
     for (const artifact of PROJECT_CONTEXT_LEDGER_ARTIFACTS.filter((name) => name !== "CACHE-MANIFEST.json")) {
       const records = packet.ledgerArtifacts[artifact];
@@ -157,6 +159,7 @@ test("generated ledger artifacts validate against ledger schemas", async () => {
       );
 
       for (const record of records) {
+        assert.equal(typeof record.source_category, "string", `${artifact} ${record.id} should include source_category`);
         for (const evidenceRef of record.evidence_refs) {
           assert.equal(evidenceIds.has(evidenceRef), true, `${artifact} ${record.id} cites missing evidence ${evidenceRef}`);
         }

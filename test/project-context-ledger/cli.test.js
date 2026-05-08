@@ -27,6 +27,17 @@ test("parses project and output args", () => {
   const parsed = parseArgs(["--project", "a", "--out", "b"]);
   assert.equal(parsed.project, "a");
   assert.equal(parsed.out, "b");
+  assert.equal(parsed.scope, "current");
+});
+
+test("parses explicit scope", () => {
+  const parsed = parseArgs(["--project", "a", "--out", "b", "--scope", "history"]);
+  assert.equal(parsed.scope, "history");
+});
+
+test("rejects invalid scope", () => {
+  assert.throws(() => parseArgs(["--scope", "future"]), /Invalid scope/);
+  assert.throws(() => parseArgs(["--scope"]), /Missing value/);
 });
 
 test("help prints usage", async () => {
@@ -35,6 +46,7 @@ test("help prints usage", async () => {
 
   assert.equal(code, 0);
   assert.match(io.output.stdout, /project-context-ledger --project <path> --out <dir>/);
+  assert.match(io.output.stdout, /--scope <value>/);
 });
 
 test("missing args returns non-zero", async () => {

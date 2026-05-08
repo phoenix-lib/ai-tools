@@ -79,11 +79,12 @@ function createToolManifest({ argv, projectDir, timestamp }) {
 async function runLedger(options) {
   const projectDir = path.resolve(options.projectDir);
   const outDir = path.resolve(options.outDir);
+  const scope = options.scope ?? "current";
   const timestamp = (options.clock ?? (() => new Date()))().toISOString();
 
   assertSafeOutputDir(projectDir, outDir);
 
-  const discovery = discoverProject({ projectDir });
+  const discovery = discoverProject({ projectDir, scope });
   const ledgerResult = buildLedger(discovery, {
     argv: options.argv ?? [],
     outDir,

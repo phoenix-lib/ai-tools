@@ -126,6 +126,14 @@
     "run_timestamp": {
       "$ref": "https://ai-tools.local/schemas/project-context-ledger/LEDGER-COMMON.schema.json#/$defs/timestamp"
     },
+    "scope": {
+      "enum": [
+        "current",
+        "planning",
+        "history",
+        "all"
+      ]
+    },
     "scanned_sources": {
       "items": {
         "additionalProperties": false,
@@ -174,11 +182,15 @@
           },
           "sha256": {
             "$ref": "https://ai-tools.local/schemas/project-context-ledger/LEDGER-COMMON.schema.json#/$defs/sha256"
+          },
+          "source_category": {
+            "$ref": "https://ai-tools.local/schemas/project-context-ledger/LEDGER-COMMON.schema.json#/$defs/sourceCategory"
           }
         },
         "required": [
           "path",
-          "path_only"
+          "path_only",
+          "source_category"
         ],
         "type": "object"
       },
@@ -209,6 +221,7 @@
     "schema_version",
     "run_timestamp",
     "tool",
+    "scope",
     "ledger_artifacts",
     "packet_artifacts",
     "scanned_sources",

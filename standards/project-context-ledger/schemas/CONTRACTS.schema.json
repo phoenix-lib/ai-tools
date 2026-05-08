@@ -17,8 +17,14 @@
       "path": {
         "$ref": "https://ai-tools.local/schemas/project-context-ledger/LEDGER-COMMON.schema.json#/$defs/relativePath"
       },
+      "reference_kind": {
+        "$ref": "https://ai-tools.local/schemas/project-context-ledger/LEDGER-COMMON.schema.json#/$defs/referenceKind"
+      },
       "source_path": {
         "$ref": "https://ai-tools.local/schemas/project-context-ledger/LEDGER-COMMON.schema.json#/$defs/relativePath"
+      },
+      "source_category": {
+        "$ref": "https://ai-tools.local/schemas/project-context-ledger/LEDGER-COMMON.schema.json#/$defs/sourceCategory"
       },
       "source_sha256": {
         "$ref": "https://ai-tools.local/schemas/project-context-ledger/LEDGER-COMMON.schema.json#/$defs/sha256"
@@ -37,6 +43,7 @@
       "path",
       "confidence",
       "evidence_refs",
+      "source_category",
       "source_path"
     ],
     "type": "object"

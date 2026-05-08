@@ -4,8 +4,8 @@ milestone: v2.1
 milestone_name: "Candidate: Portfolio Real Projects Scan Protocol"
 status: executing
 stopped_at: Phase 16 context gathered
-last_updated: "2026-05-08T10:55:43.522Z"
-last_activity: 2026-05-08 -- Phase 16 planning complete
+last_updated: "2026-05-08T10:57:08.899Z"
+last_activity: 2026-05-08 -- Phase 16 execution started
 progress:
   total_phases: 18
   completed_phases: 15
@@ -22,14 +22,14 @@ See: .planning/PROJECT.md (updated 2026-05-08)
 
 **Core value:** Produce deterministic, evidence-backed review packets that make
 AI project guidance auditable without mutating target projects.
-**Current focus:** Phase 15 — review-disposition-model
+**Current focus:** Phase 16 — Ledger Scope and Diff Modes
 
 ## Current Position
 
-Phase: 16
-Plan: Not started
-Status: Ready to execute
-Last activity: 2026-05-08 -- Phase 16 planning complete
+Phase: 16 (Ledger Scope and Diff Modes) — EXECUTING
+Plan: 1 of 2
+Status: Executing Phase 16
+Last activity: 2026-05-08 -- Phase 16 execution started
 
 Progress: Phase 14 complete; Phase 15 is ready to execute.
 

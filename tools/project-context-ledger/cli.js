@@ -1,14 +1,16 @@
 #!/usr/bin/env node
 
 const { runLedger } = require("./index");
+const { normalizeScope } = require("./scope");
 
-const USAGE = `project-context-ledger --project <path> --out <dir>
+const USAGE = `project-context-ledger --project <path> --out <dir> [--scope current|planning|history|all]
 
 Read-only project context ledger scanner.
 
 Options:
   --project <path>  Project to scan.
   --out <dir>       Output directory outside the scanned project.
+  --scope <value>   Source scope to scan. Defaults to current.
   --help            Show this help.
 `;
 
@@ -18,7 +20,8 @@ function parseArgs(argv) {
   const parsed = {
     help: false,
     out: null,
-    project: null
+    project: null,
+    scope: "current"
   };
 
   for (let index = 0; index < argv.length; index += 1) {
@@ -37,6 +40,15 @@ function parseArgs(argv) {
 
     if (arg === "--out") {
       parsed.out = argv[index + 1] ?? null;
+      index += 1;
+      continue;
+    }
+
+    if (arg === "--scope") {
+      if (!argv[index + 1] || argv[index + 1].startsWith("--")) {
+        throw new Error("Missing value for --scope.");
+      }
+      parsed.scope = normalizeScope(argv[index + 1]);
       index += 1;
       continue;
     }
@@ -72,7 +84,8 @@ async function main(argv = process.argv.slice(2), io = {}) {
     const result = await runLedger({
       argv,
       outDir: args.out,
-      projectDir: args.project
+      projectDir: args.project,
+      scope: args.scope
     });
 
     stdout.write(`project-context-ledger completed: ${result.status}.\n`);

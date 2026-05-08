@@ -91,13 +91,14 @@ function sourceHash(discovery, relativePath) {
   return sha256File(discovery.projectDir, normalizedPath);
 }
 
-function fact({ id, category, text, value, evidenceRefs, confidence, sourcePath, sourceSha256, timestamp, staleReason, unknownDetail }) {
+function fact({ id, category, text, value, evidenceRefs, confidence, sourceCategory, sourcePath, sourceSha256, timestamp, staleReason, unknownDetail }) {
   const result = {
     category,
     confidence,
     evidence_refs: evidenceRefs,
     id,
     last_checked: timestamp,
+    source_category: sourceCategory,
     source_path: sourcePath
   };
 
@@ -124,11 +125,22 @@ function fact({ id, category, text, value, evidenceRefs, confidence, sourcePath,
   return result;
 }
 
+function sourceCategory(discovery, relativePath) {
+  const normalizedPath = normalizeEvidencePath(relativePath);
+  if (discovery.sourceCategories instanceof Map) {
+    return discovery.sourceCategories.get(normalizedPath) ?? "unknown";
+  }
+
+  const document = (discovery.sourceDocuments ?? []).find((item) => item.path === normalizedPath);
+  return document?.source_category ?? "unknown";
+}
+
 function sourceRecord(discovery, relativePath) {
   const normalizedPath = normalizeEvidencePath(relativePath);
   const record = {
     path: normalizedPath,
-    path_only: isSecretLikePath(normalizedPath)
+    path_only: isSecretLikePath(normalizedPath),
+    source_category: sourceCategory(discovery, normalizedPath)
   };
 
   if (!record.path_only && existingFile(discovery.projectDir, normalizedPath)) {
@@ -304,6 +316,7 @@ function buildLedger(discovery, options) {
         confidence: "verified",
         evidenceRefs: [evidenceId],
         id: `fact.package-name.${slug(packageFile.path)}`,
+        sourceCategory: packageFile.source_category ?? sourceCategory(discovery, packageFile.path),
         sourcePath: packageFile.path,
         sourceSha256: sourceHash(discovery, packageFile.path),
         text: `Package ${packageFile.path} declares project name ${packageFile.name}.`,
@@ -321,6 +334,7 @@ function buildLedger(discovery, options) {
         kind: "package_script",
         name: scriptName,
         package_path: packageFile.path,
+        source_category: packageFile.source_category ?? sourceCategory(discovery, packageFile.path),
         source_path: packageFile.path
       });
     }
@@ -334,6 +348,7 @@ function buildLedger(discovery, options) {
         kind: "package_bin",
         name: binName,
         package_path: packageFile.path,
+        source_category: packageFile.source_category ?? sourceCategory(discovery, packageFile.path),
         source_path: packageFile.path
       });
     }
@@ -354,6 +369,7 @@ function buildLedger(discovery, options) {
         evidence_refs: [evidenceId],
         id: `contract.${slug(document.path)}`,
         path: document.path,
+        source_category: document.source_category ?? sourceCategory(discovery, document.path),
         source_path: document.path,
         source_sha256: sourceHash(discovery, document.path),
         type: "assistant_contract"
@@ -366,6 +382,7 @@ function buildLedger(discovery, options) {
         confidence: "verified",
         evidence_refs: [evidenceId],
         id: `decision.context.${slug(document.path)}.${match[1].toLowerCase()}`,
+        source_category: document.source_category ?? sourceCategory(discovery, document.path),
         source_path: document.path,
         text: match[2].trim(),
         type: "context_decision"
@@ -384,15 +401,17 @@ function buildLedger(discovery, options) {
     const exists = referenceExists(discovery, reference.path);
 
     contracts.push({
-      confidence: exists ? "verified" : "stale",
+      confidence: exists ? "verified" : reference.reference_kind === "real" ? "stale" : "inferred",
       evidence_refs: [sourceEvidenceId],
       id: `contract.reference.${slug(reference.source_path)}.${reference.line}.${slug(reference.path)}`,
       path: reference.path,
+      reference_kind: reference.reference_kind ?? "real",
+      source_category: reference.source_category ?? sourceCategory(discovery, reference.source_path),
       source_path: reference.source_path,
       type: reference.source_layer ? "source_layer_reference" : "file_reference"
     });
 
-    if (!exists) {
+    if (!exists && (reference.reference_kind ?? "real") === "real") {
       const findingId = `ledger.reference.missing.${slug(reference.source_path)}.${reference.line}.${slug(reference.path)}`;
       const actionId = `act.reference.review.${slug(reference.source_path)}.${reference.line}.${slug(reference.path)}`;
       addFinding(result, finding({
@@ -428,6 +447,7 @@ function buildLedger(discovery, options) {
       evidence_refs: [evidenceId],
       id: `cmd.documented.${slug(commandRef.source_path)}.${commandRef.line}.${slug(commandRef.command)}`,
       kind: "documented_command",
+      source_category: commandRef.source_category ?? sourceCategory(discovery, commandRef.source_path),
       source_path: commandRef.source_path
     });
 
@@ -465,6 +485,7 @@ function buildLedger(discovery, options) {
       id: `skill.${slug(skill.name)}`,
       name: skill.name,
       path: skill.path,
+      source_category: skill.source_category ?? sourceCategory(discovery, skill.path),
       source_sha256: sourceHash(discovery, skill.path)
     });
   }
@@ -482,6 +503,7 @@ function buildLedger(discovery, options) {
       confidence: "verified",
       evidenceRefs: [evidenceId],
       id: "fact.tool-registry.count",
+      sourceCategory: discovery.registry.source_category ?? sourceCategory(discovery, discovery.registry.path),
       sourcePath: discovery.registry.path,
       sourceSha256: sourceHash(discovery, discovery.registry.path),
       text: `Tool registry declares ${discovery.registry.value.tools.length} tools.`,
@@ -494,6 +516,7 @@ function buildLedger(discovery, options) {
         confidence: "verified",
         evidence_refs: [evidenceId],
         id: `decision.tool-maturity.${slug(tool.id)}`,
+        source_category: discovery.registry.source_category ?? sourceCategory(discovery, discovery.registry.path),
         source_path: discovery.registry.path,
         text: `${tool.id} maturity is ${tool.maturity}.`,
         type: "tool_registry_maturity",
@@ -522,6 +545,7 @@ function buildLedger(discovery, options) {
         confidence: "unknown",
         evidenceRefs: [evidenceId],
         id: "fact.assistant-contract.unknown",
+        sourceCategory: sourceCategory(discovery, fallbackPath),
         sourcePath: fallbackPath,
         sourceSha256: sourceHash(discovery, fallbackPath),
         text: "No assistant contract was discovered.",
@@ -531,7 +555,7 @@ function buildLedger(discovery, options) {
     }
   }
 
-  const scannedSources = (discovery.files ?? []).map((relativePath) => sourceRecord(discovery, relativePath));
+  const scannedSources = (discovery.scopedFiles ?? discovery.files ?? []).map((relativePath) => sourceRecord(discovery, relativePath));
   const previousManifest = readPreviousManifest(options.outDir);
   const changedSources = changedPreviousSources(previousManifest, scannedSources);
 
@@ -560,6 +584,7 @@ function buildLedger(discovery, options) {
     confidence: "verified",
     evidenceRefs: (discovery.generatedPacketDirs ?? []).map((generatedPath) => `ev.ignored-packet.${slug(generatedPath)}`),
     id: "fact.generated-packets.ignored",
+    sourceCategory: "generated_packet",
     sourcePath: ".",
     text: `${(discovery.generatedPacketDirs ?? []).length} generated packet directories were ignored as source input.`,
     timestamp,
@@ -571,6 +596,7 @@ function buildLedger(discovery, options) {
     confidence: "verified",
     evidenceRefs: (discovery.secretPaths ?? []).map((secretPath) => `ev.secret.${slug(secretPath)}`),
     id: "fact.secret-paths.path-only",
+    sourceCategory: "secret",
     sourcePath: ".",
     text: `${(discovery.secretPaths ?? []).length} secret-like paths were recorded path-only.`,
     timestamp,
@@ -591,6 +617,7 @@ function buildLedger(discovery, options) {
       reason: "No previous CACHE-MANIFEST.json found in output directory."
     },
     run_timestamp: timestamp,
+    scope: discovery.scope ?? "current",
     scanned_sources: scannedSources,
     schema_version: "project-context-ledger/v1",
     tool: {

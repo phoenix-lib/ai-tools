@@ -36,6 +36,26 @@
       "pattern": "^[a-f0-9]{64}$",
       "type": "string"
     },
+    "sourceCategory": {
+      "enum": [
+        "current",
+        "planning",
+        "history",
+        "generated_packet",
+        "secret",
+        "example",
+        "placeholder",
+        "unknown"
+      ]
+    },
+    "referenceKind": {
+      "enum": [
+        "real",
+        "example",
+        "placeholder",
+        "generated_packet"
+      ]
+    },
     "timestamp": {
       "format": "date-time",
       "type": "string"

@@ -21,6 +21,9 @@
       "path": {
         "$ref": "https://ai-tools.local/schemas/project-context-ledger/LEDGER-COMMON.schema.json#/$defs/relativePath"
       },
+      "source_category": {
+        "$ref": "https://ai-tools.local/schemas/project-context-ledger/LEDGER-COMMON.schema.json#/$defs/sourceCategory"
+      },
       "source_sha256": {
         "$ref": "https://ai-tools.local/schemas/project-context-ledger/LEDGER-COMMON.schema.json#/$defs/sha256"
       }
@@ -30,6 +33,7 @@
       "name",
       "path",
       "confidence",
+      "source_category",
       "evidence_refs"
     ],
     "type": "object"
