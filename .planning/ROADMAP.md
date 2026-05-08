@@ -312,7 +312,7 @@ Plans:
 
 Plans:
 **Wave 1**
-- [ ] 13-01: Define rollup fixtures, input validation, packet provenance, and grouping model.
+- [x] 13-01: Define rollup fixtures, input validation, packet provenance, and grouping model.
 
 **Wave 2** *(blocked on Wave 1 completion)*
 - [ ] 13-02: Implement rollup CLI, packet rendering, docs, registry metadata, tests, and self-use evidence.
@@ -558,7 +558,7 @@ Plans:
 | 10. Evidence-Only Gate Linter Seed MVP | 2/2 | Complete | 2026-05-08 |
 | 11. v2 Tool Selection Review | 1/1 | Complete    | 2026-05-08 |
 | 12. Project Context Ledger MVP | 1/1 | Complete    | 2026-05-08 |
-| 13. Review Packet Rollup MVP | 0/2 | Planned | |
+| 13. Review Packet Rollup MVP | 1/2 | In Progress|  |
 | 14. Ledger Artifact Schemas | 0/2 | Planned | |
 | 15. Review Disposition Model | 0/2 | Planned | |
 | 16. Ledger Scope and Diff Modes | 0/2 | Planned | |
