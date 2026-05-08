@@ -25,6 +25,11 @@ used, and what they must not do. It also slims root `AGENTS.md` by moving
 detailed workflow gate policy into focused gate documentation while preserving
 hard safety rules and source-layer pointers.
 
+Phase 9 also strengthens the existing `upstream-freshness` gate so updates to
+`.external/ai-workspace-kit` produce an assistant-led update-impact self-check:
+what changed, what is useful for AI Tools, what is useful for future
+AI Tools consumers, and what must remain kit-owned.
+
 This phase must not implement `gates-scan`, a new auditor, a runtime indexer,
 or any `ai-workspace-kit` adoption/bootstrap behavior. The registry is
 governance and planning evidence; it is not a runner and does not auto-execute
@@ -200,6 +205,12 @@ Phase 9 validation should prove:
 - Focused gate docs preserve discuss-mode, upstream freshness, changelog,
   self-use, new-tool intake, git-baseline, cross-repo, and future gate-review
   semantics.
+- The existing `upstream-freshness` gate includes update-impact self-check
+  required fields for changed upstream commits: old/new commit, update action,
+  changelog review, changed source layers, usable ideas, boundary
+  classification, current repo impact, current phase impact, consumer practice
+  impact, self-use/check output, cross-repo request decision, outcome, evidence,
+  and no install/run/dependency confirmation.
 - No Phase 9 test expects `gates-scan` to exist.
 
 ## Implementation Decisions
@@ -270,6 +281,44 @@ validated tools as evidence:
 Record status, finding counts, output paths, and interpretation. Findings are
 evidence, not automatic blockers.
 
+### D-09: Upstream Update Impact Self-Check
+
+Do not create a separate new phase for update-impact review. Extend the
+existing `upstream-freshness` gate in Phase 9 while keeping the registry id
+compatible.
+
+Use the general pattern name `Upstream Update Impact Gate`; in AI Tools docs,
+call the concrete behavior `Kit Update Self-Check Gate`. It should trigger
+only when `.external/ai-workspace-kit` commit changes or when the current phase
+depends on kit-owned contracts, gates, schemas, review packet semantics,
+optional-tool guidance, or interop docs.
+
+The gate must answer three levels:
+
+- current repo impact: docs, gates, schemas, fixtures, registry, interop
+  mapping, compatibility drift, cross-repo request needs;
+- current phase impact: adopt now, plan now, defer, no-op, or blocker only for
+  real protocol/schema/required-artifact incompatibility;
+- future consumer practice impact: reusable practices, playbook guidance,
+  expected outputs, safety rules, non-goals, and review packet conventions
+  that future AI Tools consumers should inherit.
+
+For ordinary updates, record this in `Gate Resolution`. For substantial
+upstream changes, create a phase-local review artifact such as:
+
+```text
+.planning/phases/<phase>/<phase>-UPSTREAM-UPDATE-REVIEW.md
+```
+
+Keep any central `.planning/research/AI-WORKSPACE-KIT-UPSTREAM-REVIEW.md` as a
+historical/index artifact only; the phase-local review is the source of truth
+for the phase that consumed the update.
+
+Self-use/check output, such as `cross-repo-compatibility-checker`, is evidence
+only. The assistant still performs semantic review and must not auto-create
+phases, install/run kit tools, add dependencies, or copy kit-owned
+responsibilities.
+
 ### the agent's Discretion
 
 The planner may choose exact test filenames and optional registry fields if the
@@ -304,6 +353,8 @@ docs/registry tests over broad prose snapshots.
 - `.planning/gates/registry.json` - current machine-readable gate registry.
 - `.planning/cross-repo/CROSS-REPO-CAPABILITY-REQUESTS.md` - cross-repo gate
   routing, request/decision playbook, and non-automation boundaries.
+- `.planning/research/AI-WORKSPACE-KIT-UPSTREAM-REVIEW.md` - existing upstream
+  freshness record to preserve as historical/index evidence.
 - `tools/README.md` - current seed directory list and new-tool intake guidance.
 - `tools/tool-usage-registry/SEED-IDEAS.md` - seed idea for tool usage
   registry and phase mapping.
@@ -368,6 +419,8 @@ docs/registry tests over broad prose snapshots.
   self-use routing.
 - `.planning/gates/WORKFLOW-GATES.md` should become the detailed prose home for
   gate policies currently embedded in `AGENTS.md`.
+- `upstream-freshness` should keep its existing id but gain update-impact
+  required fields and docs. Avoid a second duplicate gate id.
 - `tools/README.md` should reference the registry as the current capability
   catalog.
 - Future Phase 10 `gates-scan` should be able to read the registry as input,

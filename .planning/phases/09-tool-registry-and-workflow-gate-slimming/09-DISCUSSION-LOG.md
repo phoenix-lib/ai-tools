@@ -5,7 +5,7 @@
 
 **Date:** 2026-05-08
 **Phase:** 09-Tool Registry and Workflow Gate Slimming
-**Areas discussed:** Discuss Mode Gate, Registry Placement, Registry Shape, AGENTS Slimming, Phase 10 Boundary, Self-Use
+**Areas discussed:** Discuss Mode Gate, Registry Placement, Registry Shape, AGENTS Slimming, Upstream Update Impact, Phase 10 Boundary, Self-Use
 
 ---
 
@@ -75,6 +75,20 @@
 **User's choice:** Trusted self-questioning selected planned registry entry only.
 
 **Notes:** Phase 9 tests should not expect a runnable `gates-scan` CLI.
+
+---
+
+## Upstream Update Impact
+
+| Option | Description | Selected |
+|--------|-------------|----------|
+| New standalone phase | Add a separate governance phase for Kit Update Self-Check. | |
+| Separate new gate id | Add `kit-update-self-check` beside `upstream-freshness`. | |
+| Extend upstream-freshness | Keep the compatible registry id and require update-impact self-check when kit changes. | yes |
+
+**User's choice:** Extend `upstream-freshness` inside Phase 9 rather than adding a new phase.
+
+**Notes:** Use the general pattern `Upstream Update Impact Gate`; in AI Tools call it `Kit Update Self-Check Gate`. It must cover current repo impact, current phase impact, and future consumer practice impact. Phase-local `<phase>-UPSTREAM-UPDATE-REVIEW.md` is recommended for substantial updates.
 
 ---
 
