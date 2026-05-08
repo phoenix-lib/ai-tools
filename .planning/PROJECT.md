@@ -66,6 +66,9 @@ guidance auditable without mutating target projects.
   stdout, quiet mode, and opt-in fail policy while keeping packet artifacts as
   the source of truth. Validated in Phase 08: Contract Drift Auditor CLI
   Ergonomics.
+- [x] Add a machine-readable tool registry and slim root `AGENTS.md` by moving
+  detailed gate policy into focused workflow gate documentation. Validated in
+  Phase 09: Tool Registry and Workflow Gate Slimming.
 
 ### Active
 
@@ -78,7 +81,6 @@ guidance auditable without mutating target projects.
   reusable changes.
 - [ ] Maintain `CHANGELOG.md` after every completed phase, executed major plan,
   or workflow gate change.
-- [ ] Add a machine-readable tool registry before promoting broad seed tools.
 - [ ] Keep ledger, forensics, config, skill, test quality, UI, and integration
   tools deferred until evidence-backed v2 tool selection promotes one next
   candidate.
@@ -210,6 +212,7 @@ to inspect it.
 | Start v2 with release closeout, metadata, and cross-repo validation | Release discipline and interop drift are the current risks; broad seed tools should wait until tool registry and validator guardrails exist. | Phase 06 validated release closeout; Phase 07 validated cross-repo checker |
 | Keep release examples generated from the shared packet model | Committed examples are useful only if JSON and Markdown stay internally consistent with packet semantics. | Validated in Phase 06 |
 | Keep CLI fail policy opt-in | Packet status is evidence; shell failure should be a caller-selected policy so default auditor runs remain non-breaking. | Validated in Phase 08 |
+| Use a machine-readable tool registry before broad tool expansion | Future agents need deterministic capability routing, self-use policy, and non-goals before promoting seed tools. | Validated in Phase 09 |
 
 ## Evolution
 
@@ -229,4 +232,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state.
 
 ---
-*Last updated: 2026-05-08 after completing Phase 8 contract drift auditor CLI ergonomics*
+*Last updated: 2026-05-08 after completing Phase 9 tool registry and workflow gate slimming*

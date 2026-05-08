@@ -30,7 +30,7 @@ validator can govern tool intake.
 - [x] **Phase 6: Release Closeout and Tool Metadata** - Fix post-Phase-5 doc drift, add release packet fixtures, centralize tool metadata, and preserve safe self-audit invocation. Completed 2026-05-07.
 - [x] **Phase 7: Cross-Repo Compatibility Checker MVP** - Build the smallest read-only validator for AI Tools / `ai-workspace-kit` protocol compatibility before any automatic cross-repo automation. Completed 2026-05-08.
 - [x] **Phase 8: Contract Drift Auditor CLI Ergonomics** - Add machine stdout, quiet mode, fail-on policy, and documented exit codes without making findings automatic decisions. Completed 2026-05-08.
-- [ ] **Phase 9: Tool Registry and Workflow Gate Slimming** - Create the machine-readable tool registry and move detailed gate policy out of root `AGENTS.md` into focused workflow docs.
+- [x] **Phase 9: Tool Registry and Workflow Gate Slimming** - Create the machine-readable tool registry and move detailed gate policy out of root `AGENTS.md` into focused workflow docs. Completed 2026-05-08.
 - [ ] **Phase 10: Evidence-Only Gate Linter Seed MVP** - Build or formally re-defer the mechanical gate-linter only after the cross-repo validator and tool registry are in place.
 - [ ] **Phase 11: v2 Tool Selection Review** - Reassess deferred seed tools and choose the next single tool only from repeated evidence-backed demand.
 
@@ -215,7 +215,7 @@ Plans:
 - [x] 09-01: Add tool registry schema/data and registry-backed docs validation.
 
 **Wave 2** *(blocked on Wave 1 completion)*
-- [ ] 09-02: Slim `AGENTS.md` and move detailed gate policy into workflow gate documentation.
+- [x] 09-02: Slim `AGENTS.md` and move detailed gate policy into workflow gate documentation.
 
 Cross-cutting constraints:
 - Preserve the `ai-workspace-kit` ownership boundary and do not implement
@@ -339,6 +339,6 @@ Plans:
 | 6. Release Closeout and Tool Metadata | 3/3 | Complete | 2026-05-07 |
 | 7. Cross-Repo Compatibility Checker MVP | 3/3 | Complete | 2026-05-08 |
 | 8. Contract Drift Auditor CLI Ergonomics | 2/2 | Complete | 2026-05-08 |
-| 9. Tool Registry and Workflow Gate Slimming | 0/2 | Planned | - |
+| 9. Tool Registry and Workflow Gate Slimming | 2/2 | Complete | 2026-05-08 |
 | 10. Evidence-Only Gate Linter Seed MVP | 0/2 | Planned | - |
 | 11. v2 Tool Selection Review | 0/1 | Planned | - |

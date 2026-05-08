@@ -170,8 +170,8 @@ Which phases cover which requirements. Updated during roadmap creation.
 | XREPO-VALIDATOR-01 | Phase 7 | Complete |
 | CLI-01 | Phase 8 | Complete |
 | CLI-02 | Phase 8 | Complete |
-| REG-01 | Phase 9 | Planned |
-| GOV-01 | Phase 9 | Planned |
+| REG-01 | Phase 9 | Complete |
+| GOV-01 | Phase 9 | Complete |
 | GATELINT-01 | Phase 10 | Planned |
 | LEDGER-01 | Phase 11 | Deferred |
 | FORENSICS-01 | Phase 11 | Deferred |
@@ -187,4 +187,4 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 ---
 *Requirements defined: 2026-05-07*
-*Last updated: 2026-05-08 after completing Phase 8 contract drift auditor CLI ergonomics*
+*Last updated: 2026-05-08 after completing Phase 9 tool registry and workflow gate slimming*
