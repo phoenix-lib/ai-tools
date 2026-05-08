@@ -1,0 +1,167 @@
+{
+  "$id": "https://ai-tools.local/schemas/review-disposition/REVIEW-DISPOSITIONS.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$defs": {
+    "disposition": {
+      "additionalProperties": false,
+      "properties": {
+        "evidence_refs": {
+          "items": {
+            "$ref": "#/$defs/evidenceRefId"
+          },
+          "minItems": 0,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "expires_at": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "finding_fingerprint": {
+          "$ref": "#/$defs/findingFingerprint"
+        },
+        "finding_id": {
+          "$ref": "#/$defs/recordId"
+        },
+        "id": {
+          "$ref": "#/$defs/recordId"
+        },
+        "owner": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "reason": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "reviewed_at": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "review-disposition/v1",
+          "type": "string"
+        },
+        "source_check_id": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "source_packet_id": {
+          "$ref": "#/$defs/recordId"
+        },
+        "source_packet_path": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "source_packet_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "source_path": {
+          "$ref": "#/$defs/sourcePath"
+        },
+        "source_tool": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "accepted_current_issue",
+            "accepted_historical_noise",
+            "not_actionable",
+            "false_positive",
+            "needs_followup"
+          ],
+          "type": "string"
+        },
+        "tool_name": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "tool_version": {
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "finding_id",
+        "finding_fingerprint",
+        "source_tool",
+        "source_check_id",
+        "source_path",
+        "status",
+        "reason",
+        "owner",
+        "reviewed_at",
+        "expires_at",
+        "evidence_refs",
+        "tool_name",
+        "tool_version",
+        "schema_version"
+      ],
+      "type": "object"
+    },
+    "evidenceRefId": {
+      "minLength": 1,
+      "pattern": "^[a-z0-9][a-z0-9._-]*$",
+      "type": "string"
+    },
+    "findingFingerprint": {
+      "pattern": "^fp\\.[a-f0-9]{64}$",
+      "type": "string"
+    },
+    "recordId": {
+      "minLength": 1,
+      "pattern": "^[a-z0-9][a-z0-9._-]*$",
+      "type": "string"
+    },
+    "sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "type": "string"
+    },
+    "sourcePath": {
+      "minLength": 1,
+      "pattern": "^(unknown|(?![A-Za-z]:)(?!/)(?!.*\\\\).+)$",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Human review disposition sidecar artifact for review packet findings.",
+  "properties": {
+    "dispositions": {
+      "items": {
+        "$ref": "#/$defs/disposition"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "reviewed_at": {
+      "format": "date-time",
+      "type": "string"
+    },
+    "reviewed_by": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "review-disposition/v1",
+      "type": "string"
+    },
+    "source_packet_id": {
+      "$ref": "#/$defs/recordId"
+    },
+    "source_packet_path": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "source_packet_sha256": {
+      "$ref": "#/$defs/sha256"
+    }
+  },
+  "required": [
+    "schema_version",
+    "dispositions"
+  ],
+  "title": "Review Dispositions",
+  "type": "object"
+}
