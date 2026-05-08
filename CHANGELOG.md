@@ -5,6 +5,29 @@ major plan execution, and workflow gate change.
 
 ## Unreleased
 
+### Planning Refinement: Planning Changeset Protocol
+
+- Added Phase 20: Planning Changeset Protocol and Projector Request after
+  package readiness so future planning updates can move toward one typed
+  changeset plus deterministic projections instead of repeated manual edits
+  across roadmap, requirements, state, changelog, and cross-repo artifacts.
+- Added planning changeset requirements `PLANCHG-01` through `PLANCHG-05`
+  covering typed operation schemas, examples/fixtures, base commit and file
+  hash preconditions, idempotency expectations, kit/GSD-owned projector
+  behavior, and new-session journal/status semantics.
+- Added a cross-repo outbox request and planned decision for
+  `ai-workspace-kit` / GSD to own the mutating projector with dry-run default,
+  explicit apply, diff preview, journal, status, and verify behavior.
+- Preserved the AI Tools boundary: this repo may define schemas, fixtures,
+  compatibility notes, and optional read-only validation evidence, but should
+  not implement a mutating planning projector as an AI Tools auditor.
+- Upstream impact: no `ai-workspace-kit` source was changed. The request is a
+  decision input only and does not add runtime dependency, automatic tool
+  execution, target-project mutation, copied `.planning` state, or hidden
+  roadmap changes.
+- Validation: focused planning tests passed 32/32,
+  `gsd-sdk.cmd query state.validate` passed, and `git diff --check` passed.
+
 ### Planning Refinement: Package Readiness Before Portfolio Scans
 
 - Added Phase 19: Package Readiness and Consumer UX after Phase 18 so the

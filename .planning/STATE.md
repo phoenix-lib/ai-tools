@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v2.1
 milestone_name: "Evidence Consumption & Signal Quality"
 status: planning
-stopped_at: Phase 16 completed
-last_updated: "2026-05-08T11:16:05.274Z"
-last_activity: 2026-05-08 -- Phase 16 completed; Phase 17 ready to discuss
+stopped_at: Phase 20 added
+last_updated: "2026-05-08T11:45:00.000Z"
+last_activity: 2026-05-08 -- Phase 20 planning changeset protocol added; Phase 17 remains next
 progress:
-  total_phases: 19
+  total_phases: 20
   completed_phases: 16
-  total_plans: 41
+  total_plans: 43
   completed_plans: 36
-  percent: 88
+  percent: 84
 ---
 
 # Project State
@@ -29,7 +29,7 @@ AI project guidance auditable without mutating target projects.
 Phase: 17
 Plan: Not started
 Status: Ready for Phase 17 discussion
-Last activity: 2026-05-08 -- Phase 16 completed
+Last activity: 2026-05-08 -- Phase 20 planning changeset protocol added
 
 Progress: Phase 16 complete; Phase 17 is ready to discuss.
 
@@ -52,6 +52,7 @@ Progress: Phase 16 complete; Phase 17 is ready to discuss.
 | 17 | 0/2 | Planned |
 | 18 | 0/1 | Planned |
 | 19 | 0/2 | Planned |
+| 20 | 0/2 | Planned |
 | Phase 14 P14-01 | 44 min | 4 tasks | 9 files |
 | Phase 14 P14-02 | 19 min | 5 tasks | 8 files |
 
@@ -97,6 +98,9 @@ Decisions are logged in `.planning/PROJECT.md` Key Decisions table.
 - Package readiness should be completed before real portfolio scans so AI
   Tools has a stable installable surface, dispatcher, smoke tests, and concise
   consumer recipes.
+- Planning artifact projection should use typed changesets and a kit/GSD-owned
+  mutating projector; AI Tools should keep only schemas, compatibility notes,
+  cross-repo requests, and read-only validation evidence in scope.
 
 ### Completed Work
 
@@ -155,6 +159,9 @@ Decisions are logged in `.planning/PROJECT.md` Key Decisions table.
 - Phase 19 was added after package analysis showed real portfolio scans need
   package metadata, file allowlist, pack/install smoke tests, a top-level
   dispatcher, and consumer quickstart docs before broad local use.
+- Phase 20 was added after planning-cost analysis showed repeated markdown
+  synchronization needs a typed changeset protocol, projector request,
+  idempotency rules, and new-session journal/status semantics.
 
 ### Pending Todos
 
@@ -172,6 +179,10 @@ Decisions are logged in `.planning/PROJECT.md` Key Decisions table.
 - Phase forensics remains deferred until evidence consumption and triage
   mechanics are stable enough to consume phase review packets without adding
   another noisy analyzer.
+
+- Planning changeset projector implementation should remain outside AI Tools
+  unless the future scope is explicitly read-only validation; the mutating
+  apply/diff/journal behavior belongs to GSD or `ai-workspace-kit`.
 
 ## Deferred Items
 

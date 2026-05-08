@@ -22,9 +22,10 @@ schemas, adds human review disposition metadata with stable finding
 fingerprints, reduces ledger noise through current-by-default scope/diff modes,
 unifies validated CLI behavior, and checks the new `ai-workspace-kit` LLM
 instruction surface without making AI Tools a runtime dependency. It then
-hardens AI Tools as a consumable package before a later portfolio milestone
-uses these foundations to scan the user's real projects from an explicit
-inventory instead of adding another broad auditor.
+hardens AI Tools as a consumable package, then captures a structured planning
+changeset protocol and kit-owned projector request before a later portfolio
+milestone uses these foundations to scan the user's real projects from an
+explicit inventory instead of adding another broad auditor.
 
 ## Phases
 
@@ -51,6 +52,7 @@ inventory instead of adding another broad auditor.
 - [ ] **Phase 17: Shared CLI Contract** - Apply one CLI contract, including JSON stdout, quiet mode, and fail policy, across validated report tools.
 - [ ] **Phase 18: ai-workspace-kit LLM Instructions Compatibility** - Validate optional AI Tools evidence wording in upstream LLM project instructions.
 - [ ] **Phase 19: Package Readiness and Consumer UX** - Make AI Tools practical to install, discover, smoke test, and run before real portfolio scans.
+- [ ] **Phase 20: Planning Changeset Protocol and Projector Request** - Define the typed planning changeset protocol and request the kit/GSD-owned projector instead of adding a mutating AI Tools auditor.
 
 ## Phase Details
 
@@ -436,6 +438,26 @@ Plans:
 **Wave 2** *(blocked on Wave 1 completion)*
 - [ ] 19-02: Add top-level dispatcher, registry describe/list commands, consumer quickstart, and docs validation.
 
+### Phase 20: Planning Changeset Protocol and Projector Request
+**Goal**: Reduce planning/doc synchronization cost by defining a typed changeset protocol and requesting a kit/GSD-owned deterministic projector, while keeping AI Tools read-only by default.
+**Depends on**: Phase 19
+**Requirements**: PLANCHG-01, PLANCHG-02, PLANCHG-03, PLANCHG-04, PLANCHG-05
+**UI hint**: no
+**Success Criteria** (what must be TRUE):
+  1. A `planning-changeset/v1` schema describes explicit operation records such as phase, requirement, state, changelog, decision, and gate-resolution changes without accepting free-form semantic instructions.
+  2. Examples or fixtures cover representative planning updates with operation IDs, base git commit, file-hash preconditions, expected projection targets, and idempotency expectations.
+  3. A cross-repo outbox request asks `ai-workspace-kit` / GSD to own the mutating projector with dry-run default, explicit apply, diff preview, journal, status, and verify behavior.
+  4. AI Tools scope is limited to schemas, fixtures, compatibility notes, and optional read-only validation evidence; it does not implement the mutating planning projector.
+  5. New-session recovery semantics are specified so future agents can load a compact status/journal summary before rereading every planning markdown artifact.
+**Plans**: 2 plans
+
+Plans:
+**Wave 1**
+- [ ] 20-01: Define planning changeset schema, examples, idempotency rules, and new-session journal/status requirements.
+
+**Wave 2** *(blocked on Wave 1 completion)*
+- [ ] 20-02: Finalize the kit/GSD projector capability request, boundary decision, compatibility docs, and optional read-only validator seed.
+
 ## Post-v2.1 Candidate: Portfolio Real Projects Scan Protocol
 
 **Goal**: Prepare a safe, explicit protocol for scanning the user's real
@@ -551,6 +573,11 @@ compatibility, and package readiness are in place.
 | PKG-04 | Phase 19 |
 | PKG-05 | Phase 19 |
 | PKG-06 | Phase 19 |
+| PLANCHG-01 | Phase 20 |
+| PLANCHG-02 | Phase 20 |
+| PLANCHG-03 | Phase 20 |
+| PLANCHG-04 | Phase 20 |
+| PLANCHG-05 | Phase 20 |
 | FORENSICS-01 | Future |
 | CONFIG-01 | Future |
 | SKILL-01 | Future |
@@ -561,7 +588,7 @@ compatibility, and package readiness are in place.
 **Coverage:**
 - v1: 45/45 requirements mapped and complete.
 - v2 preliminary: 16/16 requirements mapped to complete, planned, or deferred phases.
-- v2.1: 33/33 requirements mapped to planned phases 13-19.
+- v2.1: 38/38 requirements mapped to planned phases 13-20.
 
 ## Gate Resolution
 
@@ -619,7 +646,7 @@ compatibility, and package readiness are in place.
 
 ## Progress
 
-**Execution Order:** 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> 9 -> 10 -> 11 -> 12 -> 13 -> 14 -> 15 -> 16 -> 17 -> 18 -> 19
+**Execution Order:** 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> 9 -> 10 -> 11 -> 12 -> 13 -> 14 -> 15 -> 16 -> 17 -> 18 -> 19 -> 20
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
@@ -642,3 +669,4 @@ compatibility, and package readiness are in place.
 | 17. Shared CLI Contract | 0/2 | Planned | |
 | 18. ai-workspace-kit LLM Instructions Compatibility | 0/1 | Planned | |
 | 19. Package Readiness and Consumer UX | 0/2 | Planned | |
+| 20. Planning Changeset Protocol and Projector Request | 0/2 | Planned | |

@@ -157,6 +157,14 @@
 - [ ] **PKG-05**: Consumer documentation provides concise recipes for single-project scan, phase-boundary evidence, packet rollup, ledger diff, and optional `ai-workspace-kit` evidence use.
 - [ ] **PKG-06**: Package readiness remains optional evidence tooling and does not introduce automatic target-project mutation, install hooks, hidden tool execution, mandatory `ai-workspace-kit` dependency, or copied `.planning` state.
 
+### Planning Changeset Protocol
+
+- [ ] **PLANCHG-01**: A `planning-changeset/v1` schema describes typed planning operations for phases, requirements, state, changelog, decisions, and gate-resolution records without accepting free-form semantic instructions.
+- [ ] **PLANCHG-02**: Changeset examples or fixtures include operation IDs, base git commit, file-hash preconditions, expected projection targets, idempotency expectations, and representative add/update/complete planning changes.
+- [ ] **PLANCHG-03**: A cross-repo request asks `ai-workspace-kit` / GSD to own the mutating projector with dry-run default, explicit apply, diff preview, journal, status, and verify commands.
+- [ ] **PLANCHG-04**: AI Tools scope for planning changesets is limited to schemas, fixtures, compatibility notes, and optional read-only validation evidence; AI Tools does not implement the mutating planning projector.
+- [ ] **PLANCHG-05**: New-session recovery semantics are specified so future agents can load a compact applied/pending changeset journal before rereading every planning markdown file.
+
 ## Future Requirements
 
 ### Portfolio Real Projects Scan Protocol
@@ -269,6 +277,11 @@ Which phases cover which requirements. Updated during roadmap creation.
 | PKG-04 | Phase 19 | Planned |
 | PKG-05 | Phase 19 | Planned |
 | PKG-06 | Phase 19 | Planned |
+| PLANCHG-01 | Phase 20 | Planned |
+| PLANCHG-02 | Phase 20 | Planned |
+| PLANCHG-03 | Phase 20 | Planned |
+| PLANCHG-04 | Phase 20 | Planned |
+| PLANCHG-05 | Phase 20 | Planned |
 | FORENSICS-01 | Future | Deferred - trigger: failed phases, rollbacks, disputed verification, or repeated plan/reality mismatches |
 | CONFIG-01 | Future | Deferred - trigger: config-heavy environment or deployment/refactor evidence |
 | SKILL-01 | Future | Deferred - trigger: project skills become active maintained artifacts |
@@ -280,9 +293,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 - v1 requirements: 45 total
 - Mapped to phases: 45
 - Unmapped: 0
-- v2.1 requirements: 33 total
-- v2.1 mapped to planned phases: 33
+- v2.1 requirements: 38 total
+- v2.1 mapped to planned phases: 38
 
 ---
 *Requirements defined: 2026-05-07*
-*Last updated: 2026-05-08 after adding Phase 19 Package Readiness and Consumer UX*
+*Last updated: 2026-05-08 after adding Phase 20 Planning Changeset Protocol and Projector Request*

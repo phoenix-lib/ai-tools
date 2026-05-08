@@ -31,6 +31,9 @@ auditor or making `ai-workspace-kit` depend on AI Tools.
 - Optional `ai-workspace-kit` LLM instruction compatibility checks that preserve
   the no-runtime-dependency boundary.
 - Package readiness and consumer UX hardening before real portfolio scans.
+- A structured planning changeset protocol and cross-repo projector request
+  that reduce future planning synchronization cost without adding mutating AI
+  Tools behavior.
 
 ## Requirements
 
@@ -134,6 +137,8 @@ auditor or making `ai-workspace-kit` depend on AI Tools.
 - [ ] Prepare AI Tools as a consumable local/npm package with publish metadata,
   package file allowlist, install/pack smoke tests, top-level dispatcher, and
   concise consumer quickstart guidance.
+- [ ] Define a typed planning changeset protocol and request the kit/GSD-owned
+  projector with dry-run, explicit apply, journal, status, and verify behavior.
 
 ### Out of Scope
 
@@ -272,6 +277,7 @@ to inspect it.
 | Use current-by-default ledger scope and explicit diff evidence | Current source evidence should not be dominated by historical phase artifacts, and changed ledger facts should be reviewable without becoming automatic priority or suppression logic. | Validated in Phase 16 |
 | Incorporate `ai-workspace-kit` LLM instructions as optional interop evidence | Upstream now publishes `.external/ai-workspace-kit/LLM-PROJECT-INSTRUCTIONS.json`; AI Tools may validate optional evidence wording without becoming a kit dependency. | Active |
 | Add package readiness before portfolio scans | Real multi-project use needs a stable installable surface, package smoke tests, a discoverable top-level command, and concise consumer recipes before broad portfolio execution. | Planned for Phase 19 |
+| Route planning artifact projection through typed changesets | Repeated updates across roadmap, requirements, state, changelog, and cross-repo files are costly and drift-prone; AI Tools should define compatible schemas/evidence while the mutating projector remains kit/GSD-owned. | Planned for Phase 20 |
 
 ## Evolution
 
@@ -291,4 +297,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state.
 
 ---
-*Last updated: 2026-05-08 after adding Phase 19 Package Readiness and Consumer UX*
+*Last updated: 2026-05-08 after adding Phase 20 Planning Changeset Protocol and Projector Request*

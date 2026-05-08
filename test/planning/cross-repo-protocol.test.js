@@ -141,6 +141,10 @@ const requestDecisions = new Map([
   [
     ".planning/cross-repo/inbox/REQ-20260507-ai-workspace-kit-to-ai-tools-changelog-gate-review.md",
     ".planning/cross-repo/decisions/DEC-REQ-20260507-ai-workspace-kit-to-ai-tools-changelog-gate-review.md"
+  ],
+  [
+    ".planning/cross-repo/outbox/REQ-20260508-ai-tools-to-ai-workspace-kit-planning-changeset-projector.md",
+    ".planning/cross-repo/decisions/DEC-REQ-20260508-ai-tools-to-ai-workspace-kit-planning-changeset-projector.md"
   ]
 ]);
 
