@@ -27,7 +27,7 @@ major plan execution, and workflow gate change.
   authority.
 - Validation: focused schema tests passed 10/10, generated ledger integration
   tests passed 6/6, registry/release/schema docs tests passed 17/17, full
-  `npm.cmd test` passed 225/225, and `git diff --check` passed.
+  `npm.cmd test` passed 226/226, and `git diff --check` passed.
 - Self-use result: Phase 14 `project-context-ledger` wrote output outside the
   repository at
   `C:\Users\suppo\.codex\memories\ai-tools-ledger-schemas-phase14-final`;

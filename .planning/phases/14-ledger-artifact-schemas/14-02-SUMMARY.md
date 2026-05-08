@@ -153,7 +153,7 @@ preserving artifact filenames, top-level shapes, and evidence-only semantics.
 - `npm.cmd test -- test/project-context-ledger/schema-output.test.js test/project-context-ledger/integration.test.js` - passed, 6/6 tests.
 - `npm.cmd test -- test/project-context-ledger/schema-output.test.js test/project-context-ledger/ledger-schema-contract.test.js` - passed, 10/10 tests.
 - `npm.cmd test -- test/planning/release-docs.test.js test/planning/tool-registry.test.js test/project-context-ledger/schema-output.test.js` - passed, 17/17 tests.
-- `npm.cmd test` - passed, 225/225 tests.
+- `npm.cmd test` - passed, 226/226 tests.
 - `git diff --check` - passed.
 
 ## Self-Use Evidence

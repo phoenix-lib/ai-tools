@@ -226,10 +226,10 @@ Which phases cover which requirements. Updated during roadmap creation.
 | ROLLUP-04 | Phase 13 | Complete |
 | ROLLUP-05 | Phase 13 | Complete |
 | ROLLUP-06 | Phase 13 | Complete |
-| LEDGER-SCHEMA-01 | Phase 14 | Planned |
-| LEDGER-SCHEMA-02 | Phase 14 | Planned |
-| LEDGER-SCHEMA-03 | Phase 14 | Planned |
-| LEDGER-SCHEMA-04 | Phase 14 | Planned |
+| LEDGER-SCHEMA-01 | Phase 14 | Complete |
+| LEDGER-SCHEMA-02 | Phase 14 | Complete |
+| LEDGER-SCHEMA-03 | Phase 14 | Complete |
+| LEDGER-SCHEMA-04 | Phase 14 | Complete |
 | DISP-01 | Phase 15 | Planned |
 | DISP-02 | Phase 15 | Planned |
 | DISP-03 | Phase 15 | Planned |

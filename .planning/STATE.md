@@ -2,9 +2,9 @@
 gsd_state_version: 1.0
 milestone: v2.1
 milestone_name: milestone
-status: verifying
-stopped_at: Completed 14-01-PLAN.md
-last_updated: "2026-05-08T09:48:18.913Z"
+status: Ready for discussion
+stopped_at: Completed Phase 14; ready for Phase 15 discuss
+last_updated: "2026-05-08T09:56:51.517Z"
 last_activity: 2026-05-08
 progress:
   total_phases: 18
@@ -22,22 +22,22 @@ See: .planning/PROJECT.md (updated 2026-05-08)
 
 **Core value:** Produce deterministic, evidence-backed review packets that make
 AI project guidance auditable without mutating target projects.
-**Current focus:** Phase 14 — ledger-artifact-schemas
+**Current focus:** Phase 15 - review-disposition-model
 
 ## Current Position
 
-Phase: 14 (ledger-artifact-schemas) — EXECUTING
-Plan: 2 of 2
-Status: Phase complete — ready for verification
+Phase: 15
+Plan: Not started
+Status: Ready for discussion
 Last activity: 2026-05-08
 
-Progress: [##--------] 18% of mapped v2.1 plans complete; Phase 13 has 2/2 plans complete
+Progress: Phase 14 complete; Phase 15 is next.
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total v2.1 plans completed: 2
+- Total v2.1 plans completed: 4
 - Average duration: n/a
 - Total execution time: n/a
 
@@ -46,7 +46,7 @@ Progress: [##--------] 18% of mapped v2.1 plans complete; Phase 13 has 2/2 plans
 | Phase | Plans | Status |
 |-------|-------|--------|
 | 13 | 2/2 | Complete |
-| 14 | 0/2 | Planned |
+| 14 | 2/2 | Complete |
 | 15 | 0/2 | Planned |
 | 16 | 0/2 | Planned |
 | 17 | 0/2 | Planned |
@@ -115,6 +115,11 @@ Decisions are logged in `.planning/PROJECT.md` Key Decisions table.
   `PACKET-INDEX.json`, `ROLLUP-GROUPS.json`, occurrence-normalized duplicate
   source finding IDs, self-use evidence, and 218/218 tests passing.
 
+- Phase 14 validated project-context-ledger artifact schemas with six public
+  ledger JSON Schemas, generated-output schema validation, deterministic
+  occurrence-normalized record IDs, self-use evidence, and 226/226 tests
+  passing.
+
 ### Roadmap Evolution
 
 - Phase 03 inserted: Cross-Repo Capability Request Gate.
@@ -134,7 +139,7 @@ Decisions are logged in `.planning/PROJECT.md` Key Decisions table.
 
 ### Pending Todos
 
-- Start Phase 14: Ledger Artifact Schemas.
+- Start Phase 15: Review Disposition Model.
 
 ### Blockers/Concerns
 
@@ -162,6 +167,6 @@ Decisions are logged in `.planning/PROJECT.md` Key Decisions table.
 
 ## Session Continuity
 
-Last session: 2026-05-08T09:23:17.663Z
-Stopped at: Completed 14-01-PLAN.md
+Last session: 2026-05-08T09:56:51.513Z
+Stopped at: Completed Phase 14; ready for Phase 15 discuss
 Resume file: None
