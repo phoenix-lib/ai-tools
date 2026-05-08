@@ -13,7 +13,8 @@ const publicSchemaNames = [
   "CONTRACTS.schema.json",
   "SKILLS.schema.json",
   "DECISIONS.schema.json",
-  "CACHE-MANIFEST.schema.json"
+  "CACHE-MANIFEST.schema.json",
+  "LEDGER-DIFF.schema.json"
 ];
 
 const HASH = "a".repeat(64);
@@ -61,6 +62,17 @@ function minimalCacheManifest(overrides = {}) {
       "SKILLS.json",
       "DECISIONS.json",
       "CACHE-MANIFEST.json"
+    ],
+    ledger_records: [
+      {
+        artifact: "FACTS.json",
+        confidence: "verified",
+        evidence_refs: ["ev.package"],
+        id: "fact.package-name.package-json",
+        record_sha256: HASH,
+        source_category: "current",
+        source_path: "package.json"
+      }
     ],
     packet_artifacts: [
       "REVIEW-SUMMARY.json",
@@ -255,6 +267,63 @@ test("cache manifest schema accepts current manifest states", () => {
       compared: true
     }
   }));
+});
+
+test("ledger diff schema accepts mechanical diff output", () => {
+  const compiled = validators();
+  const snapshot = {
+    artifact: "FACTS.json",
+    confidence: "verified",
+    evidence_refs: ["ev.package"],
+    id: "fact.package-name.package-json",
+    record_sha256: HASH,
+    source_category: "current",
+    source_path: "package.json"
+  };
+
+  assertValid(compiled["LEDGER-DIFF.schema.json"], {
+    added: [snapshot],
+    by_artifact: [
+      {
+        added: 1,
+        artifact: "FACTS.json",
+        changed: 1,
+        removed: 0,
+        stale: 0,
+        unchanged: 1
+      }
+    ],
+    changed: [
+      {
+        artifact: "FACTS.json",
+        current_record_sha256: "b".repeat(64),
+        evidence_refs: ["ev.package"],
+        id: "fact.package-name.package-json",
+        previous_record_sha256: HASH,
+        source_category: "current",
+        source_path: "package.json"
+      }
+    ],
+    counts: {
+      added: 1,
+      changed: 1,
+      removed: 0,
+      stale: 0,
+      total_current: 3,
+      total_previous: 2,
+      unchanged: 1
+    },
+    previous_manifest: {
+      path: "C:/tmp/CACHE-MANIFEST.json",
+      schema_version: "project-context-ledger/v1",
+      sha256: HASH
+    },
+    removed: [],
+    run_timestamp: TIMESTAMP,
+    schema_version: "project-context-ledger-diff/v1",
+    stale: [],
+    unchanged: [snapshot]
+  });
 });
 
 test("cache manifest schema rejects invalid version and source hash policy", () => {

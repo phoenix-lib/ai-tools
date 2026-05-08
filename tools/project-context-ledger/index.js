@@ -45,18 +45,19 @@ function createPolicyHashes(rootDir) {
   return hashes;
 }
 
-function createToolManifest({ argv, projectDir, timestamp }) {
+function createToolManifest({ argv, generatedArtifacts, projectDir, timestamp }) {
   const rootDir = path.join(__dirname, "../..");
+  const outputs = generatedArtifacts ?? ALL_ARTIFACTS;
 
   return {
-    generated_files: ALL_ARTIFACTS.map((artifact) => ({ path: artifact })),
+    generated_files: outputs.map((artifact) => ({ path: artifact })),
     input: {
       args: argv ?? [],
       target_path: projectDir
     },
     policy_hashes: createPolicyHashes(rootDir),
     read_write_behavior: "review_output_only",
-    requested_outputs: ALL_ARTIFACTS,
+    requested_outputs: outputs,
     run_timestamp: timestamp,
     safety_profile: {
       review_only: true,
@@ -76,11 +77,44 @@ function createToolManifest({ argv, projectDir, timestamp }) {
   };
 }
 
+function readSinceManifest(manifestPath) {
+  if (!manifestPath) {
+    return null;
+  }
+
+  const absolutePath = path.resolve(manifestPath);
+  if (!fs.existsSync(absolutePath) || !fs.statSync(absolutePath).isFile()) {
+    throw new Error(`--since-manifest not found: ${manifestPath}`);
+  }
+
+  let value;
+  try {
+    value = JSON.parse(fs.readFileSync(absolutePath, "utf8"));
+  } catch (error) {
+    throw new Error(`--since-manifest could not be parsed: ${error.message}`);
+  }
+
+  if (value?.schema_version !== "project-context-ledger/v1") {
+    throw new Error("--since-manifest must be a project-context-ledger/v1 CACHE-MANIFEST.json.");
+  }
+
+  if (!Array.isArray(value.ledger_records)) {
+    throw new Error("--since-manifest must include ledger_records.");
+  }
+
+  return {
+    path: absolutePath,
+    sha256: sha256File(absolutePath),
+    value
+  };
+}
+
 async function runLedger(options) {
   const projectDir = path.resolve(options.projectDir);
   const outDir = path.resolve(options.outDir);
   const scope = options.scope ?? "current";
   const timestamp = (options.clock ?? (() => new Date()))().toISOString();
+  const sinceManifest = readSinceManifest(options.sinceManifest);
 
   assertSafeOutputDir(projectDir, outDir);
 
@@ -88,6 +122,9 @@ async function runLedger(options) {
   const ledgerResult = buildLedger(discovery, {
     argv: options.argv ?? [],
     outDir,
+    previousManifest: sinceManifest?.value,
+    previousManifestPath: sinceManifest?.path,
+    previousManifestSha256: sinceManifest?.sha256,
     timestamp
   });
   const checkResult = ledgerResult.result;
@@ -112,6 +149,7 @@ async function runLedger(options) {
     },
     tool: createToolManifest({
       argv: options.argv ?? [],
+      generatedArtifacts: [...REQUIRED_PACKET_ARTIFACTS, ...Object.keys(ledgerResult.artifacts)],
       projectDir,
       timestamp
     })
@@ -144,5 +182,6 @@ async function runLedger(options) {
 module.exports = {
   ALL_ARTIFACTS,
   createToolManifest,
+  readSinceManifest,
   runLedger
 };

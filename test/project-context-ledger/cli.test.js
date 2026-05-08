@@ -35,9 +35,15 @@ test("parses explicit scope", () => {
   assert.equal(parsed.scope, "history");
 });
 
+test("parses explicit since manifest", () => {
+  const parsed = parseArgs(["--project", "a", "--out", "b", "--since-manifest", "CACHE-MANIFEST.json"]);
+  assert.equal(parsed.sinceManifest, "CACHE-MANIFEST.json");
+});
+
 test("rejects invalid scope", () => {
   assert.throws(() => parseArgs(["--scope", "future"]), /Invalid scope/);
   assert.throws(() => parseArgs(["--scope"]), /Missing value/);
+  assert.throws(() => parseArgs(["--since-manifest"]), /Missing value/);
 });
 
 test("help prints usage", async () => {

@@ -394,10 +394,13 @@
         "standards/project-context-ledger/schemas/SKILLS.schema.json",
         "standards/project-context-ledger/schemas/DECISIONS.schema.json",
         "standards/project-context-ledger/schemas/CACHE-MANIFEST.schema.json",
+        "standards/project-context-ledger/schemas/LEDGER-DIFF.schema.json",
         ".planning/phases/11-v2-tool-selection-review/11-SELECTION-REVIEW.md",
         ".planning/phases/12-project-context-ledger-mvp/12-VERIFICATION.md",
         ".planning/phases/14-ledger-artifact-schemas/14-01-SUMMARY.md",
         ".planning/phases/14-ledger-artifact-schemas/14-02-SUMMARY.md",
+        ".planning/phases/16-ledger-scope-and-diff-modes/16-01-SUMMARY.md",
+        ".planning/phases/16-ledger-scope-and-diff-modes/16-02-SUMMARY.md",
         "test/project-context-ledger/integration.test.js",
         "test/project-context-ledger/ledger-schema-contract.test.js",
         "test/project-context-ledger/schema-output.test.js"
@@ -412,7 +415,8 @@
         "CONTRACTS.json",
         "SKILLS.json",
         "DECISIONS.json",
-        "CACHE-MANIFEST.json"
+        "CACHE-MANIFEST.json",
+        "LEDGER-DIFF.json"
       ],
       "id": "project-context-ledger",
       "maturity": "validated",
@@ -442,7 +446,7 @@
         ]
       },
       "phase": "12",
-      "status_notes": "Validated Phase 12 read-only project context ledger CLI with shared review packet and six ledger JSON artifacts; Phase 14 adds strict ledger artifact schemas and generated-output schema validation.",
+      "status_notes": "Validated Phase 12 read-only project context ledger CLI with shared review packet and six ledger JSON artifacts; Phase 14 adds strict ledger artifact schemas and generated-output schema validation; Phase 16 adds current/planning/history/all scope modes and explicit LEDGER-DIFF.json generation from previous cache manifests.",
       "use_gate": "new-tool-intake"
     },
     {

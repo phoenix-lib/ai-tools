@@ -155,7 +155,12 @@ test("release readiness doc is checkable and preserves deferred boundaries", () 
       "review-packet-rollup",
       "PACKET-INDEX.json",
       "ROLLUP-GROUPS.json",
-      "optional packet evidence consumption"
+      "optional packet evidence consumption",
+      "--scope current|planning|history|all",
+      "--since-manifest <CACHE-MANIFEST.json>",
+      "LEDGER-DIFF.json",
+      "historical `.planning/phases/**` artifacts",
+      "mechanical ledger-record comparison"
     ],
     "release readiness"
   );

@@ -3,7 +3,7 @@
 const { runLedger } = require("./index");
 const { normalizeScope } = require("./scope");
 
-const USAGE = `project-context-ledger --project <path> --out <dir> [--scope current|planning|history|all]
+const USAGE = `project-context-ledger --project <path> --out <dir> [--scope current|planning|history|all] [--since-manifest <file>]
 
 Read-only project context ledger scanner.
 
@@ -11,6 +11,8 @@ Options:
   --project <path>  Project to scan.
   --out <dir>       Output directory outside the scanned project.
   --scope <value>   Source scope to scan. Defaults to current.
+  --since-manifest <file>
+                    Compare this run to a previous CACHE-MANIFEST.json.
   --help            Show this help.
 `;
 
@@ -21,6 +23,7 @@ function parseArgs(argv) {
     help: false,
     out: null,
     project: null,
+    sinceManifest: null,
     scope: "current"
   };
 
@@ -49,6 +52,15 @@ function parseArgs(argv) {
         throw new Error("Missing value for --scope.");
       }
       parsed.scope = normalizeScope(argv[index + 1]);
+      index += 1;
+      continue;
+    }
+
+    if (arg === "--since-manifest") {
+      if (!argv[index + 1] || argv[index + 1].startsWith("--")) {
+        throw new Error("Missing value for --since-manifest.");
+      }
+      parsed.sinceManifest = argv[index + 1];
       index += 1;
       continue;
     }
@@ -85,6 +97,7 @@ async function main(argv = process.argv.slice(2), io = {}) {
       argv,
       outDir: args.out,
       projectDir: args.project,
+      sinceManifest: args.sinceManifest,
       scope: args.scope
     });
 

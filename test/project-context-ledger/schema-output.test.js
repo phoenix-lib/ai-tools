@@ -8,6 +8,7 @@ const addFormats = require("ajv-formats");
 const { runLedger } = require("../../tools/project-context-ledger");
 const { buildLedger } = require("../../tools/project-context-ledger/ledger");
 const {
+  PROJECT_CONTEXT_LEDGER_DIFF_ARTIFACT,
   PROJECT_CONTEXT_LEDGER_ARTIFACTS,
   PROJECT_CONTEXT_LEDGER_TOOL_NAME,
   REQUIRED_PACKET_ARTIFACTS,
@@ -31,7 +32,8 @@ const ledgerPublicSchemaNames = [
   "CONTRACTS.schema.json",
   "SKILLS.schema.json",
   "DECISIONS.schema.json",
-  "CACHE-MANIFEST.schema.json"
+  "CACHE-MANIFEST.schema.json",
+  "LEDGER-DIFF.schema.json"
 ];
 
 function readReviewSchema(name) {
@@ -71,12 +73,13 @@ function createLedgerAjv() {
   return ajv;
 }
 
-async function generatePacket() {
+async function generatePacket(options = {}) {
   const outDir = fs.mkdtempSync(path.join(os.tmpdir(), "ai-tools-ledger-schema-"));
   await runLedger({
     clock: () => new Date("2026-05-08T00:00:00Z"),
     outDir,
-    projectDir: fixtureProject
+    projectDir: fixtureProject,
+    sinceManifest: options.sinceManifest
   });
 
   return {
@@ -92,6 +95,12 @@ async function generatePacket() {
       artifact,
       fs.readFileSync(path.join(outDir, artifact), "utf8")
     ])),
+    optionalArtifacts: Object.fromEntries([PROJECT_CONTEXT_LEDGER_DIFF_ARTIFACT]
+      .filter((artifact) => fs.existsSync(path.join(outDir, artifact)))
+      .map((artifact) => [
+        artifact,
+        JSON.parse(fs.readFileSync(path.join(outDir, artifact), "utf8"))
+      ])),
     outDir,
     summary: JSON.parse(fs.readFileSync(path.join(outDir, "REVIEW-SUMMARY.json"), "utf8")),
     summaryText: fs.readFileSync(path.join(outDir, "REVIEW-SUMMARY.json"), "utf8")
@@ -131,6 +140,42 @@ test("generated ledger packet validates against review packet schemas", async ()
     }
   } finally {
     fs.rmSync(packet.outDir, { force: true, recursive: true });
+  }
+});
+
+test("generated ledger diff artifact validates and reports all categories", async () => {
+  const previous = await generatePacket();
+  const previousManifest = JSON.parse(previous.cacheManifestText);
+  const currentRecords = previousManifest.ledger_records;
+  const changed = { ...currentRecords[0], record_sha256: "b".repeat(64) };
+  const unchanged = currentRecords[1];
+  const removed = {
+    artifact: "FACTS.json",
+    confidence: "verified",
+    evidence_refs: ["ev.package"],
+    id: "fact.removed.example",
+    record_sha256: "c".repeat(64),
+    source_category: "current",
+    source_path: "package.json"
+  };
+  previousManifest.ledger_records = [changed, unchanged, removed];
+  const manifestPath = path.join(previous.outDir, "CACHE-MANIFEST.previous.json");
+  fs.writeFileSync(manifestPath, JSON.stringify(previousManifest, null, 2), "utf8");
+  const current = await generatePacket({ sinceManifest: manifestPath });
+  const ajv = createLedgerAjv();
+  const validate = ajv.getSchema("https://ai-tools.local/schemas/project-context-ledger/LEDGER-DIFF.schema.json");
+
+  try {
+    const diff = current.optionalArtifacts[PROJECT_CONTEXT_LEDGER_DIFF_ARTIFACT];
+    assert.equal(validate(diff), true, ajv.errorsText(validate.errors));
+    assert.ok(diff.counts.added > 0);
+    assert.ok(diff.counts.changed > 0);
+    assert.ok(diff.counts.removed > 0);
+    assert.ok(diff.counts.stale > 0);
+    assert.ok(diff.counts.unchanged > 0);
+  } finally {
+    fs.rmSync(previous.outDir, { force: true, recursive: true });
+    fs.rmSync(current.outDir, { force: true, recursive: true });
   }
 });
 

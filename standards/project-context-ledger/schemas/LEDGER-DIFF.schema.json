@@ -1,0 +1,262 @@
+{
+  "$id": "https://ai-tools.local/schemas/project-context-ledger/LEDGER-DIFF.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "LEDGER-DIFF.json reports mechanical record-level differences between ledger runs.",
+  "properties": {
+    "added": {
+      "items": {
+        "$ref": "#/$defs/snapshot"
+      },
+      "type": "array"
+    },
+    "by_artifact": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "added": {
+            "minimum": 0,
+            "type": "integer"
+          },
+          "artifact": {
+            "$ref": "#/$defs/artifact"
+          },
+          "changed": {
+            "minimum": 0,
+            "type": "integer"
+          },
+          "removed": {
+            "minimum": 0,
+            "type": "integer"
+          },
+          "stale": {
+            "minimum": 0,
+            "type": "integer"
+          },
+          "unchanged": {
+            "minimum": 0,
+            "type": "integer"
+          }
+        },
+        "required": [
+          "artifact",
+          "added",
+          "removed",
+          "changed",
+          "stale",
+          "unchanged"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "changed": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "artifact": {
+            "$ref": "#/$defs/artifact"
+          },
+          "current_record_sha256": {
+            "$ref": "https://ai-tools.local/schemas/project-context-ledger/LEDGER-COMMON.schema.json#/$defs/sha256"
+          },
+          "evidence_refs": {
+            "$ref": "https://ai-tools.local/schemas/project-context-ledger/LEDGER-COMMON.schema.json#/$defs/evidenceRefs"
+          },
+          "id": {
+            "$ref": "https://ai-tools.local/schemas/project-context-ledger/LEDGER-COMMON.schema.json#/$defs/recordId"
+          },
+          "previous_record_sha256": {
+            "$ref": "https://ai-tools.local/schemas/project-context-ledger/LEDGER-COMMON.schema.json#/$defs/sha256"
+          },
+          "source_category": {
+            "$ref": "https://ai-tools.local/schemas/project-context-ledger/LEDGER-COMMON.schema.json#/$defs/sourceCategory"
+          },
+          "source_path": {
+            "$ref": "https://ai-tools.local/schemas/project-context-ledger/LEDGER-COMMON.schema.json#/$defs/relativePath"
+          }
+        },
+        "required": [
+          "artifact",
+          "id",
+          "previous_record_sha256",
+          "current_record_sha256",
+          "source_category",
+          "source_path",
+          "evidence_refs"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "counts": {
+      "additionalProperties": false,
+      "properties": {
+        "added": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "changed": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "removed": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "stale": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "total_current": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "total_previous": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "unchanged": {
+          "minimum": 0,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "added",
+        "removed",
+        "changed",
+        "stale",
+        "unchanged",
+        "total_current",
+        "total_previous"
+      ],
+      "type": "object"
+    },
+    "previous_manifest": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "project-context-ledger/v1"
+        },
+        "sha256": {
+          "$ref": "https://ai-tools.local/schemas/project-context-ledger/LEDGER-COMMON.schema.json#/$defs/sha256"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "schema_version"
+      ],
+      "type": "object"
+    },
+    "removed": {
+      "items": {
+        "$ref": "#/$defs/snapshot"
+      },
+      "type": "array"
+    },
+    "run_timestamp": {
+      "$ref": "https://ai-tools.local/schemas/project-context-ledger/LEDGER-COMMON.schema.json#/$defs/timestamp"
+    },
+    "schema_version": {
+      "const": "project-context-ledger-diff/v1"
+    },
+    "stale": {
+      "items": {
+        "allOf": [
+          {
+            "$ref": "#/$defs/snapshot"
+          },
+          {
+            "additionalProperties": true,
+            "properties": {
+              "stale_reason": {
+                "minLength": 1,
+                "type": "string"
+              }
+            },
+            "required": [
+              "stale_reason"
+            ],
+            "type": "object"
+          }
+        ]
+      },
+      "type": "array"
+    },
+    "unchanged": {
+      "items": {
+        "$ref": "#/$defs/snapshot"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "schema_version",
+    "run_timestamp",
+    "previous_manifest",
+    "counts",
+    "by_artifact",
+    "added",
+    "removed",
+    "changed",
+    "stale",
+    "unchanged"
+  ],
+  "title": "Project Context Ledger Diff",
+  "type": "object",
+  "$defs": {
+    "artifact": {
+      "enum": [
+        "FACTS.json",
+        "COMMANDS.json",
+        "CONTRACTS.json",
+        "SKILLS.json",
+        "DECISIONS.json"
+      ]
+    },
+    "snapshot": {
+      "additionalProperties": true,
+      "properties": {
+        "artifact": {
+          "$ref": "#/$defs/artifact"
+        },
+        "confidence": {
+          "$ref": "https://ai-tools.local/schemas/project-context-ledger/LEDGER-COMMON.schema.json#/$defs/confidence"
+        },
+        "evidence_refs": {
+          "$ref": "https://ai-tools.local/schemas/project-context-ledger/LEDGER-COMMON.schema.json#/$defs/evidenceRefs"
+        },
+        "id": {
+          "$ref": "https://ai-tools.local/schemas/project-context-ledger/LEDGER-COMMON.schema.json#/$defs/recordId"
+        },
+        "path": {
+          "$ref": "https://ai-tools.local/schemas/project-context-ledger/LEDGER-COMMON.schema.json#/$defs/relativePath"
+        },
+        "record_sha256": {
+          "$ref": "https://ai-tools.local/schemas/project-context-ledger/LEDGER-COMMON.schema.json#/$defs/sha256"
+        },
+        "source_category": {
+          "$ref": "https://ai-tools.local/schemas/project-context-ledger/LEDGER-COMMON.schema.json#/$defs/sourceCategory"
+        },
+        "source_path": {
+          "$ref": "https://ai-tools.local/schemas/project-context-ledger/LEDGER-COMMON.schema.json#/$defs/relativePath"
+        }
+      },
+      "required": [
+        "artifact",
+        "id",
+        "record_sha256",
+        "confidence",
+        "evidence_refs",
+        "source_category",
+        "source_path"
+      ],
+      "type": "object"
+    }
+  }
+}

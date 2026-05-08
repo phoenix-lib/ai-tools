@@ -35,6 +35,10 @@ Phase 15 adds the `REVIEW-DISPOSITIONS.json` sidecar schema, stable finding
 fingerprints, and `review-packet-rollup` disposition indexing through
 `DISPOSITION-INDEX.json` without changing source finding severity, status
 contribution, evidence refs, or packet status derivation.
+Phase 16 adds `project-context-ledger` source scopes and explicit diff mode:
+`--scope current|planning|history|all`, default current-source filtering for
+historical phase artifacts, cache-manifest `ledger_records`, and
+`LEDGER-DIFF.json` generation from `--since-manifest`.
 
 ## Definition of Done
 
@@ -71,6 +75,9 @@ contribution, evidence refs, or packet status derivation.
 - [x] Phase 15 post-v1 review dispositions are documented as human review
   metadata, not source finding rewrites, suppression, or automatic gate
   authority.
+- [x] Phase 16 post-v1 ledger scope and diff modes are documented as optional
+  evidence-consumer support, not automatic priority, suppression, disposition,
+  workflow, gate, roadmap, merge, phase, or portfolio authority.
 
 ## Required Artifacts
 
@@ -199,6 +206,17 @@ matched, unmatched, expired, stale, invalid, and undispositioned review
 context. It does not modify source findings, source packet counts, severity,
 status contribution, evidence refs, blockers, required decisions, or packet
 status derivation.
+
+Phase 16 ledger scope and diff hardening adds
+`project-context-ledger --scope current|planning|history|all` and
+`--since-manifest <CACHE-MANIFEST.json>`. The default `current` scope excludes
+historical `.planning/phases/**` artifacts, ledger records include
+`source_category`, `CACHE-MANIFEST.json` records canonical `ledger_records`,
+and explicit diff runs write `LEDGER-DIFF.json` with added, changed, removed,
+unchanged, and stale record snapshots. Scope and diff output remain evidence
+only and do not authorize automatic priority, suppression, disposition,
+workflow, gate, roadmap, merge, phase, portfolio, install, fetch, run, or
+mutation decisions.
 
 Phase 14 self-use wrote ledger output outside the repository at:
 
@@ -389,10 +407,36 @@ Phase 15 review disposition evidence:
   stable finding fingerprints. They are not safe-to-ignore labels,
   suppressions, source finding rewrites, or automatic gate decisions.
 
+Phase 16 ledger scope and diff evidence:
+
+- Reusable current-scope command:
+  `node tools/project-context-ledger/cli.js --project . --out <external-dir>`
+- Reusable all-scope command:
+  `node tools/project-context-ledger/cli.js --project . --scope all --out <external-dir>`
+- Reusable diff command:
+  `node tools/project-context-ledger/cli.js --project . --scope current --since-manifest <CACHE-MANIFEST.json> --out <external-dir>`
+- Focused validation command:
+  `npm.cmd test -- test/project-context-ledger/cli.test.js test/project-context-ledger/discovery.test.js test/project-context-ledger/integration.test.js test/project-context-ledger/schema-output.test.js test/project-context-ledger/ledger-schema-contract.test.js`
+- Phase 16 current-scope output path:
+  `C:\Users\suppo\.codex\memories\ai-tools-ledger-scope-phase16-current-20260508`
+- Phase 16 all-scope output path:
+  `C:\Users\suppo\.codex\memories\ai-tools-ledger-scope-phase16-all-20260508`
+- Phase 16 diff output path:
+  `C:\Users\suppo\.codex\memories\ai-tools-ledger-scope-phase16-diff-20260508`
+- Self-use result: current scope produced `human_review_required` with 74 low
+  findings, 349 scanned sources, and 239 ledger records. All scope produced
+  `human_review_required` with 460 findings, 415 scanned sources, and 2361
+  ledger records. Explicit diff produced `LEDGER-DIFF.json` with 0 added, 0
+  changed, 0 removed, 74 stale, and 239 unchanged records.
+- Interpretation: default current-scope runs reduce historical phase noise.
+  Explicit diff output is a mechanical ledger-record comparison and does not
+  replace direct source inspection or assistant judgment.
+
 ## Deferred V2 Work
 
 `XREPO-VALIDATOR-01`, `GATELINT-01`, `LEDGER-01`, the Phase 13 packet
-rollup, the Phase 14 ledger schemas, and Phase 15 review dispositions are
+rollup, the Phase 14 ledger schemas, Phase 15 review dispositions, and Phase 16
+ledger scope/diff modes are
 implemented after v1 as read-only evidence producers, consumers, or contracts.
 Automatic cross-repo indexing, automatic gate-linter decisions, automatic
 context adoption, auto-fix mode, and additional seed tools remain deferred.
@@ -410,3 +454,9 @@ Review dispositions remain not part of the v1 release. Their Phase 15
 implementation is a human review metadata layer and must not be treated as
 automatic suppression, safe-to-ignore policy, gate approval, roadmap mutation,
 merge decision, portfolio scan, or target-project mutation authority.
+
+Ledger scope and diff modes remain not part of the v1 release. Their Phase 16
+implementation is optional context evidence filtering and mechanical diffing.
+It must not be treated as automatic priority, suppression, disposition, gate
+approval, roadmap mutation, merge decision, portfolio scan, source command
+execution, or target-project mutation authority.

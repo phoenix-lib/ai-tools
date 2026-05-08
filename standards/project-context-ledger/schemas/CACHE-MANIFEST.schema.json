@@ -19,12 +19,61 @@
           "CONTRACTS.json",
           "SKILLS.json",
           "DECISIONS.json",
-          "CACHE-MANIFEST.json"
+          "CACHE-MANIFEST.json",
+          "LEDGER-DIFF.json"
         ]
       },
       "minItems": 6,
       "type": "array",
       "uniqueItems": true
+    },
+    "ledger_records": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "artifact": {
+            "enum": [
+              "FACTS.json",
+              "COMMANDS.json",
+              "CONTRACTS.json",
+              "SKILLS.json",
+              "DECISIONS.json"
+            ]
+          },
+          "confidence": {
+            "$ref": "https://ai-tools.local/schemas/project-context-ledger/LEDGER-COMMON.schema.json#/$defs/confidence"
+          },
+          "evidence_refs": {
+            "$ref": "https://ai-tools.local/schemas/project-context-ledger/LEDGER-COMMON.schema.json#/$defs/evidenceRefs"
+          },
+          "id": {
+            "$ref": "https://ai-tools.local/schemas/project-context-ledger/LEDGER-COMMON.schema.json#/$defs/recordId"
+          },
+          "path": {
+            "$ref": "https://ai-tools.local/schemas/project-context-ledger/LEDGER-COMMON.schema.json#/$defs/relativePath"
+          },
+          "record_sha256": {
+            "$ref": "https://ai-tools.local/schemas/project-context-ledger/LEDGER-COMMON.schema.json#/$defs/sha256"
+          },
+          "source_category": {
+            "$ref": "https://ai-tools.local/schemas/project-context-ledger/LEDGER-COMMON.schema.json#/$defs/sourceCategory"
+          },
+          "source_path": {
+            "$ref": "https://ai-tools.local/schemas/project-context-ledger/LEDGER-COMMON.schema.json#/$defs/relativePath"
+          }
+        },
+        "required": [
+          "artifact",
+          "id",
+          "record_sha256",
+          "confidence",
+          "evidence_refs",
+          "source_category",
+          "source_path"
+        ],
+        "type": "object"
+      },
+      "type": "array"
     },
     "packet_artifacts": {
       "items": {
@@ -223,6 +272,7 @@
     "tool",
     "scope",
     "ledger_artifacts",
+    "ledger_records",
     "packet_artifacts",
     "scanned_sources",
     "policy_hashes",

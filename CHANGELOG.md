@@ -19,6 +19,58 @@ major plan execution, and workflow gate change.
 - Validation: focused planning tests passed 17/17, `gsd-sdk.cmd query
   state.validate` passed, and `git diff --check` passed.
 
+### Phase 16: Ledger Scope and Diff Modes
+
+- Changed ledger source selection: `project-context-ledger` now supports
+  `--scope current|planning|history|all`, defaults to `current`, and excludes
+  historical `.planning/phases/**` artifacts from current-scope scans.
+- Changed source classification: scanned sources and ledger records now carry
+  `source_category`, and placeholder/example references such as `n/a` are
+  classified separately so they do not become current missing-reference
+  findings.
+- Changed cache manifests: `CACHE-MANIFEST.json` now records canonical
+  `ledger_records` snapshots with record hashes, evidence refs, confidence,
+  source path, and source category for downstream mechanical comparison.
+- Changed diff output: explicit `--since-manifest <CACHE-MANIFEST.json>` runs
+  write `LEDGER-DIFF.json` with added, changed, removed, unchanged, stale, and
+  by-artifact counts. Diff mode is mechanical evidence only and does not rank
+  importance, suppress findings, apply dispositions, or make workflow, gate,
+  roadmap, merge, phase, portfolio, install, fetch, run, or mutation decisions.
+- Changed docs and registry: updated `tools/project-context-ledger/README.md`,
+  `standards/project-context-ledger/README.md`,
+  `docs/RELEASE-READINESS.md`, and `tools/registry.json` to document scope and
+  diff support as optional evidence-consumer hardening.
+- Validation: focused ledger scope/diff and docs/registry tests passed 40/40,
+  full `npm.cmd test` passed 247/247, and `git diff --check` passed.
+- Self-use result: Phase 16 `project-context-ledger` wrote current-scope
+  output outside the repository at
+  `C:\Users\suppo\.codex\memories\ai-tools-ledger-scope-phase16-current-20260508`;
+  packet status was `human_review_required` with 74 low findings, 0 blockers,
+  0 required decisions, 349 scanned sources, and 239 ledger records. The
+  all-scope run wrote
+  `C:\Users\suppo\.codex\memories\ai-tools-ledger-scope-phase16-all-20260508`;
+  packet status was `human_review_required` with 460 findings, 458 low, 2
+  medium, 0 blockers, 0 required decisions, 415 scanned sources, and 2361
+  ledger records. The explicit diff run wrote
+  `C:\Users\suppo\.codex\memories\ai-tools-ledger-scope-phase16-diff-20260508`
+  and produced `LEDGER-DIFF.json` with 0 added, 0 changed, 0 removed, 74 stale,
+  and 239 unchanged records.
+- Upstream impact: no `ai-workspace-kit` source was changed. Scope/diff output
+  remains optional AI Tools evidence and does not add a runtime dependency or
+  copied `.planning` state.
+- Compatibility impact for `ai-workspace-kit`: downstream workflows may inspect
+  `source_category`, manifest `ledger_records`, and `LEDGER-DIFF.json` as
+  optional context evidence. No automatic tool execution, hidden trigger,
+  adoption/bootstrap behavior, gate decision, roadmap mutation, source finding
+  suppression, review disposition, or target project mutation was introduced.
+- Breaking changes: `project-context-ledger` default source scope is now
+  `current`, so default self-use output omits historical phase artifacts that
+  previously contributed findings. Use `--scope all` for broad historical
+  scans.
+- Migration notes: consumers that read `CACHE-MANIFEST.json` should allow the
+  new required `ledger_records` field and optional `LEDGER-DIFF.json` artifact
+  in explicit diff runs.
+
 ### Phase 15: Review Disposition Model
 
 - Changed review disposition contracts: added

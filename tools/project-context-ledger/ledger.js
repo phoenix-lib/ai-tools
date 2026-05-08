@@ -5,11 +5,13 @@ const { canonicalJson } = require("../../shared/canonical-json");
 const { isSecretLikePath, normalizeEvidencePath, secretEvidenceRef } = require("../../shared/secret-policy");
 const {
   POLICY_HASH_SOURCES,
+  PROJECT_CONTEXT_LEDGER_DIFF_ARTIFACT,
   PROJECT_CONTEXT_LEDGER_ARTIFACTS,
   REQUIRED_PACKET_ARTIFACTS,
   loadPackageVersion
 } = require("../../shared/tool-metadata");
 const { action, emptyCheckResult, finding } = require("./checks");
+const { buildLedgerDiff, createLedgerRecordSnapshots } = require("./diff");
 
 function slug(value) {
   return String(value)
@@ -213,6 +215,14 @@ function readPreviousManifest(outDir) {
   } catch {
     return null;
   }
+}
+
+function selectPreviousManifest(options) {
+  if (options.previousManifest) {
+    return options.previousManifest;
+  }
+
+  return readPreviousManifest(options.outDir);
 }
 
 function changedPreviousSources(previousManifest, currentSources) {
@@ -556,7 +566,7 @@ function buildLedger(discovery, options) {
   }
 
   const scannedSources = (discovery.scopedFiles ?? discovery.files ?? []).map((relativePath) => sourceRecord(discovery, relativePath));
-  const previousManifest = readPreviousManifest(options.outDir);
+  const previousManifest = selectPreviousManifest(options);
   const changedSources = changedPreviousSources(previousManifest, scannedSources);
 
   for (const changedSource of changedSources) {
@@ -603,9 +613,22 @@ function buildLedger(discovery, options) {
     value: (discovery.secretPaths ?? []).length
   }));
 
+  const recordArtifacts = {
+    "COMMANDS.json": withUniqueRecordIds(commands).sort((left, right) => left.id.localeCompare(right.id)),
+    "CONTRACTS.json": withUniqueRecordIds(contracts).sort((left, right) => left.id.localeCompare(right.id)),
+    "DECISIONS.json": withUniqueRecordIds(decisions).sort((left, right) => left.id.localeCompare(right.id)),
+    "FACTS.json": withUniqueRecordIds(facts).sort((left, right) => left.id.localeCompare(right.id)),
+    "SKILLS.json": withUniqueRecordIds(skills).sort((left, right) => left.id.localeCompare(right.id))
+  };
+  const ledgerRecords = createLedgerRecordSnapshots(recordArtifacts);
+  const ledgerArtifacts = options.previousManifest
+    ? [...PROJECT_CONTEXT_LEDGER_ARTIFACTS, PROJECT_CONTEXT_LEDGER_DIFF_ARTIFACT]
+    : PROJECT_CONTEXT_LEDGER_ARTIFACTS;
+
   const cacheManifest = {
     ignored_generated_packet_dirs: discovery.generatedPacketDirs ?? [],
-    ledger_artifacts: PROJECT_CONTEXT_LEDGER_ARTIFACTS,
+    ledger_artifacts: ledgerArtifacts,
+    ledger_records: ledgerRecords,
     packet_artifacts: REQUIRED_PACKET_ARTIFACTS,
     path_only_secret_paths: discovery.secretPaths ?? [],
     policy_hashes: createPolicyHashes(rootDir),
@@ -628,12 +651,19 @@ function buildLedger(discovery, options) {
 
   const artifactModels = {
     "CACHE-MANIFEST.json": cacheManifest,
-    "COMMANDS.json": withUniqueRecordIds(commands).sort((left, right) => left.id.localeCompare(right.id)),
-    "CONTRACTS.json": withUniqueRecordIds(contracts).sort((left, right) => left.id.localeCompare(right.id)),
-    "DECISIONS.json": withUniqueRecordIds(decisions).sort((left, right) => left.id.localeCompare(right.id)),
-    "FACTS.json": withUniqueRecordIds(facts).sort((left, right) => left.id.localeCompare(right.id)),
-    "SKILLS.json": withUniqueRecordIds(skills).sort((left, right) => left.id.localeCompare(right.id))
+    ...recordArtifacts
   };
+
+  if (options.previousManifest) {
+    artifactModels[PROJECT_CONTEXT_LEDGER_DIFF_ARTIFACT] = buildLedgerDiff({
+      changedSources,
+      currentRecords: ledgerRecords,
+      previousManifest: options.previousManifest,
+      previousManifestPath: options.previousManifestPath,
+      previousManifestSha256: options.previousManifestSha256,
+      timestamp
+    });
+  }
 
   result.evidence.sort((left, right) => left.id.localeCompare(right.id));
   result.findings.sort((left, right) => left.id.localeCompare(right.id));
