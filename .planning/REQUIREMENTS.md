@@ -114,9 +114,9 @@
 
 ### Ledger Artifact Schemas
 
-- [ ] **LEDGER-SCHEMA-01**: Tool consumers can validate `FACTS.json` entries with evidence refs, confidence, source hash, source category, and last checked timestamp.
-- [ ] **LEDGER-SCHEMA-02**: Tool consumers can validate `COMMANDS.json`, `CONTRACTS.json`, `SKILLS.json`, and `DECISIONS.json` with stable IDs, evidence refs, confidence, and source metadata.
-- [ ] **LEDGER-SCHEMA-03**: Tool consumers can validate `CACHE-MANIFEST.json` with tool version, schema version, scanned roots, source hashes, generated artifact list, and excluded path policy metadata.
+- [x] **LEDGER-SCHEMA-01**: Tool consumers can validate `FACTS.json` entries with evidence refs, confidence, source hash, source category, and last checked timestamp.
+- [x] **LEDGER-SCHEMA-02**: Tool consumers can validate `COMMANDS.json`, `CONTRACTS.json`, `SKILLS.json`, and `DECISIONS.json` with stable IDs, evidence refs, confidence, and source metadata.
+- [x] **LEDGER-SCHEMA-03**: Tool consumers can validate `CACHE-MANIFEST.json` with tool version, schema version, scanned roots, source hashes, generated artifact list, and excluded path policy metadata.
 - [ ] **LEDGER-SCHEMA-04**: `project-context-ledger` tests prove generated ledger artifacts validate against the schemas and remain deterministic.
 
 ### Review Disposition Model

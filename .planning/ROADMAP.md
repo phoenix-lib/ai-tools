@@ -331,7 +331,7 @@ Plans:
 
 Plans:
 **Wave 1**
-- [ ] 14-01: Define ledger artifact schemas and fixture expectations.
+- [x] 14-01: Define ledger artifact schemas and fixture expectations.
 
 **Wave 2** *(blocked on Wave 1 completion)*
 - [ ] 14-02: Wire ledger schema validation into tests, docs, and generated artifact checks.
@@ -579,7 +579,7 @@ Plans:
 | 11. v2 Tool Selection Review | 1/1 | Complete    | 2026-05-08 |
 | 12. Project Context Ledger MVP | 1/1 | Complete    | 2026-05-08 |
 | 13. Review Packet Rollup MVP | 2/2 | Complete    | 2026-05-08 |
-| 14. Ledger Artifact Schemas | 0/2 | Planned | |
+| 14. Ledger Artifact Schemas | 1/2 | In Progress|  |
 | 15. Review Disposition Model | 0/2 | Planned | |
 | 16. Ledger Scope and Diff Modes | 0/2 | Planned | |
 | 17. Shared CLI Contract | 0/2 | Planned | |
