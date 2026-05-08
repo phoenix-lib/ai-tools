@@ -1,5 +1,55 @@
 # ai-workspace-kit Upstream Review
 
+## Phase 8 Planning Freshness Check
+
+**Checked:** 2026-05-08 during `$gsd-plan-phase 8`
+**Local before update:** `2079ab9626e9f9ed256512091f9c5ea473582885`
+**Remote HEAD:** `7bc432cce309178bdbcdf5715af6f6187c7ee568`
+**Local after update:** `7bc432cce309178bdbcdf5715af6f6187c7ee568`
+**Branch:** `master`
+**Checkout status before update:** clean
+**Result:** local `.external/ai-workspace-kit` fast-forwarded to upstream HEAD.
+
+The upstream `CHANGELOG.md` was read first. Relevant Phase 8 planning inputs:
+
+- Phase 17 adds `AI-WORKSPACE-CONTRACT.json` and
+  `data/protocol-versions.json`, confirming that kit treats `ai-tools`
+  packets as external reference evidence and does not add an `ai-tools`
+  runtime dependency.
+- Phase 18 adds `examples/ai-tools-review-packet/` with the same four AI Tools
+  packet artifacts: `REVIEW-SUMMARY.json`, `EVIDENCE.json`, `FINDINGS.md`, and
+  `RECOMMENDED-ACTIONS.md`.
+- `AI-TOOLS-INTEROP.md` continues to require JSON artifacts as the machine
+  source of truth and Markdown as projections from the same data.
+- Kit status mapping accepts `human_review_required`, `blocked`, `info`, and
+  `pass` compatible semantics. `low` severity remains acceptable from AI Tools
+  and maps to kit `info` when needed.
+- New `templates/GATE-RESOLUTION.md` reinforces observable gate sections but
+  does not create a runnable gate-linter or an `ai-tools` dependency.
+
+AI Tools self-use evidence during Phase 8 planning:
+
+- Command:
+  `node tools/cross-repo-compatibility-checker/cli.js --ai-tools . --ai-workspace-kit C:\projects\ai-tools\.external\ai-workspace-kit --out C:\Users\suppo\.codex\memories\ai-tools-cross-repo-check-phase08-plan`
+- Packet status: `human_review_required`
+- Findings: 1 medium, 0 blockers, 0 required decisions.
+- Finding: local embedded kit decision
+  `ai-workspace-kit/.planning/cross-repo/decisions/2026-05-07-ai-tools-review-packet-standard.md`
+  is missing required field `Reason`.
+
+Phase 8 planning impact:
+
+- Keep `REVIEW-SUMMARY.json` as the durable machine source of truth. New CLI
+  stdout must be a compact projection, not a replacement packet contract.
+- `--fail-on` must remain caller-selected policy. Default shell success for a
+  generated packet preserves the evidence-only contract and avoids making kit
+  consumers treat findings as automatic blockers.
+- Do not add an `ai-workspace-kit` runtime dependency, automatic runner, fetch,
+  install, or hidden integration while improving `contract-drift-auditor` CLI
+  ergonomics.
+- Document compatibility impact in `CHANGELOG.md` because user-facing CLI
+  behavior and CI semantics change.
+
 ## Phase 6 Planning Freshness Check
 
 **Checked:** 2026-05-07 during `$gsd-plan-phase 6`

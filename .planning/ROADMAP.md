@@ -191,7 +191,10 @@ Plans:
 **Plans**: 2 plans
 
 Plans:
+**Wave 1**
 - [ ] 08-01: Add CLI output modes and stable exit-code policy.
+
+**Wave 2** *(blocked on Wave 1 completion)*
 - [ ] 08-02: Update docs, tests, and release examples for CI/assistant consumption.
 
 ### Phase 9: Tool Registry and Workflow Gate Slimming
