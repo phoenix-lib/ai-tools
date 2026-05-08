@@ -59,6 +59,9 @@ guidance auditable without mutating target projects.
 - [x] Close the v1 release baseline with accurate auditor limitations, release
   packet fixtures, centralized tool metadata, and safe self-audit invocation.
   Validated in Phase 06.
+- [x] Build the cross-repo compatibility checker before any automatic
+  cross-repo indexer or gate-linter automation. Validated in Phase 07:
+  Cross-Repo Compatibility Checker MVP.
 
 ### Active
 
@@ -71,10 +74,6 @@ guidance auditable without mutating target projects.
   reusable changes.
 - [ ] Maintain `CHANGELOG.md` after every completed phase, executed major plan,
   or workflow gate change.
-- [ ] Keep `XREPO-VALIDATOR-01` as a deferred v2 prerequisite before automatic
-  cross-repo indexer or gate-linter automation.
-- [ ] Build the cross-repo compatibility checker before any automatic
-  cross-repo indexer or gate-linter automation.
 - [ ] Improve `contract-drift-auditor` CLI ergonomics for CI and assistant
   consumers without making findings automatic decisions.
 - [ ] Add a machine-readable tool registry before promoting broad seed tools.
@@ -125,7 +124,7 @@ Important seed areas:
 - `tools/ui-regression-screenshot-comparator/SEED-IDEAS.md`
 - `tools/local-integration-harness/SEED-IDEAS.md`
 - future `gate-linter` seed from the `ai-workspace-kit` cross-repo request
-- future `cross-repo-compatibility-checker` seed for validating `ai-tools` and
+- implemented `cross-repo-compatibility-checker` for validating `ai-tools` and
   `ai-workspace-kit` protocol threads before any automatic indexer/gate-linter
 
 The project guide is `docs/AI-AGENT-IMPLEMENTATION-GUIDE.md`. It is the main
@@ -205,8 +204,8 @@ to inspect it.
 | Add shared packet renderer before broad tool expansion | Schemas alone are not enough; packet-producing tools need one renderer so JSON, Markdown, and CLI status cannot drift. | Validated in Phase 04 |
 | Treat self-use tools as evidence, not authority | AI Tools should audit itself with validated tools, but the assistant keeps responsibility for scope, relevance, and boundary decisions. | Validated in Phase 03 |
 | Classify new tools before implementation | New tool ideas should go to `standards/`, `shared/`, `tools/<tool-name>/`, seed/backlog, or cross-repo requests based on ownership and maturity. | Validated in Phase 03 |
-| Defer cross-repo protocol automation until a validator exists | Human-reviewed protocol exchange is compatible now, but automatic indexers or gate linters need a read-only checker that validates both repositories together. | Deferred v2 candidate |
-| Start v2 with release closeout, metadata, and cross-repo validation | Release discipline and interop drift are the current risks; broad seed tools should wait until tool registry and validator guardrails exist. | Phase 06 validated release closeout; Phase 07 planned next |
+| Defer cross-repo protocol automation until a validator exists | Human-reviewed protocol exchange is compatible now, but automatic indexers or gate linters need a read-only checker that validates both repositories together. | Validated in Phase 07 |
+| Start v2 with release closeout, metadata, and cross-repo validation | Release discipline and interop drift are the current risks; broad seed tools should wait until tool registry and validator guardrails exist. | Phase 06 validated release closeout; Phase 07 validated cross-repo checker |
 | Keep release examples generated from the shared packet model | Committed examples are useful only if JSON and Markdown stay internally consistent with packet semantics. | Validated in Phase 06 |
 
 ## Evolution
@@ -227,4 +226,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state.
 
 ---
-*Last updated: 2026-05-07 after completing Phase 6 release closeout*
+*Last updated: 2026-05-08 after completing Phase 7 cross-repo compatibility checker*

@@ -3,41 +3,41 @@ gsd_state_version: 1.0
 milestone: v2.0
 milestone_name: Tooling Hardening
 status: planned
-stopped_at: Phase 7 planned
-last_updated: "2026-05-08T04:09:32+03:00"
-last_activity: "2026-05-08 -- Phase 7 research and three execution plans created for the cross-repo compatibility checker MVP"
+stopped_at: Phase 7 completed
+last_updated: "2026-05-08T04:24:21+03:00"
+last_activity: "2026-05-08 -- Phase 7 completed with cross-repo compatibility checker MVP, self-use evidence, and 124/124 tests passing"
 progress:
   total_phases: 11
-  completed_phases: 6
+  completed_phases: 7
   total_plans: 27
-  completed_plans: 17
-  percent: 63
+  completed_plans: 20
+  percent: 74
 ---
 
 # Project State
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-05-07)
+See: .planning/PROJECT.md (updated 2026-05-08)
 
 **Core value:** Produce deterministic, evidence-backed review packets that make
 AI project guidance auditable without mutating target projects.
-**Current focus:** Phase 7 - Cross-Repo Compatibility Checker MVP
+**Current focus:** Phase 8 - Contract Drift Auditor CLI Ergonomics
 
 ## Current Position
 
-Phase: 7 (Cross-Repo Compatibility Checker MVP) - READY TO EXECUTE
-Plan: 0 of 3
-Status: Phase 7 planned; next command is `$gsd-execute-phase 7`.
-Last activity: 2026-05-08 -- Phase 7 research and plans created.
+Phase: 8 (Contract Drift Auditor CLI Ergonomics) - READY FOR DISCUSSION
+Plan: 0 of 2
+Status: Phase 7 complete; next command is `$gsd-discuss-phase 8`.
+Last activity: 2026-05-08 -- Phase 7 completed and verified.
 
-Progress: [######----] 63% of mapped plans complete
+Progress: [#######---] 74% of mapped plans complete
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 17
+- Total plans completed: 20
 - Average duration: n/a
 - Total execution time: n/a
 
@@ -51,7 +51,8 @@ Progress: [######----] 63% of mapped plans complete
 | 04 | 3/3 | Complete |
 | 05 | 2/2 | Complete |
 | 06 | 3/3 | Complete |
-| 07 | 0/3 | Planned |
+| 07 | 3/3 | Complete |
+| 08 | 0/2 | Planned |
 
 ## Accumulated Context
 
@@ -91,6 +92,11 @@ Decisions are logged in PROJECT.md Key Decisions table.
   centralized tool metadata, release packet fixtures for `pass`,
   `human_review_required`, and `blocked`, final external self-audit evidence,
   and 99/99 tests passing.
+- Phase 07 validated the read-only `cross-repo-compatibility-checker` MVP:
+  explicit two-repo CLI inputs, protocol field/thread/counterpart/manual
+  transfer validation, gate registry mapping checks, shared review packet
+  output, docs, changelog compatibility notes, self-use evidence, and 124/124
+  tests passing.
 
 ### Roadmap Evolution
 
@@ -103,18 +109,19 @@ Decisions are logged in PROJECT.md Key Decisions table.
 
 ### Pending Todos
 
-- Execute Phase 7 for `XREPO-VALIDATOR-01`.
+- Begin Phase 8 discussion for `CLI-01` and `CLI-02`.
 
 ### Blockers/Concerns
 
 - Automatic cross-repo indexer or gate-linter automation should remain blocked
-  until Phase 7 ships a read-only compatibility checker.
+  unless the Phase 7 read-only compatibility checker is run as evidence and
+  reviewed by the assistant.
 
 ## Deferred Items
 
 | Category | Item | Status | Deferred At |
 |----------|------|--------|-------------|
-| Tooling | Cross-repo compatibility checker | Phase 7 planned | Phase 5 release hardening |
+| Tooling | Cross-repo compatibility checker | Completed in Phase 7 | Phase 5 release hardening |
 | Tooling | Mechanical gate linter | Phase 10 planned/revalidate | 2026-05-07 cross-repo request |
 | Tooling | Project context ledger | Deferred until Phase 11 selection review | Initialization |
 | Tooling | Phase forensics tool | Deferred until Phase 11 selection review | Initialization |
@@ -123,6 +130,6 @@ Decisions are logged in PROJECT.md Key Decisions table.
 
 ## Session Continuity
 
-Last session: 2026-05-08T04:09:32+03:00
-Stopped at: Phase 7 planned
-Resume file: .planning/phases/07-cross-repo-compatibility-checker-mvp/07-01-PLAN.md
+Last session: 2026-05-08T04:24:21+03:00
+Stopped at: Phase 7 completed
+Resume file: .planning/ROADMAP.md

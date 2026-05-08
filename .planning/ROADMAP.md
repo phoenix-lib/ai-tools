@@ -28,7 +28,7 @@ validator can govern tool intake.
 - [x] **Phase 4: Contract Drift Auditor MVP** - Ship the first external auditor using the shared packet standard. Completed 2026-05-07.
 - [x] **Phase 5: Integration and Release Hardening** - Align docs, optional ai-workspace-kit integration, and first-release readiness. (completed 2026-05-07)
 - [x] **Phase 6: Release Closeout and Tool Metadata** - Fix post-Phase-5 doc drift, add release packet fixtures, centralize tool metadata, and preserve safe self-audit invocation. Completed 2026-05-07.
-- [ ] **Phase 7: Cross-Repo Compatibility Checker MVP** - Build the smallest read-only validator for AI Tools / `ai-workspace-kit` protocol compatibility before any automatic cross-repo automation.
+- [x] **Phase 7: Cross-Repo Compatibility Checker MVP** - Build the smallest read-only validator for AI Tools / `ai-workspace-kit` protocol compatibility before any automatic cross-repo automation. Completed 2026-05-08.
 - [ ] **Phase 8: Contract Drift Auditor CLI Ergonomics** - Add machine stdout, quiet mode, fail-on policy, and documented exit codes without making findings automatic decisions.
 - [ ] **Phase 9: Tool Registry and Workflow Gate Slimming** - Create the machine-readable tool registry and move detailed gate policy out of root `AGENTS.md` into focused workflow docs.
 - [ ] **Phase 10: Evidence-Only Gate Linter Seed MVP** - Build or formally re-defer the mechanical gate-linter only after the cross-repo validator and tool registry are in place.
@@ -171,11 +171,11 @@ Plans:
 
 Plans:
 **Wave 1**
-- [ ] 07-01: Define cross-repo checker fixtures, discovery, and protocol metadata parsing.
+- [x] 07-01: Define cross-repo checker fixtures, discovery, and protocol metadata parsing.
 
 **Wave 2** *(blocked on Wave 1 completion)*
-- [ ] 07-02: Implement thread/counterpart/origin/path validation checks.
-- [ ] 07-03: Add gate registry mapping checks, packet rendering, docs, and self-use validation.
+- [x] 07-02: Implement thread/counterpart/origin/path validation checks.
+- [x] 07-03: Add gate registry mapping checks, packet rendering, docs, and self-use validation.
 
 ### Phase 8: Contract Drift Auditor CLI Ergonomics
 **Goal**: Make the first auditor easier to consume in CI and assistant workflows without changing evidence-only defaults.
@@ -310,7 +310,7 @@ Plans:
 
 **Coverage:**
 - v1: 45/45 requirements mapped and complete.
-- v2 preliminary: 16/16 requirements mapped to planned or deferred phases.
+- v2 preliminary: 16/16 requirements mapped to complete, planned, or deferred phases.
 
 ## Progress
 
@@ -324,7 +324,7 @@ Plans:
 | 4. Contract Drift Auditor MVP | 3/3 | Complete | 2026-05-07 |
 | 5. Integration and Release Hardening | 2/2 | Complete | 2026-05-07 |
 | 6. Release Closeout and Tool Metadata | 3/3 | Complete | 2026-05-07 |
-| 7. Cross-Repo Compatibility Checker MVP | 0/3 | Planned | - |
+| 7. Cross-Repo Compatibility Checker MVP | 3/3 | Complete | 2026-05-08 |
 | 8. Contract Drift Auditor CLI Ergonomics | 0/2 | Planned | - |
 | 9. Tool Registry and Workflow Gate Slimming | 0/2 | Planned | - |
 | 10. Evidence-Only Gate Linter Seed MVP | 0/2 | Planned | - |
